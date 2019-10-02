@@ -5,37 +5,6 @@
 <div class="paragraph">
 <p>By: <code>Team CS2103-T16-1</code>      Since: <code>Sep 2019</code>      Licence: <code>MIT</code></p>
 </div>
-</div>
-<div id="toc" class="toc">
-<div id="toctitle"></div>
-<ul class="sectlevel1">
-<li><a href="#introduction">1. Introduction</a></li>
-<li><a href="#quick-start">2. Quick Start</a></li>
-<li><a href="#Features">3. Features</a>
-<ul class="sectlevel2">
-<li><a href="#viewing-help-code-help-code">3.1. Viewing help : <code>help</code></a></li>
-<li><a href="#adding-a-person-code-add-code">3.2. Adding a person: <code>add</code></a></li>
-<li><a href="#listing-all-persons-code-list-code">3.3. Listing all persons : <code>list</code></a></li>
-<li><a href="#editing-a-person-code-edit-code">3.4. Editing a person : <code>edit</code></a></li>
-<li><a href="#locating-persons-by-name-code-find-code">3.5. Locating persons by name: <code>find</code></a></li>
-<li><a href="#deleting-a-person-code-delete-code">3.6. Deleting a person : <code>delete</code></a></li>
-<li><a href="#clearing-all-entries-code-clear-code">3.7. Clearing all entries : <code>clear</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">3.8. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">3.9. Saving the data</a></li>
-<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">3.10. Encrypting data files <code>[coming in v2.0]</code></a></li>
-</ul>
-</li>
-<li><a href="#faq">4. FAQ</a></li>
-<li><a href="#command-summary">5. Command Summary</a></li>
-</ul>
-</div>
-</div>
-<div class="sect1">
-<h2 id="introduction"><a class="link" href="#introduction">1. Introduction</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Do you feel it difficult to keep the right diets for type II diabetes? Do you want to manage your hectic schedule? Do you want to have a better overview of your health data? Do you want to move to a healthier lifestyle? If your answer is yes, then SugarMummy is perfect  for you! SugarMummy is a lifestyle tracker and planner that aims to combat Type II diabetes by encouraging users to keep a healthy lifestyle. Moreover, being a computer app with Command Line Interface, SugarMummy is optimized for fast typers who has access to a computer most of the time.</p>
-</div>
 <div class="paragraph">
 <p>Hope following features will benefit you and enjoy!</p>
 </div>
@@ -59,15 +28,80 @@
 </ul>
 </div>
 </div>
+<div id="toc" class="toc">
+<div id="toctitle"></div>
+<ul class="sectlevel1">
+<li><a href="#quick-start">1. Quick Start</a></li>
+<li><a href="#Features">2. Features</a>
+<ul class="sectlevel2">
+<li><a href="#data-log">2.1. DATA LOG</a>
+<ul class="sectlevel3">
+<li><a href="#add-a-data-entry-to-the-diabetes-tracker-app-code-add-code">2.1.1. Add a data entry to the diabetes tracker app: <code>add</code></a></li>
+<li><a href="#show-a-list-of-all-data-entries-in-the-diabetes-tracker-app-code-list-code">2.1.2. Show a list of all data entries in the diabetes tracker app: <code>list</code></a></li>
+<li><a href="#edit-an-existing-entry-in-the-diabetes-tracker-app-code-edit-code">2.1.3. Edit an existing entry in the diabetes tracker app: <code>edit</code></a></li>
+<li><a href="#deletes-a-specified-data-entry-from-the-diabetes-tracker-app-code-delete-code">2.1.4. Deletes a specified data entry from the diabetes tracker app: <code>delete</code></a></li>
+</ul>
+</li>
+<li><a href="#calendar-and-reminder">2.2. CALENDAR AND REMINDER</a>
+<ul class="sectlevel3">
+<li><a href="#add-a-reminder-code-reminder-code">2.2.1. Add a reminder: <code>reminder</code></a></li>
+<li><a href="#add-an-event-code-event-code">2.2.2. Add an event: <code>event</code></a></li>
+<li><a href="#add-a-task-code-task-code">2.2.3. Add a task: <code>task</code></a></li>
+<li><a href="#snooze-reminder-code-snooze-code">2.2.4. Snooze reminder: <code>snooze</code></a></li>
+<li><a href="#complete-a-task-code-complete-code">2.2.5. Complete a task: <code>complete</code></a></li>
+<li><a href="#set-time-zone-code-timezone-code">2.2.6. Set time zone: <code>timezone</code></a></li>
+<li><a href="#search-for-entries-in-calendar-code-search-code">2.2.7. Search for entries in calendar: <code>search</code></a></li>
+<li><a href="#delete-an-entry-in-calendar-code-coming-in-v2-0-code">2.2.8. Delete an entry in calendar <code>[coming in v2.0]</code></a></li>
+</ul>
+</li>
+<li><a href="#personalised-user-experience">2.3. PERSONALISED USER EXPERIENCE</a>
+<ul class="sectlevel3">
+<li><a href="#show-a-list-of-all-achievements-the-user-has-attained-code-achievement-code">2.3.1. Show a list of all achievements the user has attained: <code>achievement</code></a></li>
+<li><a href="#shows-a-page-displaying-the-user-profile-of-the-user-code-bio-code">2.3.2. Shows a page displaying the user profile of the user: <code>bio</code></a></li>
+<li><a href="#adds-a-biography-for-the-user-using-specified-fields-code-addbio-code">2.3.3. Adds a biography for the user using specified fields: <code>addbio</code></a></li>
+<li><a href="#delete-biography-code-coming-in-v2-0-code">2.3.4. Delete biography <code>[coming in v2.0]</code></a></li>
+<li><a href="#edit-a-biography-for-the-user-using-specified-fields-code-editbio-code">2.3.5. Edit a biography for the user using specified fields: <code>editbio</code></a></li>
+<li><a href="#sets-the-background-picture-using-a-specified-file-path-code-bg-code">2.3.6. Sets the background picture using a specified file path: <code>bg</code></a></li>
+<li><a href="#sets-the-font-color-of-the-text-code-fontcolor-code">2.3.7. Sets the font color of the text: <code>fontcolor</code></a></li>
+<li><a href="#displays-the-daily-motivation-message-of-the-day-code-dailymsg-code">2.3.8. Displays the daily motivation message of the day: <code>dailymsg</code></a></li>
+<li><a href="#personalized-avatar-code-coming-in-v2-0-code">2.3.9. Personalized avatar <code>[coming in v2.0]</code></a></li>
+</ul>
+</li>
+<li><a href="#data-analysis">2.4. DATA ANALYSIS</a>
+<ul class="sectlevel3">
+<li><a href="#display-the-daily-weekly-monthly-average-in-a-graph-code-average-code">2.4.1. Display the daily/weekly/monthly average in a graph: <code>average</code></a></li>
+<li><a href="#display-interesting-statistics-code-summary-code">2.4.2. Display interesting statistics: <code>summary</code></a></li>
+<li><a href="#export-summary-of-all-medical-records-into-pdf-code-export-code">2.4.3. Export summary of all medical records into pdf: <code>export</code></a></li>
+</ul>
+</li>
+<li><a href="#autocomplete-command">2.5. Autocomplete Command</a></li>
+<li><a href="#education-and-quiz">2.6. EDUCATION AND QUIZ</a>
+<ul class="sectlevel3">
+<li><a href="#recommending-food-code-recmf-code">2.6.1. Recommending food: <code>recmf</code></a></li>
+<li><a href="#recommending-exercise-code-recme-code">2.6.2. Recommending exercise: <code>recme</code></a></li>
+<li><a href="#adding-new-food-items-code-put-code">2.6.3. Adding new food items : <code>put</code></a></li>
+<li><a href="#disliking-certain-foods-code-dislike-code">2.6.4. Disliking certain foods: <code>dislike</code></a></li>
+<li><a href="#playing-flash-cards-code-game-code">2.6.5. Playing flash cards: <code>game</code></a></li>
+</ul>
+</li>
+<li><a href="#clearing-all-entries-code-coming-in-v2-0-code">2.7. Clearing all entries: <code>[coming in v2.0]</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">2.8. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-the-data">2.9. Saving the data</a></li>
+<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">2.10. Encrypting data files <code>[coming in v2.0]</code></a></li>
+<li><a href="#detailed-workout-schedule-code-coming-in-v2-0-code">2.11. Detailed workout schedule <code>[coming in v2.0]</code></a></li>
+<li><a href="#workout-timer-code-coming-in-v2-0-code">2.12. Workout timer <code>[coming in v2.0]</code></a></li>
+</ul>
+</li>
+<li><a href="#faq">3. FAQ</a></li>
+<li><a href="#command-summary">4. Command Summary</a></li>
+</ul>
+</div>
 </div>
 <div class="sect1">
-<h2 id="quick-start"><a class="link" href="#quick-start">2. Quick Start</a></h2>
+<h2 id="quick-start"><a class="link" href="#quick-start">1. Quick Start</a></h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
-<li>
-<p>Ensure you have Java <code>11</code> or above installed in your Computer.</p>
-</li>
 <li>
 <p>Download the latest <code>sugarmummy.jar</code> <a href="https://github.com/AY1920S1-CS2103-T16-1/main/releases">here</a>.</p>
 </li>
@@ -103,14 +137,14 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </div>
 </li>
 <li>
-<p>Refer to <a href="#Features">Section 3, &#8220;Features&#8221;</a> for details of each command.</p>
+<p>Refer to <a href="#Features">Section 2, &#8220;Features&#8221;</a> for details of each command.</p>
 </li>
 </ol>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="Features"><a class="link" href="#Features">3. Features</a></h2>
+<h2 id="Features"><a class="link" href="#Features">2. Features</a></h2>
 <div class="sectionbody">
 <div class="exampleblock">
 <div class="content">
@@ -136,212 +170,411 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </div>
 </div>
 <div class="sect2">
-<h3 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">3.1. Viewing help : <code>help</code></a></h3>
+<h3 id="data-log"><a class="link" href="#data-log">2.1. DATA LOG</a></h3>
+<div class="sect3">
+<h4 id="add-a-data-entry-to-the-diabetes-tracker-app-code-add-code"><a class="link" href="#add-a-data-entry-to-the-diabetes-tracker-app-code-add-code">2.1.1. Add a data entry to the diabetes tracker app: <code>add</code></a></h4>
 <div class="paragraph">
-<p>Format: <code>help</code></p>
+<p>Format: <code>add r/RECORD_TYPE v/VALUE t/TIME [t/TIME_END]</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="show-a-list-of-all-data-entries-in-the-diabetes-tracker-app-code-list-code"><a class="link" href="#show-a-list-of-all-data-entries-in-the-diabetes-tracker-app-code-list-code">2.1.2. Show a list of all data entries in the diabetes tracker app: <code>list</code></a></h4>
+<div class="paragraph">
+<p>Format: <code>list [r/RECORD_TYPE] &#8230;&#8203;</code></p>
+</div>
+<div class="paragraph">
+<p>If a specific RECORD_TYPE is provided, it will list the data entries that are of RECORD_TYPE. If more than 1 RECORD_TYPE is provided, it will list all data entries of the requested types. Otherwise, it lists all types of recent data entries.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="edit-an-existing-entry-in-the-diabetes-tracker-app-code-edit-code"><a class="link" href="#edit-an-existing-entry-in-the-diabetes-tracker-app-code-edit-code">2.1.3. Edit an existing entry in the diabetes tracker app: <code>edit</code></a></h4>
+<div class="paragraph">
+<p>Format: <code>edit INDEX [v/VALUE] [t/TIME] [t/TIME_END]</code></p>
+</div>
+<div class="paragraph">
+<p>Edits the entry at the specified INDEX. The index refers to the index number shown in the displayed entries list. The index must be a positive integer. At least one of the optional fields must be provided. Existing values will be updated to the input values.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="deletes-a-specified-data-entry-from-the-diabetes-tracker-app-code-delete-code"><a class="link" href="#deletes-a-specified-data-entry-from-the-diabetes-tracker-app-code-delete-code">2.1.4. Deletes a specified data entry from the diabetes tracker app: <code>delete</code></a></h4>
+<div class="paragraph">
+<p>Format: <code>delete INDEX</code></p>
+</div>
+<div class="paragraph">
+<p>Index must be a positive integer</p>
+</div>
+<div class="paragraph">
+<p>The index refers to the index number shown in the displayed entries list</p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-a-person-code-add-code"><a class="link" href="#adding-a-person-code-add-code">3.2. Adding a person: <code>add</code></a></h3>
+<h3 id="calendar-and-reminder"><a class="link" href="#calendar-and-reminder">2.2. CALENDAR AND REMINDER</a></h3>
+<div class="sect3">
+<h4 id="add-a-reminder-code-reminder-code"><a class="link" href="#add-a-reminder-code-reminder-code">2.2.1. Add a reminder: <code>reminder</code></a></h4>
 <div class="paragraph">
-<p>Adds a person to the address book<br>
-Format: <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code></p>
+<p>Format: <code>reminder DESCRIPTION t/TIME [t/TIME]&#8230;&#8203; [rp/repetition] [v/venue] [p/people]</code></p>
 </div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-A person can have any number of tags (including 0)
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>Add a reminder at a specific time with possible detail information of other time, repetition, venue(e.g. hospital) ,people(e.g. doctor) and sound.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="add-an-event-code-event-code"><a class="link" href="#add-an-event-code-event-code">2.2.2. Add an event: <code>event</code></a></h4>
+<div class="paragraph">
+<p>Format: <code>event TITLE [DESCRIPTION] t/TIME [t/END_TIME] [tp/TIME_PERIOD]  [v/venue] [p/people]</code></p>
+</div>
+<div class="paragraph">
+<p>Add an event with starting time and optional ending time. Set a reminder some time before the event with possible detail information of venue(e.g. hospital) ,people(e.g. doctor) and sound.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="add-a-task-code-task-code"><a class="link" href="#add-a-task-code-task-code">2.2.3. Add a task: <code>task</code></a></h4>
+<div class="paragraph">
+<p>Format: <code>task TITLE [DESCRIPTION] t/TIME [t/END_TIME] [tp/TIME_PERIOD] [tg/TARGET]</code></p>
+</div>
+<div class="paragraph">
+<p>Add a task with starting time and optional ending time. Set a reminder some time before the task begins and a target for the task.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="snooze-reminder-code-snooze-code"><a class="link" href="#snooze-reminder-code-snooze-code">2.2.4. Snooze reminder: <code>snooze</code></a></h4>
+<div class="paragraph">
+<p>Format: <code>snooze [tp/TIME_PERIOD]</code></p>
+</div>
+<div class="paragraph">
+<p>Silence the current reminder and activate it after a time period.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="complete-a-task-code-complete-code"><a class="link" href="#complete-a-task-code-complete-code">2.2.5. Complete a task: <code>complete</code></a></h4>
+<div class="paragraph">
+<p>Format: <code>complete [INDEX]&#8230;&#8203; [t/TIME]</code></p>
+</div>
+<div class="paragraph">
+<p>Mark all the reminders before now as completed if no argument provided. Otherwise, mark only those tasks with indices provided or before the specific time as completed.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="set-time-zone-code-timezone-code"><a class="link" href="#set-time-zone-code-timezone-code">2.2.6. Set time zone: <code>timezone</code></a></h4>
+<div class="paragraph">
+<p>Format: <code>timezone tz/TIME_ZONE [t/TIME] [t/TIME_END]</code></p>
+</div>
+<div class="paragraph">
+<p>Set the time zone of the application permanently or in any time interval(e.g. For travelling).</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="search-for-entries-in-calendar-code-search-code"><a class="link" href="#search-for-entries-in-calendar-code-search-code">2.2.7. Search for entries in calendar: <code>search</code></a></h4>
+<div class="paragraph">
+<p>Format: <code>search [KEYWORD] [t/TIME] [t/END_TIME] [tp/TYPE] [v/VENUE] [p/PEOPLE]</code></p>
+</div>
+<div class="paragraph">
+<p>Search for all entries by providing keyword, time interval, type, venue or people.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="delete-an-entry-in-calendar-code-coming-in-v2-0-code"><a class="link" href="#delete-an-entry-in-calendar-code-coming-in-v2-0-code">2.2.8. Delete an entry in calendar <code>[coming in v2.0]</code></a></h4>
+<div class="paragraph">
+<p>Delete an event that you do not want to keep track anymore.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="personalised-user-experience"><a class="link" href="#personalised-user-experience">2.3. PERSONALISED USER EXPERIENCE</a></h3>
+<div class="sect3">
+<h4 id="show-a-list-of-all-achievements-the-user-has-attained-code-achievement-code"><a class="link" href="#show-a-list-of-all-achievements-the-user-has-attained-code-achievement-code">2.3.1. Show a list of all achievements the user has attained: <code>achievement</code></a></h4>
+<div class="paragraph">
+<p>Format: <code>achievement</code></p>
+</div>
+<div class="paragraph">
+<p>Display the current ranking of the user (i.e. Bronze III, Bronze II, Bronze I, Silver III, Silver II, Silver I, Gold&#8230;&#8203;Platinum&#8230;&#8203;Diamond) followed by milestone achievements acquired by the user.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="shows-a-page-displaying-the-user-profile-of-the-user-code-bio-code"><a class="link" href="#shows-a-page-displaying-the-user-profile-of-the-user-code-bio-code">2.3.2. Shows a page displaying the user profile of the user: <code>bio</code></a></h4>
+<div class="paragraph">
+<p>Format: <code>bio</code></p>
+</div>
+<div class="paragraph">
+<p>Display a page containing user information such as the user’s profile picture, name, nric, gender, date of birth, contact number, address and other biography information that the user would like to include. Includes an icon used to represent the user based on his/ her BMI.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="adds-a-biography-for-the-user-using-specified-fields-code-addbio-code"><a class="link" href="#adds-a-biography-for-the-user-using-specified-fields-code-addbio-code">2.3.3. Adds a biography for the user using specified fields: <code>addbio</code></a></h4>
+<div class="paragraph">
+<p>Format: <code>addbio n/NAME [nric/NRIC] [g/GENDER] [dob/DATE_OF_BIRTH] p/CONTACT_NUMBER e/EMERGENCY_CONTACT m/MEDICAL_CONDITION [a/ADDRESS] [dp/PROFILE_PICTURE_PATH] [o/OTHERS]</code></p>
+</div>
+<div class="paragraph">
+<p>Profile picture of the user is set using a given file path. If the file that is given is invalid, the user is shown an error message. Name, contact number, emergency contact number and medical condition are compulsory fields. (if a user of this app happens to have no medical condition, he / she may input NIL)</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="delete-biography-code-coming-in-v2-0-code"><a class="link" href="#delete-biography-code-coming-in-v2-0-code">2.3.4. Delete biography <code>[coming in v2.0]</code></a></h4>
+
+</div>
+<div class="sect3">
+<h4 id="edit-a-biography-for-the-user-using-specified-fields-code-editbio-code"><a class="link" href="#edit-a-biography-for-the-user-using-specified-fields-code-editbio-code">2.3.5. Edit a biography for the user using specified fields: <code>editbio</code></a></h4>
+<div class="paragraph">
+<p>Format: <code>editbio [n/NAME] [nric/NRIC] [g/GENDER] [dob/DATE_OF_BIRTH] [p/CONTACT_NUMBER] [e/EMERGENCY_CONTACT] [m/MEDICAL_CONDITION] [a/ADDRESS] [dp/PROFILE_PICTURE_PATH] [o/OTHERS]</code></p>
+</div>
+<div class="paragraph">
+<p>Profile picture of the user is set using a given file path. If the file that is given is invalid, the user is shown an error message. If no parameters are set, the program displays a message suggesting the user to set biography information using the specified fields.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="sets-the-background-picture-using-a-specified-file-path-code-bg-code"><a class="link" href="#sets-the-background-picture-using-a-specified-file-path-code-bg-code">2.3.6. Sets the background picture using a specified file path: <code>bg</code></a></h4>
+<div class="paragraph">
+<p>Format: <code>bg p/PATH</code></p>
+</div>
+<div class="paragraph">
+<p>If the file that is given is invalid, the user is shown an error message.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="sets-the-font-color-of-the-text-code-fontcolor-code"><a class="link" href="#sets-the-font-color-of-the-text-code-fontcolor-code">2.3.7. Sets the font color of the text: <code>fontcolor</code></a></h4>
+<div class="paragraph">
+<p>Format: <code>fontcolor c/COLOUR</code></p>
+</div>
+<div class="paragraph">
+<p>Sets the font to a colour specified by the user (eg. yellow, blue 00FF00)</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="displays-the-daily-motivation-message-of-the-day-code-dailymsg-code"><a class="link" href="#displays-the-daily-motivation-message-of-the-day-code-dailymsg-code">2.3.8. Displays the daily motivation message of the day: <code>dailymsg</code></a></h4>
+<div class="paragraph">
+<p>Format: <code>dailymsg</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="personalized-avatar-code-coming-in-v2-0-code"><a class="link" href="#personalized-avatar-code-coming-in-v2-0-code">2.3.9. Personalized avatar <code>[coming in v2.0]</code></a></h4>
+<div class="paragraph">
+<p>User can customize his or her own avatar and the avatar will have body shapes according to user BMI.
+This helps to motivate them to have a healthy BMI.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="data-analysis"><a class="link" href="#data-analysis">2.4. DATA ANALYSIS</a></h3>
+<div class="sect3">
+<h4 id="display-the-daily-weekly-monthly-average-in-a-graph-code-average-code"><a class="link" href="#display-the-daily-weekly-monthly-average-in-a-graph-code-average-code">2.4.1. Display the daily/weekly/monthly average in a graph: <code>average</code></a></h4>
+<div class="paragraph">
+<p>Format: <code>average a/AVERAGE_TYPE r/Record_TYPE [n/COUNT]</code></p>
+</div>
+<div class="paragraph">
+<p>AVERAGE_TYPE is either day/week/month. Displays a graph of the AVERAGE_TYPE average value of a particular RECORD_TYPE. COUNT is an integer value. If COUNT is given, show only the latest COUNT number of average values. Else, show only latest 3 average values.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="display-interesting-statistics-code-summary-code"><a class="link" href="#display-interesting-statistics-code-summary-code">2.4.2. Display interesting statistics: <code>summary</code></a></h4>
+<div class="paragraph">
+<p>Examples of statistics: minimum, maximum, average, number of dangerously high blood sugar level, weekly quiz points etc in suitable graph</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>summary r/RECORD_TYPE [d/START_DATE]</code></p>
+</div>
+<div class="paragraph">
+<p>If START_DATE is given, statistics from START_DATE to the current date will be retrieved. Else, statistics will be based on all data.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="export-summary-of-all-medical-records-into-pdf-code-export-code"><a class="link" href="#export-summary-of-all-medical-records-into-pdf-code-export-code">2.4.3. Export summary of all medical records into pdf: <code>export</code></a></h4>
+<div class="paragraph">
+<p>Format: <code>export [d/START_DATE]</code></p>
+</div>
+<div class="paragraph">
+<p>If START_DATE is given, summary from START_DATE to the current date will be exported. Else, summary of all data will be exported.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="autocomplete-command"><a class="link" href="#autocomplete-command">2.5. Autocomplete Command</a></h3>
+<div class="paragraph">
+<p>SugarMummy will recommend list of possible commands that can be add on to user current input.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="education-and-quiz"><a class="link" href="#education-and-quiz">2.6. EDUCATION AND QUIZ</a></h3>
+<div class="sect3">
+<h4 id="recommending-food-code-recmf-code"><a class="link" href="#recommending-food-code-recmf-code">2.6.1. Recommending food: <code>recmf</code></a></h4>
+<div class="paragraph">
+<p>Recommends a list of medically suggested foods for type II diabetes
+patients. The user can specify flags:</p>
+</div>
+<div class="paragraph">
+<p><code>-b</code>: breakfast recommendations</p>
+</div>
+<div class="paragraph">
+<p><code>-l</code>: lunch recommendations</p>
+</div>
+<div class="paragraph">
+<p><code>-d</code>: dinner recommendations</p>
+</div>
+<div class="paragraph">
+<p><code>-f</code>: fruit recommendations</p>
+</div>
+<div class="paragraph">
+<p><code>-v</code>: vegetable recommendations</p>
+</div>
+<div class="paragraph">
+<p>With specified one or more FOOD_ITEM, the user will only view recommendations match at least one item. However, if any food item is considered dangerous for type II diabetes patients, a warning will be shown. (case-insensitive)</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>recmf [-b] [-l] [-d] [-f] [-v] [FOOD]&#8230;&#8203;</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
 </div>
+<div class="paragraph">
+<p><code>recm -b strawberries</code></p>
+</div>
+<div class="paragraph">
+<p><code>recm -b -l -d</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="recommending-exercise-code-recme-code"><a class="link" href="#recommending-exercise-code-recme-code">2.6.2. Recommending exercise: <code>recme</code></a></h4>
+<div class="paragraph">
+<p>Format: <code>recme</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="adding-new-food-items-code-put-code"><a class="link" href="#adding-new-food-items-code-put-code">2.6.3. Adding new food items : <code>put</code></a></h4>
+<div class="paragraph">
+<p>Adds a new food time into certain category. Calorie and glycemic can
+be attached followed by -i flag. Otherwise, another prompt will be
+shown to ask for these two values.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>put FOOD[, FOOD]&#8230;&#8203;[-i CALORIE GI] in CATEGORY</code></p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="paragraph">
+<p><code>put guava -i 68 20, green apple -i 52 38 in fruits</code></p>
+</div>
+<div class="paragraph">
+<p><code>put guava in fruits</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="disliking-certain-foods-code-dislike-code"><a class="link" href="#disliking-certain-foods-code-dislike-code">2.6.4. Disliking certain foods: <code>dislike</code></a></h4>
+<div class="paragraph">
+<p>Dislikes certain foods so that those foods will no longer be shown on
+the recommendations. (case-insensitive)</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>dislike FOOD[, FOOD]&#8230;&#8203;</code></p>
+</div>
+<div class="paragraph">
+<p>Example: <code>dislike watermelon, chicken</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="playing-flash-cards-code-game-code"><a class="link" href="#playing-flash-cards-code-game-code">2.6.5. Playing flash cards: <code>game</code></a></h4>
+<div class="paragraph">
+<p>Shows an interactive page for user to play the flash card game. The
+user will win certain points if answering a question correctly.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>game</code></p>
+</div>
+<div class="paragraph">
+<p>During the game session, the user is able to:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Selecting the correct answer: <code>&lt;alphabet&gt;</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01</code></p>
+<p>Answers the multiple-choice question. If the answer is correct,
+the user will be awarded a few points. If the answer is wrong,
+multiple, or not within the choice range, a few points will be deducted and the correct answer will be revealed.</p>
 </li>
 <li>
-<p><code>add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal</code></p>
+<p>Format: <code>&lt;alphabet&gt;</code></p>
 </li>
 </ul>
+</div>
+</li>
+<li>
+<p>Skipping a certain question: <code>skip</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Skips a certain question and moves to the next question.</p>
+</li>
+<li>
+<p>Format: <code>skip</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Exiting the game: <code>exit</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Exits the game and go back to normal page</p>
+</li>
+<li>
+<p>Format: <code>exit</code></p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-all-persons-code-list-code"><a class="link" href="#listing-all-persons-code-list-code">3.3. Listing all persons : <code>list</code></a></h3>
+<h3 id="clearing-all-entries-code-coming-in-v2-0-code"><a class="link" href="#clearing-all-entries-code-coming-in-v2-0-code">2.7. Clearing all entries: <code>[coming in v2.0]</code></a></h3>
 <div class="paragraph">
-<p>Shows a list of all persons in the address book.<br>
-Format: <code>list</code></p>
+<p>Clears all entries in SugarMummy.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="editing-a-person-code-edit-code"><a class="link" href="#editing-a-person-code-edit-code">3.4. Editing a person : <code>edit</code></a></h3>
-<div class="paragraph">
-<p>Edits an existing person in the address book.<br>
-Format: <code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Edits the person at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed person list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
-</li>
-<li>
-<p>At least one of the optional fields must be provided.</p>
-</li>
-<li>
-<p>Existing values will be updated to the input values.</p>
-</li>
-<li>
-<p>When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.</p>
-</li>
-<li>
-<p>You can remove all the person&#8217;s tags by typing <code>t/</code> without specifying any tags after it.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>edit 1 p/91234567 e/johndoe@example.com</code><br>
-Edits the phone number and email address of the 1st person to be <code>91234567</code> and <code>johndoe@example.com</code> respectively.</p>
-</li>
-<li>
-<p><code>edit 2 n/Betsy Crower t/</code><br>
-Edits the name of the 2nd person to be <code>Betsy Crower</code> and clears all existing tags.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="locating-persons-by-name-code-find-code"><a class="link" href="#locating-persons-by-name-code-find-code">3.5. Locating persons by name: <code>find</code></a></h3>
-<div class="paragraph">
-<p>Finds persons whose names contain any of the given keywords.<br>
-Format: <code>find KEYWORD [MORE_KEYWORDS]</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>The search is case insensitive. e.g <code>hans</code> will match <code>Hans</code></p>
-</li>
-<li>
-<p>The order of the keywords does not matter. e.g. <code>Hans Bo</code> will match <code>Bo Hans</code></p>
-</li>
-<li>
-<p>Only the name is searched.</p>
-</li>
-<li>
-<p>Only full words will be matched e.g. <code>Han</code> will not match <code>Hans</code></p>
-</li>
-<li>
-<p>Persons matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Hans Bo</code> will return <code>Hans Gruber</code>, <code>Bo Yang</code></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>find John</code><br>
-Returns <code>john</code> and <code>John Doe</code></p>
-</li>
-<li>
-<p><code>find Betsy Tim John</code><br>
-Returns any person having names <code>Betsy</code>, <code>Tim</code>, or <code>John</code></p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="deleting-a-person-code-delete-code"><a class="link" href="#deleting-a-person-code-delete-code">3.6. Deleting a person : <code>delete</code></a></h3>
-<div class="paragraph">
-<p>Deletes the specified person from the address book.<br>
-Format: <code>delete INDEX</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Deletes the person at the specified <code>INDEX</code>.</p>
-</li>
-<li>
-<p>The index refers to the index number shown in the displayed person list.</p>
-</li>
-<li>
-<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>list</code><br>
-<code>delete 2</code><br>
-Deletes the 2nd person in the address book.</p>
-</li>
-<li>
-<p><code>find Betsy</code><br>
-<code>delete 1</code><br>
-Deletes the 1st person in the results of the <code>find</code> command.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.7. Clearing all entries : <code>clear</code></a></h3>
-<div class="paragraph">
-<p>Clears all entries from the address book.<br>
-Format: <code>clear</code></p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.8. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">2.8. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
 Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.9. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">2.9. Saving the data</a></h3>
 <div class="paragraph">
-<p>Address book data are saved in the hard disk automatically after any command that changes the data.<br>
+<p>SugarMummy data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">3.10. Encrypting data files <code>[coming in v2.0]</code></a></h3>
+<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">2.10. Encrypting data files <code>[coming in v2.0]</code></a></h3>
 <div class="paragraph">
-<p><em>{explain how the user can enable/disable data encryption}</em></p>
+<p>Users cannot retrieve data by opening data files directly.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="detailed-workout-schedule-code-coming-in-v2-0-code"><a class="link" href="#detailed-workout-schedule-code-coming-in-v2-0-code">2.11. Detailed workout schedule <code>[coming in v2.0]</code></a></h3>
+<div class="paragraph">
+<p>User can enter details of a workout schedule.<br>
+For example: Do exercise A for 10 minutes then switch to exercise B for 5 minutes.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="workout-timer-code-coming-in-v2-0-code"><a class="link" href="#workout-timer-code-coming-in-v2-0-code">2.12. Workout timer <code>[coming in v2.0]</code></a></h3>
+<div class="paragraph">
+<p>Displays workout instructions and a timer on screen.
+Screen instruction changes when the time for that particular exercise is up.
+Time required for each exercise is dictated by stored workout schedule.</p>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="faq"><a class="link" href="#faq">4. FAQ</a></h2>
+<h2 id="faq"><a class="link" href="#faq">3. FAQ</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><strong>Q</strong>: How do I transfer my data to another Computer?<br>
@@ -350,7 +583,7 @@ There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="command-summary"><a class="link" href="#command-summary">5. Command Summary</a></h2>
+<h2 id="command-summary"><a class="link" href="#command-summary">4. Command Summary</a></h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic" start="1">
@@ -442,4 +675,4 @@ E.g <code>timezone tz/GMT+8</code></p>
 </ol>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-02 08:40:44 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-02 09:28:28 UTC</div></div></div></body></html>
