@@ -151,6 +151,1055 @@
 </tr>
 </tbody>
 </table>
+<div class="sect2">
+<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">[Proposed] Data Encryption</a></h3>
+<div class="sect3">
+<h4 id="future-development-direction"><a class="link" href="#future-development-direction">Future Development Direction</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Larger database for food recommendations
+To increase the usability of food recommendations, it is suggested to have more food data at the beginning instead of depending on user inputs. Ideally, the recommendation data can be connected to online database for dynamic updates while can have local storage for offline operations.</p>
+</li>
+<li>
+<p>Diet records and analysis
+The current food models can be utilized to help record daily diets. This would allow the user to have an overview of his food consuming statistics. Therefore, some suggestions can be proposed to help diabetes users regulate and plan their diets.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="proposed-data-log-feature"><a class="link" href="#proposed-data-log-feature">[Proposed] Data log feature</a></h3>
+<div class="sect3">
+<h4 id="proposed-implementation"><a class="link" href="#proposed-implementation">Proposed Implementation</a></h4>
+<div class="paragraph">
+<p>The multi-record data logging mechanism is facilitated by a new Record package containing  BloodSugar and Bmi classes that extend an abstract Record class. Add, list and delete command classes and parsers are modified to accommodate multiple record types. Multi-record data is stored internally as a recordList where members are Records.</p>
+</div>
+<div class="paragraph">
+<p>It implements the following operations:
+* <code>Model#addRecord()</code> — Adds a record to the record list. 
+* <code>Model#deleteRecord()</code> — Deletes a record from the record list. 
+* <code>Model#getUniqueRecordListObject()</code> — Retrieves all records in record list. 
+These operations are exposed in the <code>Model</code> interface as <code>Model#addRecord()</code>, <code>Model#deleteRecord()</code> and <code>Model#getUniqueRecordListObject()</code> respectively.
+Given below is an example usage scenario and how the data log feature behaves at each step.
+Step 1. The user launches the application for the first time. If <code>recordList.json</code> is not found in <code>/data</code>, a <code>recordList.json</code> will be produced from <code>SampleDataUtil#getSampleRecords()</code>. Otherwise, the recordList will be loaded from <code>recordList.json</code> using <code>UniqueRecordList#setRecord(&lt;List&gt;)</code> and checked for inconsistencies e.g. missing fields, invalid fields. If invalid fields or missing consequential fields that must be used (e.g. <code>BloodSugar</code>’s <code>Concentration</code> field is consequential while its <code>Height</code> and <code>Weight</code> fields are not) are detected, an Exception is thrown and <code>recordList.json</code> start from scratch. Otherwise, inconsequential fields will be automatically repopulated on saving to the <code>recordList.json</code> in any command.</p>
+</div>
+<div class="paragraph">
+<p>Step 2. The user executes list command to list all records. <code>Model#getUniqueRecordListObject()</code> is called and <code>DisplayPaneType</code> is set to LIST. <code>MainDisplayPane#get()</code> determines the type of window to show based on <code>DisplayPaneType</code>. A new <code>RecordListPanel</code> is created and populates each <code>ListViewCell</code> with <code>BloodSugarRecordCard</code> and <code>BmiRecordCard</code>. Data used to populate the <code>RecordCards</code> is passed in through <code>RecordListPanel</code>’s constructor, as an <code>ObservableList</code> containing <code>BloodSugar</code> and <code>Bmi</code> objects.</p>
+</div>
+<div class="paragraph">
+<p>Step 3. The user executes <code>add rt/BMI h/1 w/1 dt/2019-09-09 12:12</code> command to create a <code>Bmi</code> record with height 1, weight 1 at date 2019-09-09 and time 12:12. The add command is first parsed by <code>AddressBookParser</code> then parsed by <code>AddCommandParser</code>. In <code>AddCommandParser</code>, we first parse for standard <code>Record</code>-class-level field like <code>DateTime</code> before parsing for the relevant <code>Bmi</code>-related CLI-arguments defined in <code>CliSyntax</code>. Individual field parsing is done inside <code>ParserUtil</code>. Either a complete <code>BloodSugar</code> or <code>Bmi</code> Object is returned otherwise a <code>ParseException</code> will be thrown. Note that <code>BloodSugar</code> and <code>Bmi</code> Objects are <code>Record</code> Objects. In <code>AddCommand</code>, this <code>Record</code> Object is first checked against the model whether the model contains such a <code>Record</code> (defined as same date time in <code>Record.java</code>). If there is no duplicate, it is added to the <code>Model#addRecord()</code> in turn calling <code>ModelManager#addRecord()</code> to call <code>add()</code> operation on the list. We reuse similar code to step 2 to display the result of the add.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/AddSequenceDiagram.png" alt="AddSequenceDiagram">
+</div>
+</div>
+<div class="paragraph">
+<p>Step 4. The user now decides that adding the record was a mistake, and decides to delete that record. The delete command is first parsed by <code>AddressBookParser</code> then parsed by <code>DeleteCommandParser</code>. In <code>DeleteCommandParser</code>, we use <code>ParseUtil</code> to check whether the index is a positive number, otherwise a <code>ParseException</code> will be thrown. <code>DeleteCommand</code> receives the positive index and checks whether the positive index indexes a record. <code>DeleteCommand</code> will call <code>Model#deleteRecord()</code>, which will call <code>Model#deleteRecord()</code> and call <code>ModelManager#deleteRecord()</code> performing a <code>remove()</code> operation on the list.</p>
+</div>
+<div class="paragraph">
+<p>Step 5. After command has executed in <code>LogicManager</code>, we attempt to write the recordList in memory to <code>recordList.json</code> on disk using <code>Storage#saveRecordList()</code>. The command result is returned to <code>MainWindow</code> which calls <code>MainDisplayPane</code> in step 2 using <code>MainWindow#switchToMainDisplayPane()</code>. This lists out the updated record list in the UI (step 2).</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+
+</div>
+<div class="sect3">
+<h4 id="aspect-commands-and-parsers-implementation"><a class="link" href="#aspect-commands-and-parsers-implementation">Aspect: Commands and parsers implementation</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Parse for new record type X within existing add, list, delete commands and their parsers</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement as long as record type X inherits from Record. AddCommand, ListCommand and DeleteCommand classes remain very similar to their original implementations. </p>
+</li>
+<li>
+<p>Cons: Harder to debug when parsing fails because XCommandParser classes are responsible for checking for presence of multiple fields of multiple record types. Parsing may become complicated if the order of parsing fields becomes important. </p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Create separate AddX, ListX, DeleteX, AddXParser, ListXParser, DeleteXParser for each new record type X introduced</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Each parser is responsible for parsing only record type X’s fields. This narrows down the scope of debugging should parsing fail. </p>
+</li>
+<li>
+<p>Cons: Accommodating a new record type involves creating at least 6 additional classes just for operations on data classes. Data classes required to represent the data include: Bmi class with Height and Weight class. </p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="aspect-data-structure-for-managing-multiple-record-types"><a class="link" href="#aspect-data-structure-for-managing-multiple-record-types">Aspect: Data Structure for managing multiple record types</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Use a single list to store multiple record types.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project. Simpler to implement.</p>
+</li>
+<li>
+<p>Cons: Must conduct type checks when retrieving from list. When a new record type is added, all type checks in different places must be updated. </p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use separate lists to store different record types.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Do not need to perform type checks when retrieving from list. </p>
+</li>
+<li>
+<p>Cons: Listing all records together becomes difficult, must build a new list from all separate lists. Each class must reference a different kind of list.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="logging"><a class="link" href="#logging">Logging</a></h3>
+<div class="paragraph">
+<p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Configuration</a>)</p>
+</li>
+<li>
+<p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
+</li>
+<li>
+<p>Currently log messages are output through: <code>Console</code> and to a <code>.log</code> file.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Logging Levels</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>SEVERE</code> : Critical problem detected which may possibly cause the termination of the application</p>
+</li>
+<li>
+<p><code>WARNING</code> : Can continue, but with caution</p>
+</li>
+<li>
+<p><code>INFO</code> : Information showing the noteworthy actions by the App</p>
+</li>
+<li>
+<p><code>FINE</code> : Details that is not usually noteworthy but may be useful in debugging e.g. print the actual list instead of just its size</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">Configuration</a></h3>
+<div class="paragraph">
+<p>Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: <code>config.json</code>).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="calendar-feature"><a class="link" href="#calendar-feature">Calendar feature</a></h3>
+<div class="sect3">
+<h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
+<div class="paragraph">
+<p>The calendar feature works along with a scheduler. Calendar stores internally a <code>calendarEntries</code> list and a <code>pastReminders</code> list.
+Calendar entries consists of reminders and events. Past reminders list is dynamically determined by time and all reminders in this
+list is shown to the user. The scheduler acts as a wrapper for the Java ScheduledExecutorService, which updates past reminder list at specific time.
+It implements the following operations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>'Calendar#addCalendarEntry'&#8201;&#8212;&#8201;Adds a new calendar entry to the calendar.</p>
+</li>
+<li>
+<p>'Calendar#addPastReminder'&#8201;&#8212;&#8201;Adds a reminder to the past reminders list.</p>
+</li>
+<li>
+<p>'Calendar#getCalendarEntryList'&#8201;&#8212;&#8201;Gets a list of calendar entries.</p>
+</li>
+<li>
+<p>'Calendar#getPastReminderList'&#8201;&#8212;&#8201;Gets a list of past reminders.</p>
+</li>
+<li>
+<p>'Calendar#schedule'&#8201;&#8212;&#8201;Schedules a series of upcoming reminders.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These operations are exposed in the <code>Model</code> interface as <code>Model#addCalendarEntry()</code>, <code>Model#addPastReminder()</code>,
+ <code>Model#getFilteredCalendarEntryList()</code>, <code>Model#getPastReminderList</code> and <code>Model#schedule</code> respectively.</p>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how the calendar behaves at each step.</p>
+</div>
+<div class="paragraph">
+<p>Step 1. The user launches the application for the first time on Dec 14 2019 09:00(local time). The <code>Calendar</code> will be initialized with the initial calendar state, which includes an empty calendar
+entry list and an empty past reminder list.</p>
+</div>
+<div class="paragraph">
+<p>Step 2. The user executes <code>reminder d/insulin injection dt/2019-12-14 17:30 r/daily</code> command to add a new reminder of 'insulin inject' at 17:30 every day. The <code>reminder</code> command calls <code>Model#addCalendarEntry()</code>,
+causing the modified state of the calendar after the reminder command executes to be saved in the <code>calendarEntries</code> list. Subsequently, it calls <code>Model#schedule()</code> which forces the scheduler to update the upcoming
+reminders.</p>
+</div>
+<div class="paragraph">
+<p>Step 3. The user executes <code>event d/meeting dt/2019-12-14 14:30 tp/00:30</code> command to add an new event with an auto reminder scheduled 30 minutes
+before the event. It calls <code>Model#addCalendarEntry()</code>, causing a new event as well as a new reminder saved in the <code>calendarEntries</code> list. Subsequently, it calls <code>Model#schedule()</code> which forces the scheduler to
+update the upcoming reminders.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If an event or reminder command fails its execution, it will not call <code>Model#addCalendarEntry()</code>, so the calendar state will not be saved into the <code>calendarEntryList</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Step 4. At 14:00, a scheduled task is executed to call <code>Model#addPastReminder()</code> and it adds the dinner event reminder to the <code>pastReminders</code> list.</p>
+</div>
+<div class="paragraph">
+<p>Step 5. At 17:30, a scheduled task is executed to call <code>Model#addPastReminder()</code> and it adds the dinner event reminder to the <code>pastReminders</code> list.</p>
+</div>
+<div class="paragraph">
+<p>The following activity diagram summarizes what happens when a user executes a new command:</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-how-scheduler-updates-upcoming-reminders"><a class="link" href="#aspect-how-scheduler-updates-upcoming-reminders">Aspect: How scheduler updates upcoming reminders</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Cancels all scheduled reminders and reschedule according to the updated reminder entries.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement.</p>
+</li>
+<li>
+<p>Cons: May have performance issues in terms of time.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Updates scheduled reminders according to the newly added reminder.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Will has less repeated work.</p>
+</li>
+<li>
+<p>Cons: More work to do on deciding which tasks to cancel.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-period-of-updating-scheduler"><a class="link" href="#aspect-period-of-updating-scheduler">Aspect: Period of updating scheduler.</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Updates scheduler at 23:59(local time) every day.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement.</p>
+</li>
+<li>
+<p>Cons: May have a large number of scheduled tasks which will not be executed before the applicaion is closed.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Updates scheduler every hour.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: More flexible scheduling without concerning date and less scheduled tasks.</p>
+</li>
+<li>
+<p>Cons: May cause overhead due to frequently updating.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="documentation"><a class="link" href="#documentation">Documentation</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Refer to the guide <a href="Documentation.html">here</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="testing"><a class="link" href="#testing">Testing</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Refer to the guide <a href="Testing.html">here</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="dev-ops"><a class="link" href="#dev-ops">Dev Ops</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Refer to the guide <a href="DevOps.html">here</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="product-scope"><a class="link" href="#product-scope">Appendix A: Product Scope</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Target user profile</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>diagnosed with type 2 diabetes</p>
+</li>
+<li>
+<p>consults a professional health practitioner</p>
+</li>
+<li>
+<p>has a need to manage a significant number of health-related records and tasks</p>
+</li>
+<li>
+<p>is diligent in immediately recording events but subsequently forgets events</p>
+</li>
+<li>
+<p>wants to gain a deeper understanding of his/her condition</p>
+</li>
+<li>
+<p>is struggling with obesity and lack of sleep</p>
+</li>
+<li>
+<p>is motivated by challenges</p>
+</li>
+<li>
+<p>enjoys a personalised experience</p>
+</li>
+<li>
+<p>needs to know his/her effectiveness in managing diabetes at a glance</p>
+</li>
+<li>
+<p>prefer desktop apps over other types</p>
+</li>
+<li>
+<p>can type fast</p>
+</li>
+<li>
+<p>reads and writes competently in English</p>
+</li>
+<li>
+<p>prefers typing over mouse input</p>
+</li>
+<li>
+<p>is reasonably comfortable using CLI apps</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Value proposition</strong>: convenient all-in-one app for effectively managing diabetes that is faster than a typical mouse/GUI driven app</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="user-stories"><a class="link" href="#user-stories">Appendix B: User Stories</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Priorities: High (must have) - <code>* * *</code>, Medium (nice to have) - <code>* *</code>, Low (unlikely to have) - <code>*</code></p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 30%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Priority</th>
+<th class="tableblock halign-left valign-top">As a &#8230;&#8203;</th>
+<th class="tableblock halign-left valign-top">I want to &#8230;&#8203;</th>
+<th class="tableblock halign-left valign-top">So that I can&#8230;&#8203;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">diabetic patient who has different options on medical care</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">know exactly how much I am spending on medication and consultation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">know which hospitals to seek medical care from</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">very busy diabetic</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">use a flexible calendar system that can account for updates</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">easily make changes to appointments that I have to change often due to other commitments</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">diabetic</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">keep track of my medical expenses</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">better manage my finance</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">person who likes numbers</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">see summary statistics</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">better track my progress</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">diabetic</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">get an overview of my dieting/exercising data regularly</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">save time because I am working 9-5</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">forgetful diabetic</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be reminded to attend my medical appointments</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">know how well my existing measures work</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">patient who has recently been diagnosed of diabetes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be informed when I eat food with high sugar content</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">live better and reduce the chances of further health deterioration</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">lazy diabetic</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have reminders for exercising</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">force myself to work out.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">busy diabetic</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be reminded on when to refill / stock up on insulin</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">diabetic</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">see graphic data summary</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">minimise the need to read long paragraphs</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">diabetic patient who has just been recently diagnosed</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have some motivation and reminders on my diet</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">reduce my struggles of cutting down on meals or even exercise that is really tough for me</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">diabetic</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">automatically calculate my daily sugar/carb intake</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">eliminate the trouble to search for the levels of sugar content in the food I eat everyday.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">diabetic who values my punctuality</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">adhere to my appointment timings</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">uphold my principles and take responsibility of my own health by not missing my appointments.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">diabetic</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">reminded to take my insulin regularly</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">diabetic</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be able to track my sugar levels</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">task-oriented diabetic patient</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have a goal to work towards or a challenge to work on everyday</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have a sense of direction in what I can do to improve my health</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">caretaker of an elderly patient with diabetes whose family members are busy working</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">reliable app to keep track of all the patients' activities</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">can answer to the family members who have entrusted unto me this responsibility of care</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">busy person</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be able to easily sort and prioritize my tasks</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">better manage my time</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">diabetic patient who is often being referred to new doctors at different specialist clinics every now and then</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be able to be able to export all my records and activities at once</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">rule out the possibility of missing any information during the registration process at a new clinic/ hospital I am visiting</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">family member of a diabetic</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">prioritize my tasks</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be immediately contactable if my family member has an emergency situation that requires urgent medical attention</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">diabetic</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have a customisable app with avatars and different backgrounds</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">enjoy a personalised experience</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">lazy and obese individual</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be motivated constantly to exercise</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">stop procrastinating</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">forgetful diabetics patient</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have a record of my doctors' advice for each medical appointment and prescription directions</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">better understand the steps that I can take to improve my condition until the next consultation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">achievement-oriented diabetic</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">view the achievements and progress I have made on food intake</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">remain motivated to keep my streak on good habits going</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">paranoid diabetic who values privacy</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">secure/encrypt my health data and other private contact details</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">protect my data</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">diabetic patient with a family</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have a user-friendly app that helps me manage my medical data and appointments on my own</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">free the burden I have on my family</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">diabetic patient with a family</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have a user-friendly app with natural commands that helps me manage my medical data and appointments on my own</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">free the burden I have on my family</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">diabetic patient in a community of diabetic patients</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have a standardised means of comparing our activities via a social network</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">learn from my peers, encourage and be encouraged through this difficult journey.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">careless user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">undo my most recent actions</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">easily make necessary amendments and input the correct commands</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a diabetic patient who has many medical receipts - and is not very good at mathematics</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have a simple calculator that is always easily accessible</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">instantly calculate all my medical costs when needed</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">an obese working adult at high risk of diabetes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">start monitoring my diet</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">minimise my risk of having diabetes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">medical consultant</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">export my patient&#8217;s health data</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">save my time</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="use-cases"><a class="link" href="#use-cases">Appendix C: Use Cases</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>(For all use cases below, the <strong>System</strong> is the <code>Sugar Mummy</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
+</div>
+<div class="sect2">
+<h3 id="use-case-add-blood-sugar-record"><a class="link" href="#use-case-add-blood-sugar-record">Use case: Add blood sugar record</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to add a blood sugar record</p>
+</li>
+<li>
+<p>System adds the blood sugar record</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. The record is incomplete or passed invalid arguments.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. System shows an error message.</p>
+<div class="paragraph">
+<p>Use case resumes at step 1.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-schedule-a-medical-appointment" class="discrete">Use case: Schedule a medical appointment</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to add a medical appointment</p>
+</li>
+<li>
+<p>System adds the medical appointment</p>
+</li>
+<li>
+<p>System notifies user of upcoming medical appointment beforehand</p>
+</li>
+<li>
+<p>User acknowledges the notification and attends medical appointment on schedule</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. The appointment is incomplete or passed invalid arguments.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. System shows an error message.</p>
+<div class="paragraph">
+<p>Use case resumes at step 1.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3a. User snoozes the notification.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3a1. System waits for snooze time to elapse.</p>
+<div class="paragraph">
+<p>Use case resumes at step 3.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-delete-blood-sugar-record" class="discrete">Use case: Delete blood sugar record</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests list of blood sugar records</p>
+</li>
+<li>
+<p>System shows a list of blood sugar records</p>
+</li>
+<li>
+<p>User requests to delete a specific blood sugar record in the list</p>
+</li>
+<li>
+<p>System deletes the blood sugar record</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. The list is empty.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+<li>
+<p>3a. The given index is invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3a1. System shows an error message.</p>
+<div class="paragraph">
+<p>Use case resumes at step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-recommend-diabetes-friendly-food" class="discrete">Use case: Recommend diabetes-friendly food</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests for a diabetes-friendly food item</p>
+</li>
+<li>
+<p>System shows a diabetes-friendly food item</p>
+</li>
+<li>
+<p>User likes the recommendation</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3a. User dislikes the recommendation.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3a1. User requests for another diabetes-friendly food item</p>
+<div class="paragraph">
+<p>Use case resumes at step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-update-blood-sugar-record" class="discrete">Use case: Update blood sugar record</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests list of blood sugar records</p>
+</li>
+<li>
+<p>System shows a list of blood sugar records</p>
+</li>
+<li>
+<p>User requests to update a specific blood sugar record in the list</p>
+</li>
+<li>
+<p>System updates the blood sugar record</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. The list is empty.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+<li>
+<p>3a. The given index is invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3a1. System shows an error message.</p>
+<div class="paragraph">
+<p>Use case resumes at step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3b. The record is incomplete or passed invalid arguments.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3b1. System shows an error message.</p>
+<div class="paragraph">
+<p>Use case resumes at step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="non-functional-requirements"><a class="link" href="#non-functional-requirements">Appendix D: Non Functional Requirements</a></h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Should work on any <a href="#mainstream-os">mainstream OS</a> as long as it has Java <code>11</code> or above installed.</p>
+</li>
+<li>
+<p>Should be able to hold up to 1000 health-related records and tasks without a noticeable sluggishness in performance for typical usage.</p>
+</li>
+<li>
+<p>A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.</p>
+</li>
+<li>
+<p>Third-party frameworks/libraries used should be free, open-source, and have permissive license terms, should not require any installation by the user of this software, and approved by teaching team.</p>
+</li>
+<li>
+<p>Should work without requiring an installer.</p>
+</li>
+<li>
+<p>The software should not depend on your own remote server</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="glossary"><a class="link" href="#glossary">Appendix E: Glossary</a></h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a id="mainstream-os"></a> Mainstream OS</dt>
+<dd>
+<p>Windows, Linux, Unix, OS-X</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="product-survey"><a class="link" href="#product-survey">Appendix F: Product Survey</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Product Name</strong></p>
+</div>
+<div class="paragraph">
+<p>Author: &#8230;&#8203;</p>
+</div>
+<div class="paragraph">
+<p>Pros:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>&#8230;&#8203;</p>
+</li>
+<li>
+<p>&#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Cons:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>&#8230;&#8203;</p>
+</li>
+<li>
+<p>&#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="instructions-for-manual-testing"><a class="link" href="#instructions-for-manual-testing">Appendix G: Instructions for Manual Testing</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Given below are instructions to test the app manually.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+These instructions only provide a starting point for testers to work on; testers are expected to do more <em>exploratory</em> testing.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="launch-and-shutdown"><a class="link" href="#launch-and-shutdown">Launch and Shutdown</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Initial launch</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Download the jar file and copy into an empty folder</p>
+</li>
+<li>
+<p>Double-click the jar file<br>
+Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Saving window preferences</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Resize the window to an optimum size. Move the window to a different location. Close the window.</p>
+</li>
+<li>
+<p>Re-launch the app by double-clicking the jar file.<br>
+Expected: The most recent window size and location is retained.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><em>{ more test cases &#8230;&#8203; }</em></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-a-person"><a class="link" href="#deleting-a-person">Deleting a person</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Deleting a person while all persons are listed</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: List all persons using the <code>list</code> command. Multiple persons in the list.</p>
+</li>
+<li>
+<p>Test case: <code>delete 1</code><br>
+Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.</p>
+</li>
+<li>
+<p>Test case: <code>delete 0</code><br>
+Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.</p>
+</li>
+<li>
+<p>Other incorrect delete commands to try: <code>delete</code>, <code>delete x</code> (where x is larger than the list size) <em>{give more}</em><br>
+Expected: Similar to previous.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><em>{ more test cases &#8230;&#8203; }</em></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="saving-data"><a class="link" href="#saving-data">Saving data</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Dealing with missing/corrupted data files</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p><em>{explain how to simulate a missing/corrupted file and the expected behavior}</em></p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><em>{ more test cases &#8230;&#8203; }</em></p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -161,4 +1210,4 @@
 <p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-23 16:11:46 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-23 16:28:03 UTC</div></div></div></body></html>

@@ -24,9 +24,11 @@
 <ul class="sectlevel2">
 <li><a href="#average-graph-feature">3.1. Average graph feature</a></li>
 <li><a href="#food-recommendation-feature">3.2. Food Recommendation Feature</a></li>
-<li><a href="#logging">3.3. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.4. Configuration</a></li>
-<li><a href="#calendar-feature">3.5. Calendar feature</a></li>
+<li><a href="#proposed-data-encryption">3.3. [Proposed] Data Encryption</a></li>
+<li><a href="#proposed-data-log-feature">3.4. [Proposed] Data log feature</a></li>
+<li><a href="#logging">3.5. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.6. Configuration</a></li>
+<li><a href="#calendar-feature">3.7. Calendar feature</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a></li>
@@ -719,8 +721,11 @@ The lifeline for <code>RecmFoodCommand</code> should end at the destroy marker (
 </div>
 </div>
 </div>
+</div>
+<div class="sect2">
+<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.3. [Proposed] Data Encryption</a></h3>
 <div class="sect3">
-<h4 id="future-development-direction"><a class="link" href="#future-development-direction">3.2.4. Future Development Direction</a></h4>
+<h4 id="future-development-direction"><a class="link" href="#future-development-direction">3.3.1. Future Development Direction</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -736,14 +741,119 @@ The current food models can be utilized to help record daily diets. This would a
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.3. Logging</a></h3>
+<h3 id="proposed-data-log-feature"><a class="link" href="#proposed-data-log-feature">3.4. [Proposed] Data log feature</a></h3>
+<div class="sect3">
+<h4 id="proposed-implementation"><a class="link" href="#proposed-implementation">3.4.1. Proposed Implementation</a></h4>
+<div class="paragraph">
+<p>The multi-record data logging mechanism is facilitated by a new Record package containing  BloodSugar and Bmi classes that extend an abstract Record class. Add, list and delete command classes and parsers are modified to accommodate multiple record types. Multi-record data is stored internally as a recordList where members are Records.</p>
+</div>
+<div class="paragraph">
+<p>It implements the following operations:
+* <code>Model#addRecord()</code> — Adds a record to the record list. 
+* <code>Model#deleteRecord()</code> — Deletes a record from the record list. 
+* <code>Model#getUniqueRecordListObject()</code> — Retrieves all records in record list. 
+These operations are exposed in the <code>Model</code> interface as <code>Model#addRecord()</code>, <code>Model#deleteRecord()</code> and <code>Model#getUniqueRecordListObject()</code> respectively.
+Given below is an example usage scenario and how the data log feature behaves at each step.
+Step 1. The user launches the application for the first time. If <code>recordList.json</code> is not found in <code>/data</code>, a <code>recordList.json</code> will be produced from <code>SampleDataUtil#getSampleRecords()</code>. Otherwise, the recordList will be loaded from <code>recordList.json</code> using <code>UniqueRecordList#setRecord(&lt;List&gt;)</code> and checked for inconsistencies e.g. missing fields, invalid fields. If invalid fields or missing consequential fields that must be used (e.g. <code>BloodSugar</code>’s <code>Concentration</code> field is consequential while its <code>Height</code> and <code>Weight</code> fields are not) are detected, an Exception is thrown and <code>recordList.json</code> start from scratch. Otherwise, inconsequential fields will be automatically repopulated on saving to the <code>recordList.json</code> in any command.</p>
+</div>
+<div class="paragraph">
+<p>Step 2. The user executes list command to list all records. <code>Model#getUniqueRecordListObject()</code> is called and <code>DisplayPaneType</code> is set to LIST. <code>MainDisplayPane#get()</code> determines the type of window to show based on <code>DisplayPaneType</code>. A new <code>RecordListPanel</code> is created and populates each <code>ListViewCell</code> with <code>BloodSugarRecordCard</code> and <code>BmiRecordCard</code>. Data used to populate the <code>RecordCards</code> is passed in through <code>RecordListPanel</code>’s constructor, as an <code>ObservableList</code> containing <code>BloodSugar</code> and <code>Bmi</code> objects.</p>
+</div>
+<div class="paragraph">
+<p>Step 3. The user executes <code>add rt/BMI h/1 w/1 dt/2019-09-09 12:12</code> command to create a <code>Bmi</code> record with height 1, weight 1 at date 2019-09-09 and time 12:12. The add command is first parsed by <code>AddressBookParser</code> then parsed by <code>AddCommandParser</code>. In <code>AddCommandParser</code>, we first parse for standard <code>Record</code>-class-level field like <code>DateTime</code> before parsing for the relevant <code>Bmi</code>-related CLI-arguments defined in <code>CliSyntax</code>. Individual field parsing is done inside <code>ParserUtil</code>. Either a complete <code>BloodSugar</code> or <code>Bmi</code> Object is returned otherwise a <code>ParseException</code> will be thrown. Note that <code>BloodSugar</code> and <code>Bmi</code> Objects are <code>Record</code> Objects. In <code>AddCommand</code>, this <code>Record</code> Object is first checked against the model whether the model contains such a <code>Record</code> (defined as same date time in <code>Record.java</code>). If there is no duplicate, it is added to the <code>Model#addRecord()</code> in turn calling <code>ModelManager#addRecord()</code> to call <code>add()</code> operation on the list. We reuse similar code to step 2 to display the result of the add.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AddSequenceDiagram.png" alt="AddSequenceDiagram">
+</div>
+</div>
+<div class="paragraph">
+<p>Step 4. The user now decides that adding the record was a mistake, and decides to delete that record. The delete command is first parsed by <code>AddressBookParser</code> then parsed by <code>DeleteCommandParser</code>. In <code>DeleteCommandParser</code>, we use <code>ParseUtil</code> to check whether the index is a positive number, otherwise a <code>ParseException</code> will be thrown. <code>DeleteCommand</code> receives the positive index and checks whether the positive index indexes a record. <code>DeleteCommand</code> will call <code>Model#deleteRecord()</code>, which will call <code>Model#deleteRecord()</code> and call <code>ModelManager#deleteRecord()</code> performing a <code>remove()</code> operation on the list.</p>
+</div>
+<div class="paragraph">
+<p>Step 5. After command has executed in <code>LogicManager</code>, we attempt to write the recordList in memory to <code>recordList.json</code> on disk using <code>Storage#saveRecordList()</code>. The command result is returned to <code>MainWindow</code> which calls <code>MainDisplayPane</code> in step 2 using <code>MainWindow#switchToMainDisplayPane()</code>. This lists out the updated record list in the UI (step 2).</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.4.2. Design Considerations</a></h4>
+
+</div>
+<div class="sect3">
+<h4 id="aspect-commands-and-parsers-implementation"><a class="link" href="#aspect-commands-and-parsers-implementation">3.4.3. Aspect: Commands and parsers implementation</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Parse for new record type X within existing add, list, delete commands and their parsers</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement as long as record type X inherits from Record. AddCommand, ListCommand and DeleteCommand classes remain very similar to their original implementations. </p>
+</li>
+<li>
+<p>Cons: Harder to debug when parsing fails because XCommandParser classes are responsible for checking for presence of multiple fields of multiple record types. Parsing may become complicated if the order of parsing fields becomes important. </p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Create separate AddX, ListX, DeleteX, AddXParser, ListXParser, DeleteXParser for each new record type X introduced</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Each parser is responsible for parsing only record type X’s fields. This narrows down the scope of debugging should parsing fail. </p>
+</li>
+<li>
+<p>Cons: Accommodating a new record type involves creating at least 6 additional classes just for operations on data classes. Data classes required to represent the data include: Bmi class with Height and Weight class. </p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="aspect-data-structure-for-managing-multiple-record-types"><a class="link" href="#aspect-data-structure-for-managing-multiple-record-types">3.4.4. Aspect: Data Structure for managing multiple record types</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Use a single list to store multiple record types.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project. Simpler to implement.</p>
+</li>
+<li>
+<p>Cons: Must conduct type checks when retrieving from list. When a new record type is added, all type checks in different places must be updated. </p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use separate lists to store different record types.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Do not need to perform type checks when retrieving from list. </p>
+</li>
+<li>
+<p>Cons: Listing all records together becomes difficult, must build a new list from all separate lists. Each class must reference a different kind of list.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="logging"><a class="link" href="#logging">3.5. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.4, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.6, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -774,15 +884,15 @@ The current food models can be utilized to help record daily diets. This would a
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.4. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.6. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="calendar-feature"><a class="link" href="#calendar-feature">3.5. Calendar feature</a></h3>
+<h3 id="calendar-feature"><a class="link" href="#calendar-feature">3.7. Calendar feature</a></h3>
 <div class="sect3">
-<h4 id="implementation-4"><a class="link" href="#implementation-4">3.5.1. Implementation</a></h4>
+<h4 id="implementation-4"><a class="link" href="#implementation-4">3.7.1. Implementation</a></h4>
 <div class="paragraph">
 <p>The calendar feature works along with a scheduler. Calendar stores internally a <code>calendarEntries</code> list and a <code>pastReminders</code> list.
 Calendar entries consists of reminders and events. Past reminders list is dynamically determined by time and all reminders in this
@@ -852,7 +962,7 @@ If an event or reminder command fails its execution, it will not call <code>Mode
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.5.2. Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.7.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-scheduler-updates-upcoming-reminders"><a class="link" href="#aspect-how-scheduler-updates-upcoming-reminders">Aspect: How scheduler updates upcoming reminders</a></h5>
 <div class="ulist">
@@ -1662,4 +1772,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-23 16:11:46 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-23 16:28:03 UTC</div></div></div></body></html>
