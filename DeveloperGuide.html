@@ -24,9 +24,8 @@
 <ul class="sectlevel2">
 <li><a href="#average-graph-feature">3.1. Average graph feature</a></li>
 <li><a href="#food-recommendation-feature">3.2. Food Recommendation Feature</a></li>
-<li><a href="#proposed-data-encryption">3.3. [Proposed] Data Encryption</a></li>
-<li><a href="#logging">3.4. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.5. Configuration</a></li>
+<li><a href="#logging">3.3. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.4. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a></li>
@@ -469,16 +468,48 @@ time period records are from and value is the average values.</p>
 </ul>
 </div>
 <div class="sect3">
-<h4 id="model-overview"><a class="link" href="#model-overview">3.2.1. Model Overview</a></h4>
+<h4 id="overview"><a class="link" href="#overview">3.2.1. Overview</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Internal Data Structure</p>
 <div class="paragraph">
-<p>The
-image::FoodModelClassDiagram.png[]</p>
+<p>The <code>UniqueFoodList</code> is the main model that contains all the foods and interacts with logic and UI. It exposes an
+unmodifiable <code>ObservableList&lt;Food&gt;</code> that associates the UI display of food recommendations.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/FoodModelClassDiagram.png" alt="FoodModelClassDiagram">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Parsers</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>RecmFoodCommandParser</code> specifies the filters applied on the food list. Filters are implemented by two <code>Predicate</code> and are based on <code>Flag</code> and / or <code>FoodName</code>.</p>
+</li>
+<li>
+<p><code>AddFoodCommandParser</code> specifies and checks each fields of a new input food.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>UI: Two main components are <code>FoodCard</code>, which shows the food information, and <code>FoodFlowPanel</code>: holds all the cards. It is nested in a <code>Scrollable</code> One highlight of the design is the background color usage for food name. Different colors are corresponding to different types of foods.</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect3">
 <h4 id="implementation-3"><a class="link" href="#implementation-3">3.2.2. Implementation</a></h4>
 <div class="paragraph">
-<p>It majorly implements the following operations:</p>
+<p>The food recommendation mechanism majorly implements the following operations:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -486,21 +517,24 @@ image::FoodModelClassDiagram.png[]</p>
 <p><code>SugarMummy#recmf()</code>&#8201;&#8212;&#8201;Recommends a list of foods to the user.</p>
 </li>
 <li>
-<p><code>SugarMummy#sortf()</code>&#8201;&#8212;&#8201;Sorts the recommendations in ascending or descending order in terms of food name or calorie, gi, sugar, and fat values.</p>
+<p><code>SugarMummy#sort()</code>&#8201;&#8212;&#8201;Sorts the recommendations in ascending or descending order in terms of food name or calorie, gi, sugar, and fat values.</p>
+</li>
+<li>
+<p><code>SugarMummy#addfood()</code>&#8201;&#8212;&#8201;Inputs new foods into the database for future recommendations.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>These operations are exposed in the <code>Model</code> interface as <code>Model#updateFilteredFoodList()</code>, <code>Model#sortFilteredFoodList()</code> respectively.</p>
+<p>These operations are exposed in the <code>Model</code> interface as <code>Model#updateFilteredFoodList()</code>, <code>Model#sortFilteredFoodList()</code>, <code>Model#addFood()</code> respectively.</p>
 </div>
 <div class="paragraph">
 <p>Given below is an example usage scenario and how the food recommendation mechanism behaves at each step.</p>
 </div>
 <div class="paragraph">
-<p>Step 1. The user launches the application and enter <code>recmf</code> Command for the first time and . The <code>foodlist.json</code> storage file will be initialized with the pre-loaded food data.</p>
+<p>Step 1. The user launches the application and enter <code>recmf</code> Command for the first time and . The <code>foodlist.json</code> storage file will be initialized with the pre-loaded food data from <code>SampleFoodDataUtil</code>.</p>
 </div>
 <div class="paragraph">
-<p>Step 2. The user executes <code>recmf -f -sv</code> command.  calls</p>
+<p>Step 2. The user executes <code>recmf -f -sv</code> command. <code>IsWantedTypePredicate</code> will be applied on the food list to select specified types.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -515,10 +549,10 @@ If no flag is specified, <code>RecmFoodCommandParser#getParsedFlags()</code> wil
 </table>
 </div>
 <div class="paragraph">
-<p>Step 4. The user executes <code>recmf sort/calorie</code></p>
+<p>Step 3. The user executes <code>recmf fn/Cherry</code>. Similar to step 2, <code>FoodNameContainsKeywordPredicate</code> will be applied.</p>
 </div>
 <div class="paragraph">
-<p>Step 5. The user feels the database is insufficient and wants to add a new food by executing <code>addfood (FOOD INFO)</code>.</p>
+<p>Step 4. The user executes <code>recmf sort/calorie</code>.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -527,15 +561,18 @@ If no flag is specified, <code>RecmFoodCommandParser#getParsedFlags()</code> wil
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If the <code>currentStatePointer</code> is at index 0, pointing to the initial address book state, then there are no previous address book states to restore. The <code>undo</code> command uses <code>Model#canUndoAddressBook()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
+Collectively, Step 2 to 4 have similar underlying logic implementation and Ui updates. The whole food list wil be iterated through to get a filter or reordered food list.
 </td>
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p>Step 5. The user feels the database is insufficient and wants to add a new food by executing <code>addfood (FOOD INFO)</code>. The <code>foodlist.json</code> storage file will be immediately updated if the execution is successful.</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>The following sequence diagram shows how the food recommendation operation works: <code>recmf -f fn/Cherry</code></p>
+<p>The following sequence diagram shows how the typical food recommendation operation works: <code>recmf -f fn/Cherry</code></p>
 </li>
 </ul>
 </div>
@@ -559,13 +596,13 @@ The lifeline for <code>RecmFoodCommand</code> should end at the destroy marker (
 <div class="ulist">
 <ul>
 <li>
-<p>The following activity diagram summarizes what happens when a user executes <code>recmf</code> :</p>
+<p>The following activity diagram summarizes what happens when a user executes <code>addfood</code> command.</p>
 </li>
 </ul>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/CommitActivityDiagram.png" alt="CommitActivityDiagram">
+<img src="images/AddFoodActivityDiagram.png" alt="AddFoodActivityDiagram">
 </div>
 </div>
 </div>
@@ -698,20 +735,14 @@ The current food models can be utilized to help record daily diets. This would a
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.3. [Proposed] Data Encryption</a></h3>
-<div class="paragraph">
-<p><em>{Explain here how the data encryption feature will be implemented}</em></p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.4. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.3. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.5, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.4, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -742,7 +773,7 @@ The current food models can be utilized to help record daily diets. This would a
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.5. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.4. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -1488,4 +1519,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-23 15:17:58 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-23 16:09:45 UTC</div></div></div></body></html>
