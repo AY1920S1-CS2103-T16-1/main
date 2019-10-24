@@ -460,6 +460,284 @@ If an event or reminder command fails its execution, it will not call <code>Mode
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="personalised-user-experience-feature"><a class="link" href="#personalised-user-experience-feature">Personalised User Experience Feature</a></h3>
+<div class="paragraph">
+<p>To personalise the diabetic user’s the experience in using the SugarMummy app, several sub-features are used,
+including:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Addition, editing and clearing of the user’s biography</p>
+</li>
+<li>
+<p>Customisation of font and <code>background</code> colour, with the ability to set as <code>background</code> image for <code>background</code> as well.</p>
+</li>
+<li>
+<p>Display of motivational quotes for the user (initialisation phase; in progress)</p>
+</li>
+<li>
+<p><code>Achievements</code> to be shown to the user upon achieving a milestone.</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="overview-2"><a class="link" href="#overview-2">Overview</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>User</code> class is used to represent a diabetic user. A diabetic user is composed of the <code>Name</code>, <code>ProfileDesc</code>, <code>DisplayPicPath</code>, <code>Nric</code>, <code>Gender</code>, <code>Phone</code>, <code>MedicalCondition</code>, <code>Address</code>, <code>Goal</code> and <code>OtherBioInfo</code> classes.</p>
+</li>
+<li>
+<p>A <code>User</code> is currently defined to be able to have more than one <code>Phone</code>, <code>MedicalCondition</code> and <code>Goal</code>. As such, these classes inherit the <code>ListableField</code> Interface.</p>
+</li>
+<li>
+<p>The structure of a <code>User</code> and its interactions are shown as follows:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UserModelClassDiagram.png" alt="UserModelClassDiagram">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A <code>User</code> implements <code>ListableField</code> by storing them in a java <code>List</code>.</p>
+</li>
+<li>
+<p>A <code>User</code> that is created is added to a <code>UserList</code>. Although not more than one <code>User</code> can be added in current versions so as to enhance personalisation for the, future developers may decide to repurpose the app to allow more users, and their corresponding biographies represented by the <code>bio</code> fields, to the <code>UserList</code>.</p>
+</li>
+<li>
+<p>Other personalisation features such as <code>fontcolour</code>, <code>background</code> and <code>achievements</code> are currently represented by independent classes <code>Colour</code>, <code>Background</code> and <code>Achievement</code> respectively on their own, representing the model as their name describes.</p>
+</li>
+<li>
+<p>The <code>Colour</code> feature allows for either enumeration of colour names or hexadecimal colour codes to be used to set colour. <code>Background</code> is associated to <code>Colour</code> as an argument for <code>Background</code> could simply be a colour. It depends on the static method isValid`Colour`(String test) method to determine if it’s argument is a <code>Colour</code></p>
+</li>
+<li>
+<p>The <code>AddBioParser</code> and <code>EditBioParser</code> is currently used to parse command arguments given by the user and allows adding of specific biography fields, whereas the <code>FontColour</code> and <code>Background</code> parsers are used to parse arguments for other personalisation features for font colours and <code>background</code> respectively.</p>
+</li>
+<li>
+<p>The <code>Ui</code> for personalisation is separated into distinct parts. <code>User</code>’s biography information and achievements page are components on their own in the <code>Ui</code>’s <code>MainDisplayPane</code> – switched when required, whereas <code>background</code> and <code>fontcolour</code> do not have a designated <code>Ui</code> window, but instead changes the attributes for the entire application by modifying the CSS file used itself.</p>
+</li>
+<li>
+<p>All command words in this program, not restricted to this feature alone, are not case sensitive and implemented under <code>SugarMummyParser</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-2"><a class="link" href="#implementation-2">Implementation</a></h4>
+<div class="sect4">
+<h5 id="biography"><a class="link" href="#biography">Biography</a></h5>
+<div class="paragraph">
+<p>The biography feature is supported by the <code>addbio</code>, <code>editbio</code> and <code>clrbio</code> commands. Each command adheres to the main flow of information used by this application. In other words, when a command is received, the command is first parsed by <code>SugarMummyParser</code>, and to individual parsers where required, before return a <code>Command</code> object. The <code>Command</code> object is then executed by <code>Logic</code>, during which it updates <code>Model</code>, and after which Storage is updated <code>Logic</code>, before the feedback from the <code>CommandResult</code> returned by the <code>Command</code> object is shown to the user back at the <code>Ui</code>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The following are possible scenarios for each of the following types of command words.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Scenario 1: User keys in <code>addbio n/testMinimal p/91234567 e/81234567 /testMedicalCondition</code></p>
+</li>
+<li>
+<p>Scenario 2: User keys in <code>editbio p/2/91234567</code></p>
+</li>
+<li>
+<p>Scenario 3: User keys in <code>bio</code></p>
+</li>
+<li>
+<p>Scenario 4: User keys in <code>clrbio</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>In all scenarios, <code>SugarMummyParser</code> responds to the command word via a series of switch cases. As mentioned above, <code>addbio</code> and <code>editbio</code> will AddCommandParser and <code>EditCommandParser</code> respectively.</p>
+</li>
+<li>
+<p>A key difference between the parsers for <code>addbio</code> and <code>editbio</code> is that the former requires <code>Name</code>, Contact Number, Emergency Contact, and <code>MedicalCondition</code> to be compulsory whereas <code>editbio</code> requires at least one argument denoting the <code>User</code>’s biography field to be changed. Furthermore, <code>EditCommandParser</code> determines whether or not subarguments for fields of <code>ListableField</code> type contain the format <code>INDEX/</code>, denoting the particular number in the list to be changed.</p>
+</li>
+<li>
+<p><code>CommandParser</code> then  returns an <code>AddBioCommand</code> object that stores the <code>User</code> to be created. <code>EditCommandParser</code> on the other hand creates an <code>EditBioCommand</code> object that stores an <code>EditedUserDescription</code> containing information on which fields are edited to be edited. A <code>List</code> of <code>HashMaps</code> that maps indexes to <code>ListableField`s is usedin `EditedUserDescription</code> to denote changes to be made within each <code>ListableField</code>. When executed by <code>Logic</code> afterwards, the <code>AddBioCommand</code> creates the <code>User</code> to be stored in model whereas the <code>EditBioCommand</code> creates a new <code>User</code> based on information in <code>EditedUserDescription</code>. A <code>UserList</code> is used in the <code>Model</code> to store Users. At any point of time when a user attempts to access biography information, <code>Logic</code> accesses the <code>UserList</code> from <code>Model</code> to display information. In order to be able to display the same information upon startup, <code>Logic</code> saves this <code>UserList</code> to the storage after execution of each command.</p>
+</li>
+<li>
+<p>For the <code>bio</code> and <code>clrbio</code> commands, the implementations are relatively more straightforward. A BioCommand returned by <code>SugarMummyParser</code> simply overrides the <code>getDisplayPaneType()</code> of the <code>Command</code> object (that each <code>Command</code> object contains) so that back at <code>Ui</code>, <code>Ui</code> knows to display the <code>BioPane</code> of the <code>Ui</code> in the <code>MainDisplayPane</code> part of the window. This is also done for all other biography-related commands so after each biography-related command, the <code>BioPane</code> is displayed.  A <code>DisplayPane</code> is stored in the form of an enumeration as the type of display would be predefined to all it’s accessors. The <code>ClearBioCommand</code> simply clears the <code>UserList</code> stored in the model upon execution.</p>
+</li>
+<li>
+<p>In the cases of <code>bio</code> and <code>clrbio</code> commands, <code>SugarMummyParser</code> requires non-null arguments just as it does for other single-word commands such as <code>exit</code>.</p>
+</li>
+<li>
+<p>Each <code>Command</code> returns a <code>CommandResult</code> to logic containing feedback to be displayed to the user. Any exception that is thrown to the user is caught back at <code>Ui</code> <code>Ui</code>. Feedback is displayed to the user using the <code>ResultsDisplayPane</code>. The display of user biography is implemented using JavaFX <code>TableView</code>. If the <code>DisplayPicPath</code> of a <code>User</code> is unchanged, the <code>Ui</code> does not reload the image, so as to optimise performance of the program. If an entire pane is left unchanged, the pane is not reloaded, even upon execution of commands that are used to display the pane, unless explicitly indicated in the <code>getNewPaneIsToBeCreated()</code> method of the. <code>Command</code>. Caching is implemented using a <code>HashMap</code> that maps <code>DisplayPane</code> enumerations to the corresponding <code>UiPart</code> representing the respective pane.</p>
+</li>
+<li>
+<p>An illustration of how the information flows for the <code>editbio</code> command (Scenario 2) is shown as follows:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/EditBioSequenceDiagram.png" alt="EditBioSequenceDiagram">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The rest of the biography commands follow a similar logic, with key differences in the parser and command steps as described above.  Validation within parsers are done via the <code>ParserUtil</code> class.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aesthetics"><a class="link" href="#aesthetics">Aesthetics</a></h5>
+<div class="paragraph">
+<p>The aesthetics aspects of the application help to support the feature of personalised user experience and are implemented using the command words “<code>fontcolour</code>” and “<code>background</code>” respectively.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Possible valid usages are as follows:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Scenario 1: User keys in <code>fontcolour</code></p>
+</li>
+<li>
+<p>Scenario 2: User keys in <code>fontcolour white</code></p>
+</li>
+<li>
+<p>Scenario 3: User keys in <code>fontcolour #FFFF00</code></p>
+</li>
+<li>
+<p>Scenario 4: User keys in <code>bg</code></p>
+</li>
+<li>
+<p>Scenario 5: User keys in <code>bg #000000</code></p>
+</li>
+<li>
+<p>Scenario 6: User keys in <code>bg blue</code></p>
+</li>
+<li>
+<p>Scenario 7: User keys in <code>bg /Users/John/displayPicture.jpg s/cover</code></p>
+</li>
+<li>
+<p>Scenario 8: User keys in <code>bg r/no-repeat</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>As mentioned above, <code>Colour</code> and <code>Background</code> are independent classes, and <code>Colour</code> makes use of enumerations of colour codes and colour names to determine validity of the colours.</p>
+</li>
+<li>
+<p>Upon receival of the command “<code>fontcolour</code>”, if <code>fontcolour</code> has no arguments (checked by <code>FontColourParser</code>), a new <code>FontColourCommand</code> with no arguments is returned, and upon execution return a <code>CommandResult</code> that shows the existing font used via access of <code>Model</code> (logic is similar to the ones for biography) Otherwise if arguments are received, validity of the arguments is checked against, and if the colour is a valid <code>Colour</code>, it is set in <code>Model</code> and saved to Storage. <code>FontColourCommand</code> overrides the <code>getDisplayPane()</code> to return the <code>DisplayPane.COLOUR</code> enumeration. i.e. the <code>MainDisplayPane</code> is unchanged in <code>Ui</code>, and only font colours change.</p>
+</li>
+<li>
+<p><code>Background</code> on the other hand, checks for additional possible arguments. First of all, as observed in Scenarios 6 and 7, an argument could either represent a <code>Colour</code> or a path leading to an image to be used to set the background picture (this is similar to the <code>DisplayPicPath</code> of <code>bio</code> field). Thus, <code>BackgroundParser</code> first determines if the argument received is a colour. If so it returns a <code>BackgroundCommand</code> storing a <code>Background</code> that has a <code>background</code> colour attribute. Otherwise, it checks, via <code>ParserUtil</code> , whether or not the argument before valid prefixes (preamble) is a valid file path. If so, a <code>Background</code> that has a <code>backgroundPicPath</code> attribute is used to create the <code>BackgroundCommand</code>. Otherwise a parse exception is returned. Possible arguments that a <code>background</code> command can have include the size and repeat feature, corresponding to CSS <code>background</code> attributes. In current versions of the program, the program allows for fixed constants of this features to be used, that are stored in <code>Background`ImageArgs class and used by the `Background</code> model for validation. <code>Background``Command</code> overrides the <code>getDisplayPane()</code> to return <code>DisplayPane.BACKGROUND</code> enumeration. i.e. the <code>MainDisplayPane</code> is unchanged in <code>Ui</code>, and only the <code>background</code> changes. Similar to font colour, the command word on its own simply displays to the user current <code>background</code> settings.</p>
+</li>
+<li>
+<p>An illustration of the logic for handling a <code>background</code> command is shown as follows:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/BackgroundActivityDiagram.png" alt="BackgroundActivityDiagram">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>For both <code>fontcolour</code> and <code>background</code> commands, the StyleManager class of <code>Ui</code> is used to set the user’s intention of <code>fontcolour</code> and <code>background</code> (if parsing is successful). The way StyleManager sets the <code>background</code> is by making a copy of the existing StyleSheet used, modifying the required fields and setting it to the StyleSheets of the scene, internally.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="achievements"><a class="link" href="#achievements">Achievements</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p>A diabetic user’s <code>Achievements</code> is supported by the <code>achvm</code> command, that displays the list of user’s achievements. Similar to how <code>bio</code> is implemented, <code>SugarMummyParser</code> returns an <code>AchievementsCommand</code> that overrides the <code>getDisplayPane()</code> method to return  <code>DisplayPane.ACHVM</code> – such that <code>Ui</code> of <code>Ui</code> sets the children of the <code>MainDisplayPane</code> node to be the <code>AchievementsPane</code>. Each <code>Achievement</code> is represented using an <code>ImageView</code> in JavaFX <code>TilePane</code> so that all images are of the same size.</p>
+</li>
+<li>
+<p>Although this feature has yet to be fully implemented, the feature is intended to be implemented by checking user records (eg. average) in the <code>Model</code> after each related field is modified (eg. food / sugar level). Where appropriate at certain milestones, the <code>AchievementsList</code> of the user in <code>Model</code> and Storage will be updated. A feedback will be shown to the user to indicate the achievement of the milestone so that the user can check his/ her <code>Achievements</code>. Upon each <code>achvm</code> call, <code>Ui</code> fetches the <code>Achievements</code> from model and displays the corresponding image in the <code>AchievementsPane</code>. Ideally, if the <code>AchievementsPane</code> is unchanged, the pane should not reload so as to optimise performance of the program and minimise unnecessary access and loading of images. This could be implemented using a flag in <code>Model</code> indicating whether or not the <code>Achievements</code> is to be reloaded when rendering the <code>Ui</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="motivation"><a class="link" href="#motivation">Motivation</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Motivational aspects of the application are to be supported using motivational quotes. Although this subfeature of personalised user experience has yet to be implemented, implementation is intended to be done by storing preset quotes in a data structure such as an enumeration. In current versions of the application, it is likely that the user will have refrained access to modifying the list.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="number-of-users"><a class="link" href="#number-of-users">Number of Users</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p>It could be argued that multiple user support is not required and thus a <code>UserList</code> should not be used to store data. However, the intention is to leave it open to future developers to decide on whether to include multiple user support for the application, as the choice of a fully personalised experience for diabetic patients versus functionality for multiple users (having diabetes and using the same app), as well as the possibilities of such scenarios are debatable. Furthermore, our user stories appear to suggest the desire for a more personalised application.</p>
+</li>
+<li>
+<p>In the strict case of single-user support that leaves the app less open to such modification, the alternative would be to simply implement and store the <code>User</code> in <code>Model</code>, rather than the <code>UserList</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="code-background-code-sub-argument-values"><a class="link" href="#code-background-code-sub-argument-values"><code>Background</code> Sub-Argument Values</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p>The use of <code>enum</code> is a possibility to implement <code>static final background</code> sub-argument values (eg, <code>auto</code> of attribute <code>background</code> size). However considerations that eventually led against this idea included the possibility of values that are not in proper <code>String</code> format that may not be able to be directly enumerated (leading to the required use of additional lengthy switch cases). Additionally other <code>background</code> fields may be added by future developers  and it would be more concise to have them all in a single class rather than as separate enumerations.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="code-command-code-classification"><a class="link" href="#code-command-code-classification"><code>Command</code> Classification</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p>It is possible to separate the commands for  <code>fontcolour</code> and <code>background</code> into different commands (eg. addfontcolour, editfontcolour, showfontcolour, <code>clrfontcolour</code>). However, this is likely unnecessary as this will not only require the end user to type more words, but also introduce redundancy (eg. <code>clrfontcolour</code> could simply be <code>fontcolour</code> black and this is not hard to achieve the same effects as <code>clrfontcolour</code>, which also adds a restrictive definition on what the default colour to the user upon clearing settings should be).</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="modification-of-application-style-dynamically"><a class="link" href="#modification-of-application-style-dynamically">Modification of Application Style Dynamically</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p>An alternative idea to achieving font colours and backgrounds throughout the entire app was to visit each child node recursively and set the colours and backgrounds if the nodes are of specific instances with these attributes (eg. <code>Label</code> which has textfill attribute). However this idea was quickly aborted as the <code>TableView</code> implemented only renders headers after the scene has been set and to include such a case in thet recursive solution adds significant complexity to the program on top of the possibility of severely breaking abstraction.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="use-of-code-label-code-instead-of-code-textarea-code-nodes"><a class="link" href="#use-of-code-label-code-instead-of-code-textarea-code-nodes">Use of <code>Label</code> instead of <code>TextArea</code> Nodes</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>ResultDisplay</code> was originally implanted as a <code>TextArea</code> but was eventually replaced with a <code>Label</code> which achieves similarly results. The reasoning for this change was the inability to or difficulty in setting the <code>background</code> of <code>TextArea</code>, even via CSS. A <code>Label</code> serves as a perfect alternative since in the case both are non-editable to the user.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1210,4 +1488,4 @@ Expected: Similar to previous.</p>
 <p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-23 16:35:29 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-24 08:47:03 UTC</div></div></div></body></html>
