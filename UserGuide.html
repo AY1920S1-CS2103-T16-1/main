@@ -40,7 +40,7 @@
 <li><a href="#adds-a-biography-for-the-user-using-specified-fields-code-addbio-code">3.3.3. Adds a biography for the user using specified fields: <code>addbio</code></a></li>
 <li><a href="#edits-a-biography-for-the-user-using-specified-fields-code-editbio-code">3.3.4. Edits a biography for the user using specified fields: <code>editbio</code></a></li>
 <li><a href="#clears-the-biography-of-the-user-using-code-clrbio-code">3.3.5. Clears the biography of the user using: <code>clrbio</code></a></li>
-<li><a href="#sets-the-font-color-of-the-text-code-fontcolor-code">3.3.6. Sets the font color of the text: <code>fontcolor</code></a></li>
+<li><a href="#sets-the-font-color-of-the-text-code-fontcolour-code-or-code-fontcolor-code">3.3.6. Sets the font color of the text: <code>fontcolour</code> or <code>fontcolor</code></a></li>
 <li><a href="#sets-the-background-picture-using-a-specified-file-path-code-bg-code">3.3.7. Sets the background picture using a specified file path: <code>bg</code></a></li>
 <li><a href="#displays-a-motivational-quote-code-no-action-required-code">3.3.8. Displays a motivational quote: <code>[no action required]</code></a></li>
 </ul>
@@ -945,14 +945,20 @@ and as such pose no issue.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="sets-the-font-color-of-the-text-code-fontcolor-code"><a class="link" href="#sets-the-font-color-of-the-text-code-fontcolor-code">3.3.6. Sets the font color of the text: <code>fontcolor</code></a></h4>
+<h4 id="sets-the-font-color-of-the-text-code-fontcolour-code-or-code-fontcolor-code"><a class="link" href="#sets-the-font-color-of-the-text-code-fontcolour-code-or-code-fontcolor-code">3.3.6. Sets the font color of the text: <code>fontcolour</code> or <code>fontcolor</code></a></h4>
 <div class="paragraph">
 <p>Formats:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
+<p><code>fontcolour</code>; or</p>
+</li>
+<li>
 <p><code>fontcolor</code>; or</p>
+</li>
+<li>
+<p><code>fontcolour COLOUR</code>; or</p>
 </li>
 <li>
 <p><code>fontcolor COLOUR</code></p>
@@ -964,14 +970,16 @@ and as such pose no issue.</p>
 but <em>any</em> colour. This means that a user can set a colour using <strong>EITHER</strong> colour names or hexadecimal values.</p>
 </div>
 <div class="paragraph">
-<p>To set a colour of a font using a colour name, simply enter <code>font</code> followed by the intended name of the colour.
-For instance, one may enter: <code>font yellow</code> or <code>font skyblue</code>. So long as the colour names are within the 140+ colour
+<p>To set a colour of a font using a colour name, simply enter <code>fontcolour</code> (or the American spelling <code>fontcolor</code>;
+both are recognised by the program) followed by the intended name of the colour. For instance, one may enter:
+<code>fontcolour yellow</code> or <code>fontcolor skyblue</code>. So long as the colour names are within the 140+ colour
 names recognised by CSS, the colours will be set accordingly on the user&#8217;s application. If the colour is not recognised,
 the program attempts to interpret it as a hexadecimal value colour. Note that <code>transparent</code> is NOT a valid colour.</p>
 </div>
 <div class="paragraph">
 <p>A colour may be set using its hexadecimal value provided it follows format beginning with a '#' followed byt six valid
-alphanumeric characters representing a hexadecimal colour. For instance, one may enter: <code>font #FFFF00</code> or <code>font #FFFF3A</code>.</p>
+alphanumeric characters representing a hexadecimal colour. For instance, one may enter: <code>fontcolour #FFFF00</code>
+or <code>fontcolor #FFFF3A</code>.</p>
 </div>
 <div class="paragraph">
 <p>If a coloured entered belongs to neither categories of names nor hexadecimal values, an error message will be shown to
@@ -995,25 +1003,25 @@ hexadecimal value of the colour is displayed and saved.</p>
 </div>
 <div class="paragraph">
 <p>The last set font colour of the user is always saved, and upon restarting the application, the program should display
-the window with the last saved <code>fontcolour</code> settings.</p>
+the window with the last saved <code>fontcolour</code> (or <code>fontcolor</code>) settings.</p>
 </div>
 <div class="paragraph">
 <p>If the preferences file happen to be corrupted with unrecognised colours, or cannot be found, the <code>background</code> and
-<code>fontcolour</code> are reset to its default aesthetics settings, which a new preferences file also contains.</p>
+<code>fontcolour</code> (or <code>fontcolor</code>) are reset to its default aesthetics settings, which a new preferences file also contains.</p>
 </div>
 <div class="paragraph">
-<p>By default, the <code>fontcolour</code> and <code>background</code> of the application are set as colours <code>#FFFF3A</code> and <code>#000A34</code>
+<p>By default, the <code>fontcolour</code> (or <code>fontcolor</code>) and <code>background</code> of the application are set as colours <code>#FFFF3A</code> and <code>#000A34</code>
 respectively.</p>
 </div>
 <div class="paragraph">
 <p>This program does not implement a command to clear a font colour due to its redundancy - a user, if dissatisfied with
 the font colour may simply change the colour to his or her preference, or use generic colours by keying in
-<code>fontcolour black</code> along with a white background.</p>
+<code>fontcolour black</code> (or <code>fontcolor black</code>) along with a white background.</p>
 </div>
 <div class="paragraph">
-<p>A user is also allowed to key in <code>fontcolour</code> on its own and the program having received this will display the current
-font colour settings in the feedback display pane. This allows the user to view the current settings of the font colour
-without having to use the <code>bio</code> command to navigate to the biography display pane.</p>
+<p>A user is also allowed to key in <code>fontcolour</code>  (or <code>fontcolor</code>) on its own and the program having received this will
+display the current font colour settings in the feedback display pane. This allows the user to view the current settings
+of the font colour without having to use the <code>bio</code> command to navigate to the biography display pane.</p>
 </div>
 <div class="paragraph">
 <p>The command word, as for all all other commands, is not case-sensitive for convenience to user. The colour entered for
@@ -1022,7 +1030,7 @@ lower as compared to sub-arguments of commands such as <code>editbio</code>, or 
 user for this command and both <code>fonTColour yElLoW</code> and <code>fONtColOur #fFFf00</code> will work.</p>
 </div>
 <div class="paragraph">
-<p>Examples of <strong>VALID</strong> <code>fontcolour</code> commands:</p>
+<p>Examples of <strong>VALID</strong> <code>fontcolour</code> (or <code>fontcolor</code>) commands:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1030,22 +1038,25 @@ user for this command and both <code>fonTColour yElLoW</code> and <code>fONtColO
 <p><code>fontcolour lime</code></p>
 </li>
 <li>
-<p><code>fontcolour indigo</code></p>
+<p><code>fontcolor indigo</code></p>
 </li>
 <li>
 <p><code>fontcolour #202020</code></p>
 </li>
 <li>
-<p><code>fontcolour #000000</code></p>
+<p><code>fontcolor #000000</code></p>
 </li>
 <li>
 <p><code>fontcolour</code></p>
 </li>
 <li>
+<p><code>fontcolor</code></p>
+</li>
+<li>
 <p><code>fONTCOLOUr wHITE</code></p>
 </li>
 <li>
-<p><code>foNTcoLOUr #FFffFf</code></p>
+<p><code>foNTcoLOr #FFffFf</code></p>
 </li>
 </ul>
 </div>
@@ -1075,13 +1086,13 @@ user for this command and both <code>fonTColour yElLoW</code> and <code>fONtColO
 <p>Users are allowed to set the background either using a <code>COLOUR</code> or a <code>PATH</code> to a background image.</p>
 </div>
 <div class="paragraph">
-<p>The <code>COLOUR</code> argument of the background works in exactly the same way as described in the <code>fontcolour</code>
-sub-section above, except that command word used is now <code>bg</code> instead of <code>fontcolour</code>. i.e. a user may enter
-<code>bg blue</code> or bg <code>#202020</code> to set the background image.</p>
+<p>The <code>COLOUR</code> argument of the background works in exactly the same way as described in the <code>fontcolour</code> or (<code>fontcolor</code>)
+sub-section above, except that command word used is now <code>bg</code> instead of <code>fontcolour</code> (or <code>fontcolor</code>).
+i.e. a user may enter`bg blue` or bg <code>#202020</code> to set the background image.</p>
 </div>
 <div class="paragraph">
-<p>Just as for the <code>fontcolour</code> command, upon successful execution of the <code>bg</code> command with <code>COLOUR</code>, the colour would
-be applied universally and instantaneously, from the backgrounds of scrollpanes to the backgrounds of
+<p>Just as for the <code>fontcolour</code> (or <code>fontcolor</code>) command, upon successful execution of the <code>bg</code> command with <code>COLOUR</code>,
+the colour would be applied universally and instantaneously, from the backgrounds of scrollpanes to the backgrounds of
 feedback display panes. This is with the exception of the background in the graph shown for the <code>average</code>
 command, that uses predefined colours. The change will be described in the feedback display panel and the new colour is
 reflected in the biography table of the biography display pane. This command does not change the panes displayed to the
@@ -1093,14 +1104,14 @@ hexadecimal value of the colour is displayed and saved.</p>
 </div>
 <div class="paragraph">
 <p>The last set font colour of the user is always saved, and upon restarting the application, the program should display
-the window with the last saved <code>fontcolour</code> settings.</p>
+the window with the last saved <code>fontcolour</code> (or <code>fontcolor</code>) settings.</p>
 </div>
 <div class="paragraph">
 <p>If the preferences file happen to be corrupted with unrecognised colours, or cannot be found,
-the <code>background</code> and <code>fontcolour</code> are reset to its default aesthetics settings, which a new preferences file also contains.</p>
+the <code>background</code> and <code>fontcolour</code> (or <code>fontcolor</code>) are reset to its default aesthetics settings, which a new preferences file also contains.</p>
 </div>
 <div class="paragraph">
-<p>By default, the <code>fontcolour</code> and <code>background</code> of the application are set as colours <code>#FFFF3A</code> and <code>#000A34</code>
+<p>By default, the <code>fontcolour</code> (or <code>fontcolor</code>) and <code>background</code> of the application are set as colours <code>#FFFF3A</code> and <code>#000A34</code>
 respectively.</p>
 </div>
 <div class="paragraph">
@@ -1191,8 +1202,8 @@ such as this, clearly indicating that additional arguments are allowed only for 
 biography display pane, there will never also be a situation where a colour is indicated in the 'Background' field along
 with data in 'Background Repeat' and 'Background Size' fields. If a background colour is used, these fields are simply
 blank. A user may only set the background to <strong>EITHER</strong> a background or an image; setting both at the same time would not
-be possible. At any point of time, generic or not, the user will have exactly one <code>background</code> and <code>fontcolour</code> field set for
-the application.</p>
+be possible. At any point of time, generic or not, the user will have exactly one <code>background</code> and <code>fontcolour</code>
+(or <code>fontcolor</code>) field set for the application.</p>
 </div>
 <div class="paragraph">
 <p>For each successful command, feedback will be displayed to the user on the change in background, be it from a
@@ -1210,7 +1221,7 @@ colour or another image path will do the job.</p>
 </div>
 <div class="paragraph">
 <p>If the preferences file happen to be corrupted with unrecognised / unloadable background paths, or cannot be found,
-the <code>background</code> and <code>fontcolour</code> are reset to its default aesthetics settings as described above, which a new
+the <code>background</code> and <code>fontcolour</code> (or <code>fontcolor</code>) are reset to its default aesthetics settings as described above, which a new
 preferences file also contains. As for paths to profile pictures, an unloadable background file (or colours) from the
 storage does not cause the user to lose any other data, and the user is simply notified via the feedback display pane
 that the image cannot load and has been removed.</p>
@@ -1675,9 +1686,9 @@ E.g. <code>editbio dp/C:\\Users\\Bob\\Pictures\\dp.jpg</code><br>
 E.g. <code>editbio p/1/234567 p/2/3456789</code></p>
 </li>
 <li>
-<p><strong>Font Color</strong>: <code>fontcolor COLOUR</code> or <code>fontcolour</code><br>
-E.g. <code>fontcolor yellow</code><br>
-E.g. <code>fontcolor #FFFF00</code></p>
+<p><strong>Font Color</strong>: <code>fontcolour COLOUR</code> or <code>fontcolour</code> or <code>fontcolor COLOUR</code> or <code>fontcolor</code><br>
+E.g. <code>fontcolour yellow</code><br>
+E.g. <code>fontcolour #FFFF00</code></p>
 </li>
 <li>
 <p><strong>List</strong>: <code>list</code><br>
@@ -1719,4 +1730,4 @@ E.g <code>summary rt/bloodsugar d/01.09.2019</code></p>
 </ol>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-01 19:20:44 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-01 19:24:36 UTC</div></div></div></body></html>
