@@ -725,6 +725,10 @@ non-image file)</p>
 and the command cannot proceed until the user re-enters the command with the corrected values.</p>
 </div>
 <div class="paragraph">
+<p>Users will also <em>not</em> be allowed to enter duplicate values for fields that supports multiple values. (i.e. p/123 p/123)
+Doing so results in an error message being shown to the user, indicating that duplicate values are not allowed.</p>
+</div>
+<div class="paragraph">
 <p>Upon successful processing of the command and its arguments, the user&#8217;s biography will be updated accordingly and the
 biography pane will be displayed to the user, regardless of which pane was previously being displayed before (eg. a user
 may add to the biography while records are being displayed). In the user&#8217;s feedback display pane, a message indicating
@@ -854,6 +858,10 @@ feedback display pane that the same information already exists in the biography 
 Hence, if the user&#8217;s biography contains <code>Bob</code> as the value of the <code>Name</code> field but not the address field, keying in <code>editbio n/Bob</code> will result
 in the notification being shown but not <code>editbio n/Bob a/Test Address</code>. The new value in the address field will be
 updated in the second case.</p>
+</div>
+<div class="paragraph">
+<p>Users will also <em>not</em> be allowed to enter duplicate values in each list that supports multiple values. (i.e. p/123 p/123)
+Doing so results in an error message being shown to the user, indicating that duplicate values are not allowed.</p>
 </div>
 <div class="paragraph">
 <p>Upon successful processing of the command and its arguments, the user&#8217;s biography will be updated accordingly and the
@@ -1711,4 +1719,4 @@ E.g <code>summary rt/bloodsugar d/01.09.2019</code></p>
 </ol>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-01 09:19:06 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-01 19:20:44 UTC</div></div></div></body></html>
