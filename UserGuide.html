@@ -961,7 +961,10 @@ and as such pose no issue.</p>
 <p><code>fontcolour COLOUR</code>; or</p>
 </li>
 <li>
-<p><code>fontcolor COLOUR</code></p>
+<p><code>fontcolor COLOUR</code>; or</p>
+</li>
+<li>
+<p>any of the above with <code>[bg/BACKGROUND ARGUMENTS]</code></p>
 </li>
 </ul>
 </div>
@@ -1014,6 +1017,20 @@ the window with the last saved <code>fontcolour</code> (or <code>fontcolor</code
 respectively.</p>
 </div>
 <div class="paragraph">
+<p>Note that colours that are deemed to be too close to the dominant colour of the <code>background</code> will not be allowed to be
+set as the font colour as the text may get too difficult to read on screen. (eg. yellow font colour with white background)
+In such cases the user will be prompted to change the colour or image of the background first before proceeding with the change
+in font colour.</p>
+</div>
+<div class="paragraph">
+<p>Alternatively, the user is allowed to change the font colour and background <em>simultaneously</em> by combining the commands for
+font colour and background, using the <code>bg/</code> prefix. eg. fontcolour yellow bg/black. This allows the user to not only
+save time but also make contrasting changes in colours which would otherwise have been difficult to achieve. For
+instance, a user intending to change the font colour from white to black with a current dark background will benefit
+from this feature as sequentially changing switching to a light background or dark font colour would be impossible.
+At most one of such prefixes may be used; using more than one results in an error message shown to the user.</p>
+</div>
+<div class="paragraph">
 <p>This program does not implement a command to clear a font colour due to its redundancy - a user, if dissatisfied with
 the font colour may simply change the colour to his or her preference, or use generic colours by keying in
 <code>fontcolour black</code> (or <code>fontcolor black</code>) along with a white background.</p>
@@ -1058,6 +1075,13 @@ user for this command and both <code>fonTColour yElLoW</code> and <code>fONtColO
 <li>
 <p><code>foNTcoLOr #FFffFf</code></p>
 </li>
+<li>
+<p><code>fontcolour yellow bg/black</code></p>
+</li>
+<li>
+<p><code>fontcolor yellow bg//Users/whneo97/OneDrive/UNI/CS/Y2S1/CS2103/duke/src/main/resources/images/SpaceModified.jpg s/cover</code>
+(Note: this is provided that the image exists at exactly the <strong>SAME PATH</strong> in the user&#8217;s device. Otherwise, it has to be modifed or removed in order for this example to work)</p>
+</li>
 </ul>
 </div>
 </div>
@@ -1079,6 +1103,9 @@ user for this command and both <code>fonTColour yElLoW</code> and <code>fONtColO
 </li>
 <li>
 <p><code>bg [s/BACKGROUND SIZE] [r/BACKGROUND REPEAT]</code> (if background is already a background image)</p>
+</li>
+<li>
+<p>any of the above with <code>[fontcolour/COLOUR]</code></p>
 </li>
 </ul>
 </div>
@@ -1212,6 +1239,20 @@ particular attribute of the background, only the changes made will be reported. 
 done to convert hexadecimal values to colour names where possible.</p>
 </div>
 <div class="paragraph">
+<p>Note that colours that are deemed to be too close to the dominant colour of the <code>fontcolour</code> will not be allowed to be
+set as the background as the text may get too difficult to read on screen. (eg. yellow font colour with white background)
+In such cases the user will be prompted to change the <code>fontcolour</code> first before proceeding with the change
+in background.</p>
+</div>
+<div class="paragraph">
+<p>Alternatively, the user is allowed to change the font colour and background <em>simultaneously</em> by combining the commands for
+font colour and background, using either the <code>fontcolour/</code> or <code>fontcolor</code> prefix. eg. bg black fontcolour/yellow. This allows the user to not only
+save time but also make contrasting changes in colours which would otherwise have been difficult to achieve. For
+instance, a user intending to change the font colour from white to black with a current dark background will benefit
+from this feature as sequentially changing switching to a light background or dark font colour would be impossible.
+At most one of such prefixes may be used; using more than one results in an error message shown to the user.</p>
+</div>
+<div class="paragraph">
 <p>This program does not implement a command to clear a font colour or background due to its redundancy - a user,
 if dissatisfied with the background colour may simply change the colour to his or her preference,
 or use generic colours by keying in <code>background white</code> along with a black background. As user&#8217;s images are not saved in
@@ -1282,6 +1323,12 @@ with the user having the freedom to choose any combination of font colours and b
 </li>
 <li>
 <p><code>bg r/no-repeat s/contain</code> (if background is already a background image)</p>
+</li>
+<li>
+<p><code>bg black fontcolor/#FFFF00</code></p>
+</li>
+<li>
+<p><code>bg /Users/whneo97/OneDrive/UNI/CS/Y2S1/CS2103/duke/src/main/resources/images/SpaceModified.jpg s/cover fontcolour/yellow</code></p>
 </li>
 </ul>
 </div>
@@ -1730,4 +1777,4 @@ E.g <code>summary rt/bloodsugar d/01.09.2019</code></p>
 </ol>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-01 19:24:36 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-02 01:13:14 UTC</div></div></div></body></html>
