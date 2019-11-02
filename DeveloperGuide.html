@@ -1072,10 +1072,12 @@ including:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>The <code>User</code> class is used to represent a diabetic user. A diabetic user is composed of the <code>Name</code>, <code>ProfileDesc</code>, <code>DisplayPicPath</code>, <code>Nric</code>, <code>Gender</code>, <code>Phone</code>, <code>MedicalCondition</code>, <code>Address</code>, <code>Goal</code> and <code>OtherBioInfo</code> classes.</p>
+<p>The <code>User</code> class is used to represent a diabetic user. A diabetic user is composed of the <code>Name</code>, <code>ProfileDesc</code>,
+<code>DisplayPicPath</code>, <code>Nric</code>, <code>Gender</code>, <code>Phone</code>, <code>MedicalCondition</code>, <code>Address</code>, <code>Goal</code> and <code>OtherBioInfo</code> classes.</p>
 </li>
 <li>
-<p>A <code>User</code> is currently defined to be able to have more than one <code>Phone</code>, <code>MedicalCondition</code> and <code>Goal</code>. As such, these classes inherit the <code>ListableField</code> Interface.</p>
+<p>A <code>User</code> is currently defined to be able to have more than one <code>Phone</code>, <code>MedicalCondition</code> and <code>Goal</code>. As such,
+these classes inherit the <code>ListableField</code> Interface.</p>
 </li>
 <li>
 <p>The structure of a <code>User</code> and its interactions are shown as follows:</p>
@@ -1093,22 +1095,34 @@ including:</p>
 <p>A <code>User</code> implements <code>ListableField</code> by storing them in a java <code>List</code>.</p>
 </li>
 <li>
-<p>A <code>User</code> that is created is added to a <code>UserList</code>. Although not more than one <code>User</code> can be added in current versions so as to enhance personalisation for the, future developers may decide to repurpose the app to allow more users, and their corresponding biographies represented by the <code>bio</code> fields, to the <code>UserList</code>.</p>
+<p>A <code>User</code> that is created is added to a <code>UserList</code>. Although not more than one <code>User</code> can be added in current versions
+so as to enhance personalisation for the, future developers may decide to repurpose the app to allow more users, and
+their corresponding biographies represented by the <code>bio</code> fields, to the <code>UserList</code>.</p>
 </li>
 <li>
-<p>Other personalisation features such as <code>fontcolour</code>, <code>background</code> and <code>achievements</code> are currently represented by independent classes <code>Colour</code>, <code>Background</code> and <code>Achievement</code> respectively on their own, representing the model as their name describes.</p>
+<p>Other personalisation features such as <code>fontcolour</code>, <code>background</code> and <code>achievements</code> are currently represented by
+independent classes <code>Colour</code>, <code>Background</code> and <code>Achievement</code> respectively on their own, representing the model as their
+name describes.</p>
 </li>
 <li>
-<p>The <code>Colour</code> feature allows for either enumeration of colour names or hexadecimal colour codes to be used to set colour. <code>Background</code> is associated to <code>Colour</code> as an argument for <code>Background</code> could simply be a colour. It depends on the static method isValid`Colour`(String test) method to determine if it’s argument is a <code>Colour</code></p>
+<p>The <code>Colour</code> feature allows for either enumeration of colour names or hexadecimal colour codes to be used to set
+colour. <code>Background</code> is associated to <code>Colour</code> as an argument for <code>Background</code> could simply be a colour. It depends on
+the static method isValid`Colour`(String test) method to determine if it’s argument is a <code>Colour</code></p>
 </li>
 <li>
-<p>The <code>AddBioParser</code> and <code>EditBioParser</code> is currently used to parse command arguments given by the user and allows adding of specific biography fields, whereas the <code>FontColour</code> and <code>Background</code> parsers are used to parse arguments for other personalisation features for font colours and <code>background</code> respectively.</p>
+<p>The <code>AddBioParser</code> and <code>EditBioParser</code> is currently used to parse command arguments given by the user and allows
+adding of specific biography fields, whereas the <code>FontColour</code> and <code>Background</code> parsers are used to parse arguments for
+other personalisation features for font colours and <code>background</code> respectively.</p>
 </li>
 <li>
-<p>The <code>Ui</code> for personalisation is separated into distinct parts. <code>User</code>’s biography information and achievements page are components on their own in the <code>Ui</code>’s <code>MainDisplayPane</code> – switched when required, whereas <code>background</code> and <code>fontcolour</code> do not have a designated <code>Ui</code> window, but instead changes the attributes for the entire application by modifying the CSS file used itself.</p>
+<p>The <code>Ui</code> for personalisation is separated into distinct parts. <code>User</code>’s biography information and achievements page
+are components on their own in the <code>Ui</code>’s <code>MainDisplayPane</code> – switched when required, whereas <code>background</code> and
+<code>fontcolour</code> do not have a designated <code>Ui</code> window, but instead changes the attributes for the entire application by
+modifying the CSS file used itself.</p>
 </li>
 <li>
-<p>All command words in this program, not restricted to this feature alone, are not case sensitive and implemented under <code>SugarMummyParser</code>.</p>
+<p>All command words in this program, not restricted to this feature alone, are not case sensitive and implemented under
+<code>SugarMummyParser</code>.</p>
 </li>
 </ul>
 </div>
@@ -1118,7 +1132,11 @@ including:</p>
 <div class="sect4">
 <h5 id="biography"><a class="link" href="#biography">Biography</a></h5>
 <div class="paragraph">
-<p>The biography feature is supported by the <code>addbio</code>, <code>editbio</code> and <code>clrbio</code> commands. Each command adheres to the main flow of information used by this application. In other words, when a command is received, the command is first parsed by <code>SugarMummyParser</code>, and to individual parsers where required, before return a <code>Command</code> object. The <code>Command</code> object is then executed by <code>Logic</code>, during which it updates <code>Model</code>, and after which Storage is updated <code>Logic</code>, before the feedback from the <code>CommandResult</code> returned by the <code>Command</code> object is shown to the user back at the <code>Ui</code>.</p>
+<p>The biography feature is supported by the <code>addbio</code>, <code>editbio</code> and <code>clrbio</code> commands. Each command adheres to the main
+flow of information used by this application. In other words, when a command is received, the command is first parsed
+by <code>SugarMummyParser</code>, and to individual parsers where required, before return a <code>Command</code> object. The <code>Command</code> object
+is then executed by <code>Logic</code>, during which it updates <code>Model</code>, and after which Storage is updated <code>Logic</code>, before the
+feedback from the <code>CommandResult</code> returned by the <code>Command</code> object is shown to the user back at the <code>Ui</code>.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1142,22 +1160,46 @@ including:</p>
 </div>
 </li>
 <li>
-<p>In all scenarios, <code>SugarMummyParser</code> responds to the command word via a series of switch cases. As mentioned above, <code>addbio</code> and <code>editbio</code> will AddCommandParser and <code>EditCommandParser</code> respectively.</p>
+<p>In all scenarios, <code>SugarMummyParser</code> responds to the command word via a series of switch cases. As mentioned above,
+<code>addbio</code> and <code>editbio</code> will AddCommandParser and <code>EditCommandParser</code> respectively.</p>
 </li>
 <li>
-<p>A key difference between the parsers for <code>addbio</code> and <code>editbio</code> is that the former requires <code>Name</code>, Contact Number, Emergency Contact, and <code>MedicalCondition</code> to be compulsory whereas <code>editbio</code> requires at least one argument denoting the <code>User</code>’s biography field to be changed. Furthermore, <code>EditCommandParser</code> determines whether or not subarguments for fields of <code>ListableField</code> type contain the format <code>INDEX/</code>, denoting the particular number in the list to be changed.</p>
+<p>A key difference between the parsers for <code>addbio</code> and <code>editbio</code> is that the former requires <code>Name</code>, <code>ContactNumber</code>,
+<code>EmergencyContact</code>, and <code>MedicalCondition</code> to be compulsory whereas <code>editbio</code> requires at least one argument denoting
+the <code>User</code>’s biography field to be changed. Furthermore, <code>EditCommandParser</code> determines whether or not subarguments for
+fields of <code>ListableField</code> type contain the format <code>INDEX/</code>, denoting the particular number in the list to be changed.</p>
 </li>
 <li>
-<p><code>CommandParser</code> then  returns an <code>AddBioCommand</code> object that stores the <code>User</code> to be created. <code>EditCommandParser</code> on the other hand creates an <code>EditBioCommand</code> object that stores an <code>EditedUserDescription</code> containing information on which fields are edited to be edited. A <code>List</code> of <code>HashMaps</code> that maps indexes to <code>ListableField`s is usedin `EditedUserDescription</code> to denote changes to be made within each <code>ListableField</code>. When executed by <code>Logic</code> afterwards, the <code>AddBioCommand</code> creates the <code>User</code> to be stored in model whereas the <code>EditBioCommand</code> creates a new <code>User</code> based on information in <code>EditedUserDescription</code>. A <code>UserList</code> is used in the <code>Model</code> to store Users. At any point of time when a user attempts to access biography information, <code>Logic</code> accesses the <code>UserList</code> from <code>Model</code> to display information. In order to be able to display the same information upon startup, <code>Logic</code> saves this <code>UserList</code> to the storage after execution of each command.</p>
+<p><code>CommandParser</code> then  returns an <code>AddBioCommand</code> object that stores the <code>User</code> to be created. <code>EditCommandParser</code> on
+the other hand creates an <code>EditBioCommand</code> object that stores an <code>EditedUserDescription</code> containing information on which
+fields are edited to be edited. A <code>List</code> of <code>HashMaps</code> that maps indexes to <code>ListableField`s is usedin
+`EditedUserDescription</code> to denote changes to be made within each <code>ListableField</code>. When executed by <code>Logic</code> afterwards,
+the <code>AddBioCommand</code> creates the <code>User</code> to be stored in model whereas the <code>EditBioCommand</code> creates a new <code>User</code> based on
+information in <code>EditedUserDescription</code>. A <code>UserList</code> is used in the <code>Model</code> to store Users. At any point of time when a
+user attempts to access biography information, <code>Logic</code> accesses the <code>UserList</code> from <code>Model</code> to display information. In
+order to be able to display the same information upon startup, <code>Logic</code> saves this <code>UserList</code> to the storage after
+execution of each command.</p>
 </li>
 <li>
-<p>For the <code>bio</code> and <code>clrbio</code> commands, the implementations are relatively more straightforward. A BioCommand returned by <code>SugarMummyParser</code> simply overrides the <code>getDisplayPaneType()</code> of the <code>Command</code> object (that each <code>Command</code> object contains) so that back at <code>Ui</code>, <code>Ui</code> knows to display the <code>BioPane</code> of the <code>Ui</code> in the <code>MainDisplayPane</code> part of the window. This is also done for all other biography-related commands so after each biography-related command, the <code>BioPane</code> is displayed.  A <code>DisplayPane</code> is stored in the form of an enumeration as the type of display would be predefined to all it’s accessors. The <code>ClearBioCommand</code> simply clears the <code>UserList</code> stored in the model upon execution.</p>
+<p>For the <code>bio</code> and <code>clrbio</code> commands, the implementations are relatively more straightforward. A BioCommand returned by
+<code>SugarMummyParser</code> simply overrides the <code>getDisplayPaneType()</code> of the <code>Command</code> object (that each <code>Command</code> object
+contains) so that back at <code>Ui</code>, <code>Ui</code> knows to display the <code>BioPane</code> of the <code>Ui</code> in the <code>MainDisplayPane</code> part of the
+window. This is also done for all other biography-related commands so after each biography-related command, the
+<code>BioPane</code> is displayed.  A <code>DisplayPane</code> is stored in the form of an enumeration as the type of display would be
+predefined to all it’s accessors. The <code>ClearBioCommand</code> simply clears the <code>UserList</code> stored in the model upon execution.</p>
 </li>
 <li>
-<p>In the cases of <code>bio</code> and <code>clrbio</code> commands, <code>SugarMummyParser</code> requires non-null arguments just as it does for other single-word commands such as <code>exit</code>.</p>
+<p>In the cases of <code>bio</code> and <code>clrbio</code> commands, <code>SugarMummyParser</code> requires non-null arguments just as it does for other
+single-word commands such as <code>exit</code>.</p>
 </li>
 <li>
-<p>Each <code>Command</code> returns a <code>CommandResult</code> to logic containing feedback to be displayed to the user. Any exception that is thrown to the user is caught back at <code>Ui</code> <code>Ui</code>. Feedback is displayed to the user using the <code>ResultsDisplayPane</code>. The display of user biography is implemented using JavaFX <code>TableView</code>. If the <code>DisplayPicPath</code> of a <code>User</code> is unchanged, the <code>Ui</code> does not reload the image, so as to optimise performance of the program. If an entire pane is left unchanged, the pane is not reloaded, even upon execution of commands that are used to display the pane, unless explicitly indicated in the <code>getNewPaneIsToBeCreated()</code> method of the. <code>Command</code>. Caching is implemented using a <code>HashMap</code> that maps <code>DisplayPane</code> enumerations to the corresponding <code>UiPart</code> representing the respective pane.</p>
+<p>Each <code>Command</code> returns a <code>CommandResult</code> to logic containing feedback to be displayed to the user. Any exception
+that is thrown to the user is caught back at <code>Ui</code> <code>Ui</code>. Feedback is displayed to the user using the <code>ResultsDisplayPane</code>.
+The display of user biography is implemented using JavaFX <code>TableView</code>. If the <code>DisplayPicPath</code> of a <code>User</code> is unchanged,
+the <code>Ui</code> does not reload the image, so as to optimise performance of the program. If an entire pane is left unchanged,
+the pane is not reloaded, even upon execution of commands that are used to display the pane, unless explicitly indicated
+in the <code>getNewPaneIsToBeCreated()</code> method of the. <code>Command</code>. Caching is implemented using a <code>HashMap</code> that maps
+<code>DisplayPane</code> enumerations to the corresponding <code>UiPart</code> representing the respective pane.</p>
 </li>
 <li>
 <p>An illustration of how the information flows for the <code>editbio</code> command (Scenario 2) is shown as follows:</p>
@@ -1172,7 +1214,8 @@ including:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>The rest of the biography commands follow a similar logic, with key differences in the parser and command steps as described above.  Validation within parsers are done via the <code>ParserUtil</code> class.</p>
+<p>The rest of the biography commands follow a similar logic, with key differences in the parser and command steps as
+described above.  Validation within parsers are done via the <code>ParserUtil</code> class.</p>
 </li>
 </ul>
 </div>
@@ -1180,7 +1223,8 @@ including:</p>
 <div class="sect4">
 <h5 id="aesthetics"><a class="link" href="#aesthetics">Aesthetics</a></h5>
 <div class="paragraph">
-<p>The aesthetics aspects of the application help to support the feature of personalised user experience and are implemented using the command words “<code>fontcolour</code>” and “<code>background</code>” respectively.</p>
+<p>The aesthetics aspects of the application help to support the feature of personalised user experience and are
+implemented using the command words “<code>fontcolour</code>” and “<code>background</code>” respectively.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1216,13 +1260,30 @@ including:</p>
 </div>
 </li>
 <li>
-<p>As mentioned above, <code>Colour</code> and <code>Background</code> are independent classes, and <code>Colour</code> makes use of enumerations of colour codes and colour names to determine validity of the colours.</p>
+<p>As mentioned above, <code>Colour</code> and <code>Background</code> are independent classes, and <code>Colour</code> makes use of enumerations of
+colour codes and colour names to determine validity of the colours.</p>
 </li>
 <li>
-<p>Upon receival of the command “<code>fontcolour</code>”, if <code>fontcolour</code> has no arguments (checked by <code>FontColourParser</code>), a new <code>FontColourCommand</code> with no arguments is returned, and upon execution return a <code>CommandResult</code> that shows the existing font used via access of <code>Model</code> (logic is similar to the ones for biography) Otherwise if arguments are received, validity of the arguments is checked against, and if the colour is a valid <code>Colour</code>, it is set in <code>Model</code> and saved to Storage. <code>FontColourCommand</code> overrides the <code>getDisplayPane()</code> to return the <code>DisplayPane.COLOUR</code> enumeration. i.e. the <code>MainDisplayPane</code> is unchanged in <code>Ui</code>, and only font colours change.</p>
+<p>Upon receival of the command “<code>fontcolour</code>”, if <code>fontcolour</code> has no arguments (checked by <code>FontColourParser</code>), a new
+<code>FontColourCommand</code> with no arguments is returned, and upon execution return a <code>CommandResult</code> that shows the existing
+font used via access of <code>Model</code> (logic is similar to the ones for biography) Otherwise if arguments are received,
+validity of the arguments is checked against, and if the colour is a valid <code>Colour</code>, it is set in <code>Model</code> and saved to
+Storage. <code>FontColourCommand</code> overrides the <code>getDisplayPane()</code> to return the <code>DisplayPane.COLOUR</code> enumeration. i.e. the
+<code>MainDisplayPane</code> is unchanged in <code>Ui</code>, and only font colours change.</p>
 </li>
 <li>
-<p><code>Background</code> on the other hand, checks for additional possible arguments. First of all, as observed in Scenarios 6 and 7, an argument could either represent a <code>Colour</code> or a path leading to an image to be used to set the background picture (this is similar to the <code>DisplayPicPath</code> of <code>bio</code> field). Thus, <code>BackgroundParser</code> first determines if the argument received is a colour. If so it returns a <code>BackgroundCommand</code> storing a <code>Background</code> that has a <code>background</code> colour attribute. Otherwise, it checks, via <code>ParserUtil</code> , whether or not the argument before valid prefixes (preamble) is a valid file path. If so, a <code>Background</code> that has a <code>backgroundPicPath</code> attribute is used to create the <code>BackgroundCommand</code>. Otherwise a parse exception is returned. Possible arguments that a <code>background</code> command can have include the size and repeat feature, corresponding to CSS <code>background</code> attributes. In current versions of the program, the program allows for fixed constants of this features to be used, that are stored in <code>Background`ImageArgs class and used by the `Background</code> model for validation. <code>Background``Command</code> overrides the <code>getDisplayPane()</code> to return <code>DisplayPane.BACKGROUND</code> enumeration. i.e. the <code>MainDisplayPane</code> is unchanged in <code>Ui</code>, and only the <code>background</code> changes. Similar to font colour, the command word on its own simply displays to the user current <code>background</code> settings.</p>
+<p><code>Background</code> on the other hand, checks for additional possible arguments. First of all, as observed in Scenarios 6
+and 7, an argument could either represent a <code>Colour</code> or a path leading to an image to be used to set the background
+picture (this is similar to the <code>DisplayPicPath</code> of <code>bio</code> field). Thus, <code>BackgroundParser</code> first determines if the
+argument received is a colour. If so it returns a <code>BackgroundCommand</code> storing a <code>Background</code> that has a <code>background</code>
+colour attribute. Otherwise, it checks, via <code>ParserUtil</code> , whether or not the argument before valid prefixes (preamble)
+is a valid file path. If so, a <code>Background</code> that has a <code>backgroundPicPath</code> attribute is used to create the
+<code>BackgroundCommand</code>. Otherwise a parse exception is returned. Possible arguments that a <code>background</code> command can have
+include the size and repeat feature, corresponding to CSS <code>background</code> attributes. In current versions of the program,
+the program allows for fixed constants of this features to be used, that are stored in <code>Background`ImageArgs class and
+used by the `Background</code> model for validation. <code>Background``Command</code> overrides the <code>getDisplayPane()</code> to return
+<code>DisplayPane.BACKGROUND</code> enumeration. i.e. the <code>MainDisplayPane</code> is unchanged in <code>Ui</code>, and only the <code>background</code>
+changes. Similar to font colour, the command word on its own simply displays to the user current <code>background</code> settings.</p>
 </li>
 <li>
 <p>An illustration of the logic for handling a <code>background</code> command is shown as follows:</p>
@@ -1237,7 +1298,54 @@ including:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>For both <code>fontcolour</code> and <code>background</code> commands, the StyleManager class of <code>Ui</code> is used to set the user’s intention of <code>fontcolour</code> and <code>background</code> (if parsing is successful). The way StyleManager sets the <code>background</code> is by making a copy of the existing StyleSheet used, modifying the required fields and setting it to the StyleSheets of the scene, internally.</p>
+<p>For both <code>fontcolour</code> and <code>background</code> commands, the StyleManager class of <code>Ui</code> is used to set the user’s intention of
+<code>fontcolour</code> and <code>background</code> (if parsing is successful). The way StyleManager sets the <code>background</code> is by making a copy
+of the existing StyleSheet used, modifying the required fields and setting it to the StyleSheets of the scene, internally.</p>
+</li>
+<li>
+<p>Perhaps an interesting area of the <code>Colour</code> and <code>Background</code> commands in more recent updates would include
+implementation using command composition.</p>
+</li>
+<li>
+<p>The driving factor that fueled this is the need to ensure the <code>Fontcolour</code> and <code>Background</code> do not have colours that are
+too similar (or otherwise the text could get difficult or impossible to see).</p>
+</li>
+<li>
+<p>This above-mentioned checking was implemented by Summing square of the differences in red, green and blue channels'
+values between the <code>Colour</code> of the <code>Fontcolour</code> and <code>Background</code>.</p>
+</li>
+<li>
+<p>How then a <code>Colour</code> for a <code>Background</code> with an image instead of a <code>Colour</code> is determined would be by extracting the
+<code>Colour</code> that appears the most often using the <code>ImageTester</code> class.</p>
+</li>
+<li>
+<p>An issue that arose in checking for colour differences would be addressing the situation when the user intends to make
+changes to a <code>Fontcolour</code> that clashes with the <code>Background</code> if changed. Take for example a change in <code>fontcolour</code>
+intended to be changed from white to black, with a background that is curently <em>already</em> black. The system would not have
+allowed changes of the text from white to black because of the background&#8217;s black colour and would have suggested to
+change the background first. The background is required to be changed to something much lighter so that the background can
+be set to black. However, if the background cannot be changed to something that is lighter than it&#8217;s current colour but
+yet dark enough not to clash with the current background colour, then the user could find it hard to switch to the new
+colours without going through a series of specific steps that would not cause colour clash.</p>
+</li>
+<li>
+<p>Command composition allows the <code>background</code> and <code>fontcolour</code> commands to be combined such that the user is able to
+set both the <code>background</code> and <code>fontcolour</code> simultaneously, and as such colour comparison is made solely between the
+new colours entered rather than any of the current colours.</p>
+</li>
+<li>
+<p>How it works is that <code>BackgroundParser</code> parses for <code>fontcolour/</code> and its arguments while <code>FontColourParser</code> parses for
+<code>bg/</code> and its arguments. Any of these prefixes observed will result in the Parser generating a <code>FontColourCommand</code> and
+`BackgroundColourCommand` respectively. <code>BackgroundParser</code> then returns a <code>BackgroundColourCommand</code> that has a
+<code>FontColourCommand</code> <em>stored</em> in it and vice versa. When <code>Logic</code> executes <code>BackgroundCommand</code>, for instance,
+<code>BackgroundCommand</code> executes the <code>FontColourCommand</code> stored in it as well. The necessary adjustments are made to model
+accordingly and the feedback to users from both commands will be returned to the user.</p>
+</li>
+<li>
+<p>The idea of a command running another command allows commands such as <code>bg black fontcolour/red</code> to be entered by the
+user. Modified methods in the <code>ArgumentMultimap</code> class of the <code>logic</code> package also allows the program to ensure that
+the user does not entert multiple arguments of the same type at once eg. disallowing <code>bg black fontcolour/red
+fontcolor/yellow</code>.</p>
 </li>
 </ul>
 </div>
@@ -1247,10 +1355,59 @@ including:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>A diabetic user’s <code>Achievements</code> is supported by the <code>achvm</code> command, that displays the list of user’s achievements. Similar to how <code>bio</code> is implemented, <code>SugarMummyParser</code> returns an <code>AchievementsCommand</code> that overrides the <code>getDisplayPane()</code> method to return  <code>DisplayPane.ACHVM</code> – such that <code>Ui</code> of <code>Ui</code> sets the children of the <code>MainDisplayPane</code> node to be the <code>AchievementsPane</code>. Each <code>Achievement</code> is represented using an <code>ImageView</code> in JavaFX <code>TilePane</code> so that all images are of the same size.</p>
+<p>A diabetic user’s <code>Achievements</code> is supported by the <code>achvm</code> command, that displays the list of user’s achievements.
+Similar to how <code>bio</code> is implemented, <code>SugarMummyParser</code> returns an <code>AchievementsCommand</code> that overrides the
+<code>getDisplayPane()</code> method to return  <code>DisplayPane.ACHVM</code> – such that <code>Ui</code> of <code>Ui</code> sets the children of the
+<code>MainDisplayPane</code> node to be the <code>AchievementsPane</code>. Each <code>Achievement</code> is represented using an <code>ImageView</code> in JavaFX
+<code>TilePane</code> so that all images are of the same size.</p>
 </li>
 <li>
-<p>Although this feature has yet to be fully implemented, the feature is intended to be implemented by checking user records (eg. average) in the <code>Model</code> after each related field is modified (eg. food / sugar level). Where appropriate at certain milestones, the <code>AchievementsList</code> of the user in <code>Model</code> and Storage will be updated. A feedback will be shown to the user to indicate the achievement of the milestone so that the user can check his/ her <code>Achievements</code>. Upon each <code>achvm</code> call, <code>Ui</code> fetches the <code>Achievements</code> from model and displays the corresponding image in the <code>AchievementsPane</code>. Ideally, if the <code>AchievementsPane</code> is unchanged, the pane should not reload so as to optimise performance of the program and minimise unnecessary access and loading of images. This could be implemented using a flag in <code>Model</code> indicating whether or not the <code>Achievements</code> is to be reloaded when rendering the <code>Ui</code>.</p>
+<p>An <code>Achievement</code> is implemented as an abstract class in the <code>Model</code> package. Each achievement contains attributes that
+define the <code>Achievement</code> such as its <code>title</code> and <code>description</code> which specifies the requirements needed to attain it.
+A significant attribute of the <code>Achievement</code> class is it&#8217;s three states - <code>Achieved</code>, <code>Yet to Achieve</code> and <code>Previously
+Achieved</code>. Another would be the <code>level</code> of the achievement (eg. <code>Bronze</code>, <code>Silver</code>, <code>Gold</code> etc.)</p>
+</li>
+<li>
+<p>Current <code>Achievement</code> objects have <code>recordType</code> <code>Bmi</code> and <code>BloodSugar</code>, with corresponding interfaces that represent
+the <code>Achievement</code> for its <code>RecordType</code>. Specific classes inherit the <code>Bmi</code> and <code>BloodSugar</code> interfaces while extending
+the <code>Achievement</code> abstract class to specify defining attributes and methods.</p>
+</li>
+<li>
+<p>When the program starts, an <code>AchievementsMap</code> containing the list of all <code>Achievement</code> objects that the program has is
+created in the <code>model</code> of the program. All <code>Achievement</code> objects are initially all at the state of <code>Yet to Achieve</code>.
+Thereafter, the <code>AchievementStateProcessor</code> class is called, which iterates through the list of all <code>Record</code> elements
+stored in <code>model</code>.</p>
+</li>
+<li>
+<p>For each <code>RecordType</code> and <code>Level</code> of <code>Achievement</code>, the <code>AchievementStateProcessor</code> class checks whether the records
+fulfils the requirements for a predefined number of consecutive days. Requirements are in turn termined by the
+<code>MAXIMUM</code> and <code>MINIMUM</code> values stored in the interfaces of the <code>Achievement</code> class. State changes are made to the
+<code>Achievement</code> class if requirements are fulfilled (eg. if the number of requirements of a <code>RecordType</code> for <code>Gold</code> are met,
+then the <code>Achievement</code> of <code>level</code> <code>Gold</code> and of that particular <code>RecordType</code> would have it&#8217;s state updated to reflect
+that change. This is accomplised using methods such as the <code>promote</code> and <code>demote</code> in the <code>AchievementStateProcessor</code>).</p>
+</li>
+<li>
+<p>In order to determine whether requirements are fulfilled, interaction with not only the <code>RecordType</code> is implemented,
+but also the methods of the <code>Average</code> feature (to obtain daily averages of record types before comparing them).</p>
+</li>
+<li>
+<p>A notable aspect of the implementation is the reversal of <code>level</code> from high to low level. This is such that if a
+higher-level <code>Achievement</code> has been achieved, lower levels of achievement would also have been attained. In such cases,
+the program automatically sets lower levels of <code>Achievement</code> to be achieved without having to iterate through the rest
+of the <code>Record</code> elements in the <code>RecordList</code>.</p>
+</li>
+<li>
+<p>Thereafter, for each addition and removal of <code>Record</code> elements, the same process described above is used to update the
+<code>AchievementsMap</code>, that maps <code>RecordType</code> to an <code>AchievementsList</code> of <code>Achievement</code> elements.</p>
+</li>
+<li>
+<p>When the <code>achvm</code> command is received by the program, this <code>AchievementsMap</code> is simply retrieved from <code>Model</code> to
+<code>Logic`and the corresponding images representing the `Achievement</code> objects in the list, with their <code>State</code> values,
+and attributes are presented to the user via the <code>MainDisplayPane</code> of the <code>MainWindow</code>.</p>
+</li>
+<li>
+<p>If the <code>AchievementsList</code> happens to be unchanged since the last time the pane is loaded in the same session, the pane
+is not reload so as to optimise performance of the program and minimise unnecessary access and loading of images.</p>
 </li>
 </ul>
 </div>
@@ -1260,7 +1417,24 @@ including:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Motivational aspects of the application are to be supported using motivational quotes. Although this subfeature of personalised user experience has yet to be implemented, implementation is intended to be done by storing preset quotes in a data structure such as an enumeration. In current versions of the application, it is likely that the user will have refrained access to modifying the list.</p>
+<p>Motivational aspects of the application are supported using motivational quotes.</p>
+</li>
+<li>
+<p>Each motivational quote exists as a <code>String</code> in an unmodifiable <code>List</code> of tthe class <code>MotivationalQuotes</code>.</p>
+</li>
+<li>
+<p>The <code>List</code> of quotes (collated from different sources but modified to have the same formats) are initialised to be part
+of the <code>model</code> when the program first starts up.</p>
+</li>
+<li>
+<p>Upon initialisation of the program, the <code>MotivationalQuotesLabel.fxml</code> file is referenced via its corresponding class.</p>
+</li>
+<li>
+<p>Retrieval of the <code>List</code> of motivational quotes is done via <code>Logic</code> which accesses the <code>List</code> of motivational quotes in
+<code>ModelManager</code>.</p>
+</li>
+<li>
+<p>A quote is randomly selected and then displayed to the user via the program&#8217;s user interface.</p>
 </li>
 </ul>
 </div>
@@ -1273,10 +1447,15 @@ including:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>It could be argued that multiple user support is not required and thus a <code>UserList</code> should not be used to store data. However, the intention is to leave it open to future developers to decide on whether to include multiple user support for the application, as the choice of a fully personalised experience for diabetic patients versus functionality for multiple users (having diabetes and using the same app), as well as the possibilities of such scenarios are debatable. Furthermore, our user stories appear to suggest the desire for a more personalised application.</p>
+<p>It could be argued that multiple user support is not required and thus a <code>UserList</code> should not be used to store data.
+However, the intention is to leave it open to future developers to decide on whether to include multiple user support
+for the application, as the choice of a fully personalised experience for diabetic patients versus functionality for
+multiple users (having diabetes and using the same app), as well as the possibilities of such scenarios are debatable.
+Furthermore, our user stories appear to suggest the desire for a more personalised application.</p>
 </li>
 <li>
-<p>In the strict case of single-user support that leaves the app less open to such modification, the alternative would be to simply implement and store the <code>User</code> in <code>Model</code>, rather than the <code>UserList</code>.</p>
+<p>In the strict case of single-user support that leaves the app less open to such modification, the alternative would be
+to simply implement and store the <code>User</code> in <code>Model</code>, rather than the <code>UserList</code>.</p>
 </li>
 </ul>
 </div>
@@ -1286,7 +1465,11 @@ including:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>The use of <code>enum</code> is a possibility to implement <code>static final background</code> sub-argument values (eg, <code>auto</code> of attribute <code>background</code> size). However considerations that eventually led against this idea included the possibility of values that are not in proper <code>String</code> format that may not be able to be directly enumerated (leading to the required use of additional lengthy switch cases). Additionally other <code>background</code> fields may be added by future developers  and it would be more concise to have them all in a single class rather than as separate enumerations.</p>
+<p>The use of <code>enum</code> is a possibility to implement <code>static final background</code> sub-argument values (eg, <code>auto</code> of attribute
+<code>background</code> size). However considerations that eventually led against this idea included the possibility of values that
+are not in proper <code>String</code> format that may not be able to be directly enumerated (leading to the required use of
+additional lengthy switch cases). Additionally other <code>background</code> fields may be added by future developers  and it would
+be more concise to have them all in a single class rather than as separate enumerations.</p>
 </li>
 </ul>
 </div>
@@ -1296,7 +1479,11 @@ including:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>It is possible to separate the commands for  <code>fontcolour</code> and <code>background</code> into different commands (eg. addfontcolour, editfontcolour, showfontcolour, <code>clrfontcolour</code>). However, this is likely unnecessary as this will not only require the end user to type more words, but also introduce redundancy (eg. <code>clrfontcolour</code> could simply be <code>fontcolour</code> black and this is not hard to achieve the same effects as <code>clrfontcolour</code>, which also adds a restrictive definition on what the default colour to the user upon clearing settings should be).</p>
+<p>It is possible to separate the commands for  <code>fontcolour</code> and <code>background</code> into different commands (eg. addfontcolour,
+editfontcolour, showfontcolour, <code>clrfontcolour</code>). However, this is likely unnecessary as this will not only require the
+end user to type more words, but also introduce redundancy (eg. <code>clrfontcolour</code> could simply be <code>fontcolour</code> black and
+this is not hard to achieve the same effects as <code>clrfontcolour</code>, which also adds a restrictive definition on what the
+default colour to the user upon clearing settings should be).</p>
 </li>
 </ul>
 </div>
@@ -1306,7 +1493,11 @@ including:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>An alternative idea to achieving font colours and backgrounds throughout the entire app was to visit each child node recursively and set the colours and backgrounds if the nodes are of specific instances with these attributes (eg. <code>Label</code> which has textfill attribute). However this idea was quickly aborted as the <code>TableView</code> implemented only renders headers after the scene has been set and to include such a case in thet recursive solution adds significant complexity to the program on top of the possibility of severely breaking abstraction.</p>
+<p>An alternative idea to achieving font colours and backgrounds throughout the entire app was to visit each child node
+recursively and set the colours and backgrounds if the nodes are of specific instances with these attributes (eg.
+<code>Label</code> which has textfill attribute). However this idea was quickly aborted as the <code>TableView</code> implemented only renders
+headers after the scene has been set and to include such a case in thet recursive solution adds significant complexity
+to the program on top of the possibility of severely breaking abstraction.</p>
 </li>
 </ul>
 </div>
@@ -1316,10 +1507,111 @@ including:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>The <code>ResultDisplay</code> was originally implanted as a <code>TextArea</code> but was eventually replaced with a <code>Label</code> which achieves similarly results. The reasoning for this change was the inability to or difficulty in setting the <code>background</code> of <code>TextArea</code>, even via CSS. A <code>Label</code> serves as a perfect alternative since in the case both are non-editable to the user.</p>
+<p>The <code>ResultDisplay</code> was originally implanted as a <code>TextArea</code> but was eventually replaced with a <code>Label</code> which achieves
+similarly results. The reasoning for this change was the inability to or difficulty in setting the <code>background</code> of
+<code>TextArea</code>, even via CSS. A <code>Label</code> serves as a perfect alternative since in the case both are non-editable to the user.</p>
 </li>
 </ul>
 </div>
+</div>
+<div class="sect4">
+<h5 id="restricting-user-modification-of-motivational-quotes"><a class="link" href="#restricting-user-modification-of-motivational-quotes">Restricting User Modification of Motivational Quotes</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p>The user is specifically designed to have no access in modifying the list as that would not only have taken away the
+element of surprise but defeat the purpose of motivating the user one step at a time.</p>
+</li>
+<li>
+<p>Additionally, no additional commands for switching quotes are implemented as the user may simply restart the
+application to generate a new <code>MotivationalQuote</code> out of the 600+ that are currently available.</p>
+</li>
+<li>
+<p>Future developers may decide to add more quotes, or implement the capability for users to add or modify them, but at
+the moment we believe modification would be unnecessary as user-defined fields may also be achieved via other existing
+features such as those in the biography. A user may furthermore add to quotes that may turn out to be discouraging
+without knowing it, or accidentally delete quotes from the list unintentionally, making the user experience of the
+feature much less deterministic.</p>
+</li>
+<li>
+<p>Daily motivational quotes were replaced with motivational quotes that change every time the application is restarted
+as not only does it increase ease of testability, but also allows the user to encounter something different each time
+the application is opened. Given the minimal ability intended for the user to modify the quotes, it is perhaps
+important that a user who may not like what he is seeing on screen, or simply wishes to see something different. does
+not have to wait till the end of the day in order for a change in quote to be observed.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="achievement-measures-and-criteria"><a class="link" href="#achievement-measures-and-criteria">3.8.4. Achievement Measures and Criteria</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p>It was difficult to define what a user needs to 'achieve' before he or she gets an achievement.</p>
+</li>
+<li>
+<p>The basic idea was to allow for different achievement levels which was eventually implemented. However, marking of the
+boundaries of when a user attains an <code>Achievement</code> was debatable and could still be amongst developers.</p>
+</li>
+<li>
+<p>An initial consideration was to award users achievements based on the average of the data in their health records.
+In other words, take the average of all data within a specific time period and award the achievement if the data within
+that time period matches the requirement. However a major flaw with this idea was how users would eventually be able to
+'cheat' - by minimising the number of days during which records are entered, and only recording data when results are
+desirable. The other issue was the duration during which the average was determined. Suppose an achievement may be
+attained by the user upon meeting requirements based on data over a year on <em>average</em>. This means that a user could
+enter a record that meets the requirements in year 1, and then one year later enter another record that meets the
+requirements. By this definition of achievements, the user could have received the achievement even though the records
+may not have met requirements for the majority of year (especially for records that were not keyed in).</p>
+</li>
+<li>
+<p>Thus, user&#8217;s achievements were defined by the actual duration during which they met requirements, and furthermore
+for <em>consecutive</em> number of days. i.e. streak</p>
+</li>
+<li>
+<p>This ensures that the user is incentivised not only to achieve good records (and in the process improve his or her
+health), but also acquire a good habit of keying in and storing records.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="saving-of-user-s-preferred-themes-code-coming-in-v2-0-code"><a class="link" href="#saving-of-user-s-preferred-themes-code-coming-in-v2-0-code">3.8.5. Saving of user&#8217;s preferred themes: <code>[coming in v2.0]</code></a></h4>
+<div class="paragraph">
+<p>This feature has not currently been implemented, but could possibly be implemented using the
+<code>StyleManager</code> class, which processes users' <code>background</code> and <code>fontColour</code>. A list could be used to save an
+archive of users' preferred themes during that session. Adding, editing and deletion could be accomplished using <code>List</code>
+methods. A <code>HashMap</code> could also be used such that the user can self-define names for each of the themes. A variable
+would serve as a current pointer to determine the current theme the user is using. A change in theme could be achieved
+by updating the pointer and / or the <code>HashMap</code>, if any is implemented. If the user does not have any themes,
+then default aesthetics would be loaded, or if there is at least one saved settings (as there is in this current version
+of the application), the users' preferences' in those settings would be loaded. Upon termination of the program, the
+contents of the list could be saved to a JsonStorage file.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="displaying-of-cartoon-avatar-that-represents-the-user-code-coming-in-v2-0-code"><a class="link" href="#displaying-of-cartoon-avatar-that-represents-the-user-code-coming-in-v2-0-code">3.8.6. Displaying of cartoon avatar that represents the user: <code>[coming in v2.0]</code></a></h4>
+<div class="paragraph">
+<p>This feature has yet to be implemented but could possibly be implemented using a class / method that interacts with the
+user&#8217;s <code>RecordList</code>. A larger BMI of the user could be represented by a figure with a wider profile while a smaller BMI
+could lead to the avatar being represented otherwise. Users could also have the option to enable and disable this feature.
+This dynamically changing avatar could be achieved by combining shapes that change according to the values in <code>ReordList</code>,
+or by using an existing library that allows for this.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="follow-up-on-user-s-goals-code-coming-in-v2-0-code"><a class="link" href="#follow-up-on-user-s-goals-code-coming-in-v2-0-code">3.8.7. Follow up on user&#8217;s goals: <code>[coming in v2.0]</code></a></h4>
+<div class="paragraph">
+<p>This feature has yet to be implemented but could possibly be implemented by first parsing the input which the user has
+entered for the Goals field. If recognised in the correct format, the program can automatically store the recognised
+fields in an array and Json file. As the days progress, the program automatically checks on the user&#8217;s progress by
+analysing data in the user&#8217;s <code>RecordList, and gives timely feedback to the user by using the `LocalDate</code> java class to
+check how close users are to the goal as well as encourage them to set more realistic targets as time passes by. For
+instance, the program may display a new alert-box like window via the <code>UI</code> indicating to user 'good job' for perhaps
+being 'halfway there' in attaining set goals. This feature may also implement some methods from the `Reminder`feature so
+a goal can be automatically be reminded about at specific time intervals as desired by the user.</p>
 </div>
 </div>
 </div>
@@ -1431,14 +1723,16 @@ including:</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">diabetic patient who has different options on medical care</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">know exactly how much I am spending on medication and consultation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">know exactly how much I am spending on medication
+and consultation</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">know which hospitals to seek medical care from</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">very busy diabetic</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">use a flexible calendar system that can account for updates</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">easily make changes to appointments that I have to change often due to other commitments</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">easily make changes to
+appointments that I have to change often due to other commitments</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
@@ -1468,7 +1762,8 @@ including:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">patient who has recently been diagnosed of diabetes</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">be informed when I eat food with high sugar content</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">live better and reduce the chances of further health deterioration</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">live
+better and reduce the chances of further health deterioration</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
@@ -1492,19 +1787,22 @@ including:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">diabetic patient who has just been recently diagnosed</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">have some motivation and reminders on my diet</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">reduce my struggles of cutting down on meals or even exercise that is really tough for me</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">reduce
+my struggles of cutting down on meals or even exercise that is really tough for me</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">diabetic</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">automatically calculate my daily sugar/carb intake</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">eliminate the trouble to search for the levels of sugar content in the food I eat everyday.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">eliminate the trouble to search for the levels
+of sugar content in the food I eat everyday.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">diabetic who values my punctuality</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">adhere to my appointment timings</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">uphold my principles and take responsibility of my own health by not missing my appointments.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">uphold my principles and take
+responsibility of my own health by not missing my appointments.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
@@ -1522,13 +1820,16 @@ including:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">task-oriented diabetic patient</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">have a goal to work towards or a challenge to work on everyday</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">have a sense of direction in what I can do to improve my health</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have a
+sense of direction in what I can do to improve my health</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">caretaker of an elderly patient with diabetes whose family members are busy working</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">reliable app to keep track of all the patients' activities</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">can answer to the family members who have entrusted unto me this responsibility of care</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">reliable app to keep
+track of all the patients' activities</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">can answer to the family members who have entrusted unto me this responsibility
+of care</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
@@ -1540,13 +1841,15 @@ including:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">diabetic patient who is often being referred to new doctors at different specialist clinics every now and then</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">be able to be able to export all my records and activities at once</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">rule out the possibility of missing any information during the registration process at a new clinic/ hospital I am visiting</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">rule out the possibility of missing any information
+during the registration process at a new clinic/ hospital I am visiting</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">family member of a diabetic</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">prioritize my tasks</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">be immediately contactable if my family member has an emergency situation that requires urgent medical attention</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be immediately contactable if my family member has an
+emergency situation that requires urgent medical attention</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
@@ -1563,37 +1866,43 @@ including:</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">forgetful diabetics patient</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">have a record of my doctors' advice for each medical appointment and prescription directions</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have a record of my doctors' advice for each medical appointment and prescription
+directions</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">better understand the steps that I can take to improve my condition until the next consultation</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">achievement-oriented diabetic</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">view the achievements and progress I have made on food intake</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">remain motivated to keep my streak on good habits going</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">remain motivated
+to keep my streak on good habits going</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">paranoid diabetic who values privacy</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">secure/encrypt my health data and other private contact details</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">protect my data</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">protect
+my data</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">diabetic patient with a family</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">have a user-friendly app that helps me manage my medical data and appointments on my own</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have a user-friendly app that helps me manage my medical data and appointments
+on my own</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">free the burden I have on my family</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">diabetic patient with a family</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">have a user-friendly app with natural commands that helps me manage my medical data and appointments on my own</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have a user-friendly app with natural commands that helps me manage my medical
+data and appointments on my own</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">free the burden I have on my family</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">diabetic patient in a community of diabetic patients</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">have a standardised means of comparing our activities via a social network</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have a standardised means of comparing our activities via a
+social network</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">learn from my peers, encourage and be encouraged through this difficult journey.</p></td>
 </tr>
 <tr>
@@ -1605,7 +1914,8 @@ including:</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">a diabetic patient who has many medical receipts - and is not very good at mathematics</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">have a simple calculator that is always easily accessible</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have a simple calculator
+that is always easily accessible</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">instantly calculate all my medical costs when needed</p></td>
 </tr>
 <tr>
@@ -2064,4 +2374,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-02 01:59:57 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-02 14:34:55 UTC</div></div></div></body></html>
