@@ -689,9 +689,9 @@ or she may input "NIL". However, this is highly not recommended, especially for 
 argument in this form: <code>e/91234567</code> <code>e/98765432</code>.</p>
 </div>
 <div class="paragraph">
-<p>Other fields can only have one data value associated with it. If two names are attempted to be added, the program
-simply takes the latest name received. eg. In the case of <code>n/firstTestName</code> and <code>n/secondTestName</code>, the program will
-save the user&#8217;s name as "secondTestName".</p>
+<p>Other fields can only have one data value associated with it. If multiple fields of the same type are entered for
+fields other than the ones listed above, an error message is displayed to the user, along with the prefixes that the
+user entered that can only be entered at most once.</p>
 </div>
 <div class="paragraph">
 <p>For the following fields, certain restrictions are put in place:</p>
@@ -794,7 +794,9 @@ is more than one field and the inputs are valid.</p>
 </div>
 <div class="paragraph">
 <p>Similar to the <code>addbio</code> command, an error message is shown if a user attempts to edit a biography but does not specify
-any fields.</p>
+any fields. If multiple prefixes of the same type are entered for fields meant to contain only one data value
+(refer to <code>bio</code> section) eg. Name, an error message is displayed to the user, along with the prefixes that the
+user entered that can only be entered at most once.</p>
 </div>
 <div class="paragraph">
 <p>Data of fields may be removed by simply entering blank input for the field eg. <code>editbio a/</code> resets the address to blank.
@@ -1777,4 +1779,4 @@ E.g <code>summary rt/bloodsugar d/01.09.2019</code></p>
 </ol>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-02 01:13:14 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-02 01:59:57 UTC</div></div></div></body></html>
