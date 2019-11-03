@@ -184,7 +184,7 @@ The following class plays an important role at the architecture level:</p>
 <p>The UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>PersonListPanel</code>, <code>StatusBarFooter</code> etc. All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
 </div>
 <div class="paragraph">
-<p>The <code>UI</code> component uses JavaFx UI framework. The layout of these UI parts are defined in matching <code>.fxml</code> files that are in the <code>src/main/resources/view</code> folder. For example, the layout of the <a href="https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java"><code>MainWindow</code></a> is specified in <a href="https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml"><code>MainWindow.fxml</code></a></p>
+<p>The <code>UI</code> component uses JavaFX UI framework. The layout of these UI parts are defined in matching <code>.fxml</code> files that are in the <code>src/main/resources/view</code> folder. For example, the layout of the <a href="https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java"><code>MainWindow</code></a> is specified in <a href="https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml"><code>MainWindow.fxml</code></a></p>
 </div>
 <div class="paragraph">
 <p>The <code>UI</code> component,</p>
@@ -769,7 +769,7 @@ Step 1. The user launches the application for the first time. If <code>recordLis
 </div>
 </div>
 <div class="paragraph">
-<p>Step 4. The user now decides that adding the record was a mistake, and decides to delete that record. The delete command is first parsed by <code>AddressBookParser</code> then parsed by <code>DeleteCommandParser</code>. In <code>DeleteCommandParser</code>, we use <code>ParseUtil</code> to check whether the index is a positive number, otherwise a <code>ParseException</code> will be thrown. <code>DeleteCommand</code> receives the positive index and checks whether the positive index indexes a record. <code>DeleteCommand</code> will call <code>Model#deleteRecord()</code>, which will call <code>Model#deleteRecord()</code> and call <code>ModelManager#deleteRecord()</code> performing a <code>remove()</code> operation on the list.</p>
+<p>Step 4. The user now decides that adding the record was a mistake, and decides to delete that record. The delete command is first parsed by <code>AddressBookParser</code> then parsed by <code>DeleteCommandParser</code>. In <code>DeleteCommandParser</code>, we use <code>ParseUtil</code> to check whether the index is a positive number, otherwise a <code>ParseException</code> will be thrown. <code>DeleteCommand</code> receives the positive index and checks whether the positive index indices a record. <code>DeleteCommand</code> will call <code>Model#deleteRecord()</code>, which will call <code>Model#deleteRecord()</code> and call <code>ModelManager#deleteRecord()</code> performing a <code>remove()</code> operation on the list.</p>
 </div>
 <div class="paragraph">
 <p>Step 5. After command has executed in <code>LogicManager</code>, we attempt to write the recordList in memory to <code>recordList.json</code> on disk using <code>Storage#saveRecordList()</code>. The command result is returned to <code>MainWindow</code> which calls <code>MainDisplayPane</code> in step 2 using <code>MainWindow#switchToMainDisplayPane()</code>. This lists out the updated record list in the UI (step 2).</p>
@@ -1132,11 +1132,12 @@ modifying the CSS file used itself.</p>
 <div class="sect4">
 <h5 id="biography"><a class="link" href="#biography">Biography</a></h5>
 <div class="paragraph">
-<p>The biography feature is supported by the <code>addbio</code>, <code>editbio</code> and <code>clrbio</code> commands. Each command adheres to the main
+<p>The biography feature is supported by the <code>addbio</code>, <code>editbio</code> and <code>clrbio</code> commands.
+Each command adheres to the main
 flow of information used by this application. In other words, when a command is received, the command is first parsed
 by <code>SugarMummyParser</code>, and to individual parsers where required, before return a <code>Command</code> object. The <code>Command</code> object
-is then executed by <code>Logic</code>, during which it updates <code>Model</code>, and after which Storage is updated <code>Logic</code>, before the
-feedback from the <code>CommandResult</code> returned by the <code>Command</code> object is shown to the user back at the <code>Ui</code>.</p>
+is then executed by <code>LogicManager</code>, during which it updates <code>ModelManager</code>, and after which Storage is updated, before feedback from
+the <code>CommandResult</code> returned by the <code>Command</code> object is shown to the user back at the <code>Ui</code>.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1160,33 +1161,53 @@ feedback from the <code>CommandResult</code> returned by the <code>Command</code
 </div>
 </li>
 <li>
-<p>In all scenarios, <code>SugarMummyParser</code> responds to the command word via a series of switch cases. As mentioned above,
-<code>addbio</code> and <code>editbio</code> will AddCommandParser and <code>EditCommandParser</code> respectively.</p>
+<p>In all scenarios,
+<code>SugarMummyParser</code> responds to the command word via a series of switch cases.
+As mentioned above,
+<code>addbio</code> and <code>editbio</code> returns <code>AddBioCommandParser</code> and <code>EditBioCommandParser</code> respectively.</p>
 </li>
 <li>
 <p>A key difference between the parsers for <code>addbio</code> and <code>editbio</code> is that the former requires <code>Name</code>, <code>ContactNumber</code>,
 <code>EmergencyContact</code>, and <code>MedicalCondition</code> to be compulsory whereas <code>editbio</code> requires at least one argument denoting
-the <code>User</code>’s biography field to be changed. Furthermore, <code>EditCommandParser</code> determines whether or not subarguments for
+the <code>User</code>’s biography field to be changed. Furthermore, <code>EditBioCommandParser</code> determines whether or not subarguments for
 fields of <code>ListableField</code> type contain the format <code>INDEX/</code>, denoting the particular number in the list to be changed.</p>
 </li>
 <li>
-<p><code>CommandParser</code> then  returns an <code>AddBioCommand</code> object that stores the <code>User</code> to be created. <code>EditCommandParser</code> on
+<p><code>CommandParser</code> then  returns an <code>AddBioCommand</code> object that stores the <code>User</code> to be created. <code>EditBioCommandParser</code> on
 the other hand creates an <code>EditBioCommand</code> object that stores an <code>EditedUserDescription</code> containing information on which
-fields are edited to be edited. A <code>List</code> of <code>HashMaps</code> that maps indexes to <code>ListableField`s is usedin
-`EditedUserDescription</code> to denote changes to be made within each <code>ListableField</code>. When executed by <code>Logic</code> afterwards,
-the <code>AddBioCommand</code> creates the <code>User</code> to be stored in model whereas the <code>EditBioCommand</code> creates a new <code>User</code> based on
-information in <code>EditedUserDescription</code>. A <code>UserList</code> is used in the <code>Model</code> to store Users. At any point of time when a
-user attempts to access biography information, <code>Logic</code> accesses the <code>UserList</code> from <code>Model</code> to display information. In
-order to be able to display the same information upon startup, <code>Logic</code> saves this <code>UserList</code> to the storage after
-execution of each command.</p>
+fields are edited to be edited.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>A <code>List</code> of <code>HashMaps</code> that maps indices to <code>ListableField</code> is used in <code>EditedUserDescription</code> to denote changes to be made within each <code>ListableField</code>. When executed by <code>Logic</code> afterwards,
+the <code>AddBioCommand</code> creates the <code>User</code> to be stored in the <code>ModelManager</code> whereas the <code>EditBioCommand</code> creates a new <code>User</code> based on
+information in <code>EditedUserDescription</code>. A <code>UserList</code> is used in the <code>ModelManager</code> to store <code>User</code> instances.</p>
 </li>
 <li>
-<p>For the <code>bio</code> and <code>clrbio</code> commands, the implementations are relatively more straightforward. A BioCommand returned by
-<code>SugarMummyParser</code> simply overrides the <code>getDisplayPaneType()</code> of the <code>Command</code> object (that each <code>Command</code> object
-contains) so that back at <code>Ui</code>, <code>Ui</code> knows to display the <code>BioPane</code> of the <code>Ui</code> in the <code>MainDisplayPane</code> part of the
-window. This is also done for all other biography-related commands so after each biography-related command, the
+<p>At any point of time when a user attempts to access biography information, <code>LogicManager</code> accesses the <code>UserList</code> from
+<code>ModelManager</code> to display information. In order to be able to display the same information upon startup, <code>LogicManager</code> saves this
+<code>UserList</code> to the storage after execution of each command.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>For the <code>bio</code> and <code>clrbio</code> commands, the implementations are relatively more straightforward.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>A <code>BioCommand</code> returned by <code>SugarMummyParser</code> simply overrides the <code>getDisplayPaneType()</code> of the <code>Command</code> object
+(that each <code>Command</code> object contains) so that back at <code>Ui</code>, <code>Ui</code> knows to display the <code>BioPane</code> of the <code>Ui</code> in the
+<code>MainDisplayPane</code> part of the window.</p>
+</li>
+<li>
+<p>This is also done for all other biography-related commands so after each biography-related command, the
 <code>BioPane</code> is displayed.  A <code>DisplayPane</code> is stored in the form of an enumeration as the type of display would be
-predefined to all it’s accessors. The <code>ClearBioCommand</code> simply clears the <code>UserList</code> stored in the model upon execution.</p>
+predefined to all it’s accessors. The <code>ClearBioCommand</code> class simply clears the <code>UserList</code> stored in the <code>ModelManager</code> upon
+execution.</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
 <p>In the cases of <code>bio</code> and <code>clrbio</code> commands, <code>SugarMummyParser</code> requires non-null arguments just as it does for other
@@ -1202,7 +1223,7 @@ in the <code>getNewPaneIsToBeCreated()</code> method of the. <code>Command</code
 <code>DisplayPane</code> enumerations to the corresponding <code>UiPart</code> representing the respective pane.</p>
 </li>
 <li>
-<p>An illustration of how the information flows for the <code>editbio</code> command (Scenario 2) is shown as follows:</p>
+<p>An illustration of how the information flows for the <code>editbio</code> command is shown as follows:</p>
 </li>
 </ul>
 </div>
@@ -1224,7 +1245,7 @@ described above.  Validation within parsers are done via the <code>ParserUtil</c
 <h5 id="aesthetics"><a class="link" href="#aesthetics">Aesthetics</a></h5>
 <div class="paragraph">
 <p>The aesthetics aspects of the application help to support the feature of personalised user experience and are
-implemented using the command words “<code>fontcolour</code>” and “<code>background</code>” respectively.</p>
+implemented using the command words <code>fontcolour</code> and <code>bg</code> respectively.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1260,33 +1281,57 @@ implemented using the command words “<code>fontcolour</code>” and “<code>b
 </div>
 </li>
 <li>
-<p>As mentioned above, <code>Colour</code> and <code>Background</code> are independent classes, and <code>Colour</code> makes use of enumerations of
-colour codes and colour names to determine validity of the colours.</p>
+<p>As mentioned above,
+<code>Colour</code> and <code>Background</code> are independent classes, and <code>Colour</code> makes use of enumerations of colour names and
+hexadecimal colour codes to determine validity of the colours.</p>
 </li>
 <li>
-<p>Upon receival of the command “<code>fontcolour</code>”, if <code>fontcolour</code> has no arguments (checked by <code>FontColourParser</code>), a new
+<p>Upon receival of the command <code>fontcolour</code>, if <code>fontcolour</code> has no arguments (checked by <code>FontColourParser</code>), a new
 <code>FontColourCommand</code> with no arguments is returned, and upon execution return a <code>CommandResult</code> that shows the existing
-font used via access of <code>Model</code> (logic is similar to the ones for biography) Otherwise if arguments are received,
-validity of the arguments is checked against, and if the colour is a valid <code>Colour</code>, it is set in <code>Model</code> and saved to
-Storage. <code>FontColourCommand</code> overrides the <code>getDisplayPane()</code> to return the <code>DisplayPane.COLOUR</code> enumeration. i.e. the
-<code>MainDisplayPane</code> is unchanged in <code>Ui</code>, and only font colours change.</p>
+<code>fontcolour</code> used via access of <code>ModelManager</code> (logic is similar to the ones for biography)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Otherwise if arguments are received, validity of the arguments is checked against, and if the colour is a valid <code>Colour</code>,
+it is set in <code>ModelManager</code> and saved to Storage. <code>FontColourCommand</code> overrides the <code>getDisplayPane()</code> to return the
+<code>DisplayPane.COLOUR</code> enumeration. i.e. the <code>MainDisplayPane</code> is unchanged in <code>Ui</code>, and only font colours change.</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
-<p><code>Background</code> on the other hand, checks for additional possible arguments. First of all, as observed in Scenarios 6
+<p><code>Background</code> on the other hand, checks for additional possible arguments.
+First of all, as observed in Scenarios 6
 and 7, an argument could either represent a <code>Colour</code> or a path leading to an image to be used to set the background
-picture (this is similar to the <code>DisplayPicPath</code> of <code>bio</code> field). Thus, <code>BackgroundParser</code> first determines if the
-argument received is a colour. If so it returns a <code>BackgroundCommand</code> storing a <code>Background</code> that has a <code>background</code>
-colour attribute. Otherwise, it checks, via <code>ParserUtil</code> , whether or not the argument before valid prefixes (preamble)
+picture (this is similar to the <code>DisplayPicPath</code> of <code>bio</code> field). Thus,
+<code>BackgroundParser</code> first determines if the
+argument received is a <code>Colour</code>. If so it returns a <code>BackgroundCommand</code> storing a <code>Background</code> that has a <code>backgroundColour</code> attribute. Otherwise, it checks, via <code>ParserUtil</code> , whether or not the argument before valid prefixes (preamble)
 is a valid file path. If so, a <code>Background</code> that has a <code>backgroundPicPath</code> attribute is used to create the
-<code>BackgroundCommand</code>. Otherwise a parse exception is returned. Possible arguments that a <code>background</code> command can have
-include the size and repeat feature, corresponding to CSS <code>background</code> attributes. In current versions of the program,
-the program allows for fixed constants of this features to be used, that are stored in <code>Background`ImageArgs class and
-used by the `Background</code> model for validation. <code>Background``Command</code> overrides the <code>getDisplayPane()</code> to return
-<code>DisplayPane.BACKGROUND</code> enumeration. i.e. the <code>MainDisplayPane</code> is unchanged in <code>Ui</code>, and only the <code>background</code>
-changes. Similar to font colour, the command word on its own simply displays to the user current <code>background</code> settings.</p>
+<code>BackgroundCommand</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Otherwise a <code>ParseException</code> is returned.
+Possible arguments that a <code>bg</code> command can have
+include the size and repeat feature, corresponding to CSS <code>background</code> attributes.</p>
 </li>
 <li>
-<p>An illustration of the logic for handling a <code>background</code> command is shown as follows:</p>
+<p>In current versions of the program, the program allows for fixed constants of this features to be used, that are stored in <code>BackgroundImageArgs</code> class and
+used by the <code>Background</code> model for validation.</p>
+</li>
+<li>
+<p><code>BackgroundCommand</code> overrides the <code>getDisplayPane()</code> method to return
+<code>DisplayPane.BACKGROUND</code> enumeration. i.e. the <code>MainDisplayPane</code> is unchanged in <code>Ui</code>, and only the <code>background</code>
+changes.</p>
+</li>
+<li>
+<p>Similar to font colour, the command word on its own simply displays to the user current <code>background</code> settings.</p>
+</li>
+<li>
+<p>An illustration of the logic for handling a <code>bg</code> command is shown as follows:</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -1298,7 +1343,7 @@ changes. Similar to font colour, the command word on its own simply displays to 
 <div class="ulist">
 <ul>
 <li>
-<p>For both <code>fontcolour</code> and <code>background</code> commands, the StyleManager class of <code>Ui</code> is used to set the user’s intention of
+<p>For both <code>fontcolour</code> and <code>bg</code> commands, the StyleManager class of <code>Ui</code> is used to set the user’s intention of
 <code>fontcolour</code> and <code>background</code> (if parsing is successful). The way StyleManager sets the <code>background</code> is by making a copy
 of the existing StyleSheet used, modifying the required fields and setting it to the StyleSheets of the scene, internally.</p>
 </li>
@@ -1324,7 +1369,7 @@ yet dark enough not to clash with the current background colour, then the user c
 colours without going through a series of specific steps that would not cause colour clash.</p>
 </li>
 <li>
-<p>Command composition allows the <code>background</code> and <code>fontcolour</code> commands to be combined such that the user is able to
+<p>Command composition allows the <code>bg</code> and <code>fontcolour</code> commands to be combined such that the user is able to
 set both the <code>background</code> and <code>fontcolour</code> simultaneously, and as such colour comparison is made solely between the
 new colours entered rather than any of the current colours.</p>
 </li>
@@ -1332,7 +1377,7 @@ new colours entered rather than any of the current colours.</p>
 <p><code>BackgroundParser</code> parses for <code>fontcolour/</code> and its arguments while <code>FontColourParser</code> parses for
 <code>bg/</code> and its arguments. Any of these prefixes observed results in the Parser generating a <code>FontColourCommand</code> and
 <code>BackgroundColourCommand</code> respectively. <code>BackgroundParser</code> then returns a <code>BackgroundColourCommand</code> that has a
-<code>FontColourCommand</code> <em>stored</em> in it and vice versa. When <code>Logic</code> executes <code>BackgroundCommand</code>, for instance,
+<code>FontColourCommand</code> <em>stored</em> in it and vice versa. When <code>LogicManager</code> executes <code>BackgroundCommand</code>, for instance,
 <code>BackgroundCommand</code> executes the <code>FontColourCommand</code> stored in it as well. The necessary adjustments are made to model
 accordingly and the feedback to users from both commands will be returned to the user.</p>
 </li>
@@ -1357,7 +1402,7 @@ Similar to how <code>bio</code> is implemented, <code>SugarMummyParser</code> re
 <code>TilePane</code> so that all images are of the same size.</p>
 </li>
 <li>
-<p>An <code>Achievement</code> is implemented as an abstract class in the <code>Model</code> package. Each achievement contains attributes that
+<p>An <code>Achievement</code> is implemented as an abstract class in the <code>model</code> package. Each achievement contains attributes that
 define the <code>Achievement</code> such as its <code>title</code> and <code>description</code> which specifies the requirements needed to attain it.
 A significant attribute of the <code>Achievement</code> class is it&#8217;s three states - <code>Achieved</code>, <code>Yet to Achieve</code> and <code>Previously
 Achieved</code>. Another would be the <code>level</code> of the achievement (eg. <code>Bronze</code>, <code>Silver</code>, <code>Gold</code> etc.)</p>
@@ -1368,10 +1413,13 @@ the <code>Achievement</code> for its <code>RecordType</code>. Specific classes i
 the <code>Achievement</code> abstract class to specify defining attributes and methods.</p>
 </li>
 <li>
-<p>When the program starts, an <code>AchievementsMap</code> containing the list of all <code>Achievement</code> objects that the program has is
-created in the <code>model</code> of the program. All <code>Achievement</code> objects are initially all at the state of <code>Yet to Achieve</code>.
-Thereafter, the <code>AchievementStateProcessor</code> class is called, which iterates through the list of all <code>Record</code> elements
-stored in <code>model</code>.</p>
+<p>When the program starts, an <code>AchievementsMap</code> containing a <code>Map</code> of <code>RecordType</code> to <code>List</code> of all <code>Achievement</code> objects
+that the program has is created in <code>ModelManager</code>.
+All <code>Achievement</code> objects are initially all at the state of <code>Yet to Achieve</code>.</p>
+</li>
+<li>
+<p>The <code>AchievementStateProcessor</code> class is then called, which iterates through the list of all <code>Record</code> elements
+stored in <code>ModelManager</code> and updates the <code>State</code> of each <code>Achievement</code> if necessary.</p>
 </li>
 <li>
 <p>For each <code>RecordType</code> and <code>Level</code> of <code>Achievement</code>, the <code>AchievementStateProcessor</code> class checks whether the records
@@ -1393,11 +1441,11 @@ of the <code>Record</code> elements in the <code>RecordList</code>.</p>
 </li>
 <li>
 <p>Thereafter, for each addition and removal of <code>Record</code> elements, the same process described above is used to update the
-<code>AchievementsMap</code>, that maps <code>RecordType</code> to an <code>AchievementsList</code> of <code>Achievement</code> elements.</p>
+<code>AchievementsMap</code>, that maps <code>RecordType</code> to an <code>AchievementsList</code> of <code>Achievement</code> elements with updated <code>State</code> attributes.</p>
 </li>
 <li>
-<p>When the <code>achvm</code> command is received by the program, this <code>AchievementsMap</code> is simply retrieved from <code>Model</code> to
-<code>Logic`and the corresponding images representing the `Achievement</code> objects in the list, with their <code>State</code> values,
+<p>When the <code>achvm</code> command is received by the program, this <code>AchievementsMap</code> is simply retrieved from <code>ModelManager</code> to
+<code>LogicManager</code> and the corresponding images representing the <code>Achievement</code> objects in the list, with their <code>State</code> values,
 and attributes are presented to the user via the <code>MainDisplayPane</code> of the <code>MainWindow</code>.</p>
 </li>
 <li>
@@ -1415,17 +1463,17 @@ is not reload so as to optimise performance of the program and minimise unnecess
 <p>Motivational aspects of the application are supported using motivational quotes.</p>
 </li>
 <li>
-<p>Each motivational quote exists as a <code>String</code> in an unmodifiable <code>List</code> of tthe class <code>MotivationalQuotes</code>.</p>
+<p>Each motivational quote exists as a <code>String</code> in an unmodifiable <code>List</code> of the class <code>MotivationalQuotes</code>.</p>
 </li>
 <li>
 <p>The <code>List</code> of quotes (collated from different sources but modified to have the same formats) are initialised to be part
-of the <code>model</code> when the program first starts up.</p>
+of <code>ModelManager</code> when the program first starts up.</p>
 </li>
 <li>
 <p>Upon initialisation of the program, the <code>MotivationalQuotesLabel.fxml</code> file is referenced via its corresponding class.</p>
 </li>
 <li>
-<p>Retrieval of the <code>List</code> of motivational quotes is done via <code>Logic</code> which accesses the <code>List</code> of motivational quotes in
+<p>Retrieval of the <code>List</code> of motivational quotes is done via <code>LogicManager</code> which accesses the <code>List</code> of motivational quotes in
 <code>ModelManager</code>.</p>
 </li>
 <li>
@@ -1450,13 +1498,13 @@ Furthermore, our user stories appear to suggest the desire for a more personalis
 </li>
 <li>
 <p>In the strict case of single-user support that leaves the app less open to such modification, the alternative would be
-to simply implement and store the <code>User</code> in <code>Model</code>, rather than the <code>UserList</code>.</p>
+to simply implement and store the <code>User</code> in <code>ModelManager</code>, rather than the <code>UserList</code>.</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect4">
-<h5 id="code-background-code-sub-argument-values"><a class="link" href="#code-background-code-sub-argument-values"><code>Background</code> Sub-Argument Values</a></h5>
+<h5 id="background-sub-argument-values"><a class="link" href="#background-sub-argument-values">Background Sub-Argument Values</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -1470,13 +1518,13 @@ be more concise to have them all in a single class rather than as separate enume
 </div>
 </div>
 <div class="sect4">
-<h5 id="code-command-code-classification"><a class="link" href="#code-command-code-classification"><code>Command</code> Classification</a></h5>
+<h5 id="command-classification"><a class="link" href="#command-classification">Command Classification</a></h5>
 <div class="ulist">
 <ul>
 <li>
-<p>It is possible to separate the commands for  <code>fontcolour</code> and <code>background</code> into different commands (eg. addfontcolour,
-editfontcolour, showfontcolour, <code>clrfontcolour</code>). However, this is likely unnecessary as this will not only require the
-end user to type more words, but also introduce redundancy (eg. <code>clrfontcolour</code> could simply be <code>fontcolour</code> black and
+<p>It is possible to separate the commands for  <code>fontcolour</code> and <code>background</code> into different commands (eg. <code>addfontcolour</code>,
+<code>editfontcolour</code>, <code>showfontcolour</code>, <code>clrfontcolour</code>). However, this is likely unnecessary as this will not only require the
+end user to type more words, but also introduce redundancy (eg. <code>clrfontcolour</code> could simply be <code>fontcolour black</code> and
 this is not hard to achieve the same effects as <code>clrfontcolour</code>, which also adds a restrictive definition on what the
 default colour to the user upon clearing settings should be).</p>
 </li>
@@ -1488,23 +1536,11 @@ default colour to the user upon clearing settings should be).</p>
 <div class="ulist">
 <ul>
 <li>
-<p>An alternative idea to achieving font colours and backgrounds throughout the entire app was to visit each child node
+<p>An alternative idea to achieving <code>fontcolour</code> and <code>background</code> throughout the entire app was to visit each <code>JavaFX</code> child <code>Node</code>
 recursively and set the colours and backgrounds if the nodes are of specific instances with these attributes (eg.
-<code>Label</code> which has textfill attribute). However this idea was quickly aborted as the <code>TableView</code> implemented only renders
+<code>Label</code> which has <code>textfill</code> attribute). However this idea was quickly aborted as the <code>TableView</code> implemented only renders
 headers after the scene has been set and to include such a case in thet recursive solution adds significant complexity
 to the program on top of the possibility of severely breaking abstraction.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect4">
-<h5 id="use-of-code-label-code-instead-of-code-textarea-code-nodes"><a class="link" href="#use-of-code-label-code-instead-of-code-textarea-code-nodes">Use of <code>Label</code> instead of <code>TextArea</code> Nodes</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p>The <code>ResultDisplay</code> was originally implanted as a <code>TextArea</code> but was eventually replaced with a <code>Label</code> which achieves
-similarly results. The reasoning for this change was the inability to or difficulty in setting the <code>background</code> of
-<code>TextArea</code>, even via CSS. A <code>Label</code> serves as a perfect alternative since in the case both are non-editable to the user.</p>
 </li>
 </ul>
 </div>
@@ -1573,21 +1609,25 @@ health), but also acquire a good habit of keying in and storing records.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="saving-of-user-s-preferred-themes-code-coming-in-v2-0-code"><a class="link" href="#saving-of-user-s-preferred-themes-code-coming-in-v2-0-code">3.8.5. Saving of user&#8217;s preferred themes: <code>[coming in v2.0]</code></a></h4>
+<h4 id="future-developments"><a class="link" href="#future-developments">3.8.5. Future Developments</a></h4>
+<div class="sect4">
+<h5 id="saving-of-user-s-preferred-themes-code-coming-in-v2-0-code"><a class="link" href="#saving-of-user-s-preferred-themes-code-coming-in-v2-0-code">Saving of user&#8217;s preferred themes: <code>[coming in v2.0]</code></a></h5>
 <div class="paragraph">
-<p>This feature has not currently been implemented, but could possibly be implemented using the
-<code>StyleManager</code> class, which processes users' <code>background</code> and <code>fontColour</code>. A list could be used to save an
-archive of users' preferred themes during that session. Adding, editing and deletion could be accomplished using <code>List</code>
-methods. A <code>HashMap</code> could also be used such that the user can self-define names for each of the themes. A variable
-would serve as a current pointer to determine the current theme the user is using. A change in theme could be achieved
-by updating the pointer and / or the <code>HashMap</code>, if any is implemented. If the user does not have any themes,
-then default aesthetics would be loaded, or if there is at least one set of saved settings (as there is in this current
-version of the application), the users' preferences' in those settings would be loaded. Upon termination of the program,
-the contents of the list could be saved to a JsonStorage file.</p>
+<p>This feature has not currently been implemented, but could possibly be implemented using the existing
+<code>StyleManager</code> class, which processes users' <code>background</code> and <code>fontColour</code>. A <code>List</code> could be used to save an
+archive of users' preferred themes during that session.
+Adding, editing and deletion could be accomplished using <code>List</code>
+methods. A <code>HashMap</code> could also be used such that the user can self-define names for each of the themes.
+A variable would serve as a current pointer to determine the current theme the user is using. A change in theme could
+be achieved by updating the pointer and / or the <code>HashMap</code>, if any is implemented.
+If the user does not have any themes, then default aesthetics would be loaded, or if there is at least one set of saved
+settings (as there is in this current version of the application), the users' preferences' in those settings would be
+loaded.
+Upon termination of the program, the contents of the <code>HashMap</code> could be saved to a <code>JsonStorage</code> file.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="displaying-of-cartoon-avatar-that-represents-the-user-code-coming-in-v2-0-code"><a class="link" href="#displaying-of-cartoon-avatar-that-represents-the-user-code-coming-in-v2-0-code">3.8.6. Displaying of cartoon avatar that represents the user: <code>[coming in v2.0]</code></a></h4>
+<div class="sect4">
+<h5 id="displaying-of-cartoon-avatar-that-represents-the-user-code-coming-in-v2-0-code"><a class="link" href="#displaying-of-cartoon-avatar-that-represents-the-user-code-coming-in-v2-0-code">Displaying of cartoon avatar that represents the user: <code>[coming in v2.0]</code></a></h5>
 <div class="paragraph">
 <p>This feature has yet to be implemented but could possibly be implemented using a class / method that interacts with the
 user&#8217;s <code>RecordList</code>. A larger BMI of the user could be represented by a figure with a wider profile while a smaller BMI
@@ -1596,17 +1636,19 @@ This dynamically changing avatar could be achieved by combining shapes that chan
 or by using an existing library that allows for this.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="follow-up-on-user-s-goals-code-coming-in-v2-0-code"><a class="link" href="#follow-up-on-user-s-goals-code-coming-in-v2-0-code">3.8.7. Follow up on user&#8217;s goals: <code>[coming in v2.0]</code></a></h4>
+<div class="sect4">
+<h5 id="follow-up-on-user-s-goals-code-coming-in-v2-0-code"><a class="link" href="#follow-up-on-user-s-goals-code-coming-in-v2-0-code">Follow up on user&#8217;s goals: <code>[coming in v2.0]</code></a></h5>
 <div class="paragraph">
-<p>This feature has yet to be implemented but could possibly be implemented by first parsing the input which the user has
-entered for the Goals field. If recognised in the correct format, the program can automatically store the recognised
-fields in an array and Json file. As the days progress, the program automatically checks on the user&#8217;s progress by
-analysing data in the user&#8217;s <code>RecordList, and gives timely feedback to the user by using the `LocalDate</code> java class to
-check how close users are to the goal as well as encourage them to set more realistic targets as time passes by. For
-instance, the program may display a new alert-box like window via the <code>UI</code> indicating to user 'good job' for perhaps
-being 'halfway there' in attaining set goals. This feature may also implement some methods from the `Reminder`feature so
-a goal can be automatically be reminded about at specific time intervals as desired by the user.</p>
+<p>This feature has yet to be implemented but could possibly be implemented by first parsing inputs tat the user has
+entered for the <code>Goal</code> fields. If in a format that is recognised, the program would store the recognised
+parsed <code>Goal</code> and corresponding <code>LocalDate</code> in an <code>ArrayList</code> and <code>JsonStorage</code> file. The program would then check
+the user&#8217;s progress over time by analysing data in the user&#8217;s <code>RecordList</code>, and provide timely feedback by
+comparing the current date and date by which to reach the <code>Goal</code> targets set.
+For instance, the program may display a new alert-box like window via the <code>UI</code> indicating to user 'good job' for perhaps
+being 'halfway there' in attaining set goals.
+This feature may also implement some methods from the <code>Reminder</code> feature so the user can choose to automatically be
+reminded about his/her <code>Goal</code> inputs at specific time intervals desired.</p>
+</div>
 </div>
 </div>
 </div>
@@ -1699,7 +1741,7 @@ a goal can be automatically be reminded about at specific time intervals as desi
 <div class="paragraph">
 <p>Priorities: High (must have) - <code>* * *</code>, Medium (nice to have) - <code>* *</code>, Low (unlikely to have) - <code>*</code></p>
 </div>
-<table class="tableblock frame-all grid-all" style="width: 90%;">
+<table class="tableblock frame-all grid-all" style="width: 95%;">
 <colgroup>
 <col style="width: 20%;">
 <col style="width: 25%;">
@@ -2369,4 +2411,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-03 18:09:28 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-03 22:54:10 UTC</div></div></div></body></html>

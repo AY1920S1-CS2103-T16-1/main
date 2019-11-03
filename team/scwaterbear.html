@@ -181,7 +181,7 @@ Step 1. The user launches the application for the first time. If <code>recordLis
 </div>
 </div>
 <div class="paragraph">
-<p>Step 4. The user now decides that adding the record was a mistake, and decides to delete that record. The delete command is first parsed by <code>AddressBookParser</code> then parsed by <code>DeleteCommandParser</code>. In <code>DeleteCommandParser</code>, we use <code>ParseUtil</code> to check whether the index is a positive number, otherwise a <code>ParseException</code> will be thrown. <code>DeleteCommand</code> receives the positive index and checks whether the positive index indexes a record. <code>DeleteCommand</code> will call <code>Model#deleteRecord()</code>, which will call <code>Model#deleteRecord()</code> and call <code>ModelManager#deleteRecord()</code> performing a <code>remove()</code> operation on the list.</p>
+<p>Step 4. The user now decides that adding the record was a mistake, and decides to delete that record. The delete command is first parsed by <code>AddressBookParser</code> then parsed by <code>DeleteCommandParser</code>. In <code>DeleteCommandParser</code>, we use <code>ParseUtil</code> to check whether the index is a positive number, otherwise a <code>ParseException</code> will be thrown. <code>DeleteCommand</code> receives the positive index and checks whether the positive index indices a record. <code>DeleteCommand</code> will call <code>Model#deleteRecord()</code>, which will call <code>Model#deleteRecord()</code> and call <code>ModelManager#deleteRecord()</code> performing a <code>remove()</code> operation on the list.</p>
 </div>
 <div class="paragraph">
 <p>Step 5. After command has executed in <code>LogicManager</code>, we attempt to write the recordList in memory to <code>recordList.json</code> on disk using <code>Storage#saveRecordList()</code>. The command result is returned to <code>MainWindow</code> which calls <code>MainDisplayPane</code> in step 2 using <code>MainWindow#switchToMainDisplayPane()</code>. This lists out the updated record list in the UI (step 2).</p>
@@ -597,4 +597,4 @@ Step 1. The user launches the application for the first time. If <code>recordLis
 </ol>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-03 18:09:28 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-03 22:54:10 UTC</div></div></div></body></html>

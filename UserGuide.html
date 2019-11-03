@@ -648,22 +648,22 @@ could help them to recall important information. If a user has no biography save
 display pane, encouraging them to create one.</p>
 </div>
 <div class="paragraph">
-<p>A user is allowed to add all the fields using the format above, in any order of fields to add the biography. In adding
-a biography, it is compulsory for the user to include the following information (i.e. should not be blank):</p>
+<p>A user is allowed to add all the fields using the format above, in any order of fields to add the biography.
+In adding a biography, it is <strong>compulsory</strong> for the user to include the following information (i.e. should not be blank):</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Name</p>
+<p><code>NAME</code></p>
 </li>
 <li>
-<p>Contact Number</p>
+<p><code>CONTACT NUMBER</code></p>
 </li>
 <li>
-<p>Emergency Contact</p>
+<p><code>EMERGENCY CONTACT</code></p>
 </li>
 <li>
-<p>Medical Condition</p>
+<p><code>MEDICAL CONDITION</code></p>
 </li>
 </ul>
 </div>
@@ -776,7 +776,7 @@ than <code>a/exampleAddress m/test</code> is. Ultimately, the user has a balance
 <div class="ulist">
 <ul>
 <li>
-<p><code>addbio dp//Users/whneo97/Desktop/doge.png desc/hello world n/testName nric/testNric gender/testGender dob/2019-12-21 p/12343567 p/91234567 e/81234567 m/testMedicalCondition a/example address 123 goal/testGoal o/testOtherInfo</code>
+<p><code>addbio dp//Users/bob/Desktop/doge.png desc/hello world n/testName nric/testNric gender/testGender dob/2019-12-21 p/12343567 p/91234567 e/81234567 m/testMedicalCondition a/example address 123 goal/testGoal o/testOtherInfo</code>
 (Note: this is provided that the image exists at exactly the <strong>SAME PATH</strong> in the user&#8217;s device. Otherwise, it has to be modifed or removed in order for this example to work)</p>
 </li>
 <li>
@@ -792,7 +792,8 @@ than <code>a/exampleAddress m/test</code> is. Ultimately, the user has a balance
 </div>
 <div class="paragraph">
 <p>A biography can be edited only if one already exists. An error message will be shown to a user who attempts to use the
-<code>editbio</code> command to edit fields before a biography is added. As the fields used by <code>addbio</code> and <code>editbio</code> commands are
+<code>editbio</code> command to edit fields before a biography is added.
+As the fields used by <code>addbio</code> and <code>editbio</code> commands are
 identical and can appear in any order, a user who attempts to add a biography that does not yet exist using the <code>editbio</code>
 command, after receiving the error message, can simply amend <code>editbio</code> to <code>addbio</code> before re-entering the line of
 command, without having to re-enter all the fields. (this is, of course, with the exception that the fields do not
@@ -822,9 +823,9 @@ that the field should not be blank. The only way to remove compulsory fields is 
 for each compulsory field.</p>
 </div>
 <div class="paragraph">
-<p>Another key aspect of the <code>editbio</code> feature is that for fields that can take multiple values
+<p>A key aspect of the <code>editbio</code> feature is that for fields that can take multiple values
 (i.e. phone numbers, medical conditions and goals, as described in the <code>addbio</code> section above),
-indexes may be specified to edit (a) particular value(s) of the field.</p>
+indices may be specified to edit (a) particular value(s) of the field.</p>
 </div>
 <div class="paragraph">
 <p>Take for instance the following phone numbers that are displayed in the user&#8217;s biography table.</p>
@@ -832,24 +833,25 @@ indexes may be specified to edit (a) particular value(s) of the field.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>91234567</p>
+<p><code>91234567</code></p>
 </li>
 <li>
-<p>98765432</p>
+<p><code>98765432</code></p>
 </li>
 <li>
-<p>81234567</p>
+<p><code>81234567</code></p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
 <p>If the user intends to edit the second number in the list, he or she may input <code>editbio p/2/1234567</code> to change the second
-number in the list of phone numbers. Similarly, if he or she wishes to edit the first and third number,
+number in the list of phone numbers.
+Similarly, if he or she wishes to edit the first and third number,
 <code>editbio p/1/1234567 p/2/12121212</code> would be a valid line of command. Similar to other arguments, this can be combined
 with other arguments for fields to be edited (whether or not they allow for multiple values).</p>
 </div>
 <div class="paragraph">
-<p>It should be noted, however, that the indexes provided should be one based (i.e. starts from one) and positive integers
+<p>It should be noted, however, that the indices provided should be one based (i.e. starts from one) and positive integers
 that are not out of bounds of the list. As such, still with reference to this example, <code>editbio p/4/1234567</code> is equally
 <strong>INVALID</strong> as <code>editbio p/0/1234567</code>, <code>editbio p/-1/1234567</code> and `editbio p/string/1234567' and an error message will be
 shown in each of these cases.</p>
@@ -860,7 +862,7 @@ recognised for arguments of other fields such as name (i.e. <code>editbio n/1/te
 </div>
 <div class="paragraph">
 <p>However, fields that support multiple values may use <strong>EITHER</strong> the indexing format <em>or</em> non-indexing format
-(i.e. format used by all other fields). When a sub-argument without indexes such as <code>p/1234567 p/98765432</code>, the program
+(i.e. format used by all other fields). When a sub-argument without indices such as <code>p/1234567 p/98765432</code>, the program
 automatically takes it that a replacement is to be made (i.e. values in the original list is replaced by the new values
 given). A combination of the two is however not allowed as it is ambiguous and will never likely be the intention of
 the user. As such <code>editbio p/1234567 p/1/2345678 p/23423423</code> will be <strong>INVALID</strong> and an error message will be given in the
@@ -944,7 +946,8 @@ than <code>a/exampleAddress m/test</code> is. Ultimately, the user has a balance
 <div class="paragraph">
 <p>A user may clear his or her biography using the <code>clrbio</code> command. If a biography exists, all data from all biography
 fields will be removed. If a biography does not exist, the user will be displayed a message that the biography is
-already empty and there is no biography information to clear. If a biography is successfully cleared, the
+already empty and there is no biography information to clear.
+If a biography is successfully cleared, the
 biography display pane with an empty biography table is shown to the user. A user cannot execute <code>editbio</code> after
 clearing the biography until another biography has been added using <code>addbio</code>.</p>
 </div>
@@ -992,7 +995,8 @@ but <em>any</em> colour. This means that a user can set a colour using <strong>E
 <div class="paragraph">
 <p>To set a colour of a font using a colour name, simply enter <code>fontcolour</code> (or the American spelling <code>fontcolor</code>;
 both are recognised by the program) followed by the intended name of the colour. For instance, one may enter:
-<code>fontcolour yellow</code> or <code>fontcolor skyblue</code>. So long as the colour names are within the 140+ colour
+<code>fontcolour yellow</code> or <code>fontcolor skyblue</code>.
+So long as the colour names are within the 140+ colour
 names recognised by CSS, the colours will be set accordingly on the user&#8217;s application. If the colour is not recognised,
 the program attempts to interpret it as a hexadecimal value colour. Note that <code>transparent</code> is NOT a valid colour.</p>
 </div>
@@ -1041,7 +1045,8 @@ in font colour.</p>
 </div>
 <div class="paragraph">
 <p>Alternatively, the user is allowed to change the font colour and background <em>simultaneously</em> by combining the commands for
-font colour and background, using the <code>bg/</code> prefix. eg. fontcolour yellow bg/black. This allows the user to not only
+font colour and background, using the <code>bg/</code> prefix. eg. fontcolour yellow bg/black.
+This allows the user to not only
 save time but also make contrasting changes in colours which would otherwise have been difficult to achieve. For
 instance, a user intending to change the font colour from white to black with a current dark background will benefit
 from this feature as sequentially changing switching to a light background or dark font colour would be impossible.
@@ -1054,7 +1059,8 @@ the font colour may simply change the colour to his or her preference, or use ge
 </div>
 <div class="paragraph">
 <p>A user is also allowed to key in <code>fontcolour</code>  (or <code>fontcolor</code>) on its own and the program having received this will
-display the current font colour settings in the feedback display pane. This allows the user to view the current settings
+display the current font colour settings in the feedback display pane.
+This allows the user to view the current settings
 of the font colour without having to use the <code>bio</code> command to navigate to the biography display pane.</p>
 </div>
 <div class="paragraph">
@@ -1096,7 +1102,7 @@ user for this command and both <code>fonTColour yElLoW</code> and <code>fONtColO
 <p><code>fontcolour yellow bg/black</code></p>
 </li>
 <li>
-<p><code>fontcolor yellow bg//Users/whneo97/OneDrive/UNI/CS/Y2S1/CS2103/duke/src/main/resources/images/SpaceModified.jpg s/cover</code>
+<p><code>fontcolor yellow bg//Users/bob/Desktop/SpaceModified.jpg s/cover</code>
 (Note: this is provided that the image exists at exactly the <strong>SAME PATH</strong> in the user&#8217;s device. Otherwise, it has to be modifed or removed in order for this example to work)</p>
 </li>
 </ul>
@@ -1132,7 +1138,7 @@ user for this command and both <code>fonTColour yElLoW</code> and <code>fONtColO
 <div class="paragraph">
 <p>The <code>COLOUR</code> argument of the background works in exactly the same way as described in the <code>fontcolour</code> or (<code>fontcolor</code>)
 sub-section above, except that command word used is now <code>bg</code> instead of <code>fontcolour</code> (or <code>fontcolor</code>).
-i.e. a user may enter`bg blue` or bg <code>#202020</code> to set the background image.</p>
+i.e. a user may enter <code>bg blue</code> or <code>bg #202020</code> to set the background image.</p>
 </div>
 <div class="paragraph">
 <p>Just as for the <code>fontcolour</code> (or <code>fontcolor</code>) command, upon successful execution of the <code>bg</code> command with <code>COLOUR</code>,
@@ -1159,11 +1165,13 @@ the <code>background</code> and <code>fontcolour</code> (or <code>fontcolor</cod
 respectively.</p>
 </div>
 <div class="paragraph">
-<p>In addition to specifying a <code>COLOUR</code>, a user may also specify a <code>PATH</code> for background image. This works similarly to
-the <code>dp</code> argument of the <code>addbio</code> or <code>editbio</code> commands. The program first interprets the given argument as a <code>COLOUR</code>,
-and if it fails at doing so, attempts to interpret is a a <code>PATH</code> for an image. If the image given has an invalid path
-or cannot be loaded as an image, an error message is shown to the user. Thus, file paths have to be valid paths in order
-for the command to proceed.</p>
+<p>In addition to specifying a <code>COLOUR</code>, a user may also specify a <code>PATH</code> for background image.
+This works similarly to the <code>dp</code> argument of the <code>addbio</code> or <code>editbio</code> commands.
+The program first interprets the given argument as a <code>COLOUR</code>, and if it fails at doing so, attempts to interpret is a a
+<code>PATH</code> for an image.
+If the image given has an invalid path or cannot be loaded as an image, an error message is shown
+to the user.
+Thus, file paths have to be valid paths in order for the command to proceed.</p>
 </div>
 <div class="paragraph">
 <p>Optional prefixes <code>s/</code> and <code>r/</code> also allow the user to change the size and repeat attributes of the background image
@@ -1330,10 +1338,10 @@ with the user having the freedom to choose any combination of font colours and b
 <p><code>bG #FFffFf</code></p>
 </li>
 <li>
-<p><code>bg /Users/whneo97/Desktop/doge.png s/auto</code></p>
+<p><code>bg /Users/bob/Desktop/doge.png s/auto</code></p>
 </li>
 <li>
-<p><code>bg /Users/whneo97/OneDrive/UNI/CS/Y2S1/CS2103/duke/src/main/resources/images/SpaceModified.jpg</code></p>
+<p><code>bg /Users/bob/Desktop/SpaceModified.jpg</code></p>
 </li>
 <li>
 <p><code>bg s/cover</code> (if background is already a background image)</p>
@@ -1345,7 +1353,7 @@ with the user having the freedom to choose any combination of font colours and b
 <p><code>bg black fontcolor/#FFFF00</code></p>
 </li>
 <li>
-<p><code>bg /Users/whneo97/OneDrive/UNI/CS/Y2S1/CS2103/duke/src/main/resources/images/SpaceModified.jpg s/cover fontcolour/yellow</code></p>
+<p><code>bg /Users/bob/Desktop/SpaceModified.jpg s/cover fontcolour/yellow</code></p>
 </li>
 </ul>
 </div>
@@ -1831,4 +1839,4 @@ E.g <code>summary rt/bloodsugar d/01.09.2019</code></p>
 </ol>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-03 18:09:28 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-03 22:54:10 UTC</div></div></div></body></html>
