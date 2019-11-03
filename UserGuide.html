@@ -228,8 +228,20 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 Note that rt/ value is case sensitive, RECORD_TYPE must be in capital letters.</p>
 </div>
 <div class="paragraph">
-<p>BMI must receive atleast 1 valid parameter each for height and weight: <code>h/VALUE w/VALUE</code>
-BLOODSUGAR must receive atleast 1 valid parameter for concentration: <code>con/VALUE</code></p>
+<p>BMI must receive at least 1 valid parameter each for height and weight: <code>h/VALUE w/VALUE</code></p>
+</div>
+<div class="paragraph">
+<p>Height input (in meters) will be rounded to 2 decimal places.
+This rounded value must be less than 3 to be recorded successfully.</p>
+</div>
+<div class="paragraph">
+<p>Weight input (in kilograms) will be rounded to 2 decimal places.
+This rounded value must be less than 500 to be recorded successfully.</p>
+</div>
+<div class="paragraph">
+<p>BLOODSUGAR must receive at least 1 valid parameter for concentration: <code>con/VALUE</code>
+Concentration (mmol/L) will be rounded to 2 decimal places.
+This rounded value must be less than 33 to be recorded successfully.</p>
 </div>
 <div class="paragraph">
 <p>If there are duplicate parameters, the last parameter&#8217;s value is captured and then tested for validity.</p>
@@ -1819,4 +1831,4 @@ E.g <code>summary rt/bloodsugar d/01.09.2019</code></p>
 </ol>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-02 14:34:55 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-03 09:21:00 UTC</div></div></div></body></html>
