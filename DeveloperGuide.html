@@ -1304,22 +1304,17 @@ of the existing StyleSheet used, modifying the required fields and setting it to
 </li>
 <li>
 <p>Perhaps an interesting area of the <code>Colour</code> and <code>Background</code> commands in more recent updates would include
-implementation using command composition.</p>
-</li>
-<li>
-<p>The driving factor that fueled this is the need to ensure the <code>Fontcolour</code> and <code>Background</code> do not have colours that are
-too similar (or otherwise the text could get difficult or impossible to see).</p>
-</li>
-<li>
-<p>This above-mentioned checking was implemented by Summing square of the differences in red, green and blue channels'
+implementation using command composition. The driving factor that fueled this is the need to ensure the <code>Fontcolour</code>
+and <code>Background</code> do not have colours that are too similar (or otherwise the text could get difficult or impossible to see).
+This above-mentioned checking was implemented by summing the square of the differences in red, green and blue channels'
 values between the <code>Colour</code> of the <code>Fontcolour</code> and <code>Background</code>.</p>
 </li>
 <li>
-<p>How then a <code>Colour</code> for a <code>Background</code> with an image instead of a <code>Colour</code> is determined would be by extracting the
+<p>The <code>Colour</code> for a <code>Background</code> with an image instead of a solid <code>Colour</code> is determined by extracting the
 <code>Colour</code> that appears the most often using the <code>ImageTester</code> class.</p>
 </li>
 <li>
-<p>An issue that arose in checking for colour differences would be addressing the situation when the user intends to make
+<p>An major issue with checking for colour differences would be the situation when the user intends to make
 changes to a <code>Fontcolour</code> that clashes with the <code>Background</code> if changed. Take for example a change in <code>fontcolour</code>
 intended to be changed from white to black, with a background that is curently <em>already</em> black. The system would not have
 allowed changes of the text from white to black because of the background&#8217;s black colour and would have suggested to
@@ -1334,9 +1329,9 @@ set both the <code>background</code> and <code>fontcolour</code> simultaneously,
 new colours entered rather than any of the current colours.</p>
 </li>
 <li>
-<p>How it works is that <code>BackgroundParser</code> parses for <code>fontcolour/</code> and its arguments while <code>FontColourParser</code> parses for
-<code>bg/</code> and its arguments. Any of these prefixes observed will result in the Parser generating a <code>FontColourCommand</code> and
-`BackgroundColourCommand` respectively. <code>BackgroundParser</code> then returns a <code>BackgroundColourCommand</code> that has a
+<p><code>BackgroundParser</code> parses for <code>fontcolour/</code> and its arguments while <code>FontColourParser</code> parses for
+<code>bg/</code> and its arguments. Any of these prefixes observed results in the Parser generating a <code>FontColourCommand</code> and
+<code>BackgroundColourCommand</code> respectively. <code>BackgroundParser</code> then returns a <code>BackgroundColourCommand</code> that has a
 <code>FontColourCommand</code> <em>stored</em> in it and vice versa. When <code>Logic</code> executes <code>BackgroundCommand</code>, for instance,
 <code>BackgroundCommand</code> executes the <code>FontColourCommand</code> stored in it as well. The necessary adjustments are made to model
 accordingly and the feedback to users from both commands will be returned to the user.</p>
@@ -1344,7 +1339,7 @@ accordingly and the feedback to users from both commands will be returned to the
 <li>
 <p>The idea of a command running another command allows commands such as <code>bg black fontcolour/red</code> to be entered by the
 user. Modified methods in the <code>ArgumentMultimap</code> class of the <code>logic</code> package also allows the program to ensure that
-the user does not entert multiple arguments of the same type at once eg. disallowing <code>bg black fontcolour/red
+the user does not enter multiple arguments of the same type at once eg. disallowing <code>bg black fontcolour/red
 fontcolor/yellow</code>.</p>
 </li>
 </ul>
@@ -1380,11 +1375,11 @@ stored in <code>model</code>.</p>
 </li>
 <li>
 <p>For each <code>RecordType</code> and <code>Level</code> of <code>Achievement</code>, the <code>AchievementStateProcessor</code> class checks whether the records
-fulfils the requirements for a predefined number of consecutive days. Requirements are in turn termined by the
+fulfils the requirements for a predefined number of consecutive days. Requirements are in turn determined by the
 <code>MAXIMUM</code> and <code>MINIMUM</code> values stored in the interfaces of the <code>Achievement</code> class. State changes are made to the
 <code>Achievement</code> class if requirements are fulfilled (eg. if the number of requirements of a <code>RecordType</code> for <code>Gold</code> are met,
 then the <code>Achievement</code> of <code>level</code> <code>Gold</code> and of that particular <code>RecordType</code> would have it&#8217;s state updated to reflect
-that change. This is accomplised using methods such as the <code>promote</code> and <code>demote</code> in the <code>AchievementStateProcessor</code>).</p>
+that change. This is accomplished using methods such as the <code>promote</code> and <code>demote</code> in the <code>AchievementStateProcessor</code>).</p>
 </li>
 <li>
 <p>In order to determine whether requirements are fulfilled, interaction with not only the <code>RecordType</code> is implemented,
@@ -1586,9 +1581,9 @@ archive of users' preferred themes during that session. Adding, editing and dele
 methods. A <code>HashMap</code> could also be used such that the user can self-define names for each of the themes. A variable
 would serve as a current pointer to determine the current theme the user is using. A change in theme could be achieved
 by updating the pointer and / or the <code>HashMap</code>, if any is implemented. If the user does not have any themes,
-then default aesthetics would be loaded, or if there is at least one saved settings (as there is in this current version
-of the application), the users' preferences' in those settings would be loaded. Upon termination of the program, the
-contents of the list could be saved to a JsonStorage file.</p>
+then default aesthetics would be loaded, or if there is at least one set of saved settings (as there is in this current
+version of the application), the users' preferences' in those settings would be loaded. Upon termination of the program,
+the contents of the list could be saved to a JsonStorage file.</p>
 </div>
 </div>
 <div class="sect3">
@@ -2374,4 +2369,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-03 12:40:03 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-03 14:56:53 UTC</div></div></div></body></html>
