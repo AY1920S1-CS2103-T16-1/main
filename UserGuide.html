@@ -58,7 +58,9 @@
 <li><a href="#food-recommendation">3.5. Food Recommendation</a>
 <ul class="sectlevel3">
 <li><a href="#recommending-food-code-recmf-code">3.5.1. Recommending food: <code>recmf</code></a></li>
-<li><a href="#adding-new-food-items-code-addfood-code">3.5.2. Adding new food items : <code>addfood</code></a></li>
+<li><a href="#recommending-food-combination-code-recmfmix-code">3.5.2. Recommending food combination: <code>recmfmix</code></a></li>
+<li><a href="#adding-new-food-items-code-addfood-code">3.5.3. Adding new food items : <code>addfood</code></a></li>
+<li><a href="#resetting-food-data-code-resetf-code">3.5.4. Resetting food data: <code>resetf</code></a></li>
 </ul>
 </li>
 <li><a href="#other-common-features">3.6. Other Common Features</a>
@@ -1496,40 +1498,36 @@ Else, summary of all data will be exported.</p>
 <h4 id="recommending-food-code-recmf-code"><a class="link" href="#recommending-food-code-recmf-code">3.5.1. Recommending food: <code>recmf</code></a></h4>
 <div class="paragraph">
 <p>Recommends some medically suggested foods for type II diabetes patients.<br>
-To make searching more efficient, the user can specify two kinds of filters:</p>
+To make searching more efficient, the user can specify two kinds of filters and one sorting order:</p>
 </div>
+<hr>
 <div class="ulist">
 <ul>
 <li>
 <p>food type: in the form of following flags:</p>
-<div class="literalblock">
+</li>
+</ul>
+</div>
+<div class="exampleblock">
 <div class="content">
-<pre>-nsv: non-starchy vegetable, such as broccoli</pre>
+<div class="paragraph">
+<p><strong>-nsv</strong>: non-starchy vegetable, such as broccoli</p>
 </div>
+<div class="paragraph">
+<p><strong>-sv</strong>: starchy vegetable, such as potato</p>
 </div>
-<div class="literalblock">
-<div class="content">
-<pre>-sv: starchy vegetable, such as potato</pre>
+<div class="paragraph">
+<p><strong>-f</strong>: fruit, such as cherry</p>
 </div>
+<div class="paragraph">
+<p><strong>-p</strong>: protein, such as lean lamb</p>
 </div>
-<div class="literalblock">
-<div class="content">
-<pre>-f: fruit, such as cherry</pre>
+<div class="paragraph">
+<p><strong>-s</strong>: snack, such fig roll</p>
 </div>
+<div class="paragraph">
+<p><strong>-m</strong>: meal, such as spanish omelet</p>
 </div>
-<div class="literalblock">
-<div class="content">
-<pre>-p: protein, such as lean lamb</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>-s: snack, such fig roll</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>-m: meal, such as spanish omelet</pre>
 </div>
 </div>
 <div class="dlist">
@@ -1552,7 +1550,9 @@ To make searching more efficient, the user can specify two kinds of filters:</p>
 </dd>
 </dl>
 </div>
-</li>
+<hr>
+<div class="ulist">
+<ul>
 <li>
 <p>food name: in the form of <code>fn/FOOD_NAME [FOOD_NAME]&#8230;&#8203;</code><br></p>
 <div class="dlist">
@@ -1578,6 +1578,57 @@ To make searching more efficient, the user can specify two kinds of filters:</p>
 </li>
 </ul>
 </div>
+<hr>
+<div class="ulist">
+<ul>
+<li>
+<p>Sorting order: in the form of only one of the following two types:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>+sort/SORT_ORDER_TYPE</code>: sort the recommendations in ascending order based on the specified <code>SORT_ORDER_TYPE</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Sort order type: in the form of any of the following six types:</p>
+<div class="paragraph">
+<p><code>fn</code>: food name, <code>ft</code>: food type, <code>ca</code>: calorie, <code>gi</code>: glycemic index, <code>su</code>: sugar, <code>fa</code>: fat</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>-sort/SORT_ORDER_TYPE</code>: sort the recommendations in descending order</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">NOTE</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p><code>+sort/SORT_ORDER_TYPE</code> and <code>-sort/SORT_ORDER_TYPE</code> cannot be both present even though they may be with different
+<code>SORT_ORDER_TYPE</code>.</p>
+</li>
+<li>
+<p>Only exactly one valid sort order type will be accepted after the sorting prefix.</p>
+</li>
+<li>
+<p>Specially, for <code>ft</code>, the ascending order is predefined as: nsv, sv, f, p, s, m.
+**</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<hr>
 <div class="paragraph">
 <p>Format: <code>recmf [-nsv] [-sv] [-f] [-p] [-s] [-m] [fn/FOOD_NAME FOOD_NAME&#8230;&#8203;]</code></p>
 </div>
@@ -1589,7 +1640,41 @@ To make searching more efficient, the user can specify two kinds of filters:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="adding-new-food-items-code-addfood-code"><a class="link" href="#adding-new-food-items-code-addfood-code">3.5.2. Adding new food items : <code>addfood</code></a></h4>
+<h4 id="recommending-food-combination-code-recmfmix-code"><a class="link" href="#recommending-food-combination-code-recmfmix-code">3.5.2. Recommending food combination: <code>recmfmix</code></a></h4>
+<div class="paragraph">
+<p>Recommends one food from each type to the user. The nutrition values of all the recommended foods will be summarized as a
+separate food card appended to the end.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Note</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>This command requires no user-input arguments. All the additional inputs after this command string will be ignored.</p>
+</li>
+<li>
+<p>If any of the summary data is decimals, it will be formatted into two decimal places.</p>
+</li>
+<li>
+<p>Please note the GI (glycemic index) is the average among all foods instead of total sum. This For more information about
+GI, please refer to this <a href="https://en.wikipedia.org/wiki/Glycemic_index">link</a></p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>Format: <code>recmfmix</code></p>
+</div>
+<div class="paragraph">
+<p>Example: <code>recmfmix</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="adding-new-food-items-code-addfood-code"><a class="link" href="#adding-new-food-items-code-addfood-code">3.5.3. Adding new food items : <code>addfood</code></a></h4>
 <div class="paragraph">
 <p>Adds a new food item of certain category for future recommendations.
 The following six fields are compulsorily required:</p>
@@ -1631,8 +1716,8 @@ Fat should be less than 35(g) to be considered as safe for type II diabetes pati
 <p>No duplicate food names are allowed.</p>
 </li>
 <li>
-<p>All nutrition values are numerical values and should be equal or greater than zero.
-Besides, the values are suggested to be per serving.</p>
+<p>All nutrition values are numerical values. Such value should be equal or greater than zero and contain no more than four
+decimals. Besides, the values are suggested to be normalized as per serving for more useful value comparisons and calculations.</p>
 </li>
 <li>
 <p>The order of fields is flexible.</p>
@@ -1655,6 +1740,33 @@ valid format for the command to be executed.</p>
 <div class="paragraph">
 <p>Example:
 <code>addfood fn/Cucumber ft/nsv ca/15 gi/15 fa/0 su/1.7</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="resetting-food-data-code-resetf-code"><a class="link" href="#resetting-food-data-code-resetf-code">3.5.4. Resetting food data: <code>resetf</code></a></h4>
+<div class="paragraph">
+<p>Cleans all the modifications on the foods done by the user, such as deleting newly added foods. Namely, the recommendations will
+be based on the originally pre-loaded food data.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Note</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>This command requires no user-input arguments. All the additional inputs after this command string will be ignored.</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>Format: <code>resetf</code></p>
+</div>
+<div class="paragraph">
+<p>Example: <code>resetf</code></p>
 </div>
 </div>
 </div>
@@ -1838,5 +1950,13 @@ E.g <code>summary rt/bloodsugar d/01.09.2019</code></p>
 </li>
 </ol>
 </div>
+<div class="qlist qanda">
+<ol>
+<li>
+<p><em>How should I reset all the data?</em></p>
+<p>You can simply delete the data file within the same directory that you place SugarMummy.jar. All the data will be set to default sample data.</p>
+</li>
+</ol>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-04 13:17:05 UTC</div></div></div></body></html>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-05 00:57:09 UTC</div></div></div></body></html>
