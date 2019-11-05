@@ -48,11 +48,12 @@
 <li><a href="#follow-up-on-user-s-goals-code-coming-in-v2-0-code">3.3.11. Follow up on user&#8217;s goals: <code>[coming in v2.0]</code></a></li>
 </ul>
 </li>
-<li><a href="#data-analysis">3.4. DATA ANALYSIS</a>
+<li><a href="#data-summary-analysis">3.4. DATA SUMMARY/ANALYSIS</a>
 <ul class="sectlevel3">
-<li><a href="#display-the-daily-weekly-monthly-average-of-records-in-a-line-graph-code-average-code">3.4.1. Display the daily/weekly/monthly average of records in a line graph: <code>average</code></a></li>
-<li><a href="#display-interesting-statistics-code-summary-code-code-coming-in-v1-4-code">3.4.2. Display interesting statistics: <code>summary</code> <code>[coming in v1.4]</code></a></li>
-<li><a href="#export-summary-of-all-medical-records-into-pdf-code-export-code-code-coming-in-v2-0-code">3.4.3. Export summary of all medical records into pdf: <code>export</code> <code>[coming in v2.0]</code></a></li>
+<li><a href="#displays-the-daily-weekly-monthly-average-of-records-in-a-line-graph-code-average-code">3.4.1. Displays the daily/weekly/monthly average of records in a line graph: <code>average</code></a></li>
+<li><a href="#summary-statistics-of-a-particular-record-type-code-coming-in-v2-0-code">3.4.2. Summary statistics of a particular record type <code>[coming in v2.0]</code></a></li>
+<li><a href="#shows-relationship-between-record-types-code-coming-in-v2-0-code">3.4.3. Shows relationship between record types: <code>[coming in v2.0]</code></a></li>
+<li><a href="#exports-summary-of-all-medical-records-into-pdf-code-coming-in-v2-0-code">3.4.4. Exports summary of all medical records into pdf <code>[coming in v2.0]</code></a></li>
 </ul>
 </li>
 <li><a href="#food-recommendation">3.5. Food Recommendation</a>
@@ -1431,19 +1432,19 @@ feedback.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="data-analysis"><a class="link" href="#data-analysis">3.4. DATA ANALYSIS</a></h3>
+<h3 id="data-summary-analysis"><a class="link" href="#data-summary-analysis">3.4. DATA SUMMARY/ANALYSIS</a></h3>
 <div class="sect3">
-<h4 id="display-the-daily-weekly-monthly-average-of-records-in-a-line-graph-code-average-code"><a class="link" href="#display-the-daily-weekly-monthly-average-of-records-in-a-line-graph-code-average-code">3.4.1. Display the daily/weekly/monthly average of records in a line graph: <code>average</code></a></h4>
+<h4 id="displays-the-daily-weekly-monthly-average-of-records-in-a-line-graph-code-average-code"><a class="link" href="#displays-the-daily-weekly-monthly-average-of-records-in-a-line-graph-code-average-code">3.4.1. Displays the daily/weekly/monthly average of records in a line graph: <code>average</code></a></h4>
 <div class="paragraph">
 <p>Format: <code>average a/AVERAGE_TYPE rt/RECORD_TYPE [n/COUNT]</code></p>
 </div>
 <div class="paragraph">
 <p>AVERAGE_TYPE is either "daily", "weekly" or "monthly".<br>
 RECORD_TYPE is either "bloodsugar" or "bmi".<br>
-Displays a graph of the "daily"/"weekly"/"monthly" average of a particular RECORD_TYPE.
-COUNT is an integer between 1 to 9 inclusive.<br>
-If COUNT is given, SugarMummy shows <em>up to</em> COUNT most recent number of average values.
-Else, COUNT is set to 5 by default and show most recent 5 average values.</p>
+Displays a graph of the "daily", "weekly" or "monthly" average of a particular RECORD_TYPE.<br>
+COUNT is an optional field that takes integer between 1 to 12 inclusive.<br>
+If COUNT is given, SugarMummy shows <strong>up to</strong> COUNT most recent number of average values.
+Else, COUNT is set to 5 by default and shows 5 most recent average values.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1452,7 +1453,7 @@ Else, COUNT is set to 5 by default and show most recent 5 average values.</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If SugarMummy does not show <em>exactly</em> COUNT number of average values,
+If SugarMummy <strong>does not show exactly</strong> COUNT number of average values,
 that means you do not have enough records in the database.
 </td>
 </tr>
@@ -1460,35 +1461,44 @@ that means you do not have enough records in the database.
 </div>
 <div class="paragraph">
 <p>Example usage 1: <code>average a/weekly rt/bloodsugar</code>:
-Shows the latest 5 weekly average of blood sugar records.</p>
+Shows the 5 latest weekly average of blood sugar records.</p>
 </div>
 <div class="paragraph">
 <p>Example usage 2: <code>average a/daily rt/bmi n/9</code>:
-Shows the latest 9 weekly average of BMI records.</p>
+Shows the 9 latest daily average of BMI records.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="display-interesting-statistics-code-summary-code-code-coming-in-v1-4-code"><a class="link" href="#display-interesting-statistics-code-summary-code-code-coming-in-v1-4-code">3.4.2. Display interesting statistics: <code>summary</code> <code>[coming in v1.4]</code></a></h4>
+<h4 id="summary-statistics-of-a-particular-record-type-code-coming-in-v2-0-code"><a class="link" href="#summary-statistics-of-a-particular-record-type-code-coming-in-v2-0-code">3.4.2. Summary statistics of a particular record type <code>[coming in v2.0]</code></a></h4>
 <div class="paragraph">
-<p>Shows minimum, maximum, average of the records. Categorize records into low, normal, high values
-in pie chart.</p>
-</div>
-<div class="paragraph">
-<p>Format: <code>summary rt/RECORD_TYPE [d/START_DATE]</code></p>
-</div>
-<div class="paragraph">
-<p>If START_DATE is given, statistics from START_DATE to the current date will be retrieved.
-Else, statistics will be based on all data.</p>
+<p>Shows minimum, maximum, average of a record type. Categorizes records into low, normal
+and high values in a pie chart. User can specify the date interval of the summary by giving
+a start date and end date.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="export-summary-of-all-medical-records-into-pdf-code-export-code-code-coming-in-v2-0-code"><a class="link" href="#export-summary-of-all-medical-records-into-pdf-code-export-code-code-coming-in-v2-0-code">3.4.3. Export summary of all medical records into pdf: <code>export</code> <code>[coming in v2.0]</code></a></h4>
+<h4 id="shows-relationship-between-record-types-code-coming-in-v2-0-code"><a class="link" href="#shows-relationship-between-record-types-code-coming-in-v2-0-code">3.4.3. Shows relationship between record types: <code>[coming in v2.0]</code></a></h4>
 <div class="paragraph">
-<p>Format: <code>export [d/START_DATE]</code></p>
+<p>User can see how a particular record type changes with other record types.
+This information will be displayed on a scatter plot where trends can be spotted
+easily. Note that this feature will work well only if</p>
 </div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>You have records for both record types in any given day.</p>
+</li>
+<li>
+<p>You have more than 50 days worth of records.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="exports-summary-of-all-medical-records-into-pdf-code-coming-in-v2-0-code"><a class="link" href="#exports-summary-of-all-medical-records-into-pdf-code-coming-in-v2-0-code">3.4.4. Exports summary of all medical records into pdf <code>[coming in v2.0]</code></a></h4>
 <div class="paragraph">
-<p>If START_DATE is given, summary from START_DATE to the current date will be exported.
-Else, summary of all data will be exported.</p>
+<p>Need to share your records with your doctor or others? With SugarMummy export function,
+you can save any graphs and plots generated in a pdf file.</p>
 </div>
 </div>
 </div>
@@ -1931,10 +1941,6 @@ E.g. <code>search tp/event v/NUH</code></p>
 <p><strong>Snooze</strong>: <code>snooze [tp/TIME_PERIOD]</code><br>
 E.g <code>snooze 30min</code></p>
 </li>
-<li>
-<p><strong>Summary</strong>: <code>summary rt/RECORD_TYPE [d/START_DATE]</code><br>
-E.g <code>summary rt/bloodsugar d/01.09.2019</code></p>
-</li>
 </ol>
 </div>
 </div>
@@ -1959,4 +1965,4 @@ E.g <code>summary rt/bloodsugar d/01.09.2019</code></p>
 </ol>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-05 00:57:09 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-05 08:42:52 UTC</div></div></div></body></html>

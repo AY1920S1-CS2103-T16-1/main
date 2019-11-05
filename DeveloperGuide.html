@@ -50,6 +50,7 @@
 <li><a href="#launch-and-shutdown">G.1. Launch and Shutdown</a></li>
 <li><a href="#deleting-a-person">G.2. Deleting a person</a></li>
 <li><a href="#saving-data">G.3. Saving data</a></li>
+<li><a href="#average-command">G.4. Average command</a></li>
 </ul>
 </li>
 </ul>
@@ -84,14 +85,14 @@
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-The <code>.puml</code> files used to create diagrams in this document can be found in the <a href="https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/">diagrams</a> folder.
+The <code>.puml</code> files used to create diagrams in this document can be found in the <a href="https://github.com/AY1920S1-CS2103-T16-1/main/tree/master/docs/diagrams/">diagrams</a> folder.
 Refer to the <a href="UsingPlantUml.html">Using PlantUML guide</a> to learn how to create and edit diagrams.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p><code>Main</code> has two classes called <a href="https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java"><code>Main</code></a> and <a href="https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java"><code>MainApp</code></a>. It is responsible for,</p>
+<p><code>Main</code> has two classes called <a href="https://github.com/AY1920S1-CS2103-T16-1/main/tree/master/src/main/java/seedu/sugarmummy/Main.java"><code>Main</code></a> and <a href="https://github.com/AY1920S1-CS2103-T16-1/main/tree/master/src/main/java/seedu/sugarmummy/MainApp.java"><code>MainApp</code></a>. It is responsible for,</p>
 </div>
 <div class="ulist">
 <ul>
@@ -178,13 +179,13 @@ The following class plays an important role at the architecture level:</p>
 <div class="title">Figure 4. Structure of the UI Component</div>
 </div>
 <div class="paragraph">
-<p><strong>API</strong> : <a href="https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java"><code>Ui.java</code></a></p>
+<p><strong>API</strong> : <a href="https://github.com/AY1920S1-CS2103-T16-1/main/tree/master/src/main/java/seedu/sugarmummy/ui/Ui.java"><code>Ui.java</code></a></p>
 </div>
 <div class="paragraph">
 <p>The UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>PersonListPanel</code>, <code>StatusBarFooter</code> etc. All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
 </div>
 <div class="paragraph">
-<p>The <code>UI</code> component uses JavaFX UI framework. The layout of these UI parts are defined in matching <code>.fxml</code> files that are in the <code>src/main/resources/view</code> folder. For example, the layout of the <a href="https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java"><code>MainWindow</code></a> is specified in <a href="https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml"><code>MainWindow.fxml</code></a></p>
+<p>The <code>UI</code> component uses JavaFX UI framework. The layout of these UI parts are defined in matching <code>.fxml</code> files that are in the <code>src/main/resources/view</code> folder. For example, the layout of the <a href="https://github.com/AY1920S1-CS2103-T16-1/main/tree/master/src/main/java/seedu/sugarmummy/ui/MainWindow.java"><code>MainWindow</code></a> is specified in <a href="https://github.com/AY1920S1-CS2103-T16-1/main/tree/master/src/main/resources/view/MainWindow.fxml"><code>MainWindow.fxml</code></a></p>
 </div>
 <div class="paragraph">
 <p>The <code>UI</code> component,</p>
@@ -210,7 +211,7 @@ The following class plays an important role at the architecture level:</p>
 </div>
 <div class="paragraph">
 <p><strong>API</strong> :
-<a href="https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java"><code>Logic.java</code></a></p>
+<a href="https://github.com/AY1920S1-CS2103-T16-1/main/tree/master/src/main/java/seedu/sugarmummy/logic/Logic.java"><code>Logic.java</code></a></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -262,7 +263,7 @@ The lifeline for <code>DeleteCommandParser</code> should end at the destroy mark
 <div class="title">Figure 7. Structure of the Model Component</div>
 </div>
 <div class="paragraph">
-<p><strong>API</strong> : <a href="https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java"><code>Model.java</code></a></p>
+<p><strong>API</strong> : <a href="https://github.com/AY1920S1-CS2103-T16-1/main/tree/master/src/main/java/seedu/sugarmummy/model/Model.java"><code>Model.java</code></a></p>
 </div>
 <div class="paragraph">
 <p>The <code>Model</code>,</p>
@@ -307,7 +308,7 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 <div class="title">Figure 8. Structure of the Storage Component</div>
 </div>
 <div class="paragraph">
-<p><strong>API</strong> : <a href="https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java"><code>Storage.java</code></a></p>
+<p><strong>API</strong> : <a href="https://github.com/AY1920S1-CS2103-T16-1/main/tree/master/src/main/java/seedu/sugarmummy/storage/Storage.java"><code>Storage.java</code></a></p>
 </div>
 <div class="paragraph">
 <p>The <code>Storage</code> component,</p>
@@ -326,7 +327,7 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 <div class="sect2">
 <h3 id="Design-Commons"><a class="link" href="#Design-Commons">2.6. Common classes</a></h3>
 <div class="paragraph">
-<p>Classes used by multiple components are in the <code>seedu.addressbook.commons</code> package.</p>
+<p>Classes used by multiple components are in the <code>seedu.sugarmummy.commons</code> package.</p>
 </div>
 </div>
 </div>
@@ -340,22 +341,30 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 <div class="sect2">
 <h3 id="average-graph-feature"><a class="link" href="#average-graph-feature">3.1. Average graph feature</a></h3>
 <div class="paragraph">
-<p>The average graph shows how the average blood sugar level or weight of users change over time.
+<p>The average graph shows how the average blood sugar level or BMI of users change over time.
 Daily, weekly, monthly average are supported.</p>
 </div>
 <div class="sect3">
 <h4 id="implementation-2"><a class="link" href="#implementation-2">3.1.1. Implementation</a></h4>
 <div class="paragraph">
+<p>User input to find average graph is parsed by <code>SugarMummyParser</code> which creates a new <code>AverageCommandParser</code>.
+<code>AverageCommandParser</code> then parses user input and creates a new <code>AverageCommand</code>. Next, <code>AverageCommand</code>
+performs operations on <code>AverageMap</code> in <code>Model</code> with the help from <code>RecordContainsRecordTypePredicate</code> to
+filter <code>UniqueRecordList</code> in <code>Model</code>. The result of the execution is returned to <code>Ui</code> as a
+<code>CommandResult</code> object and is displayed to the user. In addition, <code>Ui</code> calls and display average graph
+related <code>.fxml</code> file to the user.</p>
+</div>
+<div class="paragraph">
 <p>The average graph is implemented by <code>AverageMap</code> and the average values are stored
-internally as <code>internalAverageMap</code>. Additionally, it implements the following method:</p>
+internally as <code>internalMap</code>. Additionally, it implements the following method:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>AverageMap#calculateAverage()</code> - calculates and stores the average values needed by the user.</p>
+<p><code>AverageMap#calculateAverage()</code> - calculates and stores the average values needed by <code>AverageCommand</code>.</p>
 </li>
 <li>
-<p><code>AverageMap#asUnmodifiableObservableMap()</code> - returns an read only version of <code>internalAverageMap</code>.</p>
+<p><code>AverageMap#asUnmodifiableObservableMap()</code> - returns a read only version of <code>internalMap</code>.</p>
 </li>
 </ul>
 </div>
@@ -363,17 +372,22 @@ internally as <code>internalAverageMap</code>. Additionally, it implements the f
 <p>These operations are exposed in the <code>Model</code> interface as <code>Model#calculateAverageMap()</code> and
 <code>Model#getAverageMap()</code> respectively.</p>
 </div>
+<div class="sect4">
+<h5 id="example-usage-scenario"><a class="link" href="#example-usage-scenario">Example Usage Scenario</a></h5>
 <div class="paragraph">
 <p>Below is an example usage scenario and how average graph is created.</p>
 </div>
 <div class="paragraph">
-<p>Step 1. The user launches the application for the first time. The <code>AverageMap</code> will be
-initialized and <code>internalAverageMap</code> will be empty.</p>
+<p>Step 1. User launches the application for the first time. The <code>AverageMap</code> will be
+initialized and <code>internalMap</code> will be empty.</p>
 </div>
 <div class="paragraph">
-<p>Step 2. The user enters <code>average a/daily rt/bloodsugar</code> in SugarMummy to get daily average blood sugar.
-The average command then call for <code>Model#calculateAverageMap()</code> which updates the <code>internalAverageMap</code> with
-new average values.</p>
+<p>Step 2. User enters <code>average a/daily rt/bloodsugar n/4</code> in SugarMummy to get daily average blood sugar.
+Input is parsed and send to <code>AverageCommand</code>. <code>AverageCommand</code> then calls <code>Model#updateFilteredRecordList</code>
+to filter record list with <code>RecordContainsRecordTypePredicate</code>. This results in a list of
+records containing only blood sugar records. Subsequently, <code>AverageCommand</code> calls
+<code>Model#calculateAverageMap()</code> to update the <code>internalMap</code> with new average values by using the filtered
+record list.</p>
 </div>
 <div class="paragraph">
 <p>The following sequence diagram shows how the average operation works:</p>
@@ -391,11 +405,17 @@ new average values.</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Step 2a. If the user enters <code>average a/daily rt/bloodsugar</code> and there is no data available,
-then the command will fail to execute. This step is illustrated in the activity diagram below.
+The lifeline for <code>AverageCommand</code> should end at the destroy marker (X) but due to a limitation of
+PlantUML, the lifeline reaches the end of diagram.
 </td>
 </tr>
 </table>
+</div>
+<div class="paragraph">
+<p>Step 2a. If the user enters <code>average a/daily rt/bloodsugar n/4</code> and there is no data available,
+then the command will fail to execute and throw a <code>CommandException</code>. Alternatively, if user enters
+an invalid command, a <code>ParseException</code> will be thrown.
+This is illustrated in the activity diagram below.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -404,46 +424,77 @@ then the command will fail to execute. This step is illustrated in the activity 
 <div class="title">Figure 10. Activity diagram of user enter an average command.</div>
 </div>
 <div class="paragraph">
-<p>Step 3. <code>Ui</code> receives average command result from <code>LogicManager</code> and creates a new <code>AverageGraphPanel</code>.
-It then display the <code>AverageGraphPanel</code>.</p>
+<p>Step 3. <code>Ui</code> receives average <code>CommandResult</code> from <code>LogicManager</code> and creates a new <code>AverageGraphPane</code>
+as well as all other necessary components (see below). <code>Ui</code> then displays the <code>AverageGraphPane</code> to
+user.</p>
+</div>
+<div class="paragraph">
+<p>Average graph Ui consists of several parts:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>AverageGraphPane</code>: Placeholder for <code>AverageGraph</code> and <code>LegendPane</code>.</p>
+</li>
+<li>
+<p><code>AverageGraph</code>: Contains the average graph. Data points are generated by <code>internalMap</code>.</p>
+</li>
+<li>
+<p><code>CustomLineChart</code>: Overrode JavaFx <code>LineChart</code>, the implementation for average graph.</p>
+</li>
+<li>
+<p><code>LegendPane</code>: Placeholder for <code>LegendRow</code>. This is a legend box for average graph.</p>
+</li>
+<li>
+<p><code>LegendRow</code>: Consists of a colored legend symbol and its description.</p>
+</li>
+</ul>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/AverageGraphUiSequenceDiagram.png" alt="AverageGraphUiSequenceDiagram">
+<img src="images/AverageUiClassDiagram.png" alt="AverageUiClassDiagram">
 </div>
-<div class="title">Figure 11. Sequence diagram of how <code>Ui</code> displays average graph.</div>
+<div class="title">Figure 11. Class diagram of average graph ui related classes.</div>
+</div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations"><a class="link" href="#design-considerations">3.1.2. Design Considerations</a></h4>
 <div class="sect4">
-<h5 id="aspect-data-structure-for-code-internalaveragemap-code"><a class="link" href="#aspect-data-structure-for-code-internalaveragemap-code">Aspect: Data structure for <code>internalAverageMap</code>.</a></h5>
+<h5 id="aspect-how-to-display-average-graph-to-user"><a class="link" href="#aspect-how-to-display-average-graph-to-user">Aspect: How to display average graph to user.</a></h5>
+<div class="paragraph">
+<p>The dilemma arises because users, especially recently diagnosed Type II diabetics,
+do not know the normal range of BMI and blood sugar level. An intuitive and aesthetically
+pleasing method is needed to convey this information to user.</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Use <code>observableMap&lt;LocalDate, Double&gt;</code> where key is the
-time period records are from and value is the average values.</p>
+<p><strong>Alternative 1:</strong> Use JavaFx <code>LineChart</code> to display the average graph and display the ranges below
+the graph using JavaFx <code>Label</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Easy to implement.</p>
+<p>Pros: Do not need to implement anything.</p>
 </li>
 <li>
-<p>Cons: Lower level of abstraction.</p>
+<p>Cons: User need to trace data points to the y axis to find it&#8217;s value and compare it with the
+ranges given below the graph. This can be annoying and tedious for the user.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Use <code>observableList&lt;Average&gt;</code> where we store each average values in an
-<code>Average</code> class.</p>
+<p><strong>Alternative 2 (current choice):</strong> Override JavaFx <code>LineChart</code> by adding horizontal range markers
+to the graph and color the area between the markers.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Higher level of abstraction.</p>
+<p>Pros: User is able to tell which range a particular data point falls in immediately.</p>
 </li>
 <li>
-<p>Cons: More codes to write.</p>
+<p>Cons: Need to implement horizontal range markers and lay it out on the graph. Moreover,
+a custom legend box is needed to label the horizontal range markers.</p>
 </li>
 </ul>
 </div>
@@ -2410,5 +2461,91 @@ Expected: Similar to previous.</p>
 <p><em>{ more test cases &#8230;&#8203; }</em></p>
 </div>
 </div>
+<div class="sect2">
+<h3 id="average-command"><a class="link" href="#average-command">G.4. Average command</a></h3>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: There are exactly 7 different days of blood sugar and exactly 7 different days of BMI records.</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>Test case: <code>average a/daily rt/bloodsugar</code><br>
+Expected: Shows a graph with 5 data points. The dates of the 5 data points are the 5 most
+recent blood sugar records.</p>
+</li>
+<li>
+<p>Test case: <code>average a/daily rt/bmi n/10</code><br>
+Expected: Since there are only 7 BMI records, the graph will only have 7 data points instead
+of 10.</p>
+</li>
+<li>
+<p>Test case: <code>average a/yearly rt/bmi n/3</code><br>
+Expected: This is an unsupported average type. An error message is displayed saying<br>
+<code>Please enter correct input for a/AVERAGE_TYPE!<br>
+AVERAGE_TYPE is "daily", "weekly" or "monthly"</code>.</p>
+</li>
+<li>
+<p>Test case: <code>average a/weekly</code><br>
+Expected: Missing compulsory field rt/RECORD_TYPE. An error message is shown:<br>
+<code>Oops! The command you&#8217;ve entered appears to be in an invalid format.<br>
+average: Shows daily/weekly/monthly average of different record types in a line graph.<br>
+Format: average a/AVERAGE_TYPE rt/RECORD_TYPE [n/COUNT]<br>
+Example: average a/daily rt/bloodsugar n/5</code></p>
+</li>
+</ol>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-05 00:57:09 UTC</div></div></div></body></html>
+</li>
+<li>
+<p>Prerequisites: There are exactly 3 distinct weeks of blood sugar records and no BMI records.</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>Test case: <code>average a/weekly rt/bloodsugar</code><br>
+Expected: Since there are only 3 blood sugar records, the graph will only have 3 data points
+with dates of the 3 most recent blood sugar records in terms of week. There is not enough
+records to show 5 data points.</p>
+</li>
+<li>
+<p>Test case: <code>average a/weekly rt/bmi</code><br>
+Expected: Since there are no bmi records, an error message is displayed saying<br>
+<code>Sorry! You do not have any BMI record.</code></p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Prerequisites: There are at least 12 distinct months of BMI records and no blood sugar records.</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>Test case: <code>average a/monthly rt/bmi n/9</code><br>
+Expected: Shows a graph with 9 data points and these points are the average
+BMI values of the 9 most recent month.</p>
+</li>
+<li>
+<p>Test case: <code>average a/monthly rt/expenses n/3</code><br>
+Expected: This is an unsupported record type. Following error message will be shown:<br>
+<code>Please enter correct input for rt/RECORD_TYPE!<br>
+RECORD_TYPE is "BLOODSUGAR" or "BMI"</code></p>
+</li>
+<li>
+<p>Test case: <code>average a/monthly rt/bmi n/13</code><br>
+Expected: COUNT field is out of the range 1 and 12 inclusive. Following error message will be shown:<br>
+<code>Please enter correct input for n/COUNT!<br>
+COUNT takes integer value between 1 and 12 inclusive.</code></p>
+</li>
+<li>
+<p>Test case: <code>average a/monthly rt/bmi n/five</code><br>
+Expected: COUNT field only takes integer value. Following error message will be shown:<br>
+<code>Please enter correct input for n/COUNT!<br>
+COUNT takes integer value between 1 and 12 inclusive.</code></p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-05 08:42:52 UTC</div></div></div></body></html>
