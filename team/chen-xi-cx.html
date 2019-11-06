@@ -1,0 +1,412 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Chen Xi - Project Portfolio</title><link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="../images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link active" href="../index.html">AB-3</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level4">AB-4</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">AddressBook-Level3</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="../LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link active" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/se-edu/addressbook-level3"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Chen Xi - Project Portfolio</h1></div><div id="content"><div class="sect1">
+<h2 id="project-sugarmummy"><a class="link" href="#project-sugarmummy">PROJECT: SugarMummy</a></h2>
+<div class="sectionbody">
+<hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>SugarMummy is a desktop application tailored for type 2 diabetics to better manage their day-to-day life.
+Users interact with it using a CLI, and it has a GUI created with JavaFX. It is written in Java and has
+about 19 kLOC.</p>
+</div>
+<div class="paragraph">
+<p>Besides being a schedule planner cum reminder app, SugarMummy also supports logging of data such as
+blood sugar level and BMI. As these data are closely linked to the severity of type 2 diabetes, data
+can be summarized over a time period and presented in a visually intuitive graphical form. This helps
+users to track progressions better. Moreover, there are achievements waiting to be unlocked and they serve
+as extrinsic motivation for users to keep a healthy lifestyle. GUI font color and background are also
+customizable to fully enhance user experience. The diet aspect is also taken care by SugarMummy which
+recommends food and snacks beneficial for type 2 diabetics upon request.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">Summary of contributions</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Major enhancement</strong>: added the ability to view daily, weekly or monthly average in a graphical form.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: <code>average</code> command allows users to track their daily, weekly or monthly progressions for different
+record types. Averages are presented in a line graph. Different parts of the graph background are also colored differently
+to demarcate healthy and unhealthy values. The graph also shows a legend box to describe the color used.</p>
+</li>
+<li>
+<p>Justification: Without this feature, user can only track their progression using <code>list</code> command. This requires them
+to scroll through possibly hundreds and even thousands of records. Due to this infeasibility, <code>average</code> command is
+introduced. The main part of tracking progression is to see the general trend
+and this justifies the use of line graph. Lastly, graph demarcations are used because users may not
+be familiar with the range of healthy and unhealthy values.</p>
+</li>
+<li>
+<p>Highlights: The first difficulty encountered when implementing this feature was how to group records
+from same day, week or month together without using a separate code for each type. The solution can be
+found in <a href="https://github.com/AY1920S1-CS2103-T16-1/main/tree/master/src/main/java/seedu/sugarmummy/model/statistics/AverageMap.java"><code>AverageMap.java</code></a>.
+The second difficulty was highlighting graph background with colors. JavaFX <code>LineChart</code> does not support
+such functionality hence I had to implement the functionality using through <a href="https://github.com/AY1920S1-CS2103-T16-1/main/tree/master/src/main/java/seedu/sugarmummy/ui/statistics/CustomLineChart.java"><code>CustomLineChart.java</code></a>
+which overrides JavaFX <code>LineChart</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Code contributed</strong>: [<a href="https://nus-cs2103-ay1920s1.github.io/tp-dashboard/#search=chen-xi-cx&amp;sort=groupTitle&amp;sortWithin=title&amp;since=2019-09-06&amp;timeframe=commit&amp;mergegroup=false&amp;groupSelect=groupByRepos&amp;breakdown=false&amp;tabOpen=true&amp;tabType=authorship&amp;tabAuthor=chen-xi-cx&amp;tabRepo=AY1920S1-CS2103-T16-1%2Fmain%5Bmaster%5D">Code contribution on Reposense Report</a>]</p>
+</li>
+<li>
+<p><strong>Other contributions</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Project management:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Managed release <code>v1.3</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Enhancements to existing features:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Refactor original addressbook to suit our app (Pull requests <a href="https://github.com/AY1920S1-CS2103-T16-1/main/pull/119">#119</a>)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-user-guide"><a class="link" href="#contributions-to-the-user-guide">Contributions to the User Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="data-summary-analysis"><a class="link" href="#data-summary-analysis">DATA SUMMARY/ANALYSIS</a></h3>
+<div class="sect3">
+<h4 id="displays-the-daily-weekly-monthly-average-of-records-in-a-line-graph-code-average-code"><a class="link" href="#displays-the-daily-weekly-monthly-average-of-records-in-a-line-graph-code-average-code">Displays the daily/weekly/monthly average of records in a line graph: <code>average</code></a></h4>
+<div class="paragraph">
+<p>Format: <code>average a/AVERAGE_TYPE rt/RECORD_TYPE [n/COUNT]</code></p>
+</div>
+<div class="paragraph">
+<p>AVERAGE_TYPE is either "daily", "weekly" or "monthly".<br>
+RECORD_TYPE is either "bloodsugar" or "bmi".<br>
+Displays a graph of the "daily", "weekly" or "monthly" average of a particular RECORD_TYPE.<br>
+COUNT is an optional field that takes integer between 1 to 12 inclusive.<br>
+If COUNT is given, SugarMummy shows <strong>up to</strong> COUNT most recent number of average values.
+Else, COUNT is set to 5 by default and shows 5 most recent average values.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If SugarMummy <strong>does not show exactly</strong> COUNT number of average values,
+that means you do not have enough records in the database.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Example usage 1: <code>average a/weekly rt/bloodsugar</code>:
+Shows the 5 latest weekly average of blood sugar records.</p>
+</div>
+<div class="paragraph">
+<p>Example usage 2: <code>average a/daily rt/bmi n/9</code>:
+Shows the 9 latest daily average of BMI records.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="summary-statistics-of-a-particular-record-type-code-coming-in-v2-0-code"><a class="link" href="#summary-statistics-of-a-particular-record-type-code-coming-in-v2-0-code">Summary statistics of a particular record type <code>[coming in v2.0]</code></a></h4>
+<div class="paragraph">
+<p>Shows minimum, maximum, average of a record type. Categorizes records into low, normal
+and high values in a pie chart. User can specify the date interval of the summary by giving
+a start date and end date.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="shows-relationship-between-record-types-code-coming-in-v2-0-code"><a class="link" href="#shows-relationship-between-record-types-code-coming-in-v2-0-code">Shows relationship between record types: <code>[coming in v2.0]</code></a></h4>
+<div class="paragraph">
+<p>User can see how a particular record type changes with other record types.
+This information will be displayed on a scatter plot where trends can be spotted
+easily. Note that this feature will work well only if</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>You have records for both record types in any given day.</p>
+</li>
+<li>
+<p>You have more than 50 days worth of records.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="exports-summary-of-all-medical-records-into-pdf-code-coming-in-v2-0-code"><a class="link" href="#exports-summary-of-all-medical-records-into-pdf-code-coming-in-v2-0-code">Exports summary of all medical records into pdf <code>[coming in v2.0]</code></a></h4>
+<div class="paragraph">
+<p>Need to share your records with your doctor or others? With SugarMummy export function,
+you can save any graphs and plots generated in a pdf file.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">Contributions to the Developer Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="data-sumamry-analysis-feature"><a class="link" href="#data-sumamry-analysis-feature">Data Sumamry/Analysis feature</a></h3>
+<div class="sect3">
+<h4 id="average-graph-feature-displays-the-daily-weekly-monthly-average-of-records-in-a-line-graph-code-average-code"><a class="link" href="#average-graph-feature-displays-the-daily-weekly-monthly-average-of-records-in-a-line-graph-code-average-code">Average graph feature: Displays the daily/weekly/monthly average of records in a line graph: <code>average</code></a></h4>
+<div class="paragraph">
+<p>The average graph shows how the average blood sugar level or BMI of users change over time.
+Daily, weekly, monthly average are supported.</p>
+</div>
+<div class="sect4">
+<h5 id="implementation"><a class="link" href="#implementation">Implementation</a></h5>
+<div class="paragraph">
+<p>User input to get average graph is parsed by <code>SugarMummyParser</code> which creates a new <code>AverageCommandParser</code>.
+<code>AverageCommandParser</code> then parses user input and creates a new <code>AverageCommand</code>. Next, <code>AverageCommand</code>
+performs operations on <code>AverageMap</code> in <code>Model</code> with the help from <code>RecordContainsRecordTypePredicate</code> to
+filter <code>UniqueRecordList</code> in <code>Model</code>. The result of the execution is returned to <code>Ui</code> as a
+<code>CommandResult</code> object and is displayed to the user. In addition, <code>Ui</code> calls and displays average graph
+related <code>.fxml</code> file to the user.</p>
+</div>
+<div class="paragraph">
+<p>The average graph data points generation is implemented by <code>AverageMap</code> and the average values are stored
+internally as <code>internalMap</code>. Additionally, it implements the following method:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>AverageMap#calculateAverage()</code> - calculates and stores the average values needed by <code>AverageCommand</code>.</p>
+</li>
+<li>
+<p><code>AverageMap#asUnmodifiableObservableMap()</code> - returns a read only version of <code>internalMap</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These operations are exposed in the <code>Model</code> interface as <code>Model#calculateAverageMap()</code> and
+<code>Model#getAverageMap()</code> respectively.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="example-usage-scenario"><a class="link" href="#example-usage-scenario">Example Usage Scenario</a></h5>
+<div class="paragraph">
+<p>Below is an example usage scenario and how average graph is created.</p>
+</div>
+<div class="paragraph">
+<p>Step 1. User launches the application for the first time. The <code>AverageMap</code> will be
+initialized and <code>internalMap</code> will be empty.</p>
+</div>
+<div class="paragraph">
+<p>Step 2. User enters <code>average a/daily rt/bloodsugar n/4</code> in SugarMummy to get daily average blood sugar.
+Input is parsed and send to <code>AverageCommand</code>. <code>AverageCommand</code> then calls <code>Model#updateFilteredRecordList</code>
+to filter record list with <code>RecordContainsRecordTypePredicate</code>. This results in a list of
+records containing only blood sugar records. Subsequently, <code>AverageCommand</code> calls
+<code>Model#calculateAverageMap()</code> to update the <code>internalMap</code> to store 4 most recent daily average values by using the filtered
+record list.</p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the average operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/AverageSequenceDiagram.png" alt="AverageSequenceDiagram">
+</div>
+<div class="title">Figure 1. Sequence diagram of how average command calculates average values.</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The lifeline for <code>AverageCommand</code> should end at the destroy marker (X) but due to a limitation of
+PlantUML, the lifeline reaches the end of diagram.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Step 2a. If the user enters <code>average a/daily rt/bloodsugar n/4</code> and there is no data available,
+then the command will fail to execute and throw a <code>CommandException</code>. Alternatively, if user enters
+an invalid command, a <code>ParseException</code> will be thrown.
+This is illustrated in the activity diagram below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/AverageCommandFailureActivityDiagram.png" alt="AverageCommandFailureActivityDiagram">
+</div>
+<div class="title">Figure 2. Activity diagram of user enter an average command.</div>
+</div>
+<div class="paragraph">
+<p>Step 3. <code>Ui</code> receives average <code>CommandResult</code> from <code>LogicManager</code> and creates a new <code>AverageGraphPane</code>
+as well as all other necessary components (see below). <code>Ui</code> then displays the <code>AverageGraphPane</code> to
+user.</p>
+</div>
+<div class="paragraph">
+<p>Average graph Ui consists of several parts:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>AverageGraphPane</code>: Placeholder for <code>AverageGraph</code> and <code>LegendPane</code>.</p>
+</li>
+<li>
+<p><code>AverageGraph</code>: Contains the average graph. Data points are generated by <code>internalMap</code>.</p>
+</li>
+<li>
+<p><code>CustomLineChart</code>: The implementation for average graph which extends and override JavaFx <code>LineChart</code>.</p>
+</li>
+<li>
+<p><code>LegendPane</code>: Placeholder for <code>LegendRow</code>. This is the legend box for average graph.</p>
+</li>
+<li>
+<p><code>LegendRow</code>: Consists of a colored legend symbol and its description.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/AverageUiClassDiagram.png" alt="AverageUiClassDiagram">
+</div>
+<div class="title">Figure 3. Class diagram of average graph ui related classes.</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h5>
+
+</div>
+<div class="sect4">
+<h5 id="aspect-how-to-display-average-graph-to-user"><a class="link" href="#aspect-how-to-display-average-graph-to-user">Aspect: How to display average graph to user.</a></h5>
+<div class="paragraph">
+<p>The dilemma arises because users, especially recently diagnosed type 2 diabetics,
+do not know the normal range of BMI and blood sugar level. An intuitive and aesthetically
+pleasing method is needed to convey this information to user.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1:</strong> Use JavaFx <code>LineChart</code> to display the average graph and display the ranges below
+the graph using JavaFx <code>Label</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Do not need to implement anything.</p>
+</li>
+<li>
+<p>Cons: User need to trace data points to the y axis to find it&#8217;s value and compare it with the
+ranges given below the graph. This can be annoying and tedious for the user.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2 (current choice):</strong> Override JavaFx <code>LineChart</code> by adding horizontal range markers
+to the graph and color the area between the markers.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: User is able to tell which range a particular data point falls in immediately.</p>
+</li>
+<li>
+<p>Cons: Need to implement horizontal range markers and lay it out on the graph. In addition,
+a custom legend box is needed to label the horizontal range markers.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="data-summary-analysis-feature-code-coming-in-v2-0-code"><a class="link" href="#data-summary-analysis-feature-code-coming-in-v2-0-code">Data Summary/Analysis Feature <code>coming in v2.0</code></a></h4>
+<div class="sect4">
+<h5 id="proposed-summary-statistics-of-a-particular-record-type-code-coming-in-v2-0-code"><a class="link" href="#proposed-summary-statistics-of-a-particular-record-type-code-coming-in-v2-0-code">[Proposed] Summary statistics of a particular record type <code>[coming in v2.0]</code></a></h5>
+<div class="paragraph">
+<p>The implementation will be similar to average graph feature. The <code>UniqueRecordList</code> can be filtered
+the same way as average graph feature to get a list containing only the specified record type.
+If only records from a certain time period is needed, a new date predicate class needs to be created
+to further filter the <code>UniqueRecordList</code> by starting and ending date. Using the filtered record list,
+count the number of low, normal and high values based on some threshold set by the developer. These
+counts will then be displayed using JavaFX <code>PieChart</code>. Also calculate the minimum, maximum and average of the
+filtered record list. These 3 statistics will be displayed right under the pie chart as plain text.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="proposed-shows-relationship-between-record-types-code-coming-in-v2-0-code"><a class="link" href="#proposed-shows-relationship-between-record-types-code-coming-in-v2-0-code">[Proposed] Shows relationship between record types: <code>[coming in v2.0]</code></a></h5>
+<div class="paragraph">
+<p>The implementation will be similar to average graph feature. But now, <code>UniqueRecordList</code> needs to
+be filtered so that it only contains the two record types needed. To do this, future developer
+need to tweak the current <code>RecordContainsRecordTypePredicate</code> to be able to filter two record types.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Since SugarMummy only supports two record types now, filtering <code>UniqueRecordList</code> is
+redundant. However, this implementation consider the situation that more record types may be added
+in the future.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Using the filtered record list, pair two different record types from the same day together and this pair
+represents a data point. Discard records that cannot be paired. Once the pairing process finishes,
+display the points in JavaFX <code>ScatterChart</code>.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="proposed-exports-summary-of-all-medical-records-into-pdf-code-coming-in-v2-0-code"><a class="link" href="#proposed-exports-summary-of-all-medical-records-into-pdf-code-coming-in-v2-0-code">[Proposed] Exports summary of all medical records into pdf <code>[coming in v2.0]</code></a></h5>
+<div class="paragraph">
+<p>This feature can be implemented using <code>PDFBOX</code> libraries or any other existing libraries.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-06 03:23:07 UTC</div></div></div></body></html>
