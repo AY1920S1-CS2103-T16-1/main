@@ -214,7 +214,7 @@ contact number, address and other biography information that the user would like
 <div class="ulist">
 <ul>
 <li>
-<p><code>addbio dp//Users/bob/Desktop/doge.png desc/hello world n/testName nric/testNric gender/testGender dob/2019-12-21 p/12343567 p/91234567 e/81234567 m/testMedicalCondition a/example address 123 goal/testGoal o/testOtherInfo</code>
+<p><code>addbio dp//Users/bob/Desktop/doge.png desc/hello world n/testName nric/testNric gender/testGender dob/1920-12-21 p/12343567 p/91234567 e/81234567 m/testMedicalCondition a/example address 123 goal/testGoal o/testOtherInfo</code>
 (Note: this is provided that the image exists at exactly the <strong>SAME PATH</strong> in the user&#8217;s device. Otherwise, it has to be modifed or removed in order for this example to work)</p>
 </li>
 <li>
@@ -269,7 +269,7 @@ number in the list of phone numbers.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>editbio desc/hello world n/testName nric/testNric gender/testGender dob/12/12/2019 p/91234567 e/81234567 m/testMedicalCondition a/example address 123 goal/testGoal o/testOtherInfo</code></p>
+<p><code>editbio desc/hello world n/testName nric/testNric gender/testGender dob/1920-10-08 p/91234567 e/81234567 m/testMedicalCondition a/example address 123 goal/testGoal o/testOtherInfo</code></p>
 </li>
 <li>
 <p><code>editbio dob/2019-12-28</code></p>
@@ -296,19 +296,10 @@ already empty and there is no biography information to clear.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>fontcolour</code>; or</p>
+<p><code>fontcolour COLOUR [bg/BACKGROUND ARGUMENTS]</code> or <code>fontcolor COLOUR [bg/BACKGROUND ARGUMENTS]</code>; or</p>
 </li>
 <li>
-<p><code>fontcolor</code>; or</p>
-</li>
-<li>
-<p><code>fontcolour COLOUR</code>; or</p>
-</li>
-<li>
-<p><code>fontcolor COLOUR</code>; or</p>
-</li>
-<li>
-<p>any of the above with <code>[bg/BACKGROUND ARGUMENTS]</code></p>
+<p><code>fontcolour</code> or <code>fontcolor</code></p>
 </li>
 </ul>
 </div>
@@ -337,7 +328,7 @@ or <code>fontcolor #FFFF3A</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>fontcolour lime</code></p>
+<p><code>fontcolour yellow</code></p>
 </li>
 <li>
 <p><code>fontcolor indigo</code></p>
@@ -359,19 +350,18 @@ or <code>fontcolor #FFFF3A</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>bg</code>; or</p>
+<p><code>bg COLOUR [fontcolour/COLOUR]</code> or <code>bg COLOUR [fontcolor/COLOUR]</code>; or</p>
 </li>
 <li>
-<p><code>bg COLOUR</code>; or</p>
+<p><code>bg PATH [s/BACKGROUND SIZE] [r/BACKGROUND REPEAT] [fontcolour/COLOUR]</code> or
+<code>bg PATH [s/BACKGROUND SIZE] [r/BACKGROUND REPEAT] [fontcolor/COLOUR]</code>; or</p>
 </li>
 <li>
-<p><code>bg PATH [s/BACKGROUND SIZE] [r/BACKGROUND REPEAT]</code>; or</p>
+<p><code>bg [s/BACKGROUND SIZE] [r/BACKGROUND REPEAT] [fontcolour/COLOUR]</code>
+or <code>bg [s/BACKGROUND SIZE] [r/BACKGROUND REPEAT] [fontcolor/COLOUR]</code> (only if background is already a background image); or</p>
 </li>
 <li>
-<p><code>bg [s/BACKGROUND SIZE] [r/BACKGROUND REPEAT]</code> (if background is already a background image)</p>
-</li>
-<li>
-<p>any of the above with <code>[fontcolour/COLOUR]</code></p>
+<p><code>bg</code></p>
 </li>
 </ul>
 </div>
@@ -398,7 +388,7 @@ i.e. a user may enter <code>bg blue</code> or <code>bg #202020</code> to set the
 <div class="ulist">
 <ul>
 <li>
-<p><code>bg lime</code></p>
+<p><code>bg yellow</code></p>
 </li>
 <li>
 <p><code>bg indigo</code></p>
@@ -811,4 +801,4 @@ appointments that I have to change often due to other commitments</p></td>
 <p>&#8230;&#8203;</p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-06 15:15:08 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-06 15:21:53 UTC</div></div></div></body></html>

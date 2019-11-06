@@ -779,7 +779,7 @@ than <code>a/exampleAddress m/test</code> is. Ultimately, the user has a balance
 <div class="ulist">
 <ul>
 <li>
-<p><code>addbio dp//Users/bob/Desktop/doge.png desc/hello world n/testName nric/testNric gender/testGender dob/2019-12-21 p/12343567 p/91234567 e/81234567 m/testMedicalCondition a/example address 123 goal/testGoal o/testOtherInfo</code>
+<p><code>addbio dp//Users/bob/Desktop/doge.png desc/hello world n/testName nric/testNric gender/testGender dob/1920-12-21 p/12343567 p/91234567 e/81234567 m/testMedicalCondition a/example address 123 goal/testGoal o/testOtherInfo</code>
 (Note: this is provided that the image exists at exactly the <strong>SAME PATH</strong> in the user&#8217;s device. Otherwise, it has to be modifed or removed in order for this example to work)</p>
 </li>
 <li>
@@ -921,7 +921,7 @@ than <code>a/exampleAddress m/test</code> is. Ultimately, the user has a balance
 <div class="ulist">
 <ul>
 <li>
-<p><code>editbio desc/hello world n/testName nric/testNric gender/testGender dob/12/12/2019 p/91234567 e/81234567 m/testMedicalCondition a/example address 123 goal/testGoal o/testOtherInfo</code></p>
+<p><code>editbio desc/hello world n/testName nric/testNric gender/testGender dob/1920-10-08 p/91234567 e/81234567 m/testMedicalCondition a/example address 123 goal/testGoal o/testOtherInfo</code></p>
 </li>
 <li>
 <p><code>editbio dob/2019-12-28</code></p>
@@ -936,7 +936,7 @@ than <code>a/exampleAddress m/test</code> is. Ultimately, the user has a balance
 <p><code>editbio m/medicalCondition1 m/medicalCondition2 m/medicalCondition3 m/medicalCondition4</code></p>
 </li>
 <li>
-<p><code>editbio n/Hello World</code></p>
+<p><code>editbio n/John Doe</code></p>
 </li>
 </ul>
 </div>
@@ -975,19 +975,10 @@ and as such pose no issue.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>fontcolour</code>; or</p>
+<p><code>fontcolour COLOUR [bg/BACKGROUND ARGUMENTS]</code> or <code>fontcolor COLOUR [bg/BACKGROUND ARGUMENTS]</code>; or</p>
 </li>
 <li>
-<p><code>fontcolor</code>; or</p>
-</li>
-<li>
-<p><code>fontcolour COLOUR</code>; or</p>
-</li>
-<li>
-<p><code>fontcolor COLOUR</code>; or</p>
-</li>
-<li>
-<p>any of the above with <code>[bg/BACKGROUND ARGUMENTS]</code></p>
+<p><code>fontcolour</code> or <code>fontcolor</code></p>
 </li>
 </ul>
 </div>
@@ -1078,7 +1069,7 @@ user for this command and both <code>fonTColour yElLoW</code> and <code>fONtColO
 <div class="ulist">
 <ul>
 <li>
-<p><code>fontcolour lime</code></p>
+<p><code>fontcolour yellow</code></p>
 </li>
 <li>
 <p><code>fontcolor indigo</code></p>
@@ -1119,19 +1110,18 @@ user for this command and both <code>fonTColour yElLoW</code> and <code>fONtColO
 <div class="ulist">
 <ul>
 <li>
-<p><code>bg</code>; or</p>
+<p><code>bg COLOUR [fontcolour/COLOUR]</code> or <code>bg COLOUR [fontcolor/COLOUR]</code>; or</p>
 </li>
 <li>
-<p><code>bg COLOUR</code>; or</p>
+<p><code>bg PATH [s/BACKGROUND SIZE] [r/BACKGROUND REPEAT] [fontcolour/COLOUR]</code> or
+<code>bg PATH [s/BACKGROUND SIZE] [r/BACKGROUND REPEAT] [fontcolor/COLOUR]</code>; or</p>
 </li>
 <li>
-<p><code>bg PATH [s/BACKGROUND SIZE] [r/BACKGROUND REPEAT]</code>; or</p>
+<p><code>bg [s/BACKGROUND SIZE] [r/BACKGROUND REPEAT] [fontcolour/COLOUR]</code>
+or <code>bg [s/BACKGROUND SIZE] [r/BACKGROUND REPEAT] [fontcolor/COLOUR]</code> (only if background is already a background image); or</p>
 </li>
 <li>
-<p><code>bg [s/BACKGROUND SIZE] [r/BACKGROUND REPEAT]</code> (if background is already a background image)</p>
-</li>
-<li>
-<p>any of the above with <code>[fontcolour/COLOUR]</code></p>
+<p><code>bg</code></p>
 </li>
 </ul>
 </div>
@@ -1320,7 +1310,7 @@ with the user having the freedom to choose any combination of font colours and b
 <div class="ulist">
 <ul>
 <li>
-<p><code>bg lime</code></p>
+<p><code>bg yellow</code></p>
 </li>
 <li>
 <p><code>bg indigo</code></p>
@@ -1350,7 +1340,7 @@ with the user having the freedom to choose any combination of font colours and b
 <p><code>bg s/cover</code> (if background is already a background image)</p>
 </li>
 <li>
-<p><code>bg r/no-repeat s/contain</code> (if background is already a background image)</p>
+<p><code>bg r/no-repeat s/cover</code> (if background is already a background image)</p>
 </li>
 <li>
 <p><code>bg black fontcolor/#FFFF00</code></p>
@@ -1883,10 +1873,29 @@ E.g. <code>average a/weekly rt/bloodsugar n/3</code></p>
 <p><strong>Bio</strong>: <code>bio</code></p>
 </li>
 <li>
-<p><strong>Bg</strong>: <code>bg COLOUR</code> or <code>bg PATH [s/BACKGROUND SIZE] [r/BACKGROUND REPEAT]</code> or <code>bg<br>
-E.g. `bg /Users/Bob/Pictures/bg.jpg s/cover</code><br>
+<p><strong>Bg</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>bg COLOUR [fontcolour/COLOUR]</code> or <code>bg COLOUR [fontcolor/COLOUR]</code>; or</p>
+</li>
+<li>
+<p><code>bg PATH [s/BACKGROUND SIZE] [r/BACKGROUND REPEAT] [fontcolour/COLOUR]</code> or<br>
+<code>bg PATH [s/BACKGROUND SIZE] [r/BACKGROUND REPEAT] [fontcolor/COLOUR]</code>; or</p>
+</li>
+<li>
+<p><code>bg [s/BACKGROUND SIZE] [r/BACKGROUND REPEAT] [fontcolour/COLOUR]</code><br>
+or <code>bg [s/BACKGROUND SIZE] [r/BACKGROUND REPEAT] [fontcolor/COLOUR]</code> (only if background is already a background image); or</p>
+</li>
+<li>
+<p><code>bg</code><br>
+E.g. <code>bg /Users/Bob/Pictures/bg.jpg s/cover</code><br>
 E.g. <code>bg yellow</code><br>
-E.g. <code>bg #FFFF00</code></p>
+E.g. <code>bg #FFFF00 fontcolor/#000000</code><br>
+E.g. <code>bg black fontcolour/yellow</code></p>
+</li>
+</ul>
+</div>
 </li>
 <li>
 <p><strong>Calendar</strong> <code>calendar [ym/YEAR_MONTH] [ymw/YEAR_MONTH_DAY] [ymd/YEAR_MONTH_DAY]</code><br>
@@ -1912,14 +1921,25 @@ E.g. <code>event d/appointment dt/2019-12-14 16:00 td/01:00</code></p>
 </li>
 <li>
 <p><strong>Edit Biography</strong>: <code>editbio [n/NAME] [dp/DP PATH] [desc/PROFILE DESCRIPTION] [nric/NRIC] [g/GENDER] [dob/DATE OF BIRTH] [p/[INDEX/]CONTACT NUMBER]&#8230;&#8203; [e/[INDEX/]EMERGENCY CONTACT]&#8230;&#8203; [m/[INDEX/]MEDICAL CONDITION]&#8230;&#8203; [a/ADDRESS] [goal/[INDEX/]GOAL]&#8230;&#8203; [o/OTHER BIO INFO]</code><br>
-E.g. <code>editbio g/Male dp//Users/Bob/Pictures/dp.jpg p/12345678</code><br>
+E.g. <code>editbio gender/Male dp//Users/Bob/Pictures/dp.jpg p/12345678</code><br>
 E.g. <code>editbio dp/C:\\Users\\Bob\\Pictures\\dp.jpg</code><br>
 E.g. <code>editbio p/1/234567 p/2/3456789</code></p>
 </li>
 <li>
-<p><strong>Font Color</strong>: <code>fontcolour COLOUR</code> or <code>fontcolour</code> or <code>fontcolor COLOUR</code> or <code>fontcolor</code><br>
+<p><strong>Font Color</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>fontcolour COLOUR [bg/BACKGROUND ARGUMENTS]</code> or <code>fontcolor COLOUR [bg/BACKGROUND ARGUMENTS]</code>; or</p>
+</li>
+<li>
+<p><code>fontcolour</code> or <code>fontcolor</code><br>
 E.g. <code>fontcolour yellow</code><br>
-E.g. <code>fontcolour #FFFF00</code></p>
+E.g. <code>fontcolor #FFFF00</code><br>
+E.g. <code>fontcolour #FFFFFF bg/black</code></p>
+</li>
+</ul>
+</div>
 </li>
 <li>
 <p><strong>List</strong>: <code>list</code><br>
@@ -1965,4 +1985,4 @@ E.g <code>snooze 30min</code></p>
 </ol>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-06 15:15:08 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-06 15:21:53 UTC</div></div></div></body></html>
