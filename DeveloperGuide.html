@@ -24,7 +24,7 @@
 <ul class="sectlevel2">
 <li><a href="#data-sumamry-analysis-feature">3.1. Data Sumamry/Analysis feature</a></li>
 <li><a href="#food-recommendation-feature">3.2. Food Recommendation Feature</a></li>
-<li><a href="#proposed-data-log-feature">3.3. [Proposed] Data log feature</a></li>
+<li><a href="#data-log-feature">3.3. Data log feature</a></li>
 <li><a href="#logging">3.4. Logging</a></li>
 <li><a href="#Implementation-Configuration">3.5. Configuration</a></li>
 <li><a href="#calendar-feature">3.6. Calendar feature</a></li>
@@ -1124,26 +1124,62 @@ more specific suggestions can be proposed to to balance the user&#8217;s nutriti
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-log-feature"><a class="link" href="#proposed-data-log-feature">3.3. [Proposed] Data log feature</a></h3>
+<h3 id="data-log-feature"><a class="link" href="#data-log-feature">3.3. Data log feature</a></h3>
 <div class="sect3">
-<h4 id="proposed-implementation"><a class="link" href="#proposed-implementation">3.3.1. Proposed Implementation</a></h4>
+<h4 id="implementation-3"><a class="link" href="#implementation-3">3.3.1. Implementation</a></h4>
 <div class="paragraph">
 <p>The multi-record data logging mechanism is facilitated by a new Record package containing  BloodSugar and Bmi classes that extend an abstract Record class. Add, list and delete command classes and parsers are modified to accommodate multiple record types. Multi-record data is stored internally as a recordList where members are Records.</p>
 </div>
 <div class="paragraph">
-<p>It implements the following operations:
-* <code>Model#addRecord()</code> — Adds a record to the record list. 
-* <code>Model#deleteRecord()</code> — Deletes a record from the record list. 
-* <code>Model#getUniqueRecordListObject()</code> — Retrieves all records in record list. 
-These operations are exposed in the <code>Model</code> interface as <code>Model#addRecord()</code>, <code>Model#deleteRecord()</code> and <code>Model#getUniqueRecordListObject()</code> respectively.
-Given below is an example usage scenario and how the data log feature behaves at each step.
-Step 1. The user launches the application for the first time. If <code>recordList.json</code> is not found in <code>/data</code>, a <code>recordList.json</code> will be produced from <code>SampleRecordDataUtil#getSampleRecords()</code>. Otherwise, the recordList will be loaded from <code>recordList.json</code> using <code>UniqueRecordList#setRecord(&lt;List&gt;)</code> and checked for inconsistencies e.g. missing fields, invalid fields. If invalid fields or missing consequential fields that must be used (e.g. <code>BloodSugar</code>’s <code>Concentration</code> field is consequential while its <code>Height</code> and <code>Weight</code> fields are not) are detected, an Exception is thrown and <code>recordList.json</code> start from scratch. Otherwise, inconsequential fields will be automatically repopulated on saving to the <code>recordList.json</code> in any command.</p>
+<p>It modifies the following operations:
+* <code>SugarMummy#add()</code> — Adds a record to the record list. 
+* <code>SugarMummy#delete()</code> — Deletes a record from the record list. 
+* <code>SugarMummy#list()</code> — Retrieves all records in record list. </p>
 </div>
 <div class="paragraph">
-<p>Step 2. The user executes list command to list all records. <code>Model#getUniqueRecordListObject()</code> is called and <code>DisplayPaneType</code> is set to LIST. <code>MainDisplayPane#get()</code> determines the type of window to show based on <code>DisplayPaneType</code>. A new <code>RecordListPanel</code> is created and populates each <code>ListViewCell</code> with <code>BloodSugarRecordCard</code> and <code>BmiRecordCard</code>. Data used to populate the <code>RecordCards</code> is passed in through <code>RecordListPanel</code>’s constructor, as an <code>ObservableList</code> containing <code>BloodSugar</code> and <code>Bmi</code> objects.</p>
+<p>These operations are exposed in the <code>Model</code> interface as <code>Model#addRecord()</code>, <code>Model#deleteRecord()</code>
+and <code>Model#getUniqueRecordListObject()</code> respectively.</p>
 </div>
 <div class="paragraph">
-<p>Step 3. The user executes <code>add rt/BMI h/1 w/1 dt/2019-09-09 12:12</code> command to create a <code>Bmi</code> record with height 1, weight 1 at date 2019-09-09 and time 12:12. The add command is first parsed by <code>AddressBookParser</code> then parsed by <code>AddCommandParser</code>. In <code>AddCommandParser</code>, we first parse for standard <code>Record</code>-class-level field like <code>DateTime</code> before parsing for the relevant <code>Bmi</code>-related CLI-arguments defined in <code>CliSyntax</code>. Individual field parsing is done inside <code>ParserUtil</code>. Either a complete <code>BloodSugar</code> or <code>Bmi</code> Object is returned otherwise a <code>ParseException</code> will be thrown. Note that <code>BloodSugar</code> and <code>Bmi</code> Objects are <code>Record</code> Objects. In <code>AddCommand</code>, this <code>Record</code> Object is first checked against the model whether the model contains such a <code>Record</code> (defined as same date time in <code>Record.java</code>). If there is no duplicate, it is added to the <code>Model#addRecord()</code> in turn calling <code>ModelManager#addRecord()</code> to call <code>add()</code> operation on the list. We reuse similar code to step 2 to display the result of the add.</p>
+<p>The internal data structure contains an ObservableList&lt;Record&gt; that the UI can observe to display the record list.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/RecordsClassDiagram.png" alt="RecordsClassDiagram">
+</div>
+</div>
+<div class="paragraph">
+<p>Below is an example usage scenario of how the data log feature behaves at each step.</p>
+</div>
+<div class="paragraph">
+<p>Step 1. The user launches the application for the first time.
+If <code>/data/recordList.json</code> is not found, it will be produced from <code>SampleRecordDataUtil#getSampleRecords()</code>.
+If <code>/data/recordList.json</code> is found, the recordList will be loaded from there using <code>UniqueRecordList#setRecord()</code>
+and checked for inconsistencies e.g. missing fields, invalid fields.
+If inconsistencies are detected, an Exception is thrown and existing <code>recordList.json</code> is erased.</p>
+</div>
+<div class="paragraph">
+<p>Step 2. The user lists all records.
+A new <code>RecordListPanel</code> is created and populates each <code>ListViewCell</code> with <code>BloodSugarRecordCard</code> and <code>BmiRecordCard</code>.
+<code>ObservableList&lt;Record&gt;</code> is used to populate the <code>ListViewCell</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 3. The user executes <code>add rt/BMI h/1 w/1 dt/2019-09-09 12:12</code> command.
+The add command parameters are parsed for validity.
+This job is delegated to the following classes:
+<code>SugarMummyParser</code>,<code>AddCommandParser</code> and <code>ParserUtil.
+This is illustrated in SequenceDiagram below.
+After parsing is completed, either a complete `BloodSugar</code> or <code>Bmi</code> Object is returned otherwise a <code>ParseException</code> will be thrown.
+The <code>Record</code> is checked against the model for uniqueness.
+If it is unique, it is added to the Model via <code>Model#addRecord()</code> (illustrated by the red portion of the sequence diagram below)</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AddActivityDiagram.png" alt="AddActivityDiagram">
+</div>
+</div>
+<div class="paragraph">
+<p>The above activity diagram illustrates step 3.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1151,10 +1187,19 @@ Step 1. The user launches the application for the first time. If <code>recordLis
 </div>
 </div>
 <div class="paragraph">
-<p>Step 4. The user now decides that adding the record was a mistake, and decides to delete that record. The delete command is first parsed by <code>AddressBookParser</code> then parsed by <code>DeleteCommandParser</code>. In <code>DeleteCommandParser</code>, we use <code>ParseUtil</code> to check whether the index is a positive number, otherwise a <code>ParseException</code> will be thrown. <code>DeleteCommand</code> receives the positive index and checks whether the positive index indices a record. <code>DeleteCommand</code> will call <code>Model#deleteRecord()</code>, which will call <code>Model#deleteRecord()</code> and call <code>ModelManager#deleteRecord()</code> performing a <code>remove()</code> operation on the list.</p>
+<p>The above sequence diagram provides a in-depth look at how parsing is delegated to various classes within the blue Logic component.
+The calls to the red model component illustrates Step 3 adding records to the model.
+The final call to the yellow storage component illustrates step 5.</p>
 </div>
 <div class="paragraph">
-<p>Step 5. After command has executed in <code>LogicManager</code>, we attempt to write the recordList in memory to <code>recordList.json</code> on disk using <code>Storage#saveRecordList()</code>. The command result is returned to <code>MainWindow</code> which calls <code>MainDisplayPane</code> in step 2 using <code>MainWindow#switchToMainDisplayPane()</code>. This lists out the updated record list in the UI (step 2).</p>
+<p>Step 4. The user decides to delete a record.
+The delete command is parsed for validity by <code>SugarMummyParser</code>, <code>DeleteCommandParser</code> and <code>ParserUtil</code>.
+<code>ParseUtil</code> checks whether the index is a positive number, otherwise a <code>ParseException</code> will be thrown.
+<code>DeleteCommand</code> checks whether the positive index points to a valid record.
+<code>DeleteCommand</code> will call <code>Model#deleteRecord()</code> to remove the record from the list.</p>
+</div>
+<div class="paragraph">
+<p>Step 5. After add or delete commands have been executed in <code>LogicManager</code>, the Model&#8217;s recordList is written to <code>recordList.json</code> using <code>Storage#saveRecordList()</code>.</p>
 </div>
 </div>
 <div class="sect3">
@@ -1275,7 +1320,7 @@ Step 1. The user launches the application for the first time. If <code>recordLis
 <div class="sect2">
 <h3 id="calendar-feature"><a class="link" href="#calendar-feature">3.6. Calendar feature</a></h3>
 <div class="sect3">
-<h4 id="implementation-3"><a class="link" href="#implementation-3">3.6.1. Implementation</a></h4>
+<h4 id="implementation-4"><a class="link" href="#implementation-4">3.6.1. Implementation</a></h4>
 <div class="paragraph">
 <p>The calendar feature works along with a scheduler. Calendar stores internally a <code>calendarEntries</code> list and a <code>pastReminders</code> list.
 Calendar entries consists of reminders and events. Past reminders list is dynamically determined by time and all reminders in this
@@ -1510,7 +1555,7 @@ modifying the CSS file used itself.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="implementation-4"><a class="link" href="#implementation-4">3.7.2. Implementation</a></h4>
+<h4 id="implementation-5"><a class="link" href="#implementation-5">3.7.2. Implementation</a></h4>
 <div class="sect4">
 <h5 id="biography"><a class="link" href="#biography">Biography</a></h5>
 <div class="paragraph">
@@ -3398,4 +3443,4 @@ Expected: A new motivation quote is selected at random and shown in the pane sho
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-06 15:57:40 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-06 16:03:44 UTC</div></div></div></body></html>
