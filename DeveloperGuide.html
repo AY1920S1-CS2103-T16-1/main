@@ -24,12 +24,11 @@
 <ul class="sectlevel2">
 <li><a href="#data-sumamry-analysis-feature">3.1. Data Sumamry/Analysis feature</a></li>
 <li><a href="#food-recommendation-feature">3.2. Food Recommendation Feature</a></li>
-<li><a href="#proposed-data-encryption">3.3. [Proposed] Data Encryption</a></li>
-<li><a href="#proposed-data-log-feature">3.4. [Proposed] Data log feature</a></li>
-<li><a href="#logging">3.5. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.6. Configuration</a></li>
-<li><a href="#calendar-feature">3.7. Calendar feature</a></li>
-<li><a href="#personalised-user-experience-feature">3.8. Personalised User Experience Feature</a></li>
+<li><a href="#proposed-data-log-feature">3.3. [Proposed] Data log feature</a></li>
+<li><a href="#logging">3.4. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.5. Configuration</a></li>
+<li><a href="#calendar-feature">3.6. Calendar feature</a></li>
+<li><a href="#personalised-user-experience-feature">3.7. Personalised User Experience Feature</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a></li>
@@ -559,12 +558,46 @@ display the points in JavaFX <code>ScatterChart</code>.</p>
 <div class="sect2">
 <h3 id="food-recommendation-feature"><a class="link" href="#food-recommendation-feature">3.2. Food Recommendation Feature</a></h3>
 <div class="paragraph">
-<p>The food recommendation feature externally shows a filtered food list in the form of cards. Internally, it mainly consists of three parts:</p>
+<p>The food recommendation mechanism is based on the manipulation on <code>UniqueFoodList</code>, with the implementation of operations:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Food Model: holds data for a certain food</p>
+<p><strong>Showing filtered food cards</strong>&#8201;&#8212;&#8201;Shows recommended foods to the users, which are filtered by`Flags` and / or <code>FoodNames</code>.</p>
+</li>
+<li>
+<p><strong>Sorting the food list</strong>&#8201;&#8212;&#8201;Sorts the recommendation order based on comparing food fields specified in <code>SortOrderType</code>.</p>
+</li>
+<li>
+<p><strong>Showing concise recommendations</strong>&#8201;&#8212;&#8201;Recommends one food from each food type with an additional <em>summary</em> food.</p>
+</li>
+<li>
+<p><strong>Adding new a food</strong>&#8201;&#8212;&#8201;Adds a new food to the food database and for future recommendations.</p>
+</li>
+<li>
+<p><strong>Resetting food database</strong>&#8201;&#8212;&#8201;Clears user-added foods.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These operations are respectively exposed in the <code>Model</code> interface as <code>Model#updateFilteredFoodList()</code>, <code>Model#sortFoodList()</code>,<code>Model#getMixedFoodList</code>, <code>Model#addFood()</code>, <code>Model#setFoods()</code>.</p>
+</div>
+<div class="paragraph">
+<p><a id="recmf_overview"></a></p>
+</div>
+<div class="sect3">
+<h4 id="overview-of-data-structures"><a class="link" href="#overview-of-data-structures">3.2.1. Overview of Data Structures</a></h4>
+<div class="paragraph">
+<p>The main data structures used to support food recommendation feature are <strong>Food Model</strong>, <strong>UniqueFoodList</strong>, and <strong>Predicates</strong></p>
+</div>
+<div class="paragraph">
+<p><a id="recmf_food_model"></a></p>
+</div>
+<div class="ulist">
+<div class="title"><strong>1. Food Model</strong></div>
+<ul>
+<li>
+<p><strong>Food Model</strong>: holds data for a certain food</p>
 </li>
 <li>
 <p>Predicates: indicates the filters that the user wants to apply on partial presentation of the foods</p>
@@ -574,16 +607,40 @@ display the points in JavaFX <code>ScatterChart</code>.</p>
 </li>
 </ul>
 </div>
-<div class="sect3">
-<h4 id="overview"><a class="link" href="#overview">3.2.1. Overview</a></h4>
-<div class="ulist">
-<ul>
-<li>
-<p>Internal Data Structure</p>
 <div class="paragraph">
+<p><strong>API:</strong> <a href="https://github.com/AY1920S1-CS2103-T16-1/main/tree/master/src/main/java/seedu/sugarmummy/recmfood/model/Food.java"><code>Food.java</code></a></p>
+</div>
+<hr>
+<div class="paragraph">
+<p><a id="recmf_uniqueFoodList"></a></p>
+</div>
+<div class="paragraph">
+<div class="title"><strong>2. UniqueFoodList</strong></div>
 <p>The <code>UniqueFoodList</code> is the main model that contains all the foods and interacts with logic and UI. It exposes an
 unmodifiable <code>ObservableList&lt;Food&gt;</code> that associates the UI display of food recommendations.</p>
 </div>
+<div class="paragraph">
+<p><strong>API:</strong> <a href="https://github.com/AY1920S1-CS2103-T16-1/main/tree/master/src/main/java/seedu/sugarmummy/recmfood/model/UniqueFoodList.java"><code>UniqueFoodList.java</code></a></p>
+</div>
+<div class="paragraph">
+<p><a id="recmf_predicates"></a></p>
+</div>
+<div class="paragraph">
+<div class="title"><strong>3. Predicates</strong></div>
+<p><strong>API:</strong> <a href="https://github.com/AY1920S1-CS2103-T16-1/main/tree/master/src/main/java/seedu/sugarmummy/recmfood/predicates/FoodNameContainsKeywordsPredicate.java"><code>FoodNameContainsKeywordsPredicate.java</code></a>
+<a href="https://github.com/AY1920S1-CS2103-T16-1/main/tree/master/src/main/java/seedu/sugarmummy/recmfood/predicates/FoodTypeIsWantedPredicate.java"><code>FoodTypeIsWantedPredicate.java</code></a></p>
+</div>
+<hr>
+<div class="paragraph">
+<p>The following class diagram shows the main association and interactions among the main components. Other essential parts are summaries as follows:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>UI: <code>FoodFlowPanel</code> holds an <code>ObservableList</code> of <code>Food</code>, each visulized in the form of <code>FoodCard</code>.</p>
+</li>
+<li>
+<p>Storage: Reading data from and writing data to is handled by <code>JsonFoodListStorage</code>, inherited methods from <code>JsonGeneralStorage</code>.</p>
 </li>
 </ul>
 </div>
@@ -592,56 +649,30 @@ unmodifiable <code>ObservableList&lt;Food&gt;</code> that associates the UI disp
 <img src="images/FoodModelClassDiagram.png" alt="FoodModelClassDiagram">
 </div>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Parsers</p>
-<div class="ulist">
-<ul>
-<li>
-<p><code>RecmFoodCommandParser</code> specifies the filters applied on the food list. Filters are implemented by two <code>Predicate</code> and are based on <code>Flag</code> and / or <code>FoodName</code>.</p>
-</li>
-<li>
-<p><code>AddFoodCommandParser</code> specifies and checks each fields of a new input food.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>UI: Two main components are <code>FoodCard</code>, which shows the food information, and <code>FoodFlowPanel</code>: holds all the cards. It is nested in a <code>Scrollable</code> One highlight of the design is the background color usage for food name. Different colors are corresponding to different types of foods.</p>
-</li>
-</ul>
-</div>
 </div>
 <div class="sect3">
-<h4 id="implementation-3"><a class="link" href="#implementation-3">3.2.2. Implementation</a></h4>
+<h4 id="implementation-of-em-recmf-em-and-em-recmfmix-em-command"><a class="link" href="#implementation-of-em-recmf-em-and-em-recmfmix-em-command">3.2.2. Implementation of <em>recmf</em> and <em>recmfmix</em> command</a></h4>
+<div class="sect4">
+<h5 id="em-recmf-em-command"><a class="link" href="#em-recmf-em-command"><em>recmf</em> command</a></h5>
 <div class="paragraph">
-<p>The food recommendation mechanism majorly implements the following operations:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>SugarMummy#recmf()</code>&#8201;&#8212;&#8201;Recommends a list of foods to the user.</p>
-</li>
-<li>
-<p><code>SugarMummy#sort()</code>&#8201;&#8212;&#8201;Sorts the recommendations in ascending or descending order in terms of food name or calorie, gi, sugar, and fat values.</p>
-</li>
-<li>
-<p><code>SugarMummy#addfood()</code>&#8201;&#8212;&#8201;Inputs new foods into the database for future recommendations.</p>
-</li>
-</ul>
+<p><em>The</em> <code><em>recmf</em></code> <em>command visualizes medically suggested foods as food cards for diabetics that are contained in</em> <code><em>UniqueFoodList</em></code>.</p>
 </div>
 <div class="paragraph">
-<p>These operations are exposed in the <code>Model</code> interface as <code>Model#updateFilteredFoodList()</code>, <code>Model#sortFilteredFoodList()</code>, <code>Model#addFood()</code> respectively.</p>
+<p>The customised presentation of food recommendations is implemented via the following three ways:</p>
 </div>
 <div class="paragraph">
-<p>Given below is an example usage scenario and how the food recommendation mechanism behaves at each step.</p>
+<div class="title"><strong>1. Specifying flags</strong><br></div>
+<p>Flags are similar to the usage of flags / options in Unix commands. In SugarMummy, they are used to specify food types
+that are intended to be shown. The existence of a certain flag depends on available food types in <code>FoodType</code>.
+The flags in the user input will eventually be translated to <code>FoodTypeIsWantedPredicate</code> and applied on <code>UniqueFoodList</code>.</p>
 </div>
-<div class="paragraph">
-<p>Step 1. The user launches the application and enter <code>recmf</code> Command for the first time and . The <code>foodlist.json</code> storage file will be initialized with the pre-loaded food data from <code>SampleFoodDataUtil</code>.</p>
-</div>
-<div class="paragraph">
-<p>Step 2. The user executes <code>recmf -f -sv</code> command. <code>IsWantedTypePredicate</code> will be applied on the food list to select specified types.</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Data Structure</dt>
+<dd>
+<p>A <code>HashSet</code> is used to hold specified <code>FoodTypes</code> translated from user-input flags.</p>
+</dd>
+</dl>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -650,44 +681,42 @@ unmodifiable <code>ObservableList&lt;Food&gt;</code> that associates the UI disp
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If no flag is specified, <code>RecmFoodCommandParser#getParsedFlags()</code> will return all flags to show to full content of foods.
+If no flag is specified, <code>RecmFoodCommandParser#getWantedFoodTypes(flagsStr)</code> will return an empty <code>HashSet</code>.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Step 3. The user executes <code>recmf fn/Cherry</code>. Similar to step 2, <code>FoodNameContainsKeywordPredicate</code> will be applied.</p>
+<p><strong>API:</strong> <a href="https://github.com/AY1920S1-CS2103-T16-1/main/tree/master/src/main/java/seedu/sugarmummy/recmfood/model/Flag.java">Flag.java</a></p>
+</div>
+<hr>
+<div class="paragraph">
+<div class="title"><strong>2. Filtering food names</strong><br></div>
+<p>A <code>List</code> of strings as food names will be supplied to <code>FoodNameContainsKeywordsPredicate</code>.
+Similar to the situation of no specified flags, an empty <code>ArrayList</code> will be returned by <code>RecmFoodCommandParser#getWantedFoodKeywords(namesStr)</code>.<br></p>
 </div>
 <div class="paragraph">
-<p>Step 4. The user executes <code>recmf sort/calorie</code>.</p>
+<p>The implementation is simple, details about <code>FoodNameContainsKeywordsPredicate</code> and <code>RecmFoodCommandParser</code> can be referred at <a href="#recmf_overview">Overview</a> section.</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Collectively, Step 2 to 4 have similar underlying logic implementation and Ui updates. The whole food list wil be iterated through to get a filter or reordered food list.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Step 5. The user feels the database is insufficient and wants to add a new food by executing <code>addfood (FOOD INFO)</code>. The <code>foodlist.json</code> storage file will be immediately updated if the execution is successful.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>The following sequence diagram shows how the typical food recommendation operation works: <code>recmf -f fn/Cherry</code></p>
-</li>
-</ul>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Diagram</dt>
+<dd>
+<p>The following sequence diagrams shows the how recmf command with food name as the filter works.</p>
+</dd>
+</dl>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/RecmFoodSequenceDiagram.png" alt="RecmFoodSequenceDiagram">
 </div>
 </div>
+<hr>
+<div class="paragraph">
+<div class="title"><strong>3. Sorting</strong><br></div>
+<p>Sorting the food recommendations is via supplying a <code>FoodComparator</code> to <code>UniqueFoodList#sortFoods</code>.
+To maintain or change the ordering of food recommendations, <code>model#sortFoodList</code> method must be added to <code>execute</code> method of relevant commands.</p>
+</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -695,59 +724,271 @@ Collectively, Step 2 to 4 have similar underlying logic implementation and Ui up
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The lifeline for <code>RecmFoodCommand</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+The default sort order is currently set to be by food type, specified in public variable <code>FoodComparator#DEFAULT_SORT_ORDER_STRING</code>.
+It is used when there is no specified sort type from the user and for the <code>addfood</code> command.
 </td>
 </tr>
 </table>
 </div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Data Structure</dt>
+<dd>
 <div class="ulist">
 <ul>
 <li>
-<p>The following activity diagram summarizes what happens when a user executes <code>addfood</code> command.</p>
+<p>A <code>Comparator</code> is wrapped by <code>FoodComparator</code> to handle the main logic, such as reversing the <code>FoodComparator</code> via <code>Comparator#reversed()</code>.</p>
+</li>
+<li>
+<p>A inner enum class SortOrderType` is used to specify all the available food fields for comparison and sorting. (See <a href="#recmf_food_model">Food</a> model for its field details.)</p>
 </li>
 </ul>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="images/AddFoodActivityDiagram.png" alt="AddFoodActivityDiagram">
+</dd>
+</dl>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Instantiating <code>FoodComparator</code> by other classes is done by supplying <code>String</code> that matches one of the enum value of its inner enum class <code>SortOrderType</code>.
+Instantiate FoodComparator directly from <code>Comparator</code> is for internal usage of getting reversed <code>FoodComparator</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>API:</strong> <a href="https://github.com/AY1920S1-CS2103-T16-1/main/tree/master/src/main/java/seedu/sugarmummy/recmfood/model/FoodComparator.java"><code>FoodComparator.java</code></a></p>
+</div>
+<hr>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Diagram</dt>
+<dd>
+<p>The following object diagram summaries the components in food recommendation mechanism.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect4">
+<h5 id="em-recmfmix-em-command"><a class="link" href="#em-recmfmix-em-command"><em>recmfmix</em> command</a></h5>
+<div class="paragraph">
+<p><em>Compared to</em> <code><em>recmf</em></code> command with customized options, <code><em>recmfmix</em></code>  <em>is a simpler command that concisely recommends one food from each type with a summary food card at the end.</em></p>
+</div>
+<div class="paragraph">
+<p><strong>General:</strong>
+Randomly selecting foods is implemented by <code>UniqueFoodList#getMixedFoodList()</code> that generates a separate and temporary <code>ObservableList</code> from the existing food data of <code>UniqueFoodList</code>.
+This list of mixed foods will be accessible by the <code>Model</code> and will be further used by the <code>Logic</code> to fill the content of <code>FoodFlowPanel</code>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Food Summary Card:</strong> It is essentially treated as <code>Food</code> with <em>Summary</em> as food name and <em>meal</em> as food type.
+The total / average nutrition values are calculated by <code>FoodCalculator</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This command has to override the <code>Command#isToCreateNewPane()</code> to return a <code>true</code> value,
+since it should refresh the display pane each time by randomly getting new foods, rather than getting the existing display pane from <code>typeToPaneMap</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Diagram</dt>
+<dd>
+<p>The following sequence diagram shows how recmfmix operation work.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p><strong>API:</strong> <a href="https://github.com/AY1920S1-CS2103-T16-1/main/tree/master/src/main/java/seedu/sugarmummy/recmfood/model/FoodCalculator.java"><code>FoodCalculator.java</code></a></p>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.3. Design Considerations</a></h4>
+<h4 id="implementation-of-other-supplementary-commands"><a class="link" href="#implementation-of-other-supplementary-commands">3.2.3. Implementation of other supplementary commands</a></h4>
+<div class="paragraph">
+<p>The following two commands are designed to help expand and clean up database of foods.</p>
+</div>
 <div class="sect4">
-<h5 id="aspect-how-recommendations-are-presented-to-user"><a class="link" href="#aspect-how-recommendations-are-presented-to-user">Aspect: How recommendations are presented to user</a></h5>
-<div class="ulist">
-<ul>
+<h5 id="em-addfood-em-command"><a class="link" href="#em-addfood-em-command"><em>addfood</em> command</a></h5>
+<div class="paragraph">
+<p><em>`addfood` _command adds a new food with all specified fields into the food list.</em></p>
+</div>
+<div class="paragraph">
+<p>It is implemented by using <code>AddFoodCommandParser</code>, which relies on <code>RecmFoodParserUtil</code> to check the validation of input values.</p>
+</div>
+<div class="paragraph">
+<p><strong>API:</strong> <a href="https://github.com/AY1920S1-CS2103-T16-1/main/tree/master/src/main/java/seedu/sugarmummy/recmfood/parser/RecmFoodParserUtil.java"><code>RecmFoodParserUtil.java</code></a></p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="em-resetf-em-command"><a class="link" href="#em-resetf-em-command"><em>resetf</em> command</a></h5>
+<div class="paragraph">
+<p><em>`resetf` _command clears(deletes) all newly added foods from the user.</em></p>
+</div>
+<div class="paragraph">
+<p>It is implemented by setting the internal list of <code>UniqueFoodList</code> to be the pre-loaded food data in <code>SampleFoodDataUtil</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="example-usage-scenario-and-summary"><a class="link" href="#example-usage-scenario-and-summary">3.2.4. Example Usage Scenario and Summary</a></h4>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how the food recommendation mechanism behaves at each step.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Shows the user a pane of cards. Different types are indicated by the different background colors of the food names.</p>
-<div class="ulist">
-<ul>
+<p>The user launches the application and enter <code>recmf</code> command for the first time.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
 <li>
-<p>Pros: Easy to implement.</p>
+<p>The <code>foodlist.json</code> storage file will be created and written with the pre-loaded food data from <code>SampleFoodDataUtil</code>.</p>
 </li>
 <li>
-<p>Cons:</p>
+<p>The <code>UniqueFoodList</code> will indirectly (via <code>Model</code>) supply a list of foods to <code>FoodFlowPane</code> to display.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>The user executes <code>recmf -f -sv fn/Chicken</code> command.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p><code>RecmFoodParser</code> will parse the flag string as <em>fruit</em> and <em>starchy vegetable</em> for <code>FoodTypeIsWantedPredicate</code>
+and the food name string as <em>Chicken</em> for <code>FoodNameContainsKeywordPredicate</code>. Meanwhile, <code>FoodComparator</code> will be of default sorting order</p>
+</li>
+<li>
+<p>They will be supplied to instantiate a <code>RecmFoodCommand</code> to update the display of food recommendations.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>The user executes <code>recmfmix</code> command.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>The <code>UniqueFoodList#getMixedFoodList()</code> method will return a list of randomly selected foods from each food type.</p>
+</li>
+<li>
+<p>A summary food with calculated value by <code>FoodCalculator</code> will be appended at the end.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>The user feels the database is insufficient and wants to add a new food by executing <code>addfood fn/Cucumber ft/nsv ca/15 gi/15 fa/0 su/1.7</code>.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>The display will switch to show the full list containing the newly added food in the default sorting order.</p>
+</li>
+<li>
+<p>The <code>foodlist.json</code> storage file will be immediately updated with this new food.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>The user executes <code>resetf</code> command.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p><code>UniqueFoodList</code> will reset its internal list to hold the sample data from from <code>SampleFoodDataUtil</code>.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Diagram</dt>
+<dd>
+<p>The following activity diagram summarizes the above steps.</p>
+</dd>
+</dl>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/RecmFoodActivityDiagram.png" alt="RecmFoodActivityDiagram">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.5. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-data-structure-of-the-food-collection"><a class="link" href="#aspect-data-structure-of-the-food-collection">Aspect: Data Structure of the Food Collection</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Use a <code>List</code> to store all the foods</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: The logic can be easily understood.</p>
+</li>
+<li>
+<p>Cons: Filtering, sorting, and adding new foods need to enumerating through the whole list.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Use several scrollable horizontal list views to hold different food type.</p>
+<p><strong>Alternative 2:</strong> Use a <code>Map</code> that categorizes foods based on their food types</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>The content is more organized and the user does not need to specify food types in the filter.</p>
+<p>Pros: For the <code>Flag</code> filtering, it can simply get the wanted types from the <code>Map</code>.
+Besides, maintaining the order after adding a new food only requires to sort foods of the same type.
+It can improve efficiency especially the database is large.</p>
 </li>
 <li>
-<p>The food card for different food types can be more targeted. For example, for most proteins, the sugar and gi of value 0 can be omitted while protein values can be added.</p>
+<p>Cons: There is no <code>FilteredMap</code> class supported by JavaFX. Thus, additionally structures needs to be defined to accept
+<code>Predicate</code> as filters.</p>
 </li>
 </ul>
 </div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-the-presentation-of-food-recommendations-ui"><a class="link" href="#aspect-the-presentation-of-food-recommendations-ui">Aspect: The presentation of food recommendations (UI)</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Show the user a pane of cards. Different types are indicated by the different background colors of the food names.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement. The usage of cheerful colors may make reading recommendations more pleasant.</p>
+</li>
+<li>
+<p>Cons: The size of food cards cannot be customized. If the window size is relatively small, the user may need to
+repeatedly scroll up and down to locate some foods.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use several horizontal <code>ListViews</code> to hold different food type.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: The content is more organized and the user does not need to specify food types in the filter.
+Besides, the food card for different food types can be more targeted. For example, for most proteins, the sugar and gi of value 0 can be omitted while protein values can be added.</p>
 </li>
 <li>
 <p>Cons: The operations targeting at the whole list, such as filtering based on food names, need to be applied repeatedly for each food list.</p>
@@ -759,40 +1000,7 @@ The lifeline for <code>RecmFoodCommand</code> should end at the destroy marker (
 </div>
 </div>
 <div class="sect4">
-<h5 id="aspect-data-structure-to-support-the-recmf-command"><a class="link" href="#aspect-data-structure-to-support-the-recmf-command">Aspect: Data structure to support the recmf command</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> Use a list to store all the foods</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: The logic can be easily understood.</p>
-</li>
-<li>
-<p>Cons:</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Use a map that maps different food types to corresponding food list</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros:</p>
-</li>
-<li>
-<p>Cons:</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect4">
-<h5 id="aspect-new-food-data-input-from-user"><a class="link" href="#aspect-new-food-data-input-from-user">Aspect: New food data input from user</a></h5>
+<h5 id="aspect-inputting-new-food-data"><a class="link" href="#aspect-inputting-new-food-data">Aspect: Inputting New Food Data</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -824,30 +1032,97 @@ The lifeline for <code>RecmFoodCommand</code> should end at the destroy marker (
 </ul>
 </div>
 </div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.3. [Proposed] Data Encryption</a></h3>
-<div class="sect3">
-<h4 id="future-development-direction"><a class="link" href="#future-development-direction">3.3.1. Future Development Direction</a></h4>
+<div class="sect4">
+<h5 id="aspect-data-recovery-after-resetting"><a class="link" href="#aspect-data-recovery-after-resetting">Aspect: Data Recovery after Resetting</a></h5>
 <div class="ulist">
 <ul>
 <li>
-<p>Larger database for food recommendations
-To increase the usability of food recommendations, it is suggested to have more food data at the beginning instead of depending on user inputs. Ideally, the recommendation data can be connected to online database for dynamic updates while can have local storage for offline operations.</p>
+<p><strong>Alternative 1 (current choice):</strong> There is additional storage for holding the food database just before resetting.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: The implementation is straightforward. The management of storage is also simple since it only needs synchronized with one <code>UniqueFoodList</code>.</p>
 </li>
 <li>
-<p>Diet records and analysis
-The current food models can be utilized to help record daily diets. This would allow the user to have an overview of his food consuming statistics. Therefore, some suggestions can be proposed to help diabetes users regulate and plan their diets.</p>
+<p>Cons: There is no way for the user to recover data.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Pop up another command to confirm with the user about the resetting.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Prevent the situation of resetting all food data due to accidentally entering a wrong command.,</p>
+</li>
+<li>
+<p>Cons: The recovery is still unavailable. Besides, this expands one command to two steps.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 3:</strong> Save only one copy before resetting all the food data. Update that copy whenever <code>reset</code> command is executed.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Provide more flexibility for the user to temporarily clean up the food data.
+This may be useful when another user want to temporarily use the same jar file on the same PC to get food recommendations.</p>
+</li>
+<li>
+<p>Cons: Only the latest history of food list is available.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 4:</strong> Save every copies before resetting.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Provide more freedom to the user to manipulate the history.</p>
+</li>
+<li>
+<p>Cons: The implementation can be complex. Besides, it may take up much more storage if the database is large.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="future-development-suggestion"><a class="link" href="#future-development-suggestion">3.2.6. Future Development Suggestion</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Editing and Deleting Foods
+This would provide more flexibility to the user to manipulate food data, instead of resetting all the food data.</p>
+</li>
+<li>
+<p>Disliking Foods
+This would prevent the user from repeatedly seeing the foods they dislike, cannot eat (due to religion reason), or are allergic to.</p>
+</li>
+<li>
+<p>Expanding the food database
+This would relieve the extra work required from the user to input unavailable food data.
+Ideally, the recommendation data can be connected to online database for dynamic updates while can be stored locally for offline operations.</p>
+</li>
+<li>
+<p>Recording and Analyzing diets
+This would allow the user to have an overview of his food consumption statistics. Bases on such statistics,
+more specific suggestions can be proposed to to balance the user&#8217;s nutrition intake.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-log-feature"><a class="link" href="#proposed-data-log-feature">3.4. [Proposed] Data log feature</a></h3>
+<h3 id="proposed-data-log-feature"><a class="link" href="#proposed-data-log-feature">3.3. [Proposed] Data log feature</a></h3>
 <div class="sect3">
-<h4 id="proposed-implementation"><a class="link" href="#proposed-implementation">3.4.1. Proposed Implementation</a></h4>
+<h4 id="proposed-implementation"><a class="link" href="#proposed-implementation">3.3.1. Proposed Implementation</a></h4>
 <div class="paragraph">
 <p>The multi-record data logging mechanism is facilitated by a new Record package containing  BloodSugar and Bmi classes that extend an abstract Record class. Add, list and delete command classes and parsers are modified to accommodate multiple record types. Multi-record data is stored internally as a recordList where members are Records.</p>
 </div>
@@ -879,11 +1154,11 @@ Step 1. The user launches the application for the first time. If <code>recordLis
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.4.2. Design Considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.3.2. Design Considerations</a></h4>
 
 </div>
 <div class="sect3">
-<h4 id="aspect-commands-and-parsers-implementation"><a class="link" href="#aspect-commands-and-parsers-implementation">3.4.3. Aspect: Commands and parsers implementation</a></h4>
+<h4 id="aspect-commands-and-parsers-implementation"><a class="link" href="#aspect-commands-and-parsers-implementation">3.3.3. Aspect: Commands and parsers implementation</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -916,7 +1191,7 @@ Step 1. The user launches the application for the first time. If <code>recordLis
 </div>
 </div>
 <div class="sect3">
-<h4 id="aspect-data-structure-for-managing-multiple-record-types"><a class="link" href="#aspect-data-structure-for-managing-multiple-record-types">3.4.4. Aspect: Data Structure for managing multiple record types</a></h4>
+<h4 id="aspect-data-structure-for-managing-multiple-record-types"><a class="link" href="#aspect-data-structure-for-managing-multiple-record-types">3.3.4. Aspect: Data Structure for managing multiple record types</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -950,14 +1225,14 @@ Step 1. The user launches the application for the first time. If <code>recordLis
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.5. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.4. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.6, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.5, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -988,15 +1263,15 @@ Step 1. The user launches the application for the first time. If <code>recordLis
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.6. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.5. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="calendar-feature"><a class="link" href="#calendar-feature">3.7. Calendar feature</a></h3>
+<h3 id="calendar-feature"><a class="link" href="#calendar-feature">3.6. Calendar feature</a></h3>
 <div class="sect3">
-<h4 id="implementation-4"><a class="link" href="#implementation-4">3.7.1. Implementation</a></h4>
+<h4 id="implementation-3"><a class="link" href="#implementation-3">3.6.1. Implementation</a></h4>
 <div class="paragraph">
 <p>The calendar feature works along with a scheduler. Calendar stores internally a <code>calendarEntries</code> list and a <code>pastReminders</code> list.
 Calendar entries consists of reminders and events. Past reminders list is dynamically determined by time and all reminders in this
@@ -1079,7 +1354,7 @@ If an event or reminder command fails its execution, it will not call <code>Mode
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.7.2. Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.6.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-scheduler-updates-upcoming-reminders"><a class="link" href="#aspect-how-scheduler-updates-upcoming-reminders">Aspect: How scheduler updates upcoming reminders</a></h5>
 <div class="ulist">
@@ -1149,7 +1424,7 @@ If an event or reminder command fails its execution, it will not call <code>Mode
 </div>
 </div>
 <div class="sect2">
-<h3 id="personalised-user-experience-feature"><a class="link" href="#personalised-user-experience-feature">3.8. Personalised User Experience Feature</a></h3>
+<h3 id="personalised-user-experience-feature"><a class="link" href="#personalised-user-experience-feature">3.7. Personalised User Experience Feature</a></h3>
 <div class="paragraph">
 <p>To personalise the diabetic user’s the experience in using the SugarMummy app, several sub-features are used,
 including:</p>
@@ -1171,7 +1446,7 @@ including:</p>
 </ul>
 </div>
 <div class="sect3">
-<h4 id="overview-2"><a class="link" href="#overview-2">3.8.1. Overview</a></h4>
+<h4 id="overview"><a class="link" href="#overview">3.7.1. Overview</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1231,7 +1506,7 @@ modifying the CSS file used itself.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="implementation-5"><a class="link" href="#implementation-5">3.8.2. Implementation</a></h4>
+<h4 id="implementation-4"><a class="link" href="#implementation-4">3.7.2. Implementation</a></h4>
 <div class="sect4">
 <h5 id="biography"><a class="link" href="#biography">Biography</a></h5>
 <div class="paragraph">
@@ -1587,7 +1862,7 @@ of <code>ModelManager</code> when the program first starts up.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.8.3. Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.7.3. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="number-of-users"><a class="link" href="#number-of-users">Number of Users</a></h5>
 <div class="ulist">
@@ -1679,7 +1954,7 @@ not have to wait till the end of the day in order for a change in quote to be ob
 </div>
 </div>
 <div class="sect3">
-<h4 id="achievement-measures-and-criteria"><a class="link" href="#achievement-measures-and-criteria">3.8.4. Achievement Measures and Criteria</a></h4>
+<h4 id="achievement-measures-and-criteria"><a class="link" href="#achievement-measures-and-criteria">3.7.4. Achievement Measures and Criteria</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1712,7 +1987,7 @@ health), but also acquire a good habit of keying in and storing records.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="future-developments"><a class="link" href="#future-developments">3.8.5. Future Developments</a></h4>
+<h4 id="future-developments"><a class="link" href="#future-developments">3.7.5. Future Developments</a></h4>
 <div class="sect4">
 <h5 id="saving-of-user-s-preferred-themes-code-coming-in-v2-0-code"><a class="link" href="#saving-of-user-s-preferred-themes-code-coming-in-v2-0-code">Saving of user&#8217;s preferred themes: <code>[coming in v2.0]</code></a></h5>
 <div class="paragraph">
@@ -2600,4 +2875,4 @@ COUNT takes integer value between 1 and 12 inclusive.</code></p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-06 06:57:11 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-06 15:15:08 UTC</div></div></div></body></html>
