@@ -11,7 +11,7 @@
 <div class="sectionbody">
 <div class="paragraph">
 <p>SugarMummy is a desktop application used to manage a type-II diabetic lifestyle. The user interacts with it using a CLI,
-and it has a GUI created with JavaFx. It is written in Java and has about 24 kLOC.</p>
+and it has a GUI created with JavaFx. It is written in Java and has about 29 kLOC.</p>
 </div>
 </div>
 </div>
@@ -22,18 +22,30 @@ and it has a GUI created with JavaFx. It is written in Java and has about 24 kLO
 <ul>
 <li>
 <p><strong>Major enhancement</strong>: added <strong>the ability for the application to provide a personalised user experience for the
-user through a user biography and achievements.</strong></p>
+user.</strong></p>
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: Allows the user to view, add, edit and clear his / her biography of important personal information, as well as attain different levels of achievements upon meeting predefined requirements.</p>
+<p>What it does: Allows the user to:</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>View, add, edit and clear his / her biography.</p>
 </li>
 <li>
-<p>Justification: These features improve the product significantly because a user would want to add a user profile with useful information especially in times of emergency and acquire a sense of achievement at different milestones.</p>
+<p>Attain different levels of achievements upon meeting predefined requirements.</p>
 </li>
 <li>
-<p>Highlights: These enhancements benefit commands to be added in future since new fields in a user&#8217;s biography as well as achievement could be easily defined in further developments. Implementation of the <code>Achievements</code> sub-feature in
-particular was challenging as it required careful interaction with other features such as the <code>average</code> feature and
+<p>Customise font and background to <em>any</em> hexadecimal-value colour (or image for background).</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Justification: These features improve the product significantly because a user would want to add a user  profile with useful information especially in times of emergency, acquire a sense of achievement at different milestones, and enjoy a substantial degree of flexibility in aesthetic customisation, representing his / her preferences, that enhances his / her overall quality of comfort in using the app.</p>
+</li>
+<li>
+<p>Highlights: These enhancements benefit commands to be added in future since new fields in a user&#8217;s biography, achievements and aesthetic preferences could be easily defined in further developments via inheritance and polymorphism. Implementation of the <code>Achievements</code> sub-feature was particularly challenging as it required careful interaction with other features such as the <code>average</code> feature and
 <code>record</code> instances, and maintaining balance between abstraction and minimising coupling.</p>
 </li>
 </ul>
@@ -44,12 +56,7 @@ particular was challenging as it required careful interaction with other feature
 <div class="ulist">
 <ul>
 <li>
-<p>Added the ability for users to change font and background to any hexadecimal-value colour or image for background,
-with support to set predefined background image sizes and repeat patterns.</p>
-</li>
-<li>
-<p>Added over 600+ motivational quotes to be selected at random and shown to the user for each session of the
-running of the program.</p>
+<p>Added over 600+ motivational quotes from various sources to be selected at random and shown to the user for each session of the main application&#8217;s execution.</p>
 </li>
 </ul>
 </div>
@@ -73,6 +80,9 @@ running of the program.</p>
 <a href="https://github.com/AY1920S1-CS2103-T16-1/main/pull/173">#173</a>, <a href="https://github.com/AY1920S1-CS2103-T16-1/main/pull/176">#176</a>,
 <a href="https://github.com/AY1920S1-CS2103-T16-1/main/pull/181">#181</a>)</p>
 </li>
+<li>
+<p>Standardised project structure for <code>v1.4</code> release. (Pull request <a href="https://github.com/AY1920S1-CS2103-T16-1/main/pull/183">#183</a>)</p>
+</li>
 </ul>
 </div>
 </li>
@@ -81,7 +91,7 @@ running of the program.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Abstracted code in MainApp to reduce code redundancies.
+<p>Abstracted code in MainApp to significantly reduce code redundancies and improve code readability.
 (Pull request <a href="https://github.com/AY1920S1-CS2103-T16-1/main/pull/88/commits/07279dd4494f1cd3916b4ee083de1b6fca2d1d1a">#88</a>)</p>
 </li>
 <li>
@@ -117,8 +127,8 @@ through a helper class with <code>Supplier</code> methods for other features' us
 (Pull request <a href="https://github.com/AY1920S1-CS2103-T16-1/main/pull/62">#62</a>)</p>
 </li>
 <li>
-<p>Implemented <code>StyleSheetManager</code> to add universal aesthetic support for all features. (Pull requests <a href="https://github.com/AY1920S1-CS2103-T16-1/main/pull/92">#92</a>,
-<a href="https://github.com/AY1920S1-CS2103-T16-1/main/pull/94">#94</a>)</p>
+<p>Implemented <code>StyleSheetManager</code> to add universal aesthetic support for all features, along with common scrollpanes. (Pull requests <a href="https://github.com/AY1920S1-CS2103-T16-1/main/pull/92">#92</a>,
+<a href="https://github.com/AY1920S1-CS2103-T16-1/main/pull/94">#94</a>, <a href="https://github.com/AY1920S1-CS2103-T16-1/main/pull/194">#194</a>)</p>
 </li>
 </ul>
 </div>
@@ -801,4 +811,4 @@ appointments that I have to change often due to other commitments</p></td>
 <p>&#8230;&#8203;</p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-07 02:48:39 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-07 03:04:40 UTC</div></div></div></body></html>
