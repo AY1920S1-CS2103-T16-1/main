@@ -1251,6 +1251,14 @@ be possible. At any point of time, generic or not, the user will have exactly on
 (or <code>fontcolor</code>) field set for the application.</p>
 </div>
 <div class="paragraph">
+<p>A user will not be allowed to set the background image in circumstances whereby the background image is not close to
+the "transparent colour", and the background has attributes such that the background size is not <code>cover</code> and the
+background repeat is not <code>repeat</code>. This is because in such circumstances the text could get difficult to see once
+clipping of the image occurs and the image is surrounded by the light transparent background colour. This of course does
+not apply to backgrounds that are colours as colours will naturally cover the entire screen even as the background size
+and background repeat, which are irrelevant for colours, are naturally empty <code>String</code> values.</p>
+</div>
+<div class="paragraph">
 <p>For each successful command, feedback will be displayed to the user on the change in background, be it from a
 background image to a colour, vice versa or other combinations. If a command such as <code>bg s/cover</code> changes only a
 particular attribute of the background, only the changes made will be reported. As for colours, automatic conversion is
@@ -1981,4 +1989,4 @@ You can simply delete the data file within the same directory that you place Sug
 </ol>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-06 18:21:25 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-07 02:48:39 UTC</div></div></div></body></html>
