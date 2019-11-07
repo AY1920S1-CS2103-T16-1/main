@@ -1987,9 +1987,7 @@ be more concise to have them all in a single class rather than as separate enume
 <li>
 <p>It is possible to separate the commands for  <code>fontcolour</code> and <code>background</code> into different commands (eg. <code>addfontcolour</code>,
 <code>editfontcolour</code>, <code>showfontcolour</code>, <code>clrfontcolour</code>). However, this is likely unnecessary as this will not only require the
-end user to type more words, but also introduce redundancy (eg. <code>clrfontcolour</code> could simply be <code>fontcolour black</code> and
-this is not hard to achieve the same effects as <code>clrfontcolour</code>, which also adds a restrictive definition on what the
-default colour to the user upon clearing settings should be).</p>
+end user to type more words, but also introduce redundancy (eg. <code>clrfontcolour</code> could simply be <code>fontcolour black</code> and still achieve the same effects as <code>clrfontcolour</code>).</p>
 </li>
 </ul>
 </div>
@@ -3072,7 +3070,7 @@ Expected: A biography with updated fields name, phone, emergency contacts and me
 Expected: A biography with entered fields is shown in the biography display pane. For listable fields (i.e. of prefix p/ e/ m/ g/), if more than one field is entered, the items will be presented in a numbered list in it&#8217;s cell of the biography table. A message indicating success is displayed in the feedback display pane along with fields added.</p>
 </li>
 <li>
-<p>Test case: `addbio n/firstTestName n/secondTestName p/91234567 e/81234567 m/test medical condition `
+<p>Test case: <code>addbio n/firstTestName n/secondTestName p/91234567 e/81234567 m/test medical condition</code>
 Expected: An error message is displayed showing there cannot be more than one prefix for n/.</p>
 </li>
 <li>
@@ -3440,7 +3438,7 @@ Expected: Background colour is changed to yellow. Feedback message indicates cha
 <div class="olist lowerroman">
 <ol class="lowerroman" type="i">
 <li>
-<p>Test case: `fontcolour yellow bg/black<br>
+<p>Test case: <code>fontcolour yellow bg/black</code><br>
 Expected: Feedback message indicates that there is nothing to change.</p>
 </li>
 </ol>
@@ -3451,7 +3449,7 @@ Expected: Feedback message indicates that there is nothing to change.</p>
 <div class="olist lowerroman">
 <ol class="lowerroman" type="i">
 <li>
-<p>Test case: `bg yellow fontcolour/black<br>
+<p>Test case: <code>bg yellow fontcolour/black</code><br>
 Expected: Feedback message indicates that there is nothing to change.</p>
 </li>
 </ol>
@@ -3683,4 +3681,4 @@ from <a href="https://www.flaticon.com/free-icon/user_149068" class="bare">https
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-07 16:14:07 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-07 17:06:50 UTC</div></div></div></body></html>
