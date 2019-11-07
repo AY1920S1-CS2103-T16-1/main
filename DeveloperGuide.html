@@ -47,7 +47,7 @@
 <li><a href="#instructions-for-manual-testing">Appendix G: Instructions for Manual Testing</a>
 <ul class="sectlevel2">
 <li><a href="#launch-and-shutdown">G.1. Launch and Shutdown</a></li>
-<li><a href="#deleting-a-person">G.2. Deleting a Person</a></li>
+<li><a href="#deleting-a-record">G.2. Deleting a Record</a></li>
 <li><a href="#saving-data">G.3. Saving Data</a></li>
 <li><a href="#average-command">G.4. Average Command</a></li>
 <li><a href="#achievement-commands">G.5. Achievement Commands</a></li>
@@ -227,13 +227,13 @@ The following class plays an important role at the architecture level:</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><code>Logic</code> uses the <code>AddressBookParser</code> class to parse the user command.</p>
+<p><code>Logic</code> uses the <code>SugarMummyParser</code> class to parse the user command.</p>
 </li>
 <li>
 <p>This results in a <code>Command</code> object which is executed by the <code>LogicManager</code>.</p>
 </li>
 <li>
-<p>The command execution can affect the <code>Model</code> (e.g. adding a person).</p>
+<p>The command execution can affect the <code>Model</code> (e.g. adding a <code>Record</code>).</p>
 </li>
 <li>
 <p>The result of the command execution is encapsulated as a <code>CommandResult</code> object which is passed back to the <code>Ui</code>.</p>
@@ -269,9 +269,18 @@ The lifeline for <code>DeleteCommandParser</code> should end at the destroy mark
 <h3 id="Design-Model"><a class="link" href="#Design-Model">2.4. Model component</a></h3>
 <div class="imageblock">
 <div class="content">
-<img src="images/ModelClassDiagram.png" alt="ModelClassDiagram">
+<img src="images/ModelClassDiagramUser.png" alt="ModelClassDiagramUser">
 </div>
-<div class="title">Figure 7. Structure of the Model Component</div>
+<div class="title">Figure 7. Structure of the Model Component for a <code>User</code></div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ModelClassDiagramFood.png" alt="ModelClassDiagramFood">
+</div>
+<div class="title">Figure 8. Structure of the Model Component for <code>Food</code></div>
+</div>
+<div class="paragraph">
+<p>Similar structures can also be applied for <code>Record</code> and <code>Calendar</code>.</p>
 </div>
 <div class="paragraph">
 <p><strong>API</strong> : <a href="https://github.com/AY1920S1-CS2103-T16-1/main/tree/master/src/main/java/seedu/sugarmummy/model/Model.java"><code>Model.java</code></a></p>
@@ -285,38 +294,27 @@ The lifeline for <code>DeleteCommandParser</code> should end at the destroy mark
 <p>stores a <code>UserPref</code> object that represents the user&#8217;s preferences.</p>
 </li>
 <li>
-<p>stores the Address Book data.</p>
+<p>stores SugarMummy data.</p>
 </li>
 <li>
-<p>exposes an unmodifiable <code>ObservableList&lt;Person&gt;</code> that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.</p>
+<p>exposes an unmodifiable <code>ObservableList</code> (eg. <code>ObservableList&lt;Record&gt;</code>) that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.</p>
 </li>
 <li>
 <p>does not depend on any of the other three components.</p>
 </li>
 </ul>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book</code>, which <code>Person</code> can reference. This would allow <code>Address Book</code> to only require one <code>Tag</code> object per unique <code>Tag</code>, instead of each <code>Person</code> needing their own <code>Tag</code> object. An example of how such a model may look like is given below.<br>
-<br>
-<span class="image"><img src="images/BetterModelClassDiagram.png" alt="BetterModelClassDiagram"></span>
-</td>
-</tr>
-</table>
-</div>
 </div>
 <div class="sect2">
 <h3 id="Design-Storage"><a class="link" href="#Design-Storage">2.5. Storage component</a></h3>
 <div class="imageblock">
 <div class="content">
-<img src="images/StorageClassDiagram.png" alt="StorageClassDiagram">
+<img src="images/StorageClassDiagramUser.png" alt="StorageClassDiagramUser">
 </div>
-<div class="title">Figure 8. Structure of the Storage Component</div>
+<div class="title">Figure 9. Structure of the Storage Component for a <code>User</code></div>
+</div>
+<div class="paragraph">
+<p>Similar structures can also be applied for <code>Food</code>, <code>Record</code> and <code>Calendar</code>.</p>
 </div>
 <div class="paragraph">
 <p><strong>API</strong> : <a href="https://github.com/AY1920S1-CS2103-T16-1/main/tree/master/src/main/java/seedu/sugarmummy/storage/Storage.java"><code>Storage.java</code></a></p>
@@ -330,7 +328,7 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 <p>can save <code>UserPref</code> objects in json format and read it back.</p>
 </li>
 <li>
-<p>can save the Address Book data in json format and read it back.</p>
+<p>can save the SugarMummy data in json format and read it back.</p>
 </li>
 </ul>
 </div>
@@ -410,7 +408,7 @@ record list.</p>
 <div class="content">
 <img src="images/AverageSequenceDiagram.png" alt="AverageSequenceDiagram">
 </div>
-<div class="title">Figure 9. Sequence diagram of how average command calculates average values.</div>
+<div class="title">Figure 10. Sequence diagram of how average command calculates average values.</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -435,7 +433,7 @@ This is illustrated in the activity diagram below.</p>
 <div class="content">
 <img src="images/AverageCommandFailureActivityDiagram.png" alt="AverageCommandFailureActivityDiagram">
 </div>
-<div class="title">Figure 10. Activity diagram of user enter an average command.</div>
+<div class="title">Figure 11. Activity diagram of user enter an average command.</div>
 </div>
 <div class="paragraph">
 <p>Step 3. <code>Ui</code> receives average <code>CommandResult</code> from <code>LogicManager</code> and creates a new <code>AverageGraphPane</code>
@@ -468,7 +466,7 @@ user.</p>
 <div class="content">
 <img src="images/AverageUiClassDiagram.png" alt="AverageUiClassDiagram">
 </div>
-<div class="title">Figure 11. Class diagram of average graph ui related classes.</div>
+<div class="title">Figure 12. Class diagram of average graph ui related classes.</div>
 </div>
 </div>
 <div class="sect4">
@@ -2820,15 +2818,15 @@ Expected: The most recent window size and location is retained.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-person"><a class="link" href="#deleting-a-person">G.2. Deleting a Person</a></h3>
+<h3 id="deleting-a-record"><a class="link" href="#deleting-a-record">G.2. Deleting a Record</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Deleting a person while all persons are listed</p>
+<p>Deleting a record while all records are listed</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Prerequisites: List all persons using the <code>list</code> command. Multiple persons in the list.</p>
+<p>Prerequisites: List all records using the <code>list</code> command. Multiple records in the list.</p>
 </li>
 <li>
 <p>Test case: <code>delete 1</code><br>
@@ -2836,7 +2834,7 @@ Expected: First contact is deleted from the list. Details of the deleted contact
 </li>
 <li>
 <p>Test case: <code>delete 0</code><br>
-Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.</p>
+Expected: No record is deleted. Error details shown in the status message. Status bar remains the same.</p>
 </li>
 <li>
 <p>Other incorrect delete commands to try: <code>delete</code>, <code>delete x</code> (where x is larger than the list size) <em>{give more}</em><br>
@@ -3681,4 +3679,4 @@ from <a href="https://www.flaticon.com/free-icon/user_149068" class="bare">https
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-07 17:06:50 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-07 18:42:54 UTC</div></div></div></body></html>
