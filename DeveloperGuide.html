@@ -1898,6 +1898,25 @@ is not reload so as to optimise performance of the program and minimise unnecess
 </li>
 </ul>
 </div>
+<div class="ulist">
+<ul>
+<li>
+<p>The full list of <code>Achievement</code> items, as well as corresponding <code>State</code> and <code>Level</code> possible to attain for each <code>RecordType</code> in the current version of the program are shown as follows:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/TableOfAchievements.png" alt="TableOfAchievements">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Each <code>Achievement</code> <code>State</code> is represented by hand-drawn images, which were coloured digitally using Adobe Photoshop. If a developer intends to modify or extend the current list of <code>Achievement</code> items, he or she may also modify or add on to these images that are currently located in <code>/view/images/achievements/</code> of the project directory.</p>
+</li>
+</ul>
+</div>
 </div>
 <div class="sect4">
 <h5 id="motivation"><a class="link" href="#motivation">Motivation</a></h5>
@@ -1955,7 +1974,7 @@ to simply implement and store the <code>User</code> in <code>ModelManager</code>
 <p>The use of <code>enum</code> is a possibility to implement <code>static final background</code> sub-argument values (eg, <code>auto</code> of attribute
 <code>background</code> size). However considerations that eventually led against this idea included the possibility of values that
 are not in proper <code>String</code> format that may not be able to be directly enumerated (leading to the required use of
-additional lengthy switch cases). Additionally other <code>background</code> fields may be added by future developers  and it would
+additional lengthy <code>switch</code> cases). Additionally other <code>background</code> fields may be added by future developers  and it could
 be more concise to have them all in a single class rather than as separate enumerations.</p>
 </li>
 </ul>
@@ -2074,16 +2093,16 @@ Upon termination of the program, the contents of the <code>HashMap</code> could 
 <h5 id="displaying-of-cartoon-avatar-that-represents-the-user-code-coming-in-v2-0-code"><a class="link" href="#displaying-of-cartoon-avatar-that-represents-the-user-code-coming-in-v2-0-code">Displaying of cartoon avatar that represents the user: <code>[coming in v2.0]</code></a></h5>
 <div class="paragraph">
 <p>This feature has yet to be implemented but could possibly be implemented using a class / method that interacts with the
-user&#8217;s <code>RecordList</code>. A larger BMI of the user could be represented by a figure with a wider profile while a smaller BMI
+user&#8217;s <code>RecordList</code>. A higher-value BMI of the user could be represented by a figure with a wider profile while a lower-value BMI
 could lead to the avatar being represented otherwise. Users could also have the option to enable and disable this feature.
-This dynamically changing avatar could be achieved by combining shapes that change according to the values in <code>ReordList</code>,
+This dynamically changing avatar could be achieved by combining shapes that change according to the values in <code>RecordList</code>,
 or by using an existing library that allows for this.</p>
 </div>
 </div>
 <div class="sect4">
 <h5 id="follow-up-on-user-s-goals-code-coming-in-v2-0-code"><a class="link" href="#follow-up-on-user-s-goals-code-coming-in-v2-0-code">Follow up on user&#8217;s goals: <code>[coming in v2.0]</code></a></h5>
 <div class="paragraph">
-<p>This feature has yet to be implemented but could possibly be implemented by first parsing inputs tat the user has
+<p>This feature has yet to be implemented but could possibly be implemented by first parsing inputs that the user has
 entered for the <code>Goal</code> fields. If in a format that is recognised, the program would store the recognised
 parsed <code>Goal</code> and corresponding <code>LocalDate</code> in an <code>ArrayList</code> and <code>JsonStorage</code> file. The program would then check
 the user&#8217;s progress over time by analysing data in the user&#8217;s <code>RecordList</code>, and provide timely feedback by
@@ -2261,7 +2280,7 @@ better and reduce the chances of further health deterioration</p></td>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">diabetic</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">see graphic data summary</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">see graphical data summary</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">minimise the need to read long paragraphs</p></td>
 </tr>
 <tr>
@@ -3664,4 +3683,4 @@ from <a href="https://www.flaticon.com/free-icon/user_149068" class="bare">https
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-07 14:55:46 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-07 16:14:07 UTC</div></div></div></body></html>

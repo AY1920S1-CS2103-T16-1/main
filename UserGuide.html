@@ -35,17 +35,17 @@
 </li>
 <li><a href="#personalised-user-experience">3.3. PERSONALISED USER EXPERIENCE</a>
 <ul class="sectlevel3">
-<li><a href="#show-a-list-of-all-achievements-the-user-has-attained-code-achvm-code">3.3.1. Show a list of all achievements the user has attained: <code>achvm</code></a></li>
-<li><a href="#shows-a-page-displaying-the-user-profile-of-the-user-code-bio-code">3.3.2. Shows a page displaying the user profile of the user: <code>bio</code></a></li>
-<li><a href="#adds-a-biography-for-the-user-using-specified-fields-code-addbio-code">3.3.3. Adds a biography for the user using specified fields: <code>addbio</code></a></li>
-<li><a href="#edits-a-biography-for-the-user-using-specified-fields-code-editbio-code">3.3.4. Edits a biography for the user using specified fields: <code>editbio</code></a></li>
-<li><a href="#clears-the-biography-of-the-user-using-code-clrbio-code">3.3.5. Clears the biography of the user using: <code>clrbio</code></a></li>
-<li><a href="#sets-the-font-color-of-the-text-code-fontcolour-code-or-code-fontcolor-code">3.3.6. Sets the font color of the text: <code>fontcolour</code> or <code>fontcolor</code></a></li>
-<li><a href="#sets-the-background-picture-using-a-specified-file-path-code-bg-code">3.3.7. Sets the background picture using a specified file path: <code>bg</code></a></li>
+<li><a href="#shows-all-the-achievements-that-the-user-has-attained-code-achvm-code">3.3.1. Shows all the achievements that the user has attained: <code>achvm</code></a></li>
+<li><a href="#displays-the-user-s-biography-code-bio-code">3.3.2. Displays the user&#8217;s biography': <code>bio</code></a></li>
+<li><a href="#adds-the-user-s-biography-code-addbio-code">3.3.3. Adds the user&#8217;s biography: <code>addbio</code></a></li>
+<li><a href="#edits-the-user-s-biography-code-editbio-code">3.3.4. Edits the user&#8217;s biography: <code>editbio</code></a></li>
+<li><a href="#clears-the-user-s-biography-code-clrbio-code">3.3.5. Clears the user&#8217;s biography: <code>clrbio</code></a></li>
+<li><a href="#sets-the-font-color-of-the-application-code-fontcolour-code-or-code-fontcolor-code">3.3.6. Sets the font color of the application: <code>fontcolour</code> or <code>fontcolor</code></a></li>
+<li><a href="#sets-the-background-image-or-colour-of-the-application-code-bg-code">3.3.7. Sets the background image or colour of the application: <code>bg</code></a></li>
 <li><a href="#displays-a-motivational-quote-code-no-action-required-code">3.3.8. Displays a motivational quote: <code>[no action required]</code></a></li>
 <li><a href="#saves-the-user-s-preferred-themes-code-coming-in-v2-0-code">3.3.9. Saves the user&#8217;s preferred themes: <code>[coming in v2.0]</code></a></li>
 <li><a href="#shows-a-cartoon-avatar-that-represents-the-user-code-coming-in-v2-0-code">3.3.10. Shows a cartoon avatar that represents the user: <code>[coming in v2.0]</code></a></li>
-<li><a href="#follow-up-on-user-s-goals-code-coming-in-v2-0-code">3.3.11. Follow up on user&#8217;s goals: <code>[coming in v2.0]</code></a></li>
+<li><a href="#follows-up-on-the-user-s-goals-code-coming-in-v2-0-code">3.3.11. Follows up on the user&#8217;s goals: <code>[coming in v2.0]</code></a></li>
 </ul>
 </li>
 <li><a href="#data-summary-analysis">3.4. DATA SUMMARY/ANALYSIS</a>
@@ -362,16 +362,14 @@ Otherwise, mark only those tasks with indices provided or before the specific ti
 <div class="sect2">
 <h3 id="personalised-user-experience"><a class="link" href="#personalised-user-experience">3.3. PERSONALISED USER EXPERIENCE</a></h3>
 <div class="sect3">
-<h4 id="show-a-list-of-all-achievements-the-user-has-attained-code-achvm-code"><a class="link" href="#show-a-list-of-all-achievements-the-user-has-attained-code-achvm-code">3.3.1. Show a list of all achievements the user has attained: <code>achvm</code></a></h4>
+<h4 id="shows-all-the-achievements-that-the-user-has-attained-code-achvm-code"><a class="link" href="#shows-all-the-achievements-that-the-user-has-attained-code-achvm-code">3.3.1. Shows all the achievements that the user has attained: <code>achvm</code></a></h4>
 <div class="paragraph">
 <p>Format: <code>achvm</code></p>
 </div>
 <div class="paragraph">
-<p>Displays the current list of achievements attained by the user, categorised by record type.</p>
-</div>
-<div class="paragraph">
-<p>Each achievement has a picture that represents it, a title, level, state and requirement required to attain
-the achievement. All these information are available upon the entering of the <code>achvm</code> command. However, the user
+<p>Displays the current list of achievements attained by the user, categorised by record type. Each achievement has a picture that represents it, a title, level, state and requirement required to attain
+the achievement.
+All these information are available upon the entering of the <code>achvm</code> command. However, the user
 would only be able to see, for each achievement, the corresponding picture that represents the current state of the
 achievement (eg. if a user has yet to achieve the achievement, he / she will only see a silhouette image of the
 character in the picture rather than the actual image. Achieving the achievement will allow the user to "unlock" its
@@ -514,7 +512,7 @@ measures have been taken to ensure quality in user experience, especially for a 
 </div>
 </div>
 <div class="sect3">
-<h4 id="shows-a-page-displaying-the-user-profile-of-the-user-code-bio-code"><a class="link" href="#shows-a-page-displaying-the-user-profile-of-the-user-code-bio-code">3.3.2. Shows a page displaying the user profile of the user: <code>bio</code></a></h4>
+<h4 id="displays-the-user-s-biography-code-bio-code"><a class="link" href="#displays-the-user-s-biography-code-bio-code">3.3.2. Displays the user&#8217;s biography': <code>bio</code></a></h4>
 <div class="paragraph">
 <p>Format: <code>bio</code></p>
 </div>
@@ -629,15 +627,15 @@ and as such pose no issue.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="adds-a-biography-for-the-user-using-specified-fields-code-addbio-code"><a class="link" href="#adds-a-biography-for-the-user-using-specified-fields-code-addbio-code">3.3.3. Adds a biography for the user using specified fields: <code>addbio</code></a></h4>
+<h4 id="adds-the-user-s-biography-code-addbio-code"><a class="link" href="#adds-the-user-s-biography-code-addbio-code">3.3.3. Adds the user&#8217;s biography: <code>addbio</code></a></h4>
 <div class="paragraph">
 <p>Format: <code>addbio n/NAME [dp/DP PATH] [desc/PROFILE DESCRIPTION] [nric/NRIC] [g/GENDER] [dob/DATE OF BIRTH] p/CONTACT NUMBER&#8230;&#8203; e/EMERGENCY CONTACT&#8230;&#8203; m/MEDICAL CONDITION&#8230;&#8203; [a/ADDRESS] [goal/GOAL]&#8230;&#8203; [o/OTHER BIO INFO]</code></p>
 </div>
 <div class="paragraph">
 <p>A user may add a biography if there isn&#8217;t already an existing one stored in the application. This could occur if the
 storage file is corrupted (refer to above sub-section on <code>bio</code>), or if the user decides to clear the biography (refer to
-following sub-section on <code>clrbio</code> command). A user may add <strong>at most one</strong> biography. If a user attempts to add a
-biography when one already exists, an error message will be shown for the user to either <code>editbio</code> instead or <code>clrbio</code>
+following sub-section on <code>clrbio</code> command). A user may add <strong>at most one</strong> biography.
+If a user attempts to add a biography when one already exists, an error message will be shown for the user to either <code>editbio</code> instead or <code>clrbio</code>
 before adding a new one. Support for multiple user biographies is presently not available nor intended, as the
 application is meant to be fully experienced solely by a single user for maximised personalised user experience. As the
 fields used by <code>addbio</code> and <code>editbio</code> commands are identical and can appear in any order, a user who attempts to edit
@@ -789,13 +787,13 @@ than <code>a/exampleAddress m/test</code> is. Ultimately, the user has a balance
 </div>
 </div>
 <div class="sect3">
-<h4 id="edits-a-biography-for-the-user-using-specified-fields-code-editbio-code"><a class="link" href="#edits-a-biography-for-the-user-using-specified-fields-code-editbio-code">3.3.4. Edits a biography for the user using specified fields: <code>editbio</code></a></h4>
+<h4 id="edits-the-user-s-biography-code-editbio-code"><a class="link" href="#edits-the-user-s-biography-code-editbio-code">3.3.4. Edits the user&#8217;s biography: <code>editbio</code></a></h4>
 <div class="paragraph">
 <p>Format: <code>editbio [n/NAME] [dp/DP PATH] [desc/PROFILE DESCRIPTION] [nric/NRIC] [g/GENDER] [dob/DATE OF BIRTH] [p/[INDEX/]CONTACT NUMBER]&#8230;&#8203; [e/[INDEX/]EMERGENCY CONTACT]&#8230;&#8203; [m/[INDEX/]MEDICAL CONDITION]&#8230;&#8203; [a/ADDRESS] [goal/[INDEX/]GOAL]&#8230;&#8203; [o/OTHER BIO INFO]</code></p>
 </div>
 <div class="paragraph">
-<p>A biography can be edited only if one already exists. An error message will be shown to a user who attempts to use the
-<code>editbio</code> command to edit fields before a biography is added.
+<p>A biography can be edited only if one already exists.
+An error message will be shown to a user who attempts to use the <code>editbio</code> command to edit fields before a biography is added.
 As the fields used by <code>addbio</code> and <code>editbio</code> commands are
 identical and can appear in any order, a user who attempts to add a biography that does not yet exist using the <code>editbio</code>
 command, after receiving the error message, can simply amend <code>editbio</code> to <code>addbio</code> before re-entering the line of
@@ -847,7 +845,7 @@ indices may be specified to edit (a) particular value(s) of the field.</p>
 </ol>
 </div>
 <div class="paragraph">
-<p>If the user intends to edit the second number in the list, he or she may input <code>editbio p/2/1234567</code> to change the second
+<p>If the user intends to edit the second of three phone numbers in a list, he or she may input <code>editbio p/2/1234567</code> to change the second
 number in the list of phone numbers.
 Similarly, if he or she wishes to edit the first and third number,
 <code>editbio p/1/1234567 p/2/12121212</code> would be a valid line of command. Similar to other arguments, this can be combined
@@ -942,13 +940,13 @@ than <code>a/exampleAddress m/test</code> is. Ultimately, the user has a balance
 </div>
 </div>
 <div class="sect3">
-<h4 id="clears-the-biography-of-the-user-using-code-clrbio-code"><a class="link" href="#clears-the-biography-of-the-user-using-code-clrbio-code">3.3.5. Clears the biography of the user using: <code>clrbio</code></a></h4>
+<h4 id="clears-the-user-s-biography-code-clrbio-code"><a class="link" href="#clears-the-user-s-biography-code-clrbio-code">3.3.5. Clears the user&#8217;s biography: <code>clrbio</code></a></h4>
 <div class="paragraph">
 <p>Format: <code>clrbio</code></p>
 </div>
 <div class="paragraph">
 <p>A user may clear his or her biography using the <code>clrbio</code> command. If a biography exists, all data from all biography
-fields will be removed. If a biography does not exist, the user will be displayed a message that the biography is
+fields will be removed. Otherwise, if a biography does not exist, the user will be displayed a message that the biography is
 already empty and there is no biography information to clear.
 If a biography is successfully cleared, the
 biography display pane with an empty biography table is shown to the user. A user cannot execute <code>editbio</code> after
@@ -968,7 +966,7 @@ and as such pose no issue.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="sets-the-font-color-of-the-text-code-fontcolour-code-or-code-fontcolor-code"><a class="link" href="#sets-the-font-color-of-the-text-code-fontcolour-code-or-code-fontcolor-code">3.3.6. Sets the font color of the text: <code>fontcolour</code> or <code>fontcolor</code></a></h4>
+<h4 id="sets-the-font-color-of-the-application-code-fontcolour-code-or-code-fontcolor-code"><a class="link" href="#sets-the-font-color-of-the-application-code-fontcolour-code-or-code-fontcolor-code">3.3.6. Sets the font color of the application: <code>fontcolour</code> or <code>fontcolor</code></a></h4>
 <div class="paragraph">
 <p>Formats:</p>
 </div>
@@ -995,7 +993,7 @@ names recognised by CSS, the colours will be set accordingly on the user&#8217;s
 the program attempts to interpret it as a hexadecimal value colour. Note that <code>transparent</code> is NOT a valid colour.</p>
 </div>
 <div class="paragraph">
-<p>A colour may be set using its hexadecimal value provided it follows format beginning with a '#' followed byt six valid
+<p>A colour may be set using its hexadecimal value provided it follows format beginning with a '#' followed by six valid
 alphanumeric characters representing a hexadecimal colour. For instance, one may enter: <code>fontcolour #FFFF00</code>
 or <code>fontcolor #FFFF3A</code>.</p>
 </div>
@@ -1103,7 +1101,7 @@ user for this command and both <code>fonTColour yElLoW</code> and <code>fONtColO
 </div>
 </div>
 <div class="sect3">
-<h4 id="sets-the-background-picture-using-a-specified-file-path-code-bg-code"><a class="link" href="#sets-the-background-picture-using-a-specified-file-path-code-bg-code">3.3.7. Sets the background picture using a specified file path: <code>bg</code></a></h4>
+<h4 id="sets-the-background-image-or-colour-of-the-application-code-bg-code"><a class="link" href="#sets-the-background-image-or-colour-of-the-application-code-bg-code">3.3.7. Sets the background image or colour of the application: <code>bg</code></a></h4>
 <div class="paragraph">
 <p>Formats:</p>
 </div>
@@ -1420,7 +1418,7 @@ height of avatar)</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="follow-up-on-user-s-goals-code-coming-in-v2-0-code"><a class="link" href="#follow-up-on-user-s-goals-code-coming-in-v2-0-code">3.3.11. Follow up on user&#8217;s goals: <code>[coming in v2.0]</code></a></h4>
+<h4 id="follows-up-on-the-user-s-goals-code-coming-in-v2-0-code"><a class="link" href="#follows-up-on-the-user-s-goals-code-coming-in-v2-0-code">3.3.11. Follows up on the user&#8217;s goals: <code>[coming in v2.0]</code></a></h4>
 <div class="paragraph">
 <p>Allows users to save goals in a certain format such the program will be able to follow-up on the user&#8217;s goals. eg.
 Lose 10kg by 2019-12-28 (system provides updates throughout and determines the user&#8217;s progress as well as how well they
@@ -1989,4 +1987,4 @@ You can simply delete the data file within the same directory that you place Sug
 </ol>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-07 14:55:46 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-07 16:14:07 UTC</div></div></div></body></html>

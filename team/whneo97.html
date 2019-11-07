@@ -156,27 +156,20 @@ targeting end-users. The full section of personalised features in the user guide
 </tbody>
 </table>
 <div class="sect3">
-<h4 id="show-a-list-of-all-achievements-the-user-has-attained-code-achvm-code"><a class="link" href="#show-a-list-of-all-achievements-the-user-has-attained-code-achvm-code">Show a list of all achievements the user has attained: <code>achvm</code></a></h4>
+<h4 id="shows-all-the-achievements-that-the-user-has-attained-code-achvm-code"><a class="link" href="#shows-all-the-achievements-that-the-user-has-attained-code-achvm-code">Shows all the achievements that the user has attained: <code>achvm</code></a></h4>
 <div class="paragraph">
 <p>Format: <code>achvm</code></p>
 </div>
 <div class="paragraph">
-<p>Displays the current list of achievements attained by the user, categorised by record type.</p>
+<p>Displays the current list of achievements attained by the user, categorised by record type. Each achievement has a picture that represents it, a title, level, state and requirement required to attain
+the achievement.</p>
 </div>
 <div class="paragraph">
-<p>Each achievement has a picture that represents it, a title, level, state and requirement required to attain
-the achievement. All these information are available upon the entering of the <code>achvm</code> command. However, the user
-would only be able to see, for each achievement, the corresponding picture that represents the current state of the
-achievement (eg. if a user has yet to achieve the achievement, he / she will only see a silhouette image of the
-character in the picture rather than the actual image. Achieving the achievement will allow the user to "unlock" its
-coloured image).</p>
-</div>
-<div class="paragraph">
-<p>&#8230;&#8203;</p>
+<p>&#8230;&#8203;<em>(Click <a href="https://github.com/AY1920S1-CS2103-T16-1/main/blob/master/docs/UserGuide.adoc#show-a-list-of-all-achievements-the-user-has-attained-achvm">here</a> for more information on the <code>achvm</code> command from the User Guide.)</em></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="shows-a-page-displaying-the-user-profile-of-the-user-code-bio-code"><a class="link" href="#shows-a-page-displaying-the-user-profile-of-the-user-code-bio-code">Shows a page displaying the user profile of the user: <code>bio</code></a></h4>
+<h4 id="displays-the-user-s-biography-code-bio-code"><a class="link" href="#displays-the-user-s-biography-code-bio-code">Displays the user&#8217;s biography': <code>bio</code></a></h4>
 <div class="paragraph">
 <p>Format: <code>bio</code></p>
 </div>
@@ -185,16 +178,18 @@ coloured image).</p>
 contact number, address and other biography information that the user would like to include.</p>
 </div>
 <div class="paragraph">
-<p>&#8230;&#8203;</p>
+<p>&#8230;&#8203;<em>(Click <a href="https://github.com/AY1920S1-CS2103-T16-1/main/blob/master/docs/UserGuide.adoc#shows-a-page-displaying-the-user-profile-of-the-user-bio">here</a> for more information on the <code>bio</code> command from the User Guide.)</em></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="adds-a-biography-for-the-user-using-specified-fields-code-addbio-code"><a class="link" href="#adds-a-biography-for-the-user-using-specified-fields-code-addbio-code">Adds a biography for the user using specified fields: <code>addbio</code></a></h4>
+<h4 id="adds-the-user-s-biography-code-addbio-code"><a class="link" href="#adds-the-user-s-biography-code-addbio-code">Adds the user&#8217;s biography: <code>addbio</code></a></h4>
 <div class="paragraph">
 <p>Format: <code>addbio n/NAME [dp/DP PATH] [desc/PROFILE DESCRIPTION] [nric/NRIC] [g/GENDER] [dob/DATE OF BIRTH] p/CONTACT NUMBER&#8230;&#8203; e/EMERGENCY CONTACT&#8230;&#8203; m/MEDICAL CONDITION&#8230;&#8203; [a/ADDRESS] [goal/GOAL]&#8230;&#8203; [o/OTHER BIO INFO]</code></p>
 </div>
 <div class="paragraph">
-<p>&#8230;&#8203;</p>
+<p>A user may add a biography if there isn&#8217;t already an existing one stored in the application. This could occur if the
+storage file is corrupted (refer to above sub-section on <code>bio</code>), or if the user decides to clear the biography (refer to
+following sub-section on <code>clrbio</code> command). A user may add <strong>at most one</strong> biography.</p>
 </div>
 <div class="paragraph">
 <p>In adding a biography, it is <strong>compulsory</strong> for the user to include the following information (i.e. should not be blank):</p>
@@ -216,9 +211,6 @@ contact number, address and other biography information that the user would like
 </ul>
 </div>
 <div class="paragraph">
-<p>&#8230;&#8203;</p>
-</div>
-<div class="paragraph">
 <p>Examples of <strong>VALID</strong> <code>addbio</code> commands, provided that a biography does not yet exist, include:</p>
 </div>
 <div class="ulist">
@@ -232,46 +224,19 @@ contact number, address and other biography information that the user would like
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>&#8230;&#8203;<em>(Click <a href="https://github.com/AY1920S1-CS2103-T16-1/main/blob/master/docs/UserGuide.adoc#adds-a-biography-for-the-user-using-specified-fields-addbio">here</a> for more information on the <code>addbio</code> command from the User Guide.)</em></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="edits-a-biography-for-the-user-using-specified-fields-code-editbio-code"><a class="link" href="#edits-a-biography-for-the-user-using-specified-fields-code-editbio-code">Edits a biography for the user using specified fields: <code>editbio</code></a></h4>
+<h4 id="edits-the-user-s-biography-code-editbio-code"><a class="link" href="#edits-the-user-s-biography-code-editbio-code">Edits the user&#8217;s biography: <code>editbio</code></a></h4>
 <div class="paragraph">
 <p>Format: <code>editbio [n/NAME] [dp/DP PATH] [desc/PROFILE DESCRIPTION] [nric/NRIC] [g/GENDER] [dob/DATE OF BIRTH] [p/[INDEX/]CONTACT NUMBER]&#8230;&#8203; [e/[INDEX/]EMERGENCY CONTACT]&#8230;&#8203; [m/[INDEX/]MEDICAL CONDITION]&#8230;&#8203; [a/ADDRESS] [goal/[INDEX/]GOAL]&#8230;&#8203; [o/OTHER BIO INFO]</code></p>
 </div>
 <div class="paragraph">
-<p>A biography can be edited only if one already exists. An error message will be shown to a user who attempts to use the
-<code>editbio</code> command to edit fields before a biography is added.</p>
-</div>
-<div class="paragraph">
-<p>&#8230;&#8203;</p>
-</div>
-<div class="paragraph">
-<p>A key aspect of the <code>editbio</code> feature is that for fields that can take multiple values
-(i.e. phone numbers, medical conditions and goals, as described in the <code>addbio</code> section above),
-indices may be specified to edit (a) particular value(s) of the field.</p>
-</div>
-<div class="paragraph">
-<p>Take for instance the following phone numbers that are displayed in the user&#8217;s biography table.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><code>91234567</code></p>
-</li>
-<li>
-<p><code>98765432</code></p>
-</li>
-<li>
-<p><code>81234567</code></p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>If the user intends to edit the second number in the list, he or she may input <code>editbio p/2/1234567</code> to change the second
+<p>A biography can be edited only if one already exists.
+If the user intends to edit the second of three phone numbers in a list, he or she may input <code>editbio p/2/1234567</code> to change the second
 number in the list of phone numbers.</p>
-</div>
-<div class="paragraph">
-<p>&#8230;&#8203;</p>
 </div>
 <div class="paragraph">
 <p>Examples of <strong>VALID</strong> <code>editbio</code> commands, provided that a biography exists, include:</p>
@@ -286,20 +251,26 @@ number in the list of phone numbers.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>&#8230;&#8203;<em>(Click <a href="https://github.com/AY1920S1-CS2103-T16-1/main/blob/master/docs/UserGuide.adoc#edits-a-biography-for-the-user-using-specified-fields-editbio">here</a> for more information on the <code>editbio</code> command from the User Guide.)</em></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="clears-the-biography-of-the-user-using-code-clrbio-code"><a class="link" href="#clears-the-biography-of-the-user-using-code-clrbio-code">Clears the biography of the user using: <code>clrbio</code></a></h4>
+<h4 id="clears-the-user-s-biography-code-clrbio-code"><a class="link" href="#clears-the-user-s-biography-code-clrbio-code">Clears the user&#8217;s biography: <code>clrbio</code></a></h4>
 <div class="paragraph">
 <p>Format: <code>clrbio</code></p>
 </div>
 <div class="paragraph">
 <p>A user may clear his or her biography using the <code>clrbio</code> command. If a biography exists, all data from all biography
-fields will be removed. If a biography does not exist, the user will be displayed a message that the biography is
+fields will be removed. Otherwise, if a biography does not exist, the user will be displayed a message that the biography is
 already empty and there is no biography information to clear.</p>
+</div>
+<div class="paragraph">
+<p>&#8230;&#8203;<em>(Click <a href="https://github.com/AY1920S1-CS2103-T16-1/main/blob/master/docs/UserGuide.adoc#clears-the-biography-of-the-user-using-clrbio">here</a> for more information on the <code>editbio</code> command from the User Guide.)</em></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="sets-the-font-color-of-the-text-code-fontcolour-code-or-code-fontcolor-code"><a class="link" href="#sets-the-font-color-of-the-text-code-fontcolour-code-or-code-fontcolor-code">Sets the font color of the text: <code>fontcolour</code> or <code>fontcolor</code></a></h4>
+<h4 id="sets-the-font-color-of-the-application-code-fontcolour-code-or-code-fontcolor-code"><a class="link" href="#sets-the-font-color-of-the-application-code-fontcolour-code-or-code-fontcolor-code">Sets the font color of the application: <code>fontcolour</code> or <code>fontcolor</code></a></h4>
 <div class="paragraph">
 <p>Formats:</p>
 </div>
@@ -314,23 +285,14 @@ already empty and there is no biography information to clear.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>&#8230;&#8203;</p>
-</div>
-<div class="paragraph">
 <p>To set a colour of a font using a colour name, simply enter <code>fontcolour</code> (or the American spelling <code>fontcolor</code>;
 both are recognised by the program) followed by the intended name of the colour. For instance, one may enter:
 <code>fontcolour yellow</code> or <code>fontcolor skyblue</code>.</p>
 </div>
 <div class="paragraph">
-<p>&#8230;&#8203;</p>
-</div>
-<div class="paragraph">
-<p>A colour may be set using its hexadecimal value provided it follows format beginning with a '#' followed byt six valid
+<p>A colour may be set using its hexadecimal value provided it follows format beginning with a '#' followed by six valid
 alphanumeric characters representing a hexadecimal colour. For instance, one may enter: <code>fontcolour #FFFF00</code>
 or <code>fontcolor #FFFF3A</code>.</p>
-</div>
-<div class="paragraph">
-<p>&#8230;&#8203;</p>
 </div>
 <div class="paragraph">
 <p>Examples of <strong>VALID</strong> <code>fontcolour</code> (or <code>fontcolor</code>) commands:</p>
@@ -349,11 +311,11 @@ or <code>fontcolor #FFFF3A</code>.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>&#8230;&#8203;</p>
+<p>&#8230;&#8203;<em>(Click <a href="https://github.com/AY1920S1-CS2103-T16-1/main/blob/master/docs/UserGuide.adoc#sets-the-font-color-of-the-text-fontcolour-or-fontcolor">here</a> for more information on the <code>editbio</code> command from the User Guide.)</em></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="sets-the-background-picture-using-a-specified-file-path-code-bg-code"><a class="link" href="#sets-the-background-picture-using-a-specified-file-path-code-bg-code">Sets the background picture using a specified file path: <code>bg</code></a></h4>
+<h4 id="sets-the-background-image-or-colour-of-the-application-code-bg-code"><a class="link" href="#sets-the-background-image-or-colour-of-the-application-code-bg-code">Sets the background image or colour of the application: <code>bg</code></a></h4>
 <div class="paragraph">
 <p>Formats:</p>
 </div>
@@ -384,13 +346,7 @@ sub-section above, except that command word used is now <code>bg</code> instead 
 i.e. a user may enter <code>bg blue</code> or <code>bg #202020</code> to set the background image.</p>
 </div>
 <div class="paragraph">
-<p>&#8230;&#8203;</p>
-</div>
-<div class="paragraph">
 <p>In addition to specifying a <code>COLOUR</code>, a user may also specify a <code>PATH</code> for background image.</p>
-</div>
-<div class="paragraph">
-<p>&#8230;&#8203;</p>
 </div>
 <div class="paragraph">
 <p>Examples of <strong>VALID</strong> <code>bg</code> commands:</p>
@@ -412,7 +368,7 @@ i.e. a user may enter <code>bg blue</code> or <code>bg #202020</code> to set the
 </ul>
 </div>
 <div class="paragraph">
-<p>&#8230;&#8203;</p>
+<p>&#8230;&#8203;<em>(Click <a href="https://github.com/AY1920S1-CS2103-T16-1/main/blob/master/docs/UserGuide.adoc#sets-the-background-picture-as-a-colour-or-using-a-specified-file-path-bg">here</a> for more information on the <code>editbio</code> command from the User Guide.)</em></p>
 </div>
 </div>
 </div>
@@ -507,13 +463,6 @@ information in <code>EditedUserDescription</code>. A <code>UserList</code> is us
 </ul>
 </div>
 </li>
-</ul>
-</div>
-<div class="paragraph">
-<p>&#8230;&#8203;</p>
-</div>
-<div class="ulist">
-<ul>
 <li>
 <p>An illustration of how the information flows for the <code>editbio</code> command is shown as follows:</p>
 </li>
@@ -533,9 +482,6 @@ information in <code>EditedUserDescription</code>. A <code>UserList</code> is us
 <div class="paragraph">
 <p>The aesthetics aspects of the application help to support the feature of personalised user experience and are
 implemented using the command words <code>fontcolour</code> and <code>bg</code> respectively.</p>
-</div>
-<div class="paragraph">
-<p>&#8230;&#8203;</p>
 </div>
 <div class="paragraph">
 <p><code>Colour</code> and <code>Background</code> are independent classes, and <code>Colour</code> makes use of enumerations of colour names and
@@ -563,9 +509,6 @@ it is set in <code>ModelManager</code> and saved to Storage. <code>FontColourCom
 </ul>
 </div>
 <div class="paragraph">
-<p>&#8230;&#8203;</p>
-</div>
-<div class="paragraph">
 <p><code>BackgroundParser</code> first determines if the
 argument received is a <code>Colour</code>. If so it returns a <code>BackgroundCommand</code> storing a <code>Background</code> that has a <code>backgroundColour</code> attribute. Otherwise, it checks, via <code>ParserUtil</code> , whether or not the argument before valid prefixes (preamble)
 is a valid file path. If so, a <code>Background</code> that has a <code>backgroundPicPath</code> attribute is used to create the
@@ -576,13 +519,6 @@ is a valid file path. If so, a <code>Background</code> that has a <code>backgrou
 <li>
 <p>Otherwise a <code>ParseException</code> is returned.</p>
 </li>
-</ul>
-</div>
-<div class="paragraph">
-<p>&#8230;&#8203;</p>
-</div>
-<div class="ulist">
-<ul>
 <li>
 <p>An illustration of the logic for handling a <code>bg</code> command is shown as follows:</p>
 </li>
@@ -617,35 +553,14 @@ Similar to how <code>bio</code> is implemented, <code>SugarMummyParser</code> re
 <code>MainDisplayPane</code> node to be the <code>AchievementsPane</code>. Each <code>Achievement</code> is represented using an <code>ImageView</code> in JavaFX
 <code>TilePane</code> so that all images are of the same size.</p>
 </li>
-</ul>
-</div>
-<div class="paragraph">
-<p>&#8230;&#8203;</p>
-</div>
-<div class="ulist">
-<ul>
 <li>
 <p>When the program starts, an <code>AchievementsMap</code> containing a <code>Map</code> of <code>RecordType</code> to <code>List</code> of all <code>Achievement</code> objects
 that the program has is created in <code>ModelManager</code>.</p>
 </li>
-</ul>
-</div>
-<div class="paragraph">
-<p>&#8230;&#8203;</p>
-</div>
-<div class="ulist">
-<ul>
 <li>
 <p>The <code>AchievementStateProcessor</code> class is then called, which iterates through the list of all <code>Record</code> elements
 stored in <code>ModelManager</code> and updates the <code>State</code> of each <code>Achievement</code> if necessary.</p>
 </li>
-</ul>
-</div>
-<div class="paragraph">
-<p>&#8230;&#8203;</p>
-</div>
-<div class="ulist">
-<ul>
 <li>
 <p>Thereafter, for each addition and removal of <code>Record</code> elements, the same process described above is used to update the
 <code>AchievementsMap</code>, that maps <code>RecordType</code> to an <code>AchievementsList</code> of <code>Achievement</code> elements with updated <code>State</code> attributes.</p>
@@ -654,6 +569,21 @@ stored in <code>ModelManager</code> and updates the <code>State</code> of each <
 <p>When the <code>achvm</code> command is received by the program, this <code>AchievementsMap</code> is simply retrieved from <code>ModelManager</code> to
 <code>LogicManager</code> and the corresponding images representing the <code>Achievement</code> objects in the list, with their <code>State</code> values,
 and attributes are presented to the user via the <code>MainDisplayPane</code> of the <code>MainWindow</code>.</p>
+</li>
+<li>
+<p>The full list of <code>Achievement</code> items, as well as corresponding <code>State</code> and <code>Level</code> possible to attain for each <code>RecordType</code> in the current version of the program are shown as follows:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/TableOfAchievements.png" alt="TableOfAchievements">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Each <code>Achievement</code> <code>State</code> is represented by hand-drawn images, which were coloured digitally using Adobe Photoshop. If a developer intends to modify or extend the current list of <code>Achievement</code> items, he or she may also modify or add on to these images that are currently located in <code>/view/images/achievements/</code> of the project directory.</p>
 </li>
 </ul>
 </div>
@@ -695,6 +625,20 @@ of <code>ModelManager</code> when the program first starts up.</p>
 <div class="sect3">
 <h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
 <div class="sect4">
+<h5 id="background-sub-argument-values"><a class="link" href="#background-sub-argument-values">Background Sub-Argument Values</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p>The use of <code>enum</code> is a possibility to implement <code>static final background</code> sub-argument values (eg, <code>auto</code> of attribute
+<code>background</code> size). However considerations that eventually led against this idea included the possibility of values that
+are not in proper <code>String</code> format that may not be able to be directly enumerated (leading to the required use of
+additional lengthy <code>switch</code> cases). Additionally other <code>background</code> fields may be added by future developers  and it could
+be more concise to have them all in a single class rather than as separate enumerations.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
 <h5 id="command-classification"><a class="link" href="#command-classification">Command Classification</a></h5>
 <div class="ulist">
 <ul>
@@ -733,39 +677,21 @@ to the program on top of the possibility of severely breaking abstraction.</p>
 <div class="paragraph">
 <p>This feature has not currently been implemented, but could possibly be implemented using the existing
 <code>StyleManager</code> class, which processes users' <code>background</code> and <code>fontColour</code>. A <code>List</code> could be used to save an
-archive of users' preferred themes during that session.</p>
-</div>
-<div class="paragraph">
-<p>&#8230;&#8203;</p>
-</div>
-<div class="paragraph">
-<p>A variable would serve as a current pointer to determine the current theme the user is using. A change in theme could
-be achieved by updating the pointer and / or the <code>HashMap</code>, if any is implemented.</p>
-</div>
-<div class="paragraph">
-<p>&#8230;&#8203;</p>
-</div>
-<div class="paragraph">
-<p>Upon termination of the program, the contents of the <code>HashMap</code> could be saved to a <code>JsonStorage</code> file.</p>
-</div>
-<div class="paragraph">
-<p>&#8230;&#8203;</p>
+archive of users' preferred themes during that session.
+A variable would serve as a current pointer to determine the current theme the user is using. A change in theme could
+be achieved by updating the pointer and / or the <code>HashMap</code>, if any is implemented.
+Upon termination of the program, the contents of the <code>HashMap</code> could be saved to a <code>JsonStorage</code> file.</p>
 </div>
 </div>
 <div class="sect4">
 <h5 id="follow-up-on-user-s-goals-code-coming-in-v2-0-code"><a class="link" href="#follow-up-on-user-s-goals-code-coming-in-v2-0-code">Follow up on user&#8217;s goals: <code>[coming in v2.0]</code></a></h5>
 <div class="paragraph">
-<p>This feature has yet to be implemented but could possibly be implemented by first parsing inputs tat the user has
+<p>This feature has yet to be implemented but could possibly be implemented by first parsing inputs that the user has
 entered for the <code>Goal</code> fields. If in a format that is recognised, the program would store the recognised
 parsed <code>Goal</code> and corresponding <code>LocalDate</code> in an <code>ArrayList</code> and <code>JsonStorage</code> file. The program would then check
 the user&#8217;s progress over time by analysing data in the user&#8217;s <code>RecordList</code>, and provide timely feedback by
-comparing the current date and date by which to reach the <code>Goal</code> targets set.</p>
-</div>
-<div class="paragraph">
-<p>&#8230;&#8203;</p>
-</div>
-<div class="paragraph">
-<p>This feature may also implement some methods from the <code>Reminder</code> feature so the user can choose to automatically be
+comparing the current date and date by which to reach the <code>Goal</code> targets set.
+This feature may also implement some methods from the <code>Reminder</code> feature so the user can choose to automatically be
 reminded about his/her <code>Goal</code> inputs at specific time intervals desired.</p>
 </div>
 <div class="paragraph">
@@ -811,10 +737,23 @@ appointments that I have to change often due to other commitments</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">see summary statistics</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">better track my progress</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">lazy diabetic</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have reminders for exercising</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">force myself to work out.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">family member of a diabetic</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">prioritize my tasks</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be immediately contactable if my family member has an
+emergency situation that requires urgent medical attention</p></td>
+</tr>
 </tbody>
 </table>
 <div class="paragraph">
 <p>&#8230;&#8203;</p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-07 14:55:47 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-07 16:14:07 UTC</div></div></div></body></html>
