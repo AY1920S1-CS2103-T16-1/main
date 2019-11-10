@@ -29,8 +29,7 @@
 <li><a href="#snooze-reminder-code-snooze-code-code-coming-in-v2-0-code">3.2.4. Snooze reminder: <code>snooze</code> <code>[coming in v2.0]</code></a></li>
 <li><a href="#complete-a-task-code-complete-code-code-coming-in-v2-0-code">3.2.5. Complete a task: <code>complete</code> <code>[coming in v2.0]</code></a></li>
 <li><a href="#set-time-zone-code-timezone-code-code-coming-in-v2-0-code">3.2.6. Set time zone: <code>timezone</code> <code>[coming in v2.0]</code></a></li>
-<li><a href="#search-for-entries-in-calendar-code-search-code-code-coming-in-v2-0-code">3.2.7. Search for entries in calendar: <code>search</code> <code>[coming in v2.0]</code></a></li>
-<li><a href="#delete-an-entry-in-calendar-code-coming-in-v2-0-code">3.2.8. Delete an entry in calendar <code>[coming in v2.0]</code></a></li>
+<li><a href="#cancel-an-entry-in-calendar-code-coming-in-v2-0-code">3.2.7. Cancel an entry in calendar <code>[coming in v2.0]</code></a></li>
 </ul>
 </li>
 <li><a href="#personalised-user-experience">3.3. PERSONALISED USER EXPERIENCE</a>
@@ -61,7 +60,8 @@
 <li><a href="#recommending-food-code-recmf-code">3.5.1. Recommending food: <code>recmf</code></a></li>
 <li><a href="#recommending-food-combination-code-recmfmix-code">3.5.2. Recommending food combination: <code>recmfmix</code></a></li>
 <li><a href="#adding-new-food-items-code-addfood-code">3.5.3. Adding new food items : <code>addfood</code></a></li>
-<li><a href="#resetting-food-data-code-resetf-code">3.5.4. Resetting food data: <code>resetf</code></a></li>
+<li><a href="#deleting-an-existing-food-code-deletef-code">3.5.4. Deleting an existing food: <code>deletef</code></a></li>
+<li><a href="#resetting-food-data-code-resetf-code">3.5.5. Resetting food data: <code>resetf</code></a></li>
 </ul>
 </li>
 <li><a href="#other-common-features">3.6. Other Common Features</a>
@@ -284,23 +284,112 @@ This rounded value must be less than 33 to be recorded successfully.</p>
 </div>
 <div class="sect2">
 <h3 id="calendar-and-reminder"><a class="link" href="#calendar-and-reminder">3.2. CALENDAR AND REMINDER</a></h3>
+<div class="paragraph">
+<p>Command arguments:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>d/DESCRIPTION</code> Description can take any values, and it should not be blank.</p>
+</li>
+<li>
+<p><code>dt/DATETIME</code> The format of date time is: <code>yyyy-mm-dd hh:mm</code> and the number should be valid.</p>
+</li>
+<li>
+<p><code>r/REPETITION</code> Repetition can only take value <code>once</code>, <code>daily</code> or <code>weekly</code>(case insensitive).</p>
+</li>
+<li>
+<p><code>td/TIMEDURATION</code> The format of time duration is: <code>hh:mm</code> and it should not be blank. e.g.
+<code>01:30</code> represents 1 hour and 30 minutes.</p>
+</li>
+<li>
+<p><code>ym/YEAR_MONTH</code> The format of year month is: <code>yyyy-mm</code> and the number should be valid.</p>
+</li>
+<li>
+<p><code>ymd/YEAR_MONTH_DAY</code> The format of year month day is: <code>yyyy-mm-dd</code> and the number should be valid.</p>
+</li>
+<li>
+<p><code>ymw/YEAR_MONTH_DAY</code> The format of year month day is: <code>yyyy-dd-dd</code> and the number should be valid(same as year month day).</p>
+</li>
+</ul>
+</div>
 <div class="sect3">
 <h4 id="add-a-reminder-code-reminder-code"><a class="link" href="#add-a-reminder-code-reminder-code">3.2.1. Add a reminder: <code>reminder</code></a></h4>
 <div class="paragraph">
 <p>Format: <code>reminder d/DESCRIPTION dt/DATETIME [r/REPETITION]</code></p>
 </div>
 <div class="paragraph">
-<p>Add a reminder at a specific time starting from a date. There is no repetition by default, user can specify a daily or weekly or no repetition optionally.</p>
+<p>Add a reminder at a specific time and date. There is no repetition by default and user can specify a daily or weekly or no repetition optionally.
+If it is a repeated reminder, the date inputted is the starting date of the reminder(reminder with date time before the current date time is allowed).
+And it provides duplicate and conflicting checking as well as auto merging for reminders added.
+For example, <code>reminder d/insulin inject dt/2019-11-25 17:30 r/daily</code> adds a new reminder of insulin injection at 17:30 everyday from 2019 Nov 25.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>More on duplicate and conflicting check and auto merging</p>
+<div class="ulist">
+<ul>
+<li>
+<p>To avoid duplicate reminders, the app will not accept reminders that already exist in the system(same description, date time and repetition). Similarly,
+reminders that are completely covered by an existing reminder will not be added again. For example, if the previous reminder command is successful,
+<code>reminder d/insulin inject dt/2019-12-01 17:30 r/weekly</code> will not add the new reminder because it is completely covered (whenever the later one shows up, the
+previous one shows up at the same time with the same description). <code>reminder d/insulin inject dt/2019-12-01 12:00 r/daily</code> is not considered covered because
+there could be two injections one day.</p>
+</li>
+<li>
+<p>Moreover, new reminder that covers one or more existing reminders can be added and those existing ones will be removed automatically.
+For example, if <code>reminder d/insulin inject dt/2019-11-20 17:30 r/daily</code> is typed after the
+previous one, it replaces the insulin inject from 2019-11-25 because whenever the previous reminder shows up, the new reminder shows up with the same description.</p>
+</li>
+<li>
+<p>However, if the new reminder overlaps with existing ones but they cannot be merged, it
+will not be added. To illustrate, <code>reminder d/insulin inject dt/2019-11-18 17:30 r/weekly</code> is rejected because on 2019 Nov 18 it shows up at 17:30 alone. After
+2019 Nov 20, this reminder will be a duplicate of the previous one every Monday.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Reminder list side pane</p>
+<div class="ulist">
+<ul>
+<li>
+<p>On the right side of the app window, there is a pane for reminder list with the date showing on the top.
+The reminder list pane is split into two parts: a real-time reminder list on top of a probably missed reminder list.</p>
+</li>
+<li>
+<p>The real-time reminder list is empty if there is no reminder set at current time. If the app is open, the reminders will show up in the pane at the time set by the user.
+For example, if the user opens the app at 17:00 on 2019 Nov 30. A reminder of insulin injection will show up at 17:30 if the user has not closed the app.</p>
+</li>
+<li>
+<p>The probably missed reminder list includes all reminders that should exist in at the time between the starting of day and the time when the user opens the app. For example,
+if the user opens the app at 17:00 on 2019 Nov 30, it lists all reminders from 00:00 to 16:59 on that day.
+However, if the user adds a reminder on 2019 Nov 30 17:10 at 17:20 on that day, it will neither exist in the real-time reminder list pane nor the missed reminder list pane.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect3">
 <h4 id="add-an-event-code-event-code"><a class="link" href="#add-an-event-code-event-code">3.2.2. Add an event: <code>event</code></a></h4>
 <div class="paragraph">
-<p>Format: <code>event d/DESCRIPTION dt/DATETIME [dt/DATETIME]  [td/TIME_DURATION]</code></p>
+<p>Format: <code>event d/DESCRIPTION dt/DATETIME [dt/DATETIME] [td/TIME_DURATION]</code></p>
 </div>
 <div class="paragraph">
-<p>Add an event with starting time and optional ending time.
-Optionally set a reminder some time before the event.</p>
+<p>Add an event with a starting time and an optional ending time(starting time before the current date time is accepted). There is no reminder for an event by default.
+User can also create a reminder for this event by specifying a time duration and a one time reminder will show up at the starting time of the event minus this time duration.
+For example, <code>event d/appointment dt/2019-12-20 14:00 dt/2019-12-20 15:00 td/01:30</code> adds an appointment event on 2019 Dec 20 15:00 to the calendar and a reminder for it at
+13:30 on that day.</p>
+</div>
+<div class="paragraph">
+<p>If only one <code>dt/</code> is presented, it will be recognized as the starting date time. If there are more than one <code>dt/</code>, the first and second one are interpreted as starting and ending
+date time. Starting date time should come before ending date time. If they are equal, then ending date time is discarded.
+A duplicate event(same description and starting date time) will be rejected. However, events that overlap with existing ones are accepted with a message shown to the user.
+For example, <code>event d/appointment dt/2019-12-20 14:00 dt/2019-12-20 16:00</code> will be rejected after the previous event commands. <code>event d/test dt/2019-12-20 13:00 dt/2019-12-20 14:10</code>
+is accepted with a message shown.</p>
 </div>
 </div>
 <div class="sect3">
@@ -309,10 +398,40 @@ Optionally set a reminder some time before the event.</p>
 <p>Format: <code>calendar [ym/YEAR_MONTH] [ymw/YEAR_MONTH_DAY] [ymd/YEAR_MONTH_DAY]</code></p>
 </div>
 <div class="paragraph">
-<p>View calendar entries in a month or in a week or on a day.
-<code>ymw</code> accepts a date also but it will include all days in the same week as the given date and week starts from Monday.
-(If more than one of the arguments are present, then it accepts the one with the smallest time unit. e.g. if <code>ymw</code> and <code>ymd</code> are
-both typed in, then it only shows entries on the given date if the date is valid.)</p>
+<p>View all calendar entries or calendar entries in a month or in a week or on a day.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>If none of the three arguments is presented, it will show all calendar entries added by the user.</p>
+</li>
+<li>
+<p>If one or more of the three arguments are presented, it accepts the one with the smallest time unit. e.g. if <code>ymw</code> and <code>ymd</code> are
+both typed in, it only shows entries on the given date if the date is valid.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ymd/</code> shows the monthly calendar of given date and below the calendar is a list of reminders and events on that day. Particularly, if
+no date is provided, it will show calendar entries on the current date.</p>
+</li>
+<li>
+<p><code>ymw/</code> shows the monthly calendar of given date and below the calendar is a list of reminders and events on each day in the week. <code>ymw/</code>
+accepts a date also and the week picked is 7 days from Monday to Friday which include the given date. Particularly, if no date is provided,
+it will show calendar entries in the current week. For example, <code>calendar ymw/2019-12-03</code> will show a monthly calendar of 2019 December and
+calendar entries from Dec 2 to Dec 8.</p>
+</li>
+<li>
+<p><code>ym/</code> shows the monthly calendar of given month and below the calendar is a list of reminders and events on each day in the month. <code>ym/</code>
+accepts a month. Particularly, if no date is provided, it will show calendar entries in the current week.</p>
+</li>
+<li>
+<p>For the monthly calendar shown, the subscript number beside each date is the number events and reminders on that day. And the current date is
+in a different color.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect3">
@@ -344,16 +463,10 @@ Otherwise, mark only those tasks with indices provided or before the specific ti
 </div>
 </div>
 <div class="sect3">
-<h4 id="search-for-entries-in-calendar-code-search-code-code-coming-in-v2-0-code"><a class="link" href="#search-for-entries-in-calendar-code-search-code-code-coming-in-v2-0-code">3.2.7. Search for entries in calendar: <code>search</code> <code>[coming in v2.0]</code></a></h4>
+<h4 id="cancel-an-entry-in-calendar-code-coming-in-v2-0-code"><a class="link" href="#cancel-an-entry-in-calendar-code-coming-in-v2-0-code">3.2.7. Cancel an entry in calendar <code>[coming in v2.0]</code></a></h4>
 <div class="paragraph">
-<p>Format: <code>search [KEYWORD] [t/TIME] [t/END_TIME] [tp/TYPE] [v/VENUE] [p/PEOPLE]</code></p>
+<p>Format: <code>cancel [et/ENTRYTYPE] [d/DESCRIPTION] [dt/DATETIME] [dt/DATETIME]</code></p>
 </div>
-<div class="paragraph">
-<p>Search for all entries by providing keyword, time interval, type, venue or people.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="delete-an-entry-in-calendar-code-coming-in-v2-0-code"><a class="link" href="#delete-an-entry-in-calendar-code-coming-in-v2-0-code">3.2.8. Delete an entry in calendar <code>[coming in v2.0]</code></a></h4>
 <div class="paragraph">
 <p>Delete an event that you do not want to keep track anymore.</p>
 </div>
@@ -1500,273 +1613,215 @@ you can save any graphs and plots generated in a pdf file.</p>
 </div>
 <div class="sect2">
 <h3 id="food-recommendation"><a class="link" href="#food-recommendation">3.5. Food Recommendation</a></h3>
+<div class="exampleblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">General Note</dt>
+</dl>
+</div>
+<div class="olist small">
+<ol class="small">
+<li>
+<p>If a command requires no user-input arguments,  all the additional inputs after this command string will be ignored and the command will be executed as usual.</p>
+</li>
+<li>
+<p>If a command requires any parameters, the input order is flexible. Duplicate parameters are also allowed, <strong>but only the last occurrence will be considered</strong>.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
 <div class="sect3">
 <h4 id="recommending-food-code-recmf-code"><a class="link" href="#recommending-food-code-recmf-code">3.5.1. Recommending food: <code>recmf</code></a></h4>
 <div class="paragraph">
-<p>Recommends some medically suggested foods for type II diabetes patients.<br>
-To make searching more efficient, the user can specify two kinds of filters and one sorting order:</p>
+<p>Recommends medically suggested foods for type II diabetes patients. The user can specify <code>Flags</code> and <code>Food Names</code> as two kinds of filters, as well as one type of sorting order:</p>
 </div>
-<hr>
 <div class="ulist">
 <ul>
 <li>
-<p>food type: in the form of following flags:</p>
+<p><strong>Flags:</strong> specifies the wanted food type in the form of following flags:</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-topbot grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>-nsv</strong>: non-starchy vegetable, such as <em>Broccoli</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>-sv</strong>: starchy vegetable, such as <em>Potato</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>-f</strong>: fruit, such as <em>Cherry</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>-p</strong>: protein, such as <em>Lean Lamb</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>-s</strong>: snack, such <em>Fig Roll</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>-m</strong>: meal, such as <em>Spanish Omelet</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p><span class="small"><strong>Note:</strong><br>
+1. Flags are case-insensitive and duplicates are allowed, but they will be recognized only when placed before any prefix.<br>
+2. If no flag is specified, it is equivalent to specifying all flags. Namely, foods of all types will be shown.</span></p>
+</div>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Food Names:</strong>: matches foods that contain <strong>one of</strong> given food names in the form of <code>fn/[FOOD_NAME]&#8230;&#8203;</code></p>
 </li>
 </ul>
 </div>
 <div class="exampleblock">
 <div class="content">
 <div class="paragraph">
-<p><strong>-nsv</strong>: non-starchy vegetable, such as broccoli</p>
-</div>
-<div class="paragraph">
-<p><strong>-sv</strong>: starchy vegetable, such as potato</p>
-</div>
-<div class="paragraph">
-<p><strong>-f</strong>: fruit, such as cherry</p>
-</div>
-<div class="paragraph">
-<p><strong>-p</strong>: protein, such as lean lamb</p>
-</div>
-<div class="paragraph">
-<p><strong>-s</strong>: snack, such fig roll</p>
-</div>
-<div class="paragraph">
-<p><strong>-m</strong>: meal, such as spanish omelet</p>
+<p><span class="small"><strong>Note:</strong><br>
+1. Food names are case-insensitive while matching is full-word matching. For example, "chicken" does not match "ch".<br>
+2. If no food name specified after <code>fn/</code>, it is equivalent to matching any food.</span></p>
 </div>
 </div>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Note</dt>
-<dd>
 <div class="ulist">
 <ul>
 <li>
-<p>Flags are case-insensitive.</p>
-</li>
-<li>
-<p>If no flag is specifies, it is equivalent to specifying all flags. Namely, foods of all types will be shown.</p>
-</li>
-<li>
-<p>For fast typing, white spaces are allowed before, between, or after flags. Duplicate flags are also allowed.</p>
-</li>
-</ul>
-</div>
-</dd>
-</dl>
-</div>
-<hr>
+<p><strong>Sorting Order</strong>: determines the presentation order of food cards in <strong>one</strong> of the two forms: <code>+sort/SORT_ORDER_TYPE</code> and <code>-sort/SORT_ORDER_TYPE</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p>food name: in the form of <code>fn/FOOD_NAME [FOOD_NAME]&#8230;&#8203;</code><br></p>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Note</dt>
-<dd>
-<div class="ulist">
-<ul>
-<li>
-<p>Food names are case-insensitive.</p>
+<p><code>+</code> indicates in ascending order and <code>-</code> descending</p>
 </li>
 <li>
-<p>Food name matching is full-word matching. For example, "ch" does not match "chicken", which "chicken" matches both "Chicken" and "Rice with Chicken".</p>
-</li>
-<li>
-<p><code>fn/</code> is the only allowed prefix for <code>recmf</code> command. If only <code>fn/</code> presents without following food names, all foods (of specified types) will be shown.</p>
-</li>
-</ul>
-</div>
-</dd>
-</dl>
-</div>
-</li>
-</ul>
-</div>
-<hr>
-<div class="ulist">
-<ul>
-<li>
-<p>Sorting order: in the form of only one of the following two types:</p>
-<div class="ulist">
-<ul>
-<li>
-<p><code>+sort/SORT_ORDER_TYPE</code>: sort the recommendations in ascending order based on the specified <code>SORT_ORDER_TYPE</code></p>
-<div class="ulist">
-<ul>
-<li>
-<p>Sort order type: in the form of any of the following six types:</p>
-<div class="paragraph">
-<p><code>fn</code>: food name, <code>ft</code>: food type, <code>ca</code>: calorie, <code>gi</code>: glycemic index, <code>su</code>: sugar, <code>fa</code>: fat</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><code>-sort/SORT_ORDER_TYPE</code>: sort the recommendations in descending order</p>
+<p><code>SORT_ORDER_TYPE</code> is required and can be one of the following six:<br>
+<code>fn</code>: food name; <code>ft</code>: food type; <code>ca</code>: calorie; <code>gi</code>: glycemic index; <code>su</code>: sugar; <code>fa</code>: fat</p>
 </li>
 </ul>
 </div>
 </li>
 </ul>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">NOTE</dt>
-<dd>
-<div class="ulist">
-<ul>
-<li>
-<p><code>+sort/SORT_ORDER_TYPE</code> and <code>-sort/SORT_ORDER_TYPE</code> cannot be both present even though they may be with different
-<code>SORT_ORDER_TYPE</code>.</p>
-</li>
-<li>
-<p>Only exactly one valid sort order type will be accepted after the sorting prefix.</p>
-</li>
-<li>
-<p>Specially, for <code>ft</code>, the ascending order is predefined as: nsv, sv, f, p, s, m.
-**</p>
-</li>
-</ul>
-</div>
-</dd>
-</dl>
-</div>
-<hr>
+<div class="exampleblock">
+<div class="content">
 <div class="paragraph">
-<p>Format: <code>recmf [-nsv] [-sv] [-f] [-p] [-s] [-m] [fn/FOOD_NAME FOOD_NAME&#8230;&#8203;]</code></p>
+<p><span class="small"><strong>NOTE:</strong><br>
+1. <code>+sort/SOT</code> and <code>-sort/SOT</code> cannot be both present even though they may have different <code>SOT</code>(<code>SORT_ORDER_TYPE</code>).<br>
+2. Specially, for <code>ft</code>, the ascending order is predefined as: nsv, sv, f, p, s, m.</span></p>
+</div>
+</div>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong>Format:</strong> <code>recmf [-FLAG]&#8230;&#8203; [fn/FOOD_NAME&#8230;&#8203;][±sort/SORT_ORDER_TYPE]</code></p>
 </div>
 <div class="paragraph">
-<p><code>recmf -p -f</code> <code>recmf fn/chicken</code> <code>recmf -p -m -f fn/chicken</code></p>
+<p><strong>Examples:</strong> {recmf -p -f} <code>{recmf fn/chicken rice}</code> {recmf -p -m -f fn/chicken} <code>{recmf -p -nsv +sort/gi}</code></p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="recommending-food-combination-code-recmfmix-code"><a class="link" href="#recommending-food-combination-code-recmfmix-code">3.5.2. Recommending food combination: <code>recmfmix</code></a></h4>
 <div class="paragraph">
-<p>Recommends one food from each type to the user. The nutrition values of all the recommended foods will be summarized as a
-separate food card appended to the end.</p>
+<p>Recommends one food from each type. A summary card of all nutrition values will be appended at the end.</p>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Note</dt>
-<dd>
-<div class="ulist">
-<ul>
-<li>
-<p>This command requires no user-input arguments. All the additional inputs after this command string will be ignored.</p>
-</li>
-<li>
-<p>If any of the summary data is decimals, it will be formatted into two decimal places.</p>
-</li>
-<li>
-<p>Please note the GI (glycemic index) is the average among all foods instead of total sum. This For more information about
-GI, please refer to this <a href="https://en.wikipedia.org/wiki/Glycemic_index">link</a></p>
-</li>
-</ul>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p><span class="small"><strong>Note:</strong><br>
+1. All extra inputs after this command string will be ignored.<br>
+2. Food types with no corresponding food data will not be shown. If there is no food data at all, the summary card will not be shown as well.<br>
+3. If any of the summary data is decimals, it will be formatted into two decimal places.<br>
+4. Please note the GI (glycemic index) value is the average instead of sum. For more information about GI, please refer to this <a href="https://en.wikipedia.org/wiki/Glycemic_index">link</a>.</span></p>
 </div>
-</dd>
-</dl>
+</div>
 </div>
 <div class="paragraph">
-<p>Format: <code>recmfmix</code></p>
+<p><strong>Format:</strong> <code>recmfmix</code></p>
 </div>
 <div class="paragraph">
-<p>Example: <code>recmfmix</code></p>
+<p><strong>Example:</strong> <code>recmfmix</code></p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="adding-new-food-items-code-addfood-code"><a class="link" href="#adding-new-food-items-code-addfood-code">3.5.3. Adding new food items : <code>addfood</code></a></h4>
 <div class="paragraph">
-<p>Adds a new food item of certain category for future recommendations.
-The following six fields are compulsorily required:</p>
+<p>Adds a new food item for future recommendations. The following six fields are required:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
 <p>food name: <code>fn/FOOD_NAME</code><br>
-Food name should be less than 30 characters. This is mainly for display quality and readability.
-Only alphabets, numbers, and whitespace are allowed in the name.</p>
+Food name should only contain alphabets, numbers, and whitespace. It should be less than 30 characters for display quality and readability.</p>
 </li>
 <li>
 <p>food type: <code>ft/FOOD_TYPE</code><br>
-Food types should be exactly one of the following: nsv(non-starchy vegetable), sv(starchy vegetable),
-f(fruit), p(protein), s(snack), m(meal).</p>
+Food types should be exactly one of the following: nsv(non-starchy vegetable), sv(starchy vegetable), f(fruit), p(protein), s(snack), or m(meal).</p>
 </li>
 <li>
 <p>calorie (cal): <code>ca/CALORIE</code><br>
-Calorie should be less than 700(cal) to be considered as safe for type II diabetes patients.</p>
+Calorie should be less than 700(cal) per serving.</p>
 </li>
 <li>
 <p>gi: <code>gi/GI</code><br>
-Glycemic Index should be less than 70 to be considered as safe for type II diabetes patients.</p>
+Glycemic Index should be less than 70 per serving.</p>
 </li>
 <li>
 <p>sugar (g): <code>su/SUGAR</code><br>
-Sugar should be less than 25(g) to be considered as safe for type II diabetes patients.</p>
+Sugar should be less than 25(g) per serving.</p>
 </li>
 <li>
 <p>fat (g): <code>fa/FAT</code><br>
-Fat should be less than 35(g) to be considered as safe for type II diabetes patients.</p>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Note</dt>
-<dd>
-<div class="ulist">
-<ul>
-<li>
-<p>No duplicate food names are allowed.</p>
-</li>
-<li>
-<p>All nutrition values are numerical values. Such value should be equal or greater than zero and contain no more than four
-decimals. Besides, the values are suggested to be normalized as per serving for more useful value comparisons and calculations.</p>
-</li>
-<li>
-<p>The order of fields is flexible.</p>
-</li>
-<li>
-<p>Duplicate fields are allowed and only the last one will be considered. Therefore, the last occurrence must be in
-valid format for the command to be executed.</p>
+Fat should be less than 35(g) per serving.</p>
 </li>
 </ul>
 </div>
-</dd>
-</dl>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p><span class="small"><strong>Note:</strong><br>
+1. No duplicate food names are allowed.<br>
+2. All nutrition values should be non-negative numbers and contain no more than four decimals. The decimal point must be between numbers. For example, ".5" and "1." will not be accepted.<br>
+3. Ideally, the input values are normalized as per serving for more practical value comparisons and calculations.</span></p>
 </div>
-</li>
-</ul>
+</div>
 </div>
 <div class="paragraph">
-<p>Format: <code>addfood fn/FOOD_NAME ft/FOOD_TYPE ca/CALORIE gi/GI su/SUGAR fa/FAT</code></p>
+<p><strong>Format:</strong> <code>addfood fn/FOOD_NAME ft/FOOD_TYPE ca/CALORIE gi/GI su/SUGAR fa/FAT</code></p>
 </div>
 <div class="paragraph">
-<p>Example:
-`addfood fn/Cucumber ft/nsv ca/15 gi/15 su/1.7 fa/0 `</p>
+<p><strong>Example:</strong>
+<code>addfood fn/Cucumber ft/nsv ca/15 gi/15 su/1.7 fa/0</code></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="resetting-food-data-code-resetf-code"><a class="link" href="#resetting-food-data-code-resetf-code">3.5.4. Resetting food data: <code>resetf</code></a></h4>
+<h4 id="deleting-an-existing-food-code-deletef-code"><a class="link" href="#deleting-an-existing-food-code-deletef-code">3.5.4. Deleting an existing food: <code>deletef</code></a></h4>
 <div class="paragraph">
-<p>Cleans all the modifications on the foods done by the user, such as deleting newly added foods. Namely, the recommendations will
-be based on the originally pre-loaded food data.</p>
+<p>Deletes a food that matches the specified food name(s).</p>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Note</dt>
-<dd>
-<div class="ulist">
-<ul>
-<li>
-<p>This command requires no user-input arguments. All the additional inputs after this command string will be ignored.</p>
-</li>
-</ul>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p><span class="small"><strong>Note:</strong> FOOD_NAME matching is case-insensitive, but is strict matching for every single character, including white space.
+It is also full matching, such as "Rice with Chicken" does not match with "Chicken".</span></p>
 </div>
-</dd>
-</dl>
+</div>
+</div>
+<div class="paragraph">
+<p>Format: <code>deletef fn/FOOD_NAME</code></p>
+</div>
+<div class="paragraph">
+<p>Example:
+<code>deletef fn/Mushroom</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="resetting-food-data-code-resetf-code"><a class="link" href="#resetting-food-data-code-resetf-code">3.5.5. Resetting food data: <code>resetf</code></a></h4>
+<div class="paragraph">
+<p>Clears all modifications, adding and deleting, on the food list. The food data will be reset to sample food data.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>resetf</code></p>
@@ -1905,7 +1960,9 @@ E.g. <code>bg black fontcolour/yellow</code></p>
 </li>
 <li>
 <p><strong>Calendar</strong> <code>calendar [ym/YEAR_MONTH] [ymw/YEAR_MONTH_DAY] [ymd/YEAR_MONTH_DAY]</code><br>
-E.g. <code>calendar ymd/2019-12-24</code></p>
+E.g. <code>calendar ymd/2019-12-24</code><br>
+E.g. <code>calendar ymw/</code><br>
+E.g. <code>calendar ym/2019-11</code></p>
 </li>
 <li>
 <p><strong>Clear Biography</strong> : <code>clrbio</code></p>
@@ -1923,7 +1980,8 @@ E.g <code>export d/01.09.2019</code></p>
 </li>
 <li>
 <p><strong>Event</strong>: <code>event d/DESCRIPTION dt/DATETIME [dt/DATETIME] [td/TIME_DURATION]</code><br>
-E.g. <code>event d/appointment dt/2019-12-14 16:00 td/01:00</code></p>
+E.g. <code>event d/appointment dt/2019-12-14 16:00 td/01:00</code><br>
+E.g. <code>event d/appointment dt/2019-12-20 11:00 dt/2019-12-20 11:30</code></p>
 </li>
 <li>
 <p><strong>Edit Biography</strong>: <code>editbio [n/NAME] [dp/DP PATH] [desc/PROFILE DESCRIPTION] [nric/NRIC] [g/GENDER] [dob/DATE OF BIRTH] [p/[INDEX/]CONTACT NUMBER]&#8230;&#8203; [e/[INDEX/]EMERGENCY CONTACT]&#8230;&#8203; [m/[INDEX/]MEDICAL CONDITION]&#8230;&#8203; [a/ADDRESS] [goal/[INDEX/]GOAL]&#8230;&#8203; [o/OTHER BIO INFO]</code><br>
@@ -1957,15 +2015,8 @@ E.g. <code>recmf -p -m -f fn/chicken</code></p>
 </li>
 <li>
 <p><strong>Reminder</strong>: <code>reminder d/DESCRIPTION dt/DATETIME [r/REPETITION]</code><br>
-E.g. <code>reminder d/insulin injection dt/2019-11-30 17:30 r/daily</code></p>
-</li>
-<li>
-<p><strong>Search</strong>: <code>search [KEYWORD] [t/TIME] [t/END_TIME] [tp/TYPE] [v/VENUE] [p/PEOPLE]</code><br>
-E.g. <code>search tp/event v/NUH</code></p>
-</li>
-<li>
-<p><strong>Snooze</strong>: <code>snooze [tp/TIME_PERIOD]</code><br>
-E.g <code>snooze 30min</code></p>
+E.g. <code>reminder d/insulin injection dt/2019-11-30 17:30 r/daily</code><br>
+E.g. <code>reminder d/buy bread dt/2019-12-02 19:00 r/weekly</code></p>
 </li>
 </ol>
 </div>
@@ -1987,4 +2038,4 @@ You can simply delete the data file within the same directory that you place Sug
 </ol>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-08 12:28:57 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 00:25:46 UTC</div></div></div></body></html>
