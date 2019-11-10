@@ -1643,7 +1643,7 @@ you can save any graphs and plots generated in a pdf file.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Flags:</strong> specifies the wanted food type in the form of following flags:</p>
+<p><strong>Flags:</strong> specifies the wanted food types in the form of following flags:</p>
 </li>
 </ul>
 </div>
@@ -1654,16 +1654,16 @@ you can save any graphs and plots generated in a pdf file.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>-nsv</strong>: non-starchy vegetable, such as <em>Broccoli</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>-sv</strong>: starchy vegetable, such as <em>Potato</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>-nsv: non-starchy vegetable</strong>, such as <em>Broccoli</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>-sv: starchy vegetable</strong>, such as <em>Potato</em></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>-f</strong>: fruit, such as <em>Cherry</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>-p</strong>: protein, such as <em>Lean Lamb</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>-f: fruit</strong>, such as <em>Cherry</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>-p: protein</strong>, such as <em>Lean Lamb</em></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>-s</strong>: snack, such <em>Fig Roll</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>-m</strong>: meal, such as <em>Spanish Omelet</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>-s: snack</strong>, such <em>Fig Roll</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>-m: meal</strong>, such as <em>Spanish Omelet</em></p></td>
 </tr>
 </tbody>
 </table>
@@ -1679,7 +1679,7 @@ you can save any graphs and plots generated in a pdf file.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Food Names:</strong>: matches foods that contain <strong>one of</strong> given food names in the form of <code>fn/[FOOD_NAME]&#8230;&#8203;</code></p>
+<p><strong>Food Names:</strong> matches foods that contain <strong>one of</strong> given food names in the form of <code>fn/[FOOD_NAME]&#8230;&#8203;</code></p>
 </li>
 </ul>
 </div>
@@ -1687,8 +1687,8 @@ you can save any graphs and plots generated in a pdf file.</p>
 <div class="content">
 <div class="paragraph">
 <p><span class="small"><strong>Note:</strong><br>
-1. Food names are case-insensitive while matching is full-word matching. For example, "chicken" does not match "ch".<br>
-2. If no food name specified after <code>fn/</code>, it is equivalent to matching any food.</span></p>
+1. Matching is case-insensitive but is full-word matching. For example, "chicken" does not match "ch".<br>
+2. If no food name specified after <code>fn/</code>, it is equivalent to matching all foods.</span></p>
 </div>
 </div>
 </div>
@@ -1787,7 +1787,7 @@ Fat should be less than 35(g) per serving.</p>
 <div class="paragraph">
 <p><span class="small"><strong>Note:</strong><br>
 1. No duplicate food names are allowed.<br>
-2. All nutrition values should be non-negative numbers and contain no more than four decimals. The decimal point must be between numbers. For example, ".5" and "1." will not be accepted.<br>
+2. All nutrition values should be non-negative numbers and contain no more than four decimals. Incomplete decimals, such as ".5" and "1.", can be accepted as "0.5" and "1" respectively. However, decimal point alone will not be accepted.<br>
 3. Ideally, the input values are normalized as per serving for more practical value comparisons and calculations.</span></p>
 </div>
 </div>
@@ -1808,8 +1808,8 @@ Fat should be less than 35(g) per serving.</p>
 <div class="exampleblock">
 <div class="content">
 <div class="paragraph">
-<p><span class="small"><strong>Note:</strong> FOOD_NAME matching is case-insensitive, but is strict matching for every single character, including white space.
-It is also full matching, such as "Rice with Chicken" does not match with "Chicken".</span></p>
+<p><span class="small"><strong>Note:</strong> FOOD_NAME matching is case-insensitive, but is strict matching for every single character, including white spaces between words.
+It is also full matching. For example, "Rice with Chicken" does not match with "Chicken".</span></p>
 </div>
 </div>
 </div>
@@ -2041,4 +2041,4 @@ You can simply delete the data file within the same directory that you place Sug
 </ol>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 07:05:56 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 08:50:55 UTC</div></div></div></body></html>
