@@ -285,31 +285,33 @@ This rounded value must be less than 33 to be recorded successfully.</p>
 <div class="sect2">
 <h3 id="calendar-and-reminder"><a class="link" href="#calendar-and-reminder">3.2. CALENDAR AND REMINDER</a></h3>
 <div class="paragraph">
-<p>Command arguments:</p>
+<p>Command arguments for calendar and reminder:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>d/DESCRIPTION</code> Description can take any values, and it should not be blank.</p>
+<p><code>d/DESCRIPTION</code> Description can take any values, and it should not be blank. If more than one are present, the last argument is taken.</p>
 </li>
 <li>
-<p><code>dt/DATETIME</code> The format of date time is: <code>yyyy-mm-dd hh:mm</code> and the number should be valid.</p>
+<p><code>dt/DATETIME</code> The format of date time is: <code>yyyy-mm-dd hh:mm</code> and the number should be valid.
+If more than one are present and the command only accepts one <code>dt/</code>, the last argument is taken. Otherwise, see below in <code>event</code> command for more details.</p>
 </li>
 <li>
-<p><code>r/REPETITION</code> Repetition can only take value <code>once</code>, <code>daily</code> or <code>weekly</code>(case insensitive).</p>
+<p><code>r/REPETITION</code> Repetition can only take value <code>once</code>, <code>daily</code> or <code>weekly</code>(case insensitive). If more than one are present, the last argument is taken.</p>
 </li>
 <li>
 <p><code>td/TIMEDURATION</code> The format of time duration is: <code>hh:mm</code> and it should not be blank. e.g.
-<code>01:30</code> represents 1 hour and 30 minutes.</p>
+<code>01:30</code> represents 1 hour and 30 minutes. If more than one are present, the last argument is taken.</p>
 </li>
 <li>
-<p><code>ym/YEAR_MONTH</code> The format of year month is: <code>yyyy-mm</code> and the number should be valid.</p>
+<p><code>ym/YEAR_MONTH</code> The format of year month is: <code>yyyy-mm</code> and the number should be valid. If more than one are present, the last argument is taken.</p>
 </li>
 <li>
-<p><code>ymd/YEAR_MONTH_DAY</code> The format of year month day is: <code>yyyy-mm-dd</code> and the number should be valid.</p>
+<p><code>ymd/YEAR_MONTH_DAY</code> The format of year month day is: <code>yyyy-mm-dd</code> and the number should be valid. If more than one are present, the last argument is taken.</p>
 </li>
 <li>
-<p><code>ymw/YEAR_MONTH_DAY</code> The format of year month day is: <code>yyyy-dd-dd</code> and the number should be valid(same as year month day).</p>
+<p><code>ymw/YEAR_MONTH_DAY</code> The format of year month day is: <code>yyyy-dd-dd</code> and the number should be valid(same as year month day). If more than one are present, the last argument is taken.
+See below in <code>calendar</code> command for more details if more than one of <code>ym/</code>, <code>ymd</code>, <code>ymw/</code> are present.</p>
 </li>
 </ul>
 </div>
@@ -385,7 +387,7 @@ For example, <code>event d/appointment dt/2019-12-20 14:00 dt/2019-12-20 15:00 t
 13:30 on that day.</p>
 </div>
 <div class="paragraph">
-<p>If only one <code>dt/</code> is presented, it will be recognized as the starting date time. If there are more than one <code>dt/</code>, the first and second one are interpreted as starting and ending
+<p>If only one <code>dt/</code> is present, it will be recognized as the starting date time. If there are more than one <code>dt/</code>, the first and second one are interpreted as starting and ending
 date time. Starting date time should come before ending date time. If they are equal, then ending date time is discarded.
 A duplicate event(same description and starting date time) will be rejected. However, events that overlap with existing ones are accepted with a message shown to the user.
 For example, <code>event d/appointment dt/2019-12-20 14:00 dt/2019-12-20 16:00</code> will be rejected after the previous event commands. <code>event d/test dt/2019-12-20 13:00 dt/2019-12-20 14:10</code>
@@ -403,10 +405,10 @@ is accepted with a message shown.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>If none of the three arguments is presented, it will show all calendar entries added by the user.</p>
+<p>If none of the three arguments is present, it will show all calendar entries added by the user.</p>
 </li>
 <li>
-<p>If one or more of the three arguments are presented, it accepts the one with the smallest time unit. e.g. if <code>ymw</code> and <code>ymd</code> are
+<p>If one or more of the three arguments are present, it accepts the one with the smallest time unit. e.g. if <code>ymw</code> and <code>ymd</code> are
 both typed in, it only shows entries on the given date if the date is valid.</p>
 <div class="ulist">
 <ul>
@@ -446,7 +448,7 @@ in a different color.</p>
 <div class="sect3">
 <h4 id="complete-a-task-code-complete-code-code-coming-in-v2-0-code"><a class="link" href="#complete-a-task-code-complete-code-code-coming-in-v2-0-code">3.2.5. Complete a task: <code>complete</code> <code>[coming in v2.0]</code></a></h4>
 <div class="paragraph">
-<p>Format: <code>complete [INDEX]&#8230;&#8203; [t/TIME]</code></p>
+<p>Format: <code>complete [INDEX] [t/TIME]</code></p>
 </div>
 <div class="paragraph">
 <p>Mark all the reminders before now as completed if no argument provided.
@@ -2038,4 +2040,4 @@ You can simply delete the data file within the same directory that you place Sug
 </ol>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 00:25:46 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 05:30:26 UTC</div></div></div></body></html>
