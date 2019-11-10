@@ -22,7 +22,7 @@
 </li>
 <li><a href="#implementation">3. Implementation</a>
 <ul class="sectlevel2">
-<li><a href="#data-sumamry-analysis-feature">3.1. Data Sumamry/Analysis feature</a></li>
+<li><a href="#data-summary-analysis-feature">3.1. Data Summary/Analysis feature</a></li>
 <li><a href="#data-log-feature">3.2. Data log feature</a></li>
 <li><a href="#logging">3.3. Logging</a></li>
 <li><a href="#Implementation-Configuration">3.4. Configuration</a></li>
@@ -44,30 +44,29 @@
 </li>
 <li><a href="#non-functional-requirements">Appendix D: Non Functional Requirements</a></li>
 <li><a href="#glossary">Appendix E: Glossary</a></li>
-<li><a href="#product-survey">Appendix F: Product Survey</a></li>
-<li><a href="#instructions-for-manual-testing">Appendix G: Instructions for Manual Testing</a>
+<li><a href="#instructions-for-manual-testing">Appendix F: Instructions for Manual Testing</a>
 <ul class="sectlevel2">
-<li><a href="#launch-and-shutdown">G.1. Launch and Shutdown</a></li>
-<li><a href="#saving-data">G.2. Saving Data</a></li>
-<li><a href="#deleting-a-record">G.3. Deleting a Record</a></li>
-<li><a href="#average-command">G.4. Average Command</a></li>
-<li><a href="#achievement-commands">G.5. Achievement Commands</a></li>
-<li><a href="#biography-commands">G.6. Biography Commands</a></li>
-<li><a href="#aesthetics-commands">G.7. Aesthetics Commands</a></li>
-<li><a href="#motivational-quotes-feature">G.8. Motivational Quotes Feature</a></li>
-<li><a href="#reminder-and-event-command">G.9. Reminder and Event Command</a></li>
-<li><a href="#reminder-list-side-pane">G.10. Reminder list side pane</a></li>
-<li><a href="#calendar-command">G.11. Calendar Command</a></li>
-<li><a href="#food-recommendation-feature-2">G.12. Food Recommendation Feature</a></li>
+<li><a href="#launch-and-shutdown">F.1. Launch and Shutdown</a></li>
+<li><a href="#saving-data">F.2. Saving Data</a></li>
+<li><a href="#deleting-a-record">F.3. Deleting a Record</a></li>
+<li><a href="#average-command">F.4. Average Command</a></li>
+<li><a href="#achievement-commands">F.5. Achievement Commands</a></li>
+<li><a href="#biography-commands">F.6. Biography Commands</a></li>
+<li><a href="#aesthetics-commands">F.7. Aesthetics Commands</a></li>
+<li><a href="#motivational-quotes-feature">F.8. Motivational Quotes Feature</a></li>
+<li><a href="#reminder-and-event-command">F.9. Reminder and Event Command</a></li>
+<li><a href="#reminder-list-side-pane">F.10. Reminder list side pane</a></li>
+<li><a href="#calendar-command">F.11. Calendar Command</a></li>
+<li><a href="#food-recommendation-feature-2">F.12. Food Recommendation Feature</a></li>
 </ul>
 </li>
-<li><a href="#references">Appendix H: References</a>
+<li><a href="#references">Appendix G: References</a>
 <ul class="sectlevel2">
-<li><a href="#code-references">H.1. Code References</a></li>
-<li><a href="#reference-on-healthy-blood-sugar-level-ranges-for-diabetic-patients">H.2. Reference on Healthy Blood Sugar Level Ranges for Diabetic Patients</a></li>
-<li><a href="#references-on-food-recommendations">H.3. References on Food Recommendations</a></li>
-<li><a href="#sources-of-motivational-quotes">H.4. Sources of Motivational Quotes</a></li>
-<li><a href="#credits-for-images">H.5. Credits for Images</a></li>
+<li><a href="#code-references">G.1. Code References</a></li>
+<li><a href="#reference-on-healthy-blood-sugar-level-ranges-for-diabetic-patients">G.2. Reference on Healthy Blood Sugar Level Ranges for Diabetic Patients</a></li>
+<li><a href="#references-on-food-recommendations">G.3. References on Food Recommendations</a></li>
+<li><a href="#sources-of-motivational-quotes">G.4. Sources of Motivational Quotes</a></li>
+<li><a href="#credits-for-images">G.5. Credits for Images</a></li>
 </ul>
 </li>
 </ul>
@@ -199,7 +198,7 @@ The following class plays an important role at the architecture level:</p>
 <p><strong>API</strong> : <a href="https://github.com/AY1920S1-CS2103-T16-1/main/tree/master/src/main/java/seedu/sugarmummy/ui/Ui.java"><code>Ui.java</code></a></p>
 </div>
 <div class="paragraph">
-<p>The UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>PersonListPanel</code>, <code>StatusBarFooter</code> etc. All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
+<p>The UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>MainDisplayPane</code>, <code>MotivationQuotesLabel</code>, <code>ReminderListPanel</code> etc. All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
 </div>
 <div class="paragraph">
 <p>The <code>UI</code> component uses JavaFX UI framework. The layout of these UI parts are defined in matching <code>.fxml</code> files that are in the <code>src/main/resources/view</code> folder. For example, the layout of the <a href="https://github.com/AY1920S1-CS2103-T16-1/main/tree/master/src/main/java/seedu/sugarmummy/ui/MainWindow.java"><code>MainWindow</code></a> is specified in <a href="https://github.com/AY1920S1-CS2103-T16-1/main/tree/master/src/main/resources/view/MainWindow.fxml"><code>MainWindow.fxml</code></a></p>
@@ -213,7 +212,7 @@ The following class plays an important role at the architecture level:</p>
 <p>Executes user commands using the <code>Logic</code> component.</p>
 </li>
 <li>
-<p>Listens for changes to <code>Model</code> data so that the UI can be updated with the modified data.</p>
+<p>Listens for changes to <code>Model</code> data so that the UI can be updated with the modified data. (Not shown in class diagram)</p>
 </li>
 </ul>
 </div>
@@ -354,9 +353,9 @@ The lifeline for <code>DeleteCommandParser</code> should end at the destroy mark
 <p>This section describes some noteworthy details on how certain features are implemented.</p>
 </div>
 <div class="sect2">
-<h3 id="data-sumamry-analysis-feature"><a class="link" href="#data-sumamry-analysis-feature">3.1. Data Sumamry/Analysis feature</a></h3>
+<h3 id="data-summary-analysis-feature"><a class="link" href="#data-summary-analysis-feature">3.1. Data Summary/Analysis feature</a></h3>
 <div class="sect3">
-<h4 id="average-graph-feature-displays-the-daily-weekly-monthly-average-of-records-in-a-line-graph-code-average-code"><a class="link" href="#average-graph-feature-displays-the-daily-weekly-monthly-average-of-records-in-a-line-graph-code-average-code">3.1.1. Average graph feature: Displays the daily/weekly/monthly average of records in a line graph: <code>average</code></a></h4>
+<h4 id="average-graph-feature-displays-the-average-values-of-records-in-a-line-graph-code-average-code"><a class="link" href="#average-graph-feature-displays-the-average-values-of-records-in-a-line-graph-code-average-code">3.1.1. Average graph feature: Displays the average values of records in a line graph: <code>average</code></a></h4>
 <div class="paragraph">
 <p>The average graph shows how the average blood sugar level or BMI of users change over time.
 Daily, weekly, monthly average are supported.</p>
@@ -401,10 +400,10 @@ initialized and <code>internalMap</code> will be empty.</p>
 </div>
 <div class="paragraph">
 <p>Step 2. User enters <code>average a/daily rt/bloodsugar n/4</code> in SugarMummy to get daily average blood sugar.
-Input is parsed and send to <code>AverageCommand</code>. <code>AverageCommand</code> then calls <code>Model#updateFilteredRecordList</code>
+Input is parsed and send to <code>AverageCommand</code>. <code>AverageCommand</code> then calls <code>Model#updateFilteredRecordList()</code>
 to filter record list with <code>RecordContainsRecordTypePredicate</code>. This results in a list of
 records containing only blood sugar records. Subsequently, <code>AverageCommand</code> calls
-<code>Model#calculateAverageMap()</code> to update the <code>internalMap</code> to store 4 most recent daily average values by using the filtered
+<code>Model#calculateAverageMap()</code> to update the <code>internalMap</code> to store 4 most recent daily average values based on the filtered
 record list.</p>
 </div>
 <div class="paragraph">
@@ -439,7 +438,7 @@ This is illustrated in the activity diagram below.</p>
 <div class="content">
 <img src="images/AverageCommandFailureActivityDiagram.png" alt="AverageCommandFailureActivityDiagram">
 </div>
-<div class="title">Figure 11. Activity diagram of user enter an average command.</div>
+<div class="title">Figure 11. Activity diagram of user entering an average command.</div>
 </div>
 <div class="paragraph">
 <p>Step 3. <code>Ui</code> receives average <code>CommandResult</code> from <code>LogicManager</code> and creates a new <code>AverageGraphPane</code>
@@ -541,7 +540,7 @@ filtered record list. These 3 statistics will be displayed right under the pie c
 <div class="paragraph">
 <p>The implementation will be similar to average graph feature. But now, <code>UniqueRecordList</code> needs to
 be filtered so that it only contains the two record types needed. To do this, future developer
-need to tweak the current <code>RecordContainsRecordTypePredicate</code> to be able to filter two record types.</p>
+need to tweak the current <code>RecordContainsRecordTypePredicate</code> to be able to filter two different record types.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -2782,44 +2781,7 @@ that is always easily accessible</p></td>
 </div>
 </div>
 <div class="sect1">
-<h2 id="product-survey"><a class="link" href="#product-survey">Appendix F: Product Survey</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>Product Name</strong></p>
-</div>
-<div class="paragraph">
-<p>Author: &#8230;&#8203;</p>
-</div>
-<div class="paragraph">
-<p>Pros:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>&#8230;&#8203;</p>
-</li>
-<li>
-<p>&#8230;&#8203;</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Cons:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>&#8230;&#8203;</p>
-</li>
-<li>
-<p>&#8230;&#8203;</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="instructions-for-manual-testing"><a class="link" href="#instructions-for-manual-testing">Appendix G: Instructions for Manual Testing</a></h2>
+<h2 id="instructions-for-manual-testing"><a class="link" href="#instructions-for-manual-testing">Appendix F: Instructions for Manual Testing</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Given below are instructions to test the app manually.</p>
@@ -2837,7 +2799,7 @@ These instructions only provide a starting point for testers to work on; testers
 </table>
 </div>
 <div class="sect2">
-<h3 id="launch-and-shutdown"><a class="link" href="#launch-and-shutdown">G.1. Launch and Shutdown</a></h3>
+<h3 id="launch-and-shutdown"><a class="link" href="#launch-and-shutdown">F.1. Launch and Shutdown</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2872,7 +2834,7 @@ Expected: The most recent window size and location is retained.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-data"><a class="link" href="#saving-data">G.2. Saving Data</a></h3>
+<h3 id="saving-data"><a class="link" href="#saving-data">F.2. Saving Data</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2920,7 +2882,7 @@ Expected: A message indicating the list is empty will be shown.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-record"><a class="link" href="#deleting-a-record">G.3. Deleting a Record</a></h3>
+<h3 id="deleting-a-record"><a class="link" href="#deleting-a-record">F.3. Deleting a Record</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2932,14 +2894,14 @@ Expected: A message indicating the list is empty will be shown.</p>
 </li>
 <li>
 <p>Test case: <code>delete 1</code><br>
-Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.</p>
+Expected: First record is deleted from the list. Details of the deleted record shown in the status message. Timestamp in the status bar is updated.</p>
 </li>
 <li>
 <p>Test case: <code>delete 0</code><br>
 Expected: No record is deleted. Error details shown in the status message. Status bar remains the same.</p>
 </li>
 <li>
-<p>Other incorrect delete commands to try: <code>delete</code>, <code>delete x</code> (where x is larger than the list size) <em>{give more}</em><br>
+<p>Other incorrect delete commands to try: <code>delete</code>, <code>delete x</code> (where x is larger than the list size)<br>
 Expected: Similar to previous.</p>
 </li>
 </ol>
@@ -2949,7 +2911,7 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="average-command"><a class="link" href="#average-command">G.4. Average Command</a></h3>
+<h3 id="average-command"><a class="link" href="#average-command">F.4. Average Command</a></h3>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
@@ -3035,7 +2997,7 @@ COUNT takes integer value between 1 and 12 inclusive.</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="achievement-commands"><a class="link" href="#achievement-commands">G.5. Achievement Commands</a></h3>
+<h3 id="achievement-commands"><a class="link" href="#achievement-commands">F.5. Achievement Commands</a></h3>
 <div class="olist lowerroman">
 <ol class="lowerroman" type="i">
 <li>
@@ -3116,7 +3078,7 @@ Expected: Bronze level achievement for BloodSugar continues to be shown to be <c
 </div>
 </div>
 <div class="sect2">
-<h3 id="biography-commands"><a class="link" href="#biography-commands">G.6. Biography Commands</a></h3>
+<h3 id="biography-commands"><a class="link" href="#biography-commands">F.6. Biography Commands</a></h3>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
@@ -3305,7 +3267,7 @@ Expected: Last set biography is loaded upon start up and displayed.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="aesthetics-commands"><a class="link" href="#aesthetics-commands">G.7. Aesthetics Commands</a></h3>
+<h3 id="aesthetics-commands"><a class="link" href="#aesthetics-commands">F.7. Aesthetics Commands</a></h3>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
@@ -3536,7 +3498,7 @@ Expected: Feedback message indicates that there is nothing to change.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="motivational-quotes-feature"><a class="link" href="#motivational-quotes-feature">G.8. Motivational Quotes Feature</a></h3>
+<h3 id="motivational-quotes-feature"><a class="link" href="#motivational-quotes-feature">F.8. Motivational Quotes Feature</a></h3>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
@@ -3554,7 +3516,7 @@ Expected: A new motivation quote is selected at random and shown in the pane sho
 </div>
 </div>
 <div class="sect2">
-<h3 id="reminder-and-event-command"><a class="link" href="#reminder-and-event-command">G.9. Reminder and Event Command</a></h3>
+<h3 id="reminder-and-event-command"><a class="link" href="#reminder-and-event-command">F.9. Reminder and Event Command</a></h3>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
@@ -3622,7 +3584,7 @@ Expected: Feedback message indicates that a new event: test2 From 2019-12-01 10:
 </div>
 </div>
 <div class="sect2">
-<h3 id="reminder-list-side-pane"><a class="link" href="#reminder-list-side-pane">G.10. Reminder list side pane</a></h3>
+<h3 id="reminder-list-side-pane"><a class="link" href="#reminder-list-side-pane">F.10. Reminder list side pane</a></h3>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
@@ -3652,7 +3614,7 @@ At 17:00, a reminder of insulin inject is shown in the side pane.<br></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="calendar-command"><a class="link" href="#calendar-command">G.11. Calendar Command</a></h3>
+<h3 id="calendar-command"><a class="link" href="#calendar-command">F.11. Calendar Command</a></h3>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
@@ -3684,7 +3646,7 @@ Nov 22.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="food-recommendation-feature-2"><a class="link" href="#food-recommendation-feature-2">G.12. Food Recommendation Feature</a></h3>
+<h3 id="food-recommendation-feature-2"><a class="link" href="#food-recommendation-feature-2">F.12. Food Recommendation Feature</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3928,10 +3890,10 @@ Expected: <code>Tomato</code> appears in the food recommendations again.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="references"><a class="link" href="#references">Appendix H: References</a></h2>
+<h2 id="references"><a class="link" href="#references">Appendix G: References</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="code-references"><a class="link" href="#code-references">H.1. Code References</a></h3>
+<h3 id="code-references"><a class="link" href="#code-references">G.1. Code References</a></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -4061,13 +4023,13 @@ Expected: <code>Tomato</code> appears in the food recommendations again.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="reference-on-healthy-blood-sugar-level-ranges-for-diabetic-patients"><a class="link" href="#reference-on-healthy-blood-sugar-level-ranges-for-diabetic-patients">H.2. Reference on Healthy Blood Sugar Level Ranges for Diabetic Patients</a></h3>
+<h3 id="reference-on-healthy-blood-sugar-level-ranges-for-diabetic-patients"><a class="link" href="#reference-on-healthy-blood-sugar-level-ranges-for-diabetic-patients">G.2. Reference on Healthy Blood Sugar Level Ranges for Diabetic Patients</a></h3>
 <div class="paragraph">
 <p><a href="https://www.diabetes.co.uk/diabetes_care/blood-sugar-level-ranges.html" class="bare">https://www.diabetes.co.uk/diabetes_care/blood-sugar-level-ranges.html</a></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="references-on-food-recommendations"><a class="link" href="#references-on-food-recommendations">H.3. References on Food Recommendations</a></h3>
+<h3 id="references-on-food-recommendations"><a class="link" href="#references-on-food-recommendations">G.3. References on Food Recommendations</a></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -4086,7 +4048,7 @@ Expected: <code>Tomato</code> appears in the food recommendations again.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="sources-of-motivational-quotes"><a class="link" href="#sources-of-motivational-quotes">H.4. Sources of Motivational Quotes</a></h3>
+<h3 id="sources-of-motivational-quotes"><a class="link" href="#sources-of-motivational-quotes">G.4. Sources of Motivational Quotes</a></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -4129,7 +4091,7 @@ Expected: <code>Tomato</code> appears in the food recommendations again.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="credits-for-images"><a class="link" href="#credits-for-images">H.5. Credits for Images</a></h3>
+<h3 id="credits-for-images"><a class="link" href="#credits-for-images">G.5. Credits for Images</a></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -4152,4 +4114,4 @@ from <a href="https://www.flaticon.com/free-icon/user_149068" class="bare">https
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 14:20:53 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 14:21:40 UTC</div></div></div></body></html>

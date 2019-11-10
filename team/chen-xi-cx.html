@@ -12,7 +12,7 @@
 <div class="paragraph">
 <p>SugarMummy is a desktop application tailored for type 2 diabetics to better manage their day-to-day life.
 Users interact with it using a CLI, and it has a GUI created with JavaFX. It is written in Java and has
-about 19 kLOC.</p>
+about 24 kLOC.</p>
 </div>
 <div class="paragraph">
 <p>Besides being a schedule planner cum reminder app, SugarMummy also supports logging of data such as
@@ -58,7 +58,7 @@ which overrides JavaFX <code>LineChart</code>.</p>
 </div>
 </li>
 <li>
-<p><strong>Code contributed</strong>: [<a href="https://nus-cs2103-ay1920s1.github.io/tp-dashboard/#search=chen-xi-cx&amp;sort=groupTitle&amp;sortWithin=title&amp;since=2019-09-06&amp;timeframe=commit&amp;mergegroup=false&amp;groupSelect=groupByRepos&amp;breakdown=false&amp;tabOpen=true&amp;tabType=authorship&amp;tabAuthor=chen-xi-cx&amp;tabRepo=AY1920S1-CS2103-T16-1%2Fmain%5Bmaster%5D">Code contribution on Reposense Report</a>]</p>
+<p><strong>Code contributed</strong>: [<a href="https://nus-cs2103-ay1920s1.github.io/tp-dashboard/#search=chen-xi-cx&amp;sort=groupTitle&amp;sortWithin=title&amp;since=2019-09-06&amp;timeframe=commit&amp;mergegroup=false&amp;groupSelect=groupByRepos&amp;breakdown=false">Code contribution on Reposense Report</a>]</p>
 </li>
 <li>
 <p><strong>Other contributions</strong>:</p>
@@ -75,7 +75,17 @@ which overrides JavaFX <code>LineChart</code>.</p>
 </div>
 </li>
 <li>
-<p>Enhancements to existing features:</p>
+<p>Documentation:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Update developer guide section 2.1, 2.2 and 2.3 to suit SugarMummy (Pull requests <a href="https://github.com/AY1920S1-CS2103-T16-1/main/pull/178">#178</a>, <a href="https://github.com/AY1920S1-CS2103-T16-1/main/pull/222">#222</a>)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Removal of unused existing features:</p>
 <div class="ulist">
 <ul>
 <li>
@@ -127,7 +137,9 @@ Else, COUNT is set to 5 by default and shows 5 most recent average values.</p>
 </td>
 <td class="content">
 If SugarMummy <strong>does not show exactly</strong> COUNT number of average values,
-that means you do not have enough records in the database.
+that means you do not have enough records in the database. Also, if you enter a field
+more than once e.g <code>average a/daily rt/bloodsugar a/weekly</code>, only the last field will be
+taken. In the example, weekly average will be calculated instead of daily average.
 </td>
 </tr>
 </table>
@@ -191,9 +203,9 @@ you can save any graphs and plots generated in a pdf file.</p>
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="data-sumamry-analysis-feature"><a class="link" href="#data-sumamry-analysis-feature">Data Sumamry/Analysis feature</a></h3>
+<h3 id="data-summary-analysis-feature"><a class="link" href="#data-summary-analysis-feature">Data Summary/Analysis feature</a></h3>
 <div class="sect3">
-<h4 id="average-graph-feature-displays-the-daily-weekly-monthly-average-of-records-in-a-line-graph-code-average-code"><a class="link" href="#average-graph-feature-displays-the-daily-weekly-monthly-average-of-records-in-a-line-graph-code-average-code">Average graph feature: Displays the daily/weekly/monthly average of records in a line graph: <code>average</code></a></h4>
+<h4 id="average-graph-feature-displays-the-average-values-of-records-in-a-line-graph-code-average-code"><a class="link" href="#average-graph-feature-displays-the-average-values-of-records-in-a-line-graph-code-average-code">Average graph feature: Displays the average values of records in a line graph: <code>average</code></a></h4>
 <div class="paragraph">
 <p>The average graph shows how the average blood sugar level or BMI of users change over time.
 Daily, weekly, monthly average are supported.</p>
@@ -238,10 +250,10 @@ initialized and <code>internalMap</code> will be empty.</p>
 </div>
 <div class="paragraph">
 <p>Step 2. User enters <code>average a/daily rt/bloodsugar n/4</code> in SugarMummy to get daily average blood sugar.
-Input is parsed and send to <code>AverageCommand</code>. <code>AverageCommand</code> then calls <code>Model#updateFilteredRecordList</code>
+Input is parsed and send to <code>AverageCommand</code>. <code>AverageCommand</code> then calls <code>Model#updateFilteredRecordList()</code>
 to filter record list with <code>RecordContainsRecordTypePredicate</code>. This results in a list of
 records containing only blood sugar records. Subsequently, <code>AverageCommand</code> calls
-<code>Model#calculateAverageMap()</code> to update the <code>internalMap</code> to store 4 most recent daily average values by using the filtered
+<code>Model#calculateAverageMap()</code> to update the <code>internalMap</code> to store 4 most recent daily average values based on the filtered
 record list.</p>
 </div>
 <div class="paragraph">
@@ -276,7 +288,7 @@ This is illustrated in the activity diagram below.</p>
 <div class="content">
 <img src="../images/AverageCommandFailureActivityDiagram.png" alt="AverageCommandFailureActivityDiagram">
 </div>
-<div class="title">Figure 2. Activity diagram of user enter an average command.</div>
+<div class="title">Figure 2. Activity diagram of user entering an average command.</div>
 </div>
 <div class="paragraph">
 <p>Step 3. <code>Ui</code> receives average <code>CommandResult</code> from <code>LogicManager</code> and creates a new <code>AverageGraphPane</code>
@@ -378,7 +390,7 @@ filtered record list. These 3 statistics will be displayed right under the pie c
 <div class="paragraph">
 <p>The implementation will be similar to average graph feature. But now, <code>UniqueRecordList</code> needs to
 be filtered so that it only contains the two record types needed. To do this, future developer
-need to tweak the current <code>RecordContainsRecordTypePredicate</code> to be able to filter two record types.</p>
+need to tweak the current <code>RecordContainsRecordTypePredicate</code> to be able to filter two different record types.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -408,5 +420,95 @@ display the points in JavaFX <code>ScatterChart</code>.</p>
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="instructions-for-manual-testing"><a class="link" href="#instructions-for-manual-testing">Instructions for Manual Testing</a></h3>
+
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 14:20:53 UTC</div></div></div></body></html>
+<div class="sect2">
+<h3 id="average-command"><a class="link" href="#average-command">Average Command</a></h3>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: There are exactly 7 different days of blood sugar and exactly 7 different days of BMI records.</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>Test case: <code>average a/daily rt/bloodsugar</code><br>
+Expected: Shows a graph with 5 data points. The dates of the 5 data points are the 5 most
+recent blood sugar records.</p>
+</li>
+<li>
+<p>Test case: <code>average a/daily rt/bmi n/10</code><br>
+Expected: Since there are only 7 BMI records, the graph will only have 7 data points instead
+of 10.</p>
+</li>
+<li>
+<p>Test case: <code>average a/yearly rt/bmi n/3</code><br>
+Expected: This is an unsupported average type. An error message is displayed saying<br>
+<code>Please enter correct input for a/AVERAGE_TYPE!<br>
+AVERAGE_TYPE is "daily", "weekly" or "monthly"</code>.</p>
+</li>
+<li>
+<p>Test case: <code>average a/weekly</code><br>
+Expected: Missing compulsory field rt/RECORD_TYPE. An error message is shown:<br>
+<code>Oops! The command you&#8217;ve entered appears to be in an invalid format.<br>
+average: Shows daily/weekly/monthly average of different record types in a line graph.<br>
+Format: average a/AVERAGE_TYPE rt/RECORD_TYPE [n/COUNT]<br>
+Example: average a/daily rt/bloodsugar n/5</code></p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Prerequisites: There are exactly 3 distinct weeks of blood sugar records and no BMI records.</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>Test case: <code>average a/weekly rt/bloodsugar</code><br>
+Expected: Since there are only 3 blood sugar records, the graph will only have 3 data points
+with dates of the 3 most recent blood sugar records in terms of week. There is not enough
+records to show 5 data points.</p>
+</li>
+<li>
+<p>Test case: <code>average a/weekly rt/bmi</code><br>
+Expected: Since there are no bmi records, an error message is displayed saying<br>
+<code>Sorry! You do not have any BMI record.</code></p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Prerequisites: There are at least 12 distinct months of BMI records and no blood sugar records.</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>Test case: <code>average a/monthly rt/bmi n/9</code><br>
+Expected: Shows a graph with 9 data points and these points are the average
+BMI values of the 9 most recent month.</p>
+</li>
+<li>
+<p>Test case: <code>average a/monthly rt/expenses n/3</code><br>
+Expected: This is an unsupported record type. Following error message will be shown:<br>
+<code>Please enter correct input for rt/RECORD_TYPE!<br>
+RECORD_TYPE is "BLOODSUGAR" or "BMI"</code></p>
+</li>
+<li>
+<p>Test case: <code>average a/monthly rt/bmi n/13</code><br>
+Expected: COUNT field is out of the range 1 and 12 inclusive. Following error message will be shown:<br>
+<code>Please enter correct input for n/COUNT!<br>
+COUNT takes integer value between 1 and 12 inclusive.</code></p>
+</li>
+<li>
+<p>Test case: <code>average a/monthly rt/bmi n/five</code><br>
+Expected: COUNT field only takes integer value. Following error message will be shown:<br>
+<code>Please enter correct input for n/COUNT!<br>
+COUNT takes integer value between 1 and 12 inclusive.</code></p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 14:21:40 UTC</div></div></div></body></html>
