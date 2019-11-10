@@ -11,7 +11,7 @@
 <div class="sectionbody">
 <div class="paragraph">
 <p>SugarMummy is a desktop application used to help type-II diabetics develop healthier lifestyle. The user interacts with it using a Command Line Interface,
-and its GUI is created with JavaFx. It is written in Java and has about 24 kLOC.</p>
+and its GUI is created with JavaFx. It is written in Java and has about 30 kLOC.</p>
 </div>
 </div>
 </div>
@@ -28,7 +28,7 @@ and its GUI is created with JavaFx. It is written in Java and has about 24 kLOC.
 <p>What it does: Recommends a list of medically suggested foods to type II diabetics.</p>
 </li>
 <li>
-<p>Justification: This feature is crucial to diabetic patients since their health states are closely related to food consumption.</p>
+<p>Justification: This feature is crucial to diabetic patients since their health states are closely related to food consumptions.</p>
 </li>
 <li>
 <p>Highlights: This feature benefits the extension of more accurate and personalized food recommendations since the food model with nutrition values that can be calculated and analyzed. Besides, it is also useful for future commands that relate to diet records and analysis.</p>
@@ -41,13 +41,13 @@ and its GUI is created with JavaFx. It is written in Java and has about 24 kLOC.
 <div class="ulist">
 <ul>
 <li>
-<p>added a recmfmix command as a concise version of recmf command</p>
+<p>added a <code>recmfmix</code> command as a concise version of <code>recmf</code> command</p>
 </li>
 <li>
-<p>added addfood command that allows the user to expand the database</p>
+<p>added <code>addfood</code> and <code>deletef</code> commands that allows the user to change the food database</p>
 </li>
 <li>
-<p>added resetf command that allows the user to clear newly added foods</p>
+<p>added <code>resetf</code> command that allows the user to clear any modifications on the food database</p>
 </li>
 </ul>
 </div>
@@ -64,7 +64,16 @@ and its GUI is created with JavaFx. It is written in Java and has about 24 kLOC.
 <div class="ulist">
 <ul>
 <li>
-<p>Managed releases <code>v1.3</code> - <code>v1.5rc</code> (3 releases) on GitHub</p>
+<p>Set up the organization and repo</p>
+</li>
+<li>
+<p>Transferred user cases to GitHub project</p>
+</li>
+<li>
+<p>Categorized issue tags</p>
+</li>
+<li>
+<p>Managed releases <code>v1.2.1</code>, <code>v1.3.2</code>, <code>v1.3.3</code>, <code>1.3.6</code> (4 releases) on GitHub</p>
 </li>
 </ul>
 </div>
@@ -73,6 +82,9 @@ and its GUI is created with JavaFx. It is written in Java and has about 24 kLOC.
 <p>Enhancements to existing features:</p>
 <div class="ulist">
 <ul>
+<li>
+<p>Helped construct the display pane switch between commands: <a href="https://github.com/AY1920S1-CS2103-T16-1/main/pull/64">#64</a></p>
+</li>
 <li>
 <p>Constructed a generic Storage class for storage reading and writing: <a href="https://github.com/AY1920S1-CS2103-T16-1/main/pull/65">#65</a></p>
 </li>
@@ -84,13 +96,19 @@ and its GUI is created with JavaFx. It is written in Java and has about 24 kLOC.
 <div class="ulist">
 <ul>
 <li>
-<p>Designed the background for the application. (Pull requests <a href="https://github.com/AY1920S1-CS2103-T16-1/main/pull/22">#22</a>)</p>
+<p>Designed the background for the application: <a href="https://github.com/AY1920S1-CS2103-T16-1/main/pull/22">#22</a></p>
 </li>
 <li>
-<p>Updated application logo. (<a href="https://github.com/AY1920S1-CS2103-T16-1/main/pull/105">#105</a>)</p>
+<p>Added application logo: <a href="https://github.com/AY1920S1-CS2103-T16-1/main/pull/105">#105</a></p>
 </li>
 <li>
-<p>Updated <code>Readme</code> and application screenshots. (Pull requests <a href="https://github.com/AY1920S1-CS2103-T16-1/main/pull/22">#22</a>)</p>
+<p>Updated the initial User Guide, and detailed the food recommendation feature: <a href="https://github.com/AY1920S1-CS2103-T16-1/main/pull/20">#20</a>, <a href="https://github.com/AY1920S1-CS2103-T16-1/main/pull/110">#110</a>, <a href="https://github.com/AY1920S1-CS2103-T16-1/main/pull/214">#214</a></p>
+</li>
+<li>
+<p>Updated <code>Readme</code> and application background: <a href="https://github.com/AY1920S1-CS2103-T16-1/main/pull/22">#22</a></p>
+</li>
+<li>
+<p>Helped finalize the Developer Guide, and detailed the food recommendation feature: <a href="https://github.com/AY1920S1-CS2103-T16-1/main/pull/85">#85</a>, <a href="https://github.com/AY1920S1-CS2103-T16-1/main/pull/185">#185</a>, <a href="https://github.com/AY1920S1-CS2103-T16-1/main/pull/214">#214</a>, <a href="https://github.com/AY1920S1-CS2103-T16-1/main/pull/218">#218</a></p>
 </li>
 </ul>
 </div>
@@ -100,22 +118,10 @@ and its GUI is created with JavaFx. It is written in Java and has about 24 kLOC.
 <div class="ulist">
 <ul>
 <li>
-<p>PRs reviewed (with non-trivial review comments):</p>
-</li>
-<li>
-<p>Contributed to forum discussions</p>
-</li>
-<li>
-<p>Reported bugs and suggestions for other teams in the class</p>
-</li>
-<li>
-<p>Some parts of the history feature I added was adopted by several other class mates</p>
+<p>Reported bugs and suggestions for other teams in the class: <a href="https://github.com/AY1920S1-CS2103T-W11-1/main/issues/225">1</a>, <a href="https://github.com/AY1920S1-CS2103T-W11-1/main/issues/228">2</a>, <a href="https://github.com/AY1920S1-CS2103T-W11-1/main/issues/227">3</a></p>
 </li>
 </ul>
 </div>
-</li>
-<li>
-<p>Tools:</p>
 </li>
 </ul>
 </div>
@@ -346,7 +352,7 @@ It is also full matching. For example, "Rice with Chicken" does not match with "
 </div>
 </div>
 <div class="sect3">
-<h4 id="recovering-food-data-em-recoverf-em-code-coming-in-v2-0-code"><a class="link" href="#recovering-food-data-em-recoverf-em-code-coming-in-v2-0-code">Recovering food data: <em>recoverf</em> <code>coming in v2.0</code></a></h4>
+<h4 id="recovering-food-data-em-recoverf-em-code-coming-in-v2-0-code"><a class="link" href="#recovering-food-data-em-recoverf-em-code-coming-in-v2-0-code">Recovering food data: <em>recoverf</em> <code>[coming in v2.0]</code></a></h4>
 <div class="paragraph">
 <p>Recovers the food data after resetting all the foods.
 The recovered data is based on the food list state just before the <strong>latest recmf command</strong>.
@@ -354,7 +360,7 @@ This would be useful if the user wrongly enter <code>resetf</code> command, or a
 </div>
 </div>
 <div class="sect3">
-<h4 id="editing-a-food-em-editf-em-code-coming-in-v2-0-code"><a class="link" href="#editing-a-food-em-editf-em-code-coming-in-v2-0-code">Editing a food: <em>editf</em> <code>coming in v2.0</code></a></h4>
+<h4 id="editing-a-food-em-editf-em-code-coming-in-v2-0-code"><a class="link" href="#editing-a-food-em-editf-em-code-coming-in-v2-0-code">Editing a food: <em>editf</em> <code>[coming in v2.0]</code></a></h4>
 <div class="paragraph">
 <p>Edits the available food fields, such as food name and GI value, of an existing food.
 The restrictions on field value are the same as the restrictions declared in <code>addfood</code> commands.
@@ -362,7 +368,7 @@ This would provide more flexibility to the user to manipulate food data, instead
 </div>
 </div>
 <div class="sect3">
-<h4 id="recording-and-analyzing-diets-code-coming-in-v2-0-code"><a class="link" href="#recording-and-analyzing-diets-code-coming-in-v2-0-code">Recording and analyzing diets <code>coming in v2.0</code></a></h4>
+<h4 id="recording-and-analyzing-diets-code-coming-in-v2-0-code"><a class="link" href="#recording-and-analyzing-diets-code-coming-in-v2-0-code">Recording and analyzing diets <code>[coming in v2.0]</code></a></h4>
 <div class="paragraph">
 <p>Records the user&#8217;s diets on specified dates and provides daily, weekly, and monthly summaries about nutrition intakes.
 This would allow the user to have an overview of his food consumption statistics.
@@ -804,4 +810,4 @@ The suggestions can be made via (1)calculating ideal nutrition value intake base
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 15:38:00 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 15:45:57 UTC</div></div></div></body></html>
