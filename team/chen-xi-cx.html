@@ -16,7 +16,7 @@ about 24 kLOC.</p>
 </div>
 <div class="paragraph">
 <p>Besides being a schedule planner cum reminder app, SugarMummy also supports logging of data such as
-blood sugar level and BMI. As these data are closely linked to the severity of type 2 diabetes, data
+blood sugar level and BMI. As these data are closely linked to the severity of type 2 diabetes, they
 can be summarized over a time period and presented in a visually intuitive graphical form. This helps
 users to track progressions better. Moreover, there are achievements waiting to be unlocked and they serve
 as extrinsic motivation for users to keep a healthy lifestyle. GUI font color and background are also
@@ -51,7 +51,7 @@ be familiar with the range of healthy and unhealthy values.</p>
 from same day, week or month together without using a separate code for each type. The solution can be
 found in <a href="https://github.com/AY1920S1-CS2103-T16-1/main/tree/master/src/main/java/seedu/sugarmummy/model/statistics/AverageMap.java"><code>AverageMap.java</code></a>.
 The second difficulty was highlighting graph background with colors. JavaFX <code>LineChart</code> does not support
-such functionality hence I had to implement the functionality using through <a href="https://github.com/AY1920S1-CS2103-T16-1/main/tree/master/src/main/java/seedu/sugarmummy/ui/statistics/CustomLineChart.java"><code>CustomLineChart.java</code></a>
+such functionality hence I had to implement the functionality through <a href="https://github.com/AY1920S1-CS2103-T16-1/main/tree/master/src/main/java/seedu/sugarmummy/ui/statistics/CustomLineChart.java"><code>CustomLineChart.java</code></a>
 which overrides JavaFX <code>LineChart</code>.</p>
 </li>
 </ul>
@@ -434,12 +434,12 @@ display the points in JavaFX <code>ScatterChart</code>.</p>
 <ol class="lowerroman" type="i">
 <li>
 <p>Test case: <code>average a/daily rt/bloodsugar</code><br>
-Expected: Shows a graph with 5 data points. The dates of the 5 data points are the 5 most
+    Expected: Shows a graph with 5 data points. The dates of the 5 data points are the 5 most
 recent blood sugar records.</p>
 </li>
 <li>
 <p>Test case: <code>average a/daily rt/bmi n/10</code><br>
-Expected: Since there are only 7 BMI records, the graph will only have 7 data points instead
+    Expected: Since there are only 7 BMI records, the graph will only have 7 data points instead
 of 10.</p>
 </li>
 <li>
@@ -465,7 +465,7 @@ Example: average a/daily rt/bloodsugar n/5</code></p>
 <ol class="lowerroman" type="i">
 <li>
 <p>Test case: <code>average a/weekly rt/bloodsugar</code><br>
-Expected: Since there are only 3 blood sugar records, the graph will only have 3 data points
+    Expected: Since there are only 3 blood sugar records, the graph will only have 3 data points
 with dates of the 3 most recent blood sugar records in terms of week. There is not enough
 records to show 5 data points.</p>
 </li>
@@ -483,7 +483,7 @@ Expected: Since there are no bmi records, an error message is displayed saying<b
 <ol class="lowerroman" type="i">
 <li>
 <p>Test case: <code>average a/monthly rt/bmi n/9</code><br>
-Expected: Shows a graph with 9 data points and these points are the average
+    Expected: Shows a graph with 9 data points and these points are the average
 BMI values of the 9 most recent month.</p>
 </li>
 <li>
@@ -511,4 +511,4 @@ COUNT takes integer value between 1 and 12 inclusive.</code></p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 15:23:01 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 15:38:00 UTC</div></div></div></body></html>
