@@ -62,6 +62,9 @@
 <li><a href="#adding-new-food-items-code-addfood-code">3.5.3. Adding new food items : <code>addfood</code></a></li>
 <li><a href="#deleting-an-existing-food-code-deletef-code">3.5.4. Deleting an existing food: <code>deletef</code></a></li>
 <li><a href="#resetting-food-data-code-resetf-code">3.5.5. Resetting food data: <code>resetf</code></a></li>
+<li><a href="#recovering-food-data-em-recoverf-em-code-coming-in-v2-0-code">3.5.6. Recovering food data: <em>recoverf</em> <code>coming in v2.0</code></a></li>
+<li><a href="#editing-a-food-em-editf-em-code-coming-in-v2-0-code">3.5.7. Editing a food: <em>editf</em> <code>coming in v2.0</code></a></li>
+<li><a href="#recording-and-analyzing-diets-code-coming-in-v2-0-code">3.5.8. Recording and analyzing diets <code>coming in v2.0</code></a></li>
 </ul>
 </li>
 <li><a href="#other-common-features">3.6. Other Common Features</a>
@@ -75,7 +78,7 @@
 <li><a href="#features-coming-in-v2-0">4. Features Coming in v2.0</a>
 <ul class="sectlevel2">
 <li><a href="#autocomplete-command">4.1. Autocomplete Command</a></li>
-<li><a href="#clearing-all-entries-code-clear-all-code">4.2. Clearing all entries: <code>clear all</code></a></li>
+<li><a href="#clearing-all-entries-code-clearall-code">4.2. Clearing all entries: <code>clearall</code></a></li>
 <li><a href="#editing-specific-record-entries-in-the-list-code-edit-index-h-value-w-value-con-value-code">4.3. Editing specific record entries in the list: <code>edit INDEX [h/VALUE] [w/VALUE] [con/VALUE]</code></a></li>
 <li><a href="#encrypting-data-files-code-enc-key-code">4.4. Encrypting data files: <code>enc [KEY]</code></a></li>
 <li><a href="#detailing-workout-schedule">4.5. Detailing workout schedule</a></li>
@@ -1628,7 +1631,7 @@ you can save any graphs and plots generated in a pdf file.</p>
 <div class="olist small">
 <ol class="small">
 <li>
-<p>If a command requires no user-input arguments,  all the additional inputs after this command string will be ignored and the command will be executed as usual.</p>
+<p>If a command requires no user-input arguments,  all the additional inputs after this command string will be ignored, and the command will be executed as usual.</p>
 </li>
 <li>
 <p>If a command requires any parameters, the input order is flexible. Duplicate parameters are also allowed, <strong>but only the last occurrence will be considered</strong>.</p>
@@ -1640,7 +1643,7 @@ you can save any graphs and plots generated in a pdf file.</p>
 <div class="sect3">
 <h4 id="recommending-food-code-recmf-code"><a class="link" href="#recommending-food-code-recmf-code">3.5.1. Recommending food: <code>recmf</code></a></h4>
 <div class="paragraph">
-<p>Recommends medically suggested foods for type II diabetes patients. The user can specify <code>Flags</code> and <code>Food Names</code> as two kinds of filters, as well as one type of sorting order:</p>
+<p>Recommends medically suggested foods for type II diabetes patients. The user can specify flags and food names` as two kinds of filters, as well as one type of sorting order:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1722,25 +1725,24 @@ you can save any graphs and plots generated in a pdf file.</p>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>Format:</strong> <code>recmf [-FLAG]&#8230;&#8203; [fn/FOOD_NAME&#8230;&#8203;][±sort/SORT_ORDER_TYPE]</code></p>
+<p><strong>Format:</strong> <code>recmf [-nsv] [-sv] [-f] [-p] [-s] [-m] [fn/FOOD_NAME&#8230;&#8203;][±sort/SORT_ORDER_TYPE]</code></p>
 </div>
 <div class="paragraph">
-<p><strong>Examples:</strong> {recmf -p -f} <code>{recmf fn/chicken rice}</code> {recmf -p -m -f fn/chicken} <code>{recmf -p -nsv +sort/gi}</code></p>
+<p><strong>Examples:</strong> <code>recmf -p -f</code>, <code>recmf fn/chicken rice</code>, <code>recmf -p -m -f fn/chicken</code>, <code>recmf -p -nsv +sort/gi</code></p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="recommending-food-combination-code-recmfmix-code"><a class="link" href="#recommending-food-combination-code-recmfmix-code">3.5.2. Recommending food combination: <code>recmfmix</code></a></h4>
 <div class="paragraph">
-<p>Recommends one food from each type. A summary card of all nutrition values will be appended at the end.</p>
+<p>Recommends one food from each type. A summary card will be appended at the end.</p>
 </div>
 <div class="exampleblock">
 <div class="content">
 <div class="paragraph">
 <p><span class="small"><strong>Note:</strong><br>
-1. All extra inputs after this command string will be ignored.<br>
-2. Food types with no corresponding food data will not be shown. If there is no food data at all, the summary card will not be shown as well.<br>
-3. If any of the summary data is decimals, it will be formatted into two decimal places.<br>
-4. Please note the GI (glycemic index) value is the average instead of sum. For more information about GI, please refer to this <a href="https://en.wikipedia.org/wiki/Glycemic_index">link</a>.</span></p>
+1. Food types with no available food data will not be shown. If there is no food data at all, the summary card will not be shown as well.<br>
+2. The summary data is formatted as integers. For Calorie, Sugar, and Fat, the sums of recommended foods are calculated. For GI (glycemic index) value, the average is calculated.<br>
+3. For more information about GI, please refer to this <a href="https://en.wikipedia.org/wiki/Glycemic_index">link</a>.</span></p>
 </div>
 </div>
 </div>
@@ -1789,7 +1791,7 @@ Fat should be less than 35(g) per serving.</p>
 <div class="paragraph">
 <p><span class="small"><strong>Note:</strong><br>
 1. No duplicate food names are allowed.<br>
-2. All nutrition values should be non-negative numbers and contain no more than four decimals. Incomplete decimals, such as ".5" and "1.", can be accepted as "0.5" and "1" respectively. However, decimal point alone will not be accepted.<br>
+2. All nutrition values should be non-negative numbers and contain no more than four decimals. Incomplete decimals, such as ".5" and "1.", can be accepted as "0.5" and "1" respectively. However, decimal point by it alone will not be accepted.<br>
 3. Ideally, the input values are normalized as per serving for more practical value comparisons and calculations.</span></p>
 </div>
 </div>
@@ -1805,7 +1807,7 @@ Fat should be less than 35(g) per serving.</p>
 <div class="sect3">
 <h4 id="deleting-an-existing-food-code-deletef-code"><a class="link" href="#deleting-an-existing-food-code-deletef-code">3.5.4. Deleting an existing food: <code>deletef</code></a></h4>
 <div class="paragraph">
-<p>Deletes a food that matches the specified food name(s).</p>
+<p>Deletes a food that matches the specified food name.</p>
 </div>
 <div class="exampleblock">
 <div class="content">
@@ -1833,6 +1835,30 @@ It is also full matching. For example, "Rice with Chicken" does not match with "
 </div>
 <div class="paragraph">
 <p>Example: <code>resetf</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="recovering-food-data-em-recoverf-em-code-coming-in-v2-0-code"><a class="link" href="#recovering-food-data-em-recoverf-em-code-coming-in-v2-0-code">3.5.6. Recovering food data: <em>recoverf</em> <code>coming in v2.0</code></a></h4>
+<div class="paragraph">
+<p>Recovers the food data after resetting all the foods.
+The recovered data is based on the food list state just before the <strong>latest recmf command</strong>.
+This would be useful if the user wrongly enter <code>resetf</code> command, or another user want to temporarily use the same jar file on the same PC.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="editing-a-food-em-editf-em-code-coming-in-v2-0-code"><a class="link" href="#editing-a-food-em-editf-em-code-coming-in-v2-0-code">3.5.7. Editing a food: <em>editf</em> <code>coming in v2.0</code></a></h4>
+<div class="paragraph">
+<p>Edits the available food fields, such as food name and GI value, of an existing food.
+The restrictions on field value are the same as the restrictions declared in <code>addfood</code> commands.
+This would provide more flexibility to the user to manipulate food data, instead of directly deleting a food.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="recording-and-analyzing-diets-code-coming-in-v2-0-code"><a class="link" href="#recording-and-analyzing-diets-code-coming-in-v2-0-code">3.5.8. Recording and analyzing diets <code>coming in v2.0</code></a></h4>
+<div class="paragraph">
+<p>Records the user&#8217;s diets on specified dates and provides daily, weekly, and monthly summaries about nutrition intakes.
+This would allow the user to have an overview of his food consumption statistics.
+Bases on such statistics, the user can get more specific and personalized suggestions to balance the his nutrition intake.</p>
 </div>
 </div>
 </div>
@@ -1869,7 +1895,7 @@ It is also full matching. For example, "Rice with Chicken" does not match with "
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-all-code"><a class="link" href="#clearing-all-entries-code-clear-all-code">4.2. Clearing all entries: <code>clear all</code></a></h3>
+<h3 id="clearing-all-entries-code-clearall-code"><a class="link" href="#clearing-all-entries-code-clearall-code">4.2. Clearing all entries: <code>clearall</code></a></h3>
 <div class="paragraph">
 <p>Clears all recorded data in SugarMummy.</p>
 </div>
@@ -1929,7 +1955,7 @@ E.g. <code>addbio n/Bob p/98765432 e/91234567 m/Type II Diabetes</code></p>
 </li>
 <li>
 <p><strong>Add Food</strong>: <code>addfood fn/FOOD_NAME ft/FOOD_TYPE ca/CALORIE gi/GI su/SUGAR fa/FAT</code><br>
-E.g. <code>addfood fn/Cucumber ft/nsv ca/15 gi/15 fa/0 su/1.7</code></p>
+E.g. <code>addfood fn/Cucumber ft/nsv ca/15 gi/15 su/1.7 fa/0</code></p>
 </li>
 <li>
 <p><strong>Average</strong>: <code>average a/AVERAGE_TYPE rt/Record_TYPE [n/COUNT]</code><br>
@@ -1980,8 +2006,8 @@ E.g. <code>calendar ym/2019-11</code></p>
 E.g. <code>delete 2</code></p>
 </li>
 <li>
-<p><strong>Export</strong>: <code>export [d/START_DATE]</code><br>
-E.g <code>export d/01.09.2019</code></p>
+<p><strong>Delete Food</strong>: <code>deletef fn/FOOD_NAME</code><br>
+E.g. <code>deletef fn/Mushroom</code></p>
 </li>
 <li>
 <p><strong>Event</strong>: <code>event d/DESCRIPTION dt/DATETIME [dt/DATETIME] [td/TIME_DURATION]</code><br>
@@ -1993,6 +2019,9 @@ E.g. <code>event d/appointment dt/2019-12-20 11:00 dt/2019-12-20 11:30</code></p
 E.g. <code>editbio gender/Male dp//Users/Bob/Pictures/dp.jpg p/12345678</code><br>
 E.g. <code>editbio dp/C:\\Users\\Bob\\Pictures\\dp.jpg</code><br>
 E.g. <code>editbio p/1/234567 p/2/3456789</code></p>
+</li>
+<li>
+<p><strong>Exit the Application</strong>: <code>exit</code></p>
 </li>
 <li>
 <p><strong>Font Color</strong>:</p>
@@ -2011,17 +2040,27 @@ E.g. <code>fontcolour #FFFFFF bg/black</code></p>
 </div>
 </li>
 <li>
+<p><strong>Get User Guide URL</strong>: <code>help</code></p>
+</li>
+<li>
 <p><strong>List</strong>: <code>list</code><br>
 E.g. <code>list</code></p>
 </li>
 <li>
-<p><strong>Recommend Food</strong>: <code>recmf [-nsv] [-sv] [-f] [-p] [-s] [-m] [fn/FOOD_NAME FOOD_NAME&#8230;&#8203;]</code><br>
-E.g. <code>recmf -p -m -f fn/chicken</code></p>
+<p><strong>Recommend Food</strong>: <code>recmf [-nsv] [-sv] [-f] [-p] [-s] [-m] [fn/FOOD_NAME&#8230;&#8203;] [±sort/SORT_ORDER_TYPE]</code><br>
+E.g. <code>recmf -p -nsv +sort/gi</code><br>
+E.g. <code>recmf fn/chicken rice</code></p>
+</li>
+<li>
+<p><strong>Recommend Mixed Food</strong>: <code>recmfmix</code></p>
 </li>
 <li>
 <p><strong>Reminder</strong>: <code>reminder d/DESCRIPTION dt/DATETIME [r/REPETITION]</code><br>
 E.g. <code>reminder d/insulin injection dt/2019-11-30 17:30 r/daily</code><br>
 E.g. <code>reminder d/buy bread dt/2019-12-02 19:00 r/weekly</code></p>
+</li>
+<li>
+<p><strong>Reset Food Data</strong>: <code>resetf</code></p>
 </li>
 </ol>
 </div>
@@ -2038,9 +2077,9 @@ SugarMummy data are saved in the hard disk automatically after any command that 
 </li>
 <li>
 <p><strong>How should I reset all the data?</strong><br>
-You can simply delete the data file within the same directory that you place SugarMummy.jar. All the data will be set to default sample data.</p>
+You can simply delete the data folder within the same directory that you place SugarMummy.jar. All the data will be set to default sample data.</p>
 </li>
 </ol>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 14:21:40 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 15:23:01 UTC</div></div></div></body></html>

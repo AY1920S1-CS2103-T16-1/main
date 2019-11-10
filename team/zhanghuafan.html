@@ -139,7 +139,7 @@ and its GUI is created with JavaFx. It is written in Java and has about 24 kLOC.
 <div class="olist small">
 <ol class="small">
 <li>
-<p>If a command requires no user-input arguments,  all the additional inputs after this command string will be ignored and the command will be executed as usual.</p>
+<p>If a command requires no user-input arguments,  all the additional inputs after this command string will be ignored, and the command will be executed as usual.</p>
 </li>
 <li>
 <p>If a command requires any parameters, the input order is flexible. Duplicate parameters are also allowed, <strong>but only the last occurrence will be considered</strong>.</p>
@@ -151,7 +151,7 @@ and its GUI is created with JavaFx. It is written in Java and has about 24 kLOC.
 <div class="sect3">
 <h4 id="recommending-food-code-recmf-code"><a class="link" href="#recommending-food-code-recmf-code">Recommending food: <code>recmf</code></a></h4>
 <div class="paragraph">
-<p>Recommends medically suggested foods for type II diabetes patients. The user can specify <code>Flags</code> and <code>Food Names</code> as two kinds of filters, as well as one type of sorting order:</p>
+<p>Recommends medically suggested foods for type II diabetes patients. The user can specify flags and food names` as two kinds of filters, as well as one type of sorting order:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -233,25 +233,24 @@ and its GUI is created with JavaFx. It is written in Java and has about 24 kLOC.
 </div>
 </div>
 <div class="paragraph">
-<p><strong>Format:</strong> <code>recmf [-FLAG]&#8230;&#8203; [fn/FOOD_NAME&#8230;&#8203;][±sort/SORT_ORDER_TYPE]</code></p>
+<p><strong>Format:</strong> <code>recmf [-nsv] [-sv] [-f] [-p] [-s] [-m] [fn/FOOD_NAME&#8230;&#8203;][±sort/SORT_ORDER_TYPE]</code></p>
 </div>
 <div class="paragraph">
-<p><strong>Examples:</strong> {recmf -p -f} <code>{recmf fn/chicken rice}</code> {recmf -p -m -f fn/chicken} <code>{recmf -p -nsv +sort/gi}</code></p>
+<p><strong>Examples:</strong> <code>recmf -p -f</code>, <code>recmf fn/chicken rice</code>, <code>recmf -p -m -f fn/chicken</code>, <code>recmf -p -nsv +sort/gi</code></p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="recommending-food-combination-code-recmfmix-code"><a class="link" href="#recommending-food-combination-code-recmfmix-code">Recommending food combination: <code>recmfmix</code></a></h4>
 <div class="paragraph">
-<p>Recommends one food from each type. A summary card of all nutrition values will be appended at the end.</p>
+<p>Recommends one food from each type. A summary card will be appended at the end.</p>
 </div>
 <div class="exampleblock">
 <div class="content">
 <div class="paragraph">
 <p><span class="small"><strong>Note:</strong><br>
-1. All extra inputs after this command string will be ignored.<br>
-2. Food types with no corresponding food data will not be shown. If there is no food data at all, the summary card will not be shown as well.<br>
-3. If any of the summary data is decimals, it will be formatted into two decimal places.<br>
-4. Please note the GI (glycemic index) value is the average instead of sum. For more information about GI, please refer to this <a href="https://en.wikipedia.org/wiki/Glycemic_index">link</a>.</span></p>
+1. Food types with no available food data will not be shown. If there is no food data at all, the summary card will not be shown as well.<br>
+2. The summary data is formatted as integers. For Calorie, Sugar, and Fat, the sums of recommended foods are calculated. For GI (glycemic index) value, the average is calculated.<br>
+3. For more information about GI, please refer to this <a href="https://en.wikipedia.org/wiki/Glycemic_index">link</a>.</span></p>
 </div>
 </div>
 </div>
@@ -300,7 +299,7 @@ Fat should be less than 35(g) per serving.</p>
 <div class="paragraph">
 <p><span class="small"><strong>Note:</strong><br>
 1. No duplicate food names are allowed.<br>
-2. All nutrition values should be non-negative numbers and contain no more than four decimals. Incomplete decimals, such as ".5" and "1.", can be accepted as "0.5" and "1" respectively. However, decimal point alone will not be accepted.<br>
+2. All nutrition values should be non-negative numbers and contain no more than four decimals. Incomplete decimals, such as ".5" and "1.", can be accepted as "0.5" and "1" respectively. However, decimal point by it alone will not be accepted.<br>
 3. Ideally, the input values are normalized as per serving for more practical value comparisons and calculations.</span></p>
 </div>
 </div>
@@ -316,7 +315,7 @@ Fat should be less than 35(g) per serving.</p>
 <div class="sect3">
 <h4 id="deleting-an-existing-food-code-deletef-code"><a class="link" href="#deleting-an-existing-food-code-deletef-code">Deleting an existing food: <code>deletef</code></a></h4>
 <div class="paragraph">
-<p>Deletes a food that matches the specified food name(s).</p>
+<p>Deletes a food that matches the specified food name.</p>
 </div>
 <div class="exampleblock">
 <div class="content">
@@ -346,6 +345,30 @@ It is also full matching. For example, "Rice with Chicken" does not match with "
 <p>Example: <code>resetf</code></p>
 </div>
 </div>
+<div class="sect3">
+<h4 id="recovering-food-data-em-recoverf-em-code-coming-in-v2-0-code"><a class="link" href="#recovering-food-data-em-recoverf-em-code-coming-in-v2-0-code">Recovering food data: <em>recoverf</em> <code>coming in v2.0</code></a></h4>
+<div class="paragraph">
+<p>Recovers the food data after resetting all the foods.
+The recovered data is based on the food list state just before the <strong>latest recmf command</strong>.
+This would be useful if the user wrongly enter <code>resetf</code> command, or another user want to temporarily use the same jar file on the same PC.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="editing-a-food-em-editf-em-code-coming-in-v2-0-code"><a class="link" href="#editing-a-food-em-editf-em-code-coming-in-v2-0-code">Editing a food: <em>editf</em> <code>coming in v2.0</code></a></h4>
+<div class="paragraph">
+<p>Edits the available food fields, such as food name and GI value, of an existing food.
+The restrictions on field value are the same as the restrictions declared in <code>addfood</code> commands.
+This would provide more flexibility to the user to manipulate food data, instead of directly deleting a food.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="recording-and-analyzing-diets-code-coming-in-v2-0-code"><a class="link" href="#recording-and-analyzing-diets-code-coming-in-v2-0-code">Recording and analyzing diets <code>coming in v2.0</code></a></h4>
+<div class="paragraph">
+<p>Records the user&#8217;s diets on specified dates and provides daily, weekly, and monthly summaries about nutrition intakes.
+This would allow the user to have an overview of his food consumption statistics.
+Bases on such statistics, the user can get more specific and personalized suggestions to balance the his nutrition intake.</p>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -355,18 +378,18 @@ It is also full matching. For example, "Rice with Chicken" does not match with "
 <div class="sect2">
 <h3 id="food-recommendation-feature"><a class="link" href="#food-recommendation-feature">Food Recommendation Feature</a></h3>
 <div class="paragraph">
-<p>The food recommendation mechanism is based on the manipulation of <code>UniqueFoodList</code>, with the implementation of operations:</p>
+<p>The food recommendation mechanism is based on the manipulation of <code>UniqueFoodList</code>, via the implementation of the following operations:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Showing food recommendations as cards</strong> filtered by <code>Flags</code> and / or <code>FoodNames</code>.</p>
+<p><strong>Showing food recommendations as cards</strong> filtered by <code>Flags</code> and / or <code>Food Names</code>.</p>
 </li>
 <li>
-<p><strong>Sorting the food list</strong> based on comparing food fields specified in <code>SortOrderType</code>.</p>
+<p><strong>Sorting the food list</strong> according to <code>SortOrderType</code>.</p>
 </li>
 <li>
-<p><strong>Showing combined recommendations</strong> from each food type with an additional <em>summary</em>.</p>
+<p><strong>Showing combined recommendations</strong> from each food type with an additional <em>Summary</em> card.</p>
 </li>
 <li>
 <p><strong>Adding foods</strong> and <strong>Deleting foods</strong></p>
@@ -385,14 +408,12 @@ It is also full matching. For example, "Rice with Chicken" does not match with "
 <div class="sect3">
 <h4 id="data-structure-overview"><a class="link" href="#data-structure-overview">Data Structure Overview</a></h4>
 <div class="paragraph">
-<p>The main data structures used to support food recommendation are listed as follows.</p>
-</div>
-<div class="paragraph">
-<p><a id="recmf_food_model"></a></p>
+<p>The main data structures used to support food recommendation are listed as follows.
+<a id="recmf_food_model"></a></p>
 </div>
 <div class="paragraph">
 <div class="title"><strong>1. Food Model</strong></div>
-<p>It encapsulates <code>FoodName</code>, <code>FoodType</code>, and four <code>NutritionValues</code> and has following usages:</p>
+<p>It encapsulates <code>FoodName</code>, <code>FoodType</code>, and four <code>NutritionValues</code> and has the following usages:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -408,7 +429,7 @@ It is also full matching. For example, "Rice with Chicken" does not match with "
 </ul>
 </div>
 <div class="paragraph">
-<p><strong>API:</strong> <a href="{repoURL}{generalPath}/model/recmf/Food.java"><code>Food.java</code></a></p>
+<p><strong>API:</strong> <a href="{repoURL}{generalPath}/model/recmf/Food.java">Food.java</a></p>
 </div>
 <div class="paragraph">
 <p><a id="recmf_uniqueFoodList"></a></p>
@@ -417,37 +438,37 @@ It is also full matching. For example, "Rice with Chicken" does not match with "
 <div class="title"><strong>2. UniqueFoodList</strong></div>
 <p>It holds the collection of foods, and it exposes necessary methods in <code>ModelManager</code>.
 Internally, it holds an <code>ObservableList</code> available for modifications, such as adding foods.
-It also implements <code>getMixedFoodList</code> method for <code>recmfmix</code> command via randomly selecting foods from its <code>internalUnmodifiableList</code>.</p>
+It also implements <code>getMixedFoodList()</code> method for <code>recmfmix</code> command via randomly selecting foods from its <code>internalUnmodifiableList</code>.</p>
 </div>
 <div class="paragraph">
-<p><strong>API:</strong> <a href="{repoURL}{generalPath}/model/recmf/UniqueFoodList.java"><code>UniqueFoodList.java</code></a></p>
+<p><strong>API:</strong> <a href="{repoURL}{generalPath}/model/recmf/UniqueFoodList.java">UniqueFoodList.java</a></p>
 </div>
 <div class="paragraph">
 <p>The following class diagram summaries how these two main components interact.</p>
-</div>
-<div class="paragraph">
-<p><a id="recmf_predicates"></a></p>
-</div>
-<div class="paragraph">
-<div class="title"><strong>3. Predicates</strong></div>
-<p>Both <code>Predicates</code> hold desired conditions as <code>Collections</code>, such as <code>List</code> and <code>Set</code>.
-They literate through the whole food list to select foods that matches any of given conditions.
-However, if the conditions are empty, the <code>test()</code> result is always set to be true.</p>
-</div>
-<div class="paragraph">
-<p><strong>API:</strong> <a href="{repoURL}{generalPath}/model/recmf/predicates/FoodNameContainsKeywordsPredicate.java"><code>FoodNameContainsKeywordsPredicate.java</code></a>
-<a href="{repoURL}{generalPath}/model/recmf/predicates/FoodTypeIsWantedPredicate.java"><code>FoodTypeIsWantedPredicate.java</code></a></p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="../images/FoodModelClassDiagram.png" alt="[" width="500]">
 </div>
 </div>
+<div class="paragraph">
+<p><a id="recmf_predicates"></a></p>
+</div>
+<div class="paragraph">
+<div class="title"><strong>3. Predicates</strong></div>
+<p>Both <code>Predicates</code>, <code>FoodNameContainsKeywordsPredicate</code> and <code>FoodTypeIsWantedPredicate</code> hold desired conditions as <code>Collections</code>, such as <code>List</code> and <code>Set</code>.
+They literate through the whole food list to select foods that matches any of given conditions.
+If the conditions are empty, the <code>test()</code> result is always set to be true.</p>
+</div>
+<div class="paragraph">
+<p><strong>API:</strong> <a href="{repoURL}{generalPath}/model/recmf/predicates/FoodNameContainsKeywordsPredicate.java">FoodNameContainsKeywordsPredicate.java</a>;
+<a href="{repoURL}{generalPath}/model/recmf/predicates/FoodTypeIsWantedPredicate.java">FoodTypeIsWantedPredicate.java</a></p>
+</div>
 </div>
 <div class="sect3">
 <h4 id="implementation-of-em-recmf-em-and-em-recmfmix-em-command"><a class="link" href="#implementation-of-em-recmf-em-and-em-recmfmix-em-command">Implementation of <em>recmf</em> and <em>recmfmix</em> command</a></h4>
 <div class="sect4">
-<h5 id="em-recmf-em-command"><a class="link" href="#em-recmf-em-command"><em>recmf</em> command</a></h5>
+<h5 id="code-recmf-code-command"><a class="link" href="#code-recmf-code-command"><code>recmf</code> command</a></h5>
 <div class="paragraph">
 <p><code>RecmFoodCommandParser</code> parses user inputs to standard parameters for the customised presentation of food recommendations, detailing in the following three ways:</p>
 </div>
@@ -463,30 +484,42 @@ Available <code>Flags</code> depend on available <code>FoodTypes</code>, as they
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If no flag is specified, <code>RecmFoodCommandParser#getWantedFoodTypes(flagsStr)</code> will return an empty <code>HashSet</code>.
+If no flag is specified, <code>RecmFoodCommandParser#getWantedFoodTypes(flagsStr)</code> just returns an empty <code>HashSet</code>.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p><strong>API:</strong> <a href="{repoURL}{generalPath}/model/recmf/Flag.java">Flag.java</a></p>
+<p><strong>API:</strong> <a href="{repoURL}{generalPath}/model/recmf/Flag.java">Flag.java</a>; {repoURL}{generalPath}/model/recmf/FoodType.java[FoodType.java]</p>
 </div>
 <div class="paragraph">
 <div class="title"><strong>2. Filtering food names</strong><br></div>
-<p>It is similar to and simpler than the implementation of specifying flags. A <code>List</code> of food name strings will be supplied to <a href="#recmf_predicates">FoodNameContainsKeywordsPredicate</a>.</p>
+<p>It is similar to but simpler than the implementation of specifying flags. A <code>List</code> of food name strings will be supplied to <a href="#recmf_predicates">FoodNameContainsKeywordsPredicate</a>.</p>
 </div>
 <div class="paragraph">
-<p>The following sequence diagrams shows the how <code>recmf</code> command with flag and food name as the filters works.</p>
+<p>The following sequence diagram shows the how <code>recmf</code> command with flag and food name as the filters works.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="../images/RecmFoodSequenceDiagram.png" alt="RecmFoodSequenceDiagram">
 </div>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The sorting related (refer to the following section) parts, such <code>FoodComparator</code>, are omitted in this diagram.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <div class="title"><strong>3. Sorting</strong><br></div>
 <p>It is implemented via supplying a <code>FoodComparator</code> to <code>model#sortFoodList()</code> method.<br>
-<code>FoodComparator</code> wraps A <code>Comparator</code> to handle the main logic, such as reversing the <code>FoodComparator</code> via <code>Comparator#reversed()</code>.<br>
+<code>FoodComparator</code> wraps A <code>Comparator</code> to handle the main logic, such as reversing the <code>FoodComparator</code> via <code>Comparator#reversed()</code>.
 An inner enum class <code>SortOrderType</code> holds all the comparable <a href="#recmf_food_model">food fields</a> for sorting.</p>
 </div>
 <div class="admonitionblock note">
@@ -496,7 +529,7 @@ An inner enum class <code>SortOrderType</code> holds all the comparable <a href=
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-A private <code>FoodComparator</code> constructor directly taking in <code>Comparator</code> is for internal usage of getting reversed <code>FoodComparator</code>. Outside instantiation is done by supplying <code>SortOrderType</code> strings.
+The private <code>FoodComparator</code> constructor that directly takes in <code>Comparator</code> is for internal usage of getting reversed <code>FoodComparator</code>. Outside instantiation is done by supplying <code>SortOrderType</code> strings.
 </td>
 </tr>
 </table>
@@ -505,7 +538,7 @@ A private <code>FoodComparator</code> constructor directly taking in <code>Compa
 <p><strong>API:</strong> <a href="{repoURL}{generalPath}/model/recmf/FoodComparator.java"><code>FoodComparator.java</code></a></p>
 </div>
 <div class="paragraph">
-<p>The following object diagram summaries the components in the food recommendation mechanism.</p>
+<p>The following object diagram summaries the described components in the <code>recmf</code> command.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -514,13 +547,17 @@ A private <code>FoodComparator</code> constructor directly taking in <code>Compa
 </div>
 </div>
 <div class="sect4">
-<h5 id="em-recmfmix-em-command"><a class="link" href="#em-recmfmix-em-command"><em>recmfmix</em> command</a></h5>
+<h5 id="code-recmfmix-code-command"><a class="link" href="#code-recmfmix-code-command"><code>recmfmix</code> command</a></h5>
 <div class="paragraph">
 <p><code>UniqueFoodList#getMixedFoodList()</code> generates a temporary <code>ObservableList</code> from the existing food data. This list will eventually be supplied to <code>FoodFlowPane</code> via <code>Model</code> and then <code>Logic</code>.</p>
 </div>
-<div class="paragraph">
-<p><strong>Food Summary Card:</strong> It is essentially treated as <code>Food</code> with <em>Summary</em> as food name and <em>meal</em> as food type.
+<div class="ulist">
+<ul>
+<li>
+<p>Food Summary Card: It is essentially treated as <code>Food</code> with <em>Summary</em> as food name and <em>meal</em> as food type.
 The total / average nutrition values are calculated by <code>FoodCalculator</code>.</p>
+</li>
+</ul>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -529,8 +566,8 @@ The total / average nutrition values are calculated by <code>FoodCalculator</cod
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-This command has to override the <code>Command#isToCreateNewPane()</code> to return a <code>true</code> value,
-since it must refresh the display pane each time by randomly getting new foods, rather than getting the existing display pane from <code>typeToPaneMap</code>.
+This command has to override the <code>Command#isToCreateNewPane()</code> and return <code>true</code>,
+since it must refresh the display pane each time by randomly getting new foods, rather than getting the existing display pane from <code>typeToPaneMap</code> (refer to <a href="{repoURL}{generalPath}/ui/MainDisplayPane.java"><code>MainDisplayPane.java</code></a>).
 </td>
 </tr>
 </table>
@@ -543,10 +580,10 @@ since it must refresh the display pane each time by randomly getting new foods, 
 <div class="sect3">
 <h4 id="implementation-of-other-supplementary-commands"><a class="link" href="#implementation-of-other-supplementary-commands">Implementation of other supplementary commands</a></h4>
 <div class="paragraph">
-<p>The following three commands are designed for user to modify the food database.</p>
+<p>The following three commands can be used modify the food database.</p>
 </div>
 <div class="sect4">
-<h5 id="em-addfood-em-and-em-deletef-em-commands"><a class="link" href="#em-addfood-em-and-em-deletef-em-commands"><em>addfood</em> and <em>deletef</em> commands</a></h5>
+<h5 id="code-addfood-code-and-code-deletef-code-commands"><a class="link" href="#code-addfood-code-and-code-deletef-code-commands"><code>addfood</code> and <code>deletef</code> commands</a></h5>
 <div class="paragraph">
 <p><code>AddFoodCommandParser</code> and <code>DeleteFoodCommandParser</code> are used for parsing these two commands respectively.
 Parameter validation is done by <code>RecmFoodParserUtil</code>.</p>
@@ -556,9 +593,12 @@ Parameter validation is done by <code>RecmFoodParserUtil</code>.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="em-resetf-em-command"><a class="link" href="#em-resetf-em-command"><em>resetf</em> command</a></h5>
+<h5 id="code-resetf-code-command"><a class="link" href="#code-resetf-code-command"><code>resetf</code> command</a></h5>
 <div class="paragraph">
-<p>It is implemented by setting the internal list of <code>UniqueFoodList</code> to be the pre-loaded food data in <code>SampleFoodDataUtil</code>.</p>
+<p>It is implemented by setting the internal list of <code>UniqueFoodList</code> to be the sample food data in <code>SampleFoodDataUtil</code>.</p>
+</div>
+<div class="paragraph">
+<p><strong>API:</strong> <a href="{repoURL}{generalPath}/model/util/SampleFoodDataUtil.java"><code>SampleFoodDataUtil.java</code></a></p>
 </div>
 </div>
 </div>
@@ -574,7 +614,7 @@ Parameter validation is done by <code>RecmFoodParserUtil</code>.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>If the command is used for the first time, a <code>foodlist.json</code> storage file will be created and written with the pre-loaded food data. Otherwise, data is loaded from the existing storage file.</p>
+<p>If it is the first time entering a command, a <code>foodlist.json</code> storage file will be created with sample food data. Otherwise, data is loaded from the existing storage file.</p>
 </li>
 <li>
 <p><code>FoodFlowPane</code> obtains food list information from <code>Logic</code> and displays food cards to the user.</p>
@@ -587,7 +627,7 @@ Parameter validation is done by <code>RecmFoodParserUtil</code>.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p><code>FoodTypeIsWantedPredicate</code> selects foods of <em>fruit</em> and <em>meal</em> types. <code>FoodComparator</code> sorts foods in ascending order based on their GI values.</p>
+<p><code>FoodTypeIsWantedPredicate</code> is set to select foods of <em>fruit</em> and <em>meal</em> types. <code>FoodComparator</code> is set to sort foods in ascending order based on their GI values.</p>
 </li>
 <li>
 <p><code>Model</code> updates the <code>filteredFoodList</code> with this predicate and sorts the list with this comparator.</p>
@@ -603,7 +643,10 @@ Parameter validation is done by <code>RecmFoodParserUtil</code>.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p><code>UniqueFoodList#getMixedFoodList()</code> is executed, during which <code>FoodCalculator</code> calculates the nutrition values for <em>Summary</em> food.</p>
+<p><code>Logic</code> gets a list of foods from UniqueFoodList#getMixedFoodList()<code>, which contains a <em>Summary</em> food calculated by `FoodCalculator</code>.</p>
+</li>
+<li>
+<p><code>FoodFlowPane</code> updates its content with this new list.</p>
 </li>
 </ol>
 </div>
@@ -613,7 +656,7 @@ Parameter validation is done by <code>RecmFoodParserUtil</code>.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>The display switches to show the full list containing the newly added food.</p>
+<p>The display switches to show the full list which also contains this newly added food.</p>
 </li>
 <li>
 <p>The storage file updates accordingly.</p>
@@ -657,10 +700,10 @@ Parameter validation is done by <code>RecmFoodParserUtil</code>.</p>
 <ul>
 <li>
 <p>Pros: Impoves efficiency of filtering by flags by simply <code>get()</code>. Besides, maintaining the order after adding a new food only requires to sort foods of the same type.
-It can improve efficiency especially the database is large.</p>
+It can improve efficiency especially when the database is large.</p>
 </li>
 <li>
-<p>Cons: There is no <code>FilteredMap</code> class supported by JavaFX. Extra work is needed to make it accept <code>Predicate</code>.</p>
+<p>Cons: There is no <code>FilteredMap</code> class supported by JavaFX. Extra work is needed to apply <code>Predicate</code> on the Map.</p>
 </li>
 </ul>
 </div>
@@ -691,7 +734,7 @@ repeatedly scroll up and down to locate certain foods.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: The content is more organized and the user does not need to specify food types in the filter.
+<p>Pros: The content can be more organized and the user does not need to specify the food types for filtering.
 Besides, the food cards can be customized for each <code>ListView</code>, such as omitting GI and Sugar for proteins since they are usually zero.</p>
 </li>
 <li>
@@ -712,7 +755,7 @@ Besides, the food cards can be customized for each <code>ListView</code>, such a
 <div class="ulist">
 <ul>
 <li>
-<p>It prevents some foods from permanently having empty fields, which may result in inappropriate sorting and summaries.</p>
+<p>It prevents some foods from permanently having empty fields, which may result in inaccurate sorting and summaries.</p>
 </li>
 <li>
 <p>Cons: There is no way to add new foods with currently unavailable fields.</p>
@@ -742,29 +785,23 @@ Besides, the food cards can be customized for each <code>ListView</code>, such a
 <div class="ulist">
 <ul>
 <li>
-<p>Recovering data after resetting <code>[coming in v2.0]</code>
-This would be useful if the user wrongly enter <code>resetf</code> command, or another user want to temporarily use the same jar file on the same PC.
-This may be implemented by using a separate file to store the food data before executing <code>resetf</code> command.</p>
+<p>Recovering data after resetting <code>[coming in v2.0]</code><br>
+This may be implemented by using a separate file to store the food data before executing <code>resetf</code> command.
+This file will be updated with the current food list before the <code>resetf</code> command is executed.</p>
 </li>
 <li>
-<p>Editing Foods <code>[coming in v2.0]</code>
-This would provide more flexibility to the user to manipulate food data, instead of resetting all the food data.
+<p>Editing Foods <code>[coming in v2.0]</code><br>
 This can be adapted from exiting <code>edit</code> command from <code>AddressBook3</code>.
-However, since foods are identified by names instead of indexes, how to quickly get the food may be taken into consideration.</p>
+However, since foods are identified by names instead of indexes, may consider using a <code>Map</code> that maps food names to food objects.</p>
 </li>
 <li>
-<p>Disliking Foods <code>[coming in v2.0]</code>
-This may be implemented by either</p>
-</li>
-<li>
-<p>Recording and Analyzing diets <code>[coming in v2.0]</code>
-This would allow the user to have an overview of his food consumption statistics.
+<p>Recording and Analyzing diets <code>[coming in v2.0]</code><br>
 This can be adapted from existing <code>Record</code> model for daily, weekly, and monthly data summaries.
-Bases on such statistics, more specific suggestions can be proposed to to balance the user&#8217;s nutrition intake.</p>
+The suggestions can be made via (1)calculating ideal nutrition value intake based the user&#8217;s BMI value, and (2) comparing the ideal intake amounts with the user&#8217;s actual intake amounts.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 14:21:40 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 15:23:01 UTC</div></div></div></body></html>
