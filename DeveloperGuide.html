@@ -3006,73 +3006,73 @@ Expected: A error message is shown to the user indicating that the command canno
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Prerequisites: There are at least 3 days worth of bloodsugar records with a minimum of the past three days having consistent daily averages of 4.0 to 7.8 mmol/L of bloodsugar level.</p>
+<p>Prerequisites: There are at least 3 days worth of <code>BLOOSUGAR</code> records with a minimum of the past three days having consistent daily averages of 4.0 to 7.8 mmol/L of <code>BLOOSUGAR</code> level.</p>
 </li>
 </ol>
 </div>
 </li>
 <li>
 <p>Test case: <code>achvm</code>+
-Expected: Bronze level achievement for BloodSugar is shown to be <code>ACHIEVED</code> in the achievements pane. Coloured image representing achievement is shown.</p>
+Expected: <code>BRONZE</code> level achievement for <code>BLOOSUGAR</code> is shown to be <code>ACHIEVED</code> in the achievements pane. Coloured image representing achievement is shown.</p>
 </li>
 <li>
 <p>Test case: <code>achVm</code>+
-Expected: Bronze level achievement for BloodSugar is shown to be <code>ACHIEVED</code> in the achievements pane. The <code>achvm</code> command is not case-sensitive.</p>
+Expected: <code>BRONZE</code> level achievement for <code>BLOOSUGAR</code> is shown to be <code>ACHIEVED</code> in the achievements pane. The <code>achvm</code> command is not case-sensitive.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Prerequisites: There are at least 2 days worth of bloodsugar records with a minimum of the past two days having consistent daily averages of 4.0 to 7.8 mmol/L of bloodsugar level.</p>
+<p>Prerequisites: There are at least 2 days worth of <code>BLOOSUGAR</code> records with a minimum of the past two days having consistent daily averages of 4.0 to 7.8 mmol/L of <code>BLOOSUGAR</code> level.</p>
 </li>
 </ol>
 </div>
 </li>
 <li>
 <p>Test case: <code>add rt/BLOODSUGAR dt/2019-11-06 12:12 con/4.5</code>+
-Expected: An achievement message is appended to the message showing successful addition of records in the feedback display pane, indicated the attainment of (an) achievement(s). Bronze level achievement for BloodSugar is shown to be <code>ACHIEVED</code> in the achievements pane when <code>achvm</code> is entered.</p>
+Expected: An achievement message is appended to the message showing successful addition of records in the feedback display pane, indicated the attainment of (an) achievement(s). <code>BRONZE</code> level achievement for <code>BLOOSUGAR</code> is shown to be <code>ACHIEVED</code> in the achievements pane when <code>achvm</code> is entered.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Prerequisites: There are EXACTLY 3 days of bloodsugar records (one record per day) having consistent daily bloodsugar levels of 4.0 to 7.8 mmol/L.</p>
+<p>Prerequisites: There are EXACTLY 3 days of <code>BLOOSUGAR</code> records (one record per day) having consistent daily <code>BLOOSUGAR</code> levels of 4.0 to 7.8 mmol/L.</p>
 </li>
 </ol>
 </div>
 </li>
 <li>
 <p>Test case: <code>delete 3</code>+
-Expected: A nessage is appended to the successful records removal message indicating the loss of (an) achievement(s). Bronze level achievement for BloodSugar is no longer shown to be <code>ACHIEVED</code> in the achievements pane when <code>achvm</code> is entered. Achievement state resets to <code>YET TO ACHIEVE</code> and image representing achievement can is in silhouette form again.</p>
+Expected: A message is appended to the successful records removal message indicating the loss of (an) achievement(s). <code>BRONZE</code> level achievement for <code>BLOOSUGAR</code> is no longer shown to be <code>ACHIEVED</code> in the achievements pane when <code>achvm</code> is entered. Achievement state resets to <code>YET TO ACHIEVE</code> and image representing achievement can is in silhouette form again.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Prerequisites: There are at least 3 days worth of bloodsugar records with a minimum of the past three days having consistent daily averages of 4.0 to 7.8 mmol/L of bloodsugar level. The last date of bloodsugar records is on 2019-11-06.</p>
+<p>Prerequisites: There are at least 3 days worth of <code>BLOOSUGAR</code> records with a minimum of the past three days having consistent daily averages of 4.0 to 7.8 mmol/L of <code>BLOOSUGAR</code> level. The last date of <code>BLOOSUGAR</code> records is on 2019-11-06.</p>
 </li>
 </ol>
 </div>
 </li>
 <li>
 <p>Test case: <code>add rt/BLOODSUGAR dt/2019-11-07 12:12 con/4.5</code>+
-Expected: Bronze level achievement for BloodSugar continues to be shown to be <code>ACHIEVED</code> in the achievements pane if <code>achvm</code> is entered.</p>
+Expected: <code>BRONZE</code> level achievement for <code>BLOOSUGAR</code> continues to be shown to be <code>ACHIEVED</code> in the achievements pane if <code>achvm</code> is entered.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Prerequisites: There are at least 3 days worth of bloodsugar records with a minimum of the past three days having consistent daily averages of 4.0 to 7.8 mmol/L of bloodsugar level. The last date of bloodsugar records is on 2019-11-06.</p>
+<p>Prerequisites: There are at least 3 days worth of <code>BLOOSUGAR</code> records with a minimum of the past three days having consistent daily averages of 4.0 to 7.8 mmol/L of <code>BLOOSUGAR</code> level. The last date of <code>BLOOSUGAR</code> records is on 2019-11-06.</p>
 </li>
 </ol>
 </div>
 </li>
 <li>
 <p>Test case: <code>add rt/BLOODSUGAR dt/2019-11-08 12:12 con/4.5</code>+
-Expected: Bronze level achievement for BloodSugar continues to be shown to be <code>PREVIOUSLY ACHIEVED</code> in the achievements pane if <code>achvm</code> is entered. Image representing achievement is gray-scaled and streak count resets to zero.</p>
+Expected: <code>BRONZE</code> level achievement for <code>BLOOSUGAR</code> continues to be shown to be <code>PREVIOUSLY ACHIEVED</code> in the achievements pane if <code>achvm</code> is entered. Image representing achievement is gray-scaled and streak count resets to zero.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Prerequisites: There are at least 3 days worth of bloodsugar records with a minimum of the past three days having consistent daily averages of 4.0 to 7.8 mmol/L of bloodsugar level. The last date of bloodsugar records is on 2019-11-06.</p>
+<p>Prerequisites: There are at least 3 days worth of <code>BLOOSUGAR</code> records with a minimum of the past three days having consistent daily averages of 4.0 to 7.8 mmol/L of <code>BLOOSUGAR</code> level. The last date of <code>BLOOSUGAR</code> records is on 2019-11-06.</p>
 </li>
 </ol>
 </div>
 </li>
 <li>
 <p>Test case: <code>add rt/BLOODSUGAR dt/2019-11-07 12:12 con/7.9</code>+
-Expected: Bronze level achievement for BloodSugar continues to be shown to be <code>PREVIOUSLY ACHIEVED</code> in the achievements pane if <code>achvm</code> is entered. Image representing achievement is gray-scaled and streak count resets to zero.</p>
+Expected: <code>BRONZE</code> level achievement for <code>BLOOSUGAR</code> continues to be shown to be <code>PREVIOUSLY ACHIEVED</code> in the achievements pane if <code>achvm</code> is entered. Image representing achievement is gray-scaled and streak count resets to zero.</p>
 </li>
 </ol>
 </div>
@@ -4114,4 +4114,4 @@ from <a href="https://www.flaticon.com/free-icon/user_149068" class="bare">https
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 03:56:46 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 04:17:37 UTC</div></div></div></body></html>
