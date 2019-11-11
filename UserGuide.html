@@ -18,7 +18,7 @@
 <li><a href="#add-a-data-entry-to-the-diabetes-tracker-app-code-add-code">3.1.1. Add a data entry to the diabetes tracker app: <code>add</code></a></li>
 <li><a href="#show-a-list-of-all-data-entries-in-the-diabetes-tracker-app-code-list-code">3.1.2. Show a list of all data entries in the diabetes tracker app: <code>list</code></a></li>
 <li><a href="#deletes-a-specified-data-entry-from-the-diabetes-tracker-app-code-delete-code">3.1.3. Deletes a specified data entry from the diabetes tracker app: <code>delete</code></a></li>
-<li><a href="#edits-a-specified-data-entry-from-the-diabetes-tracker-app-code-edit-code-code-coming-in-v2-0-code">3.1.4. Edits a specified data entry from the diabetes tracker app: <code>edit</code> <code>[coming in v2.0]</code></a></li>
+<li><a href="#edits-an-existing-data-entry-from-the-diabetes-tracker-app-code-edit-code-code-coming-in-v2-0-code">3.1.4. Edits an existing data entry from the diabetes tracker app: <code>edit</code> <code>[coming in v2.0]</code></a></li>
 </ul>
 </li>
 <li><a href="#calendar-and-reminder">3.2. CALENDAR AND REMINDER</a>
@@ -181,13 +181,13 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="ulist">
 <ul>
 <li>
-<p><strong><code>add</code></strong><code>rt/BLOODSUGAR con/10 dt/2019-11-01 12:12</code> : adds a <code>bloodsugar</code> record to the app.</p>
+<p><code><strong>add</strong> rt/BLOODSUGAR con/10 dt/2019-11-01 12:12</code> : adds a <code>bloodsugar</code> record to the app.</p>
 </li>
 <li>
-<p><strong><code>delete</code></strong><code>3</code> : deletes the 3rd record shown in the current list</p>
+<p><code><strong>delete</strong> 3</code> : deletes the 3rd record shown in the current list</p>
 </li>
 <li>
-<p><strong><code>exit</code></strong> : exits the app</p>
+<p><code><strong>exit</strong></code> : exits the app</p>
 </li>
 </ul>
 </div>
@@ -234,7 +234,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </div>
 <div class="paragraph">
 <p>There must not be any duplicate parameters.
-Ordering of parameters is flexible (other than "add").</p>
+Other than "add", ordering of fields is flexible.</p>
 </div>
 <div class="paragraph">
 <p>rt/ value is case sensitive, RECORD_TYPE must be in capital letters.
@@ -282,8 +282,13 @@ This rounded value must be less than 33 to be recorded successfully.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="edits-a-specified-data-entry-from-the-diabetes-tracker-app-code-edit-code-code-coming-in-v2-0-code"><a class="link" href="#edits-a-specified-data-entry-from-the-diabetes-tracker-app-code-edit-code-code-coming-in-v2-0-code">3.1.4. Edits a specified data entry from the diabetes tracker app: <code>edit</code> <code>[coming in v2.0]</code></a></h4>
-
+<h4 id="edits-an-existing-data-entry-from-the-diabetes-tracker-app-code-edit-code-code-coming-in-v2-0-code"><a class="link" href="#edits-an-existing-data-entry-from-the-diabetes-tracker-app-code-edit-code-code-coming-in-v2-0-code">3.1.4. Edits an existing data entry from the diabetes tracker app: <code>edit</code> <code>[coming in v2.0]</code></a></h4>
+<div class="paragraph">
+<p>Format: <code>edit INDEX</code></p>
+</div>
+<div class="paragraph">
+<p>Allows users to modify existing record fields.</p>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -304,7 +309,7 @@ If more than one are present and the command only accepts one <code>dt/</code>, 
 <p><code>r/REPETITION</code> Repetition can only take value <code>once</code>, <code>daily</code> or <code>weekly</code>(case insensitive). If more than one are present, the last argument is taken.</p>
 </li>
 <li>
-<p><code>td/TIMEDURATION</code> The format of time duration is: <code>hh:mm</code> and it should not be blank. e.g.
+<p><code>td/TIME_DURATION</code> The format of time duration is: <code>hh:mm</code> and it should not be blank. e.g.
 <code>01:30</code> represents 1 hour and 30 minutes. If more than one are present, the last argument is taken.</p>
 </li>
 <li>
@@ -314,7 +319,7 @@ If more than one are present and the command only accepts one <code>dt/</code>, 
 <p><code>ymd/YEAR_MONTH_DAY</code> The format of year month day is: <code>yyyy-mm-dd</code> and the number should be valid. If more than one are present, the last argument is taken.</p>
 </li>
 <li>
-<p><code>ymw/YEAR_MONTH_DAY</code> The format of year month day is: <code>yyyy-dd-dd</code> and the number should be valid(same as year month day). If more than one are present, the last argument is taken.
+<p><code>ymw/YEAR_MONTH_DAY</code> The format of year month day is: <code>yyyy-mm-dd</code> and the number should be valid(same as year month day). If more than one are present, the last argument is taken.
 See below in <code>calendar</code> command for more details if more than one of <code>ym/</code>, <code>ymd</code>, <code>ymw/</code> are present.</p>
 </li>
 </ul>
@@ -387,8 +392,8 @@ However, if the user adds a reminder on 2019 Nov 30 17:10 at 17:20 on that day, 
 <div class="paragraph">
 <p>Add an event with a starting time and an optional ending time(starting time before the current date time is accepted). There is no reminder for an event by default.
 User can also create a reminder for this event by specifying a time duration and a one time reminder will show up at the starting time of the event minus this time duration.
-For example, <code>event d/appointment dt/2019-12-20 14:00 dt/2019-12-20 15:00 td/01:30</code> adds an appointment event on 2019 Dec 20 15:00 to the calendar and a reminder for it at
-13:30 on that day.</p>
+For example, <code>event d/appointment dt/2019-12-20 14:00 dt/2019-12-20 15:00 td/01:30</code> adds an appointment event on 2019 Dec 20 from 14:00 to 15:00 to the calendar and a reminder for it at
+12:30 on that day.</p>
 </div>
 <div class="paragraph">
 <p>If only one <code>dt/</code> is present, it will be recognized as the starting date time. If there are more than one <code>dt/</code>, the first and second one are interpreted as starting and ending
@@ -2079,4 +2084,4 @@ You can simply delete the data folder within the same directory that you place S
 </ol>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 12:07:32 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 12:11:38 UTC</div></div></div></body></html>

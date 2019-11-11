@@ -127,7 +127,7 @@ If more than one are present and the command only accepts one <code>dt/</code>, 
 <p><code>r/REPETITION</code> Repetition can only take value <code>once</code>, <code>daily</code> or <code>weekly</code>(case insensitive). If more than one are present, the last argument is taken.</p>
 </li>
 <li>
-<p><code>td/TIMEDURATION</code> The format of time duration is: <code>hh:mm</code> and it should not be blank. e.g.
+<p><code>td/TIME_DURATION</code> The format of time duration is: <code>hh:mm</code> and it should not be blank. e.g.
 <code>01:30</code> represents 1 hour and 30 minutes. If more than one are present, the last argument is taken.</p>
 </li>
 <li>
@@ -137,7 +137,7 @@ If more than one are present and the command only accepts one <code>dt/</code>, 
 <p><code>ymd/YEAR_MONTH_DAY</code> The format of year month day is: <code>yyyy-mm-dd</code> and the number should be valid. If more than one are present, the last argument is taken.</p>
 </li>
 <li>
-<p><code>ymw/YEAR_MONTH_DAY</code> The format of year month day is: <code>yyyy-dd-dd</code> and the number should be valid(same as year month day). If more than one are present, the last argument is taken.
+<p><code>ymw/YEAR_MONTH_DAY</code> The format of year month day is: <code>yyyy-mm-dd</code> and the number should be valid(same as year month day). If more than one are present, the last argument is taken.
 See below in <code>calendar</code> command for more details if more than one of <code>ym/</code>, <code>ymd</code>, <code>ymw/</code> are present.</p>
 </li>
 </ul>
@@ -210,8 +210,8 @@ However, if the user adds a reminder on 2019 Nov 30 17:10 at 17:20 on that day, 
 <div class="paragraph">
 <p>Add an event with a starting time and an optional ending time(starting time before the current date time is accepted). There is no reminder for an event by default.
 User can also create a reminder for this event by specifying a time duration and a one time reminder will show up at the starting time of the event minus this time duration.
-For example, <code>event d/appointment dt/2019-12-20 14:00 dt/2019-12-20 15:00 td/01:30</code> adds an appointment event on 2019 Dec 20 15:00 to the calendar and a reminder for it at
-13:30 on that day.</p>
+For example, <code>event d/appointment dt/2019-12-20 14:00 dt/2019-12-20 15:00 td/01:30</code> adds an appointment event on 2019 Dec 20 from 14:00 to 15:00 to the calendar and a reminder for it at
+12:30 on that day.</p>
 </div>
 <div class="paragraph">
 <p>If only one <code>dt/</code> is present, it will be recognized as the starting date time. If there are more than one <code>dt/</code>, the first and second one are interpreted as starting and ending
@@ -356,14 +356,6 @@ time of running the app.</p>
 <p>These operations are exposed in the <code>Model</code> interface as <code>Model#addCalendarEntry()</code>, <code>Model#addPastReminder()</code>,
  <code>Model#getFilteredCalendarEntryList()</code>, <code>Model#getPastReminderList()</code> and <code>Model#schedule()</code> respectively.</p>
 </div>
-<div class="paragraph">
-<p>See the class diagram below for calendar related classes.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/CalendarClassDiagram.png" alt="CCD" width="400">
-</div>
-</div>
 </div>
 <div class="sect4">
 <h5 id="reminder-and-event-class"><a class="link" href="#reminder-and-event-class">Reminder and Event class</a></h5>
@@ -377,6 +369,12 @@ It has a field of <code>Repetition</code>, which is an enum class representing <
 <div class="paragraph">
 <p>For <code>Event</code>, it has another optional <code>DateTime</code> field and an optional <code>Reminder</code> field. The compulsory <code>DateTime</code> field is the starting date time while the optional one is the ending date time. The <code>Reminder</code>
 is for an auto reminder created by the app if the user requires in the command.</p>
+</div>
+<div class="paragraph">
+<p>See the class diagram below for calendar related classes.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../images/CalendarClassDiagram.png" alt="CCD" width="300"></span></p>
 </div>
 </div>
 <div class="sect4">
@@ -396,6 +394,12 @@ will replace them. For those overlap but cannot be resolved, the system will not
 <div class="paragraph">
 <p>To show reminders at certain time, the <code>Scheduler</code> utilizes java <code>ScheduledExecutorService</code> to schedule a future task with a delay. It creates two inner classes implementing the <code>Runnable</code> interface for tasks. The <code>ReminderAdder</code>
 class represents a task of adding a reminder to the past reminder list. <code>Initializer</code> class represents a task of initializing the scheduler at the beginning of a day.</p>
+</div>
+<div class="paragraph">
+<p>The following activity diagram shows how scheduler works when it is called to schedule tasks:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../images/SchedulerActivityDiagram.png" alt="SAD" width="400"></span></p>
 </div>
 <div class="ulist">
 <ul>
@@ -425,19 +429,11 @@ deadline to be end of the next day, update date and schedule tasks.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>The following activity diagram shows how scheduler works when it is called to schedule tasks:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/SchedulerActivityDiagram.png" alt="SAD" width="500">
-</div>
-</div>
-<div class="paragraph">
 <p>The following activity diagram shows an example of how event command and scheduler work together:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/CalendarActivityDiagram.png" alt="CAD" width="600">
+<img src="../images/CalendarActivityDiagram.png" alt="CAD" width="400">
 </div>
 </div>
 </div>
@@ -599,136 +595,5 @@ differently in the <code>MainWindow</code>. <code>MainWindow</code> will create 
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="reminder-and-event-command"><a class="link" href="#reminder-and-event-command">Reminder and Event Command</a></h3>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Prerequisites: The calendar entry list is empty.</p>
-<div class="olist lowerroman">
-<ol class="lowerroman" type="i">
-<li>
-<p>Test case: <code>reminder d/insulin inject dt/2019-11-30 17:00</code><br>
-Expected: Feedback message indicates that a new reminder: insulin inject On 2019-11-30 17:00 is added and the pane of all calendar entries shown.</p>
-</li>
-<li>
-<p>Test case: <code>reminder d/test dt/2019-12-10 12:00 r/daily</code><br>
-Expected: Feedback message indicates that a new reminder: test At 12:00 everyday From 2019-12-10 is added and the pane of all calendar entries shown.</p>
-</li>
-<li>
-<p>Test case: <code>event d/test dt/2019-12-01 11:00 dt/2019-12-01 11:30 td/01:00</code><br>
-Expected: Feedback message indicates that a new event: test From 2019-12-01 11:00 To: 2019-12-01 11:30 is added along with a new reminder for the event:
-Event: test in 1 hours 0 minutes On 2019-12-01 10:00. And the pane of all calendar entries shown.</p>
-</li>
-<li>
-<p>Test case: <code>event d/test dt/2019-12-01 11:00 dt/2019-12-01 10:00</code><br>
-Expected: Error message shown: The ending date time of an event should come after starting date time.</p>
-</li>
-</ol>
 </div>
-</li>
-<li>
-<p>Prerequisites: The calendar entry list contains the following entries:<br>
-reminder: insulin inject On 2019-11-30 17:00<br>
-reminder: test At 12:00 everyday From 2019-12-10<br>
-event: test From 2019-12-01 11:00 To: 2019-12-01 11:30<br>
-reminder: Event: test in 1 hours 0 minutes On 2019-12-01 10:00<br>
-The following commands are typed in the order they present.</p>
-<div class="olist lowerroman">
-<ol class="lowerroman" type="i">
-<li>
-<p>Test case: <code>reminder d/insulin inject dt/2019-11-30 17:00</code><br>
-Expected: Error message shown: This reminder already exists in the calendar</p>
-</li>
-<li>
-<p>Test case: <code>reminder d/insulin inject dt/2019-11-30 17:00 r/daily</code><br>
-Expected: Feedback message indicates that a new reminder: insulin inject At 17:00 everyday From 2019-11-30 is added and the following reminder(s) were removed because they are covered by the new reminder:
-insulin inject On 2019-11-30 17:00. Also the pane of all all calendar entries shown.</p>
-</li>
-<li>
-<p>Test case: <code>reminder d/insulin inject dt/2019-12-20 17:00 r/weekly</code><br>
-Expected: Error message shown: This reminder is covered by insulin inject At 17:00 everyday From 2019-11-30.</p>
-</li>
-<li>
-<p>Test case: <code>reminder d/insulin inject dt/2019-11-20 17:00 r/weekly</code><br>
-Expected: Error message shown: This reminder and the following reminder(s) conflict: insulin inject At 17:00 everyday From 2019-11-30.</p>
-</li>
-<li>
-<p>Test case: <code>event d/test dt/2019-12-01 11:00 dt/2019-12-01 11:30</code><br>
-Expected: Error message shown: This event already exists in the calendar.</p>
-</li>
-<li>
-<p>Test case: <code>event d/test2 dt/2019-12-01 10:00 dt/2019-12-01 11:30</code><br>
-Expected: Feedback message indicates that a new event: test2 From 2019-12-01 10:00 To: 2019-12-01 11:30 is added. However, it overlaps with the following events: test From 2019-12-01 11:00 To: 2019-12-01 11:30.</p>
-</li>
-</ol>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="reminder-list-side-pane"><a class="link" href="#reminder-list-side-pane">Reminder list side pane</a></h3>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Prerequisites: The calendar entry list contains the following entries:<br>
-reminder: insulin inject At 17:00 everyday From 2019-11-30<br>
-reminder: test At 12:00 everyday From 2019-12-10<br>
-event: test From 2019-12-01 11:00 To: 2019-12-01 11:30<br>
-reminder: Event: test in 1 hours 0 minutes On 2019-12-01 10:00<br>
-reminder: test2 At 16:00 everyday From 2019-11-20<br>
-The user opens the app on 2019-12-11 15:00 and does not close it until 18:00.</p>
-<div class="olist lowerroman">
-<ol class="lowerroman" type="i">
-<li>
-<p>Expected: The side pane shows reminders that the user might miss today:<br>
-test at 12:00<br>
-At 16:00, a reminder of test2 is shown in the side pane.</p>
-</li>
-<li>
-<p>Test case: <code>reminder d/test3 dt/2019-12-11 16:30</code>(typed in at 16:10)<br>
-Expected: At 16:30, a reminder of test3 is shown in the side pane.<br>
-At 17:00, a reminder of insulin inject is shown in the side pane.<br></p>
-</li>
-</ol>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="calendar-command"><a class="link" href="#calendar-command">Calendar Command</a></h3>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Prerequisites: The calendar entry list contains the following entries:<br>
-reminder: test At 12:00 everyday From 2019-12-10<br>
-event: test From 2019-12-01 11:00 To: 2019-12-01 11:30<br>
-The user opens the app on 2019-11-20</p>
-<div class="olist lowerroman">
-<ol class="lowerroman" type="i">
-<li>
-<p>Test case: <code>calendar</code><br>
-Expected: A pane of all the calendar entries added is shown.</p>
-</li>
-<li>
-<p>Test case: <code>calendar ym/2019-12</code><br>
-Expected: A monthly calendar of 2019 Dec is shown. Below are calendar entries on each day of 2019 Dec.
-In this case, there is a reminder of test at 12:00 listed in list for each day from Dec 10. An event of
-test from 11:00 to 11:30 is listed in Dec 1&#8217;s list.</p>
-</li>
-<li>
-<p>Test case: <code>calendar ymw/</code><br>
-Expected: A monthly calendar of 2019 Nov is shown. Below are calendar entries on each day from Nov 16 to
-Nov 22.</p>
-</li>
-</ol>
-</div>
-</li>
-</ol>
-</div>
-<hr>
-</div>
-</div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 12:07:33 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 12:11:39 UTC</div></div></div></body></html>
