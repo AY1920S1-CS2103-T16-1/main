@@ -1765,7 +1765,7 @@ If no flag is specified, <code>RecmFoodCommandParser#getWantedFoodTypes(flagsStr
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The sorting related (refer to the following section) parts, such <code>FoodComparator</code>, are omitted in this diagram.
+The sorting related (refer to the following section) parts, such as <code>FoodComparator</code>, are omitted in this diagram.
 </td>
 </tr>
 </table>
@@ -1773,7 +1773,7 @@ The sorting related (refer to the following section) parts, such <code>FoodCompa
 <div class="paragraph">
 <div class="title"><strong>3. Sorting</strong><br></div>
 <p>It is implemented via supplying a <code>FoodComparator</code> to <code>model#sortFoodList()</code> method.<br>
-<code>FoodComparator</code> wraps A <code>Comparator</code> to handle the main logic, such as reversing the <code>FoodComparator</code> via <code>Comparator#reversed()</code>.
+<code>FoodComparator</code> wraps A <code>Comparator</code> to handle the main logic, such as reversing the sorting order via <code>Comparator#reversed()</code>.
 An inner enum class <code>SortOrderType</code> holds all the comparable <a href="#recmf_food_model">food fields</a> for sorting.</p>
 </div>
 <div class="admonitionblock note">
@@ -1789,7 +1789,7 @@ The private <code>FoodComparator</code> constructor that directly takes in <code
 </table>
 </div>
 <div class="paragraph">
-<p><strong>API:</strong> <a href="https://github.com/AY1920S1-CS2103-T16-1/main/tree/master/src/main/java/seedu/sugarmummy/model/recmf/FoodComparator.java"><code>FoodComparator.java</code></a></p>
+<p><strong>API:</strong> <a href="https://github.com/AY1920S1-CS2103-T16-1/main/tree/master/src/main/java/seedu/sugarmummy/model/recmf/FoodComparator.java">FoodComparator.java</a></p>
 </div>
 </div>
 <div class="sect4">
@@ -1819,7 +1819,7 @@ since it must refresh the display pane each time by randomly getting new foods, 
 </table>
 </div>
 <div class="paragraph">
-<p><strong>API:</strong> <a href="https://github.com/AY1920S1-CS2103-T16-1/main/tree/master/src/main/java/seedu/sugarmummy/model/recmf/FoodCalculator.java"><code>FoodCalculator.java</code></a></p>
+<p><strong>API:</strong> <a href="https://github.com/AY1920S1-CS2103-T16-1/main/tree/master/src/main/java/seedu/sugarmummy/model/recmf/FoodCalculator.java">FoodCalculator.java</a></p>
 </div>
 </div>
 </div>
@@ -1835,7 +1835,7 @@ since it must refresh the display pane each time by randomly getting new foods, 
 Parameter validation is done by <code>RecmFoodParserUtil</code>.</p>
 </div>
 <div class="paragraph">
-<p><strong>API:</strong> <a href="https://github.com/AY1920S1-CS2103-T16-1/main/tree/master/src/main/java/seedu/sugarmummy/parser/RecmFoodParserUtil.java"><code>RecmFoodParserUtil.java</code></a></p>
+<p><strong>API:</strong> <a href="https://github.com/AY1920S1-CS2103-T16-1/main/tree/master/src/main/java/seedu/sugarmummy/parser/RecmFoodParserUtil.java">RecmFoodParserUtil.java</a></p>
 </div>
 </div>
 <div class="sect4">
@@ -1844,7 +1844,7 @@ Parameter validation is done by <code>RecmFoodParserUtil</code>.</p>
 <p>It is implemented by setting the internal list of <code>UniqueFoodList</code> to be the sample food data in <code>SampleFoodDataUtil</code>.</p>
 </div>
 <div class="paragraph">
-<p><strong>API:</strong> <a href="https://github.com/AY1920S1-CS2103-T16-1/main/tree/master/src/main/java/seedu/sugarmummy/model/util/SampleFoodDataUtil.java"><code>SampleFoodDataUtil.java</code></a></p>
+<p><strong>API:</strong> <a href="https://github.com/AY1920S1-CS2103-T16-1/main/tree/master/src/main/java/seedu/sugarmummy/model/util/SampleFoodDataUtil.java">SampleFoodDataUtil.java</a></p>
 </div>
 </div>
 </div>
@@ -1889,7 +1889,7 @@ Parameter validation is done by <code>RecmFoodParserUtil</code>.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p><code>Logic</code> gets a list of foods from UniqueFoodList#getMixedFoodList()<code>, which contains a <em>Summary</em> food calculated by `FoodCalculator</code>.</p>
+<p><code>Logic</code> gets a list of foods from <code>UniqueFoodList#getMixedFoodList()</code>, which contains a <em>Summary</em> food calculated by <code>FoodCalculator</code>.</p>
 </li>
 <li>
 <p><code>FoodFlowPane</code> updates its content with this new list.</p>
@@ -4114,4 +4114,4 @@ from <a href="https://www.flaticon.com/free-icon/user_149068" class="bare">https
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 01:18:02 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 01:23:03 UTC</div></div></div></body></html>
